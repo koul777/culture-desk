@@ -1,0 +1,47 @@
+{
+  "duration": 21,
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "audio": false,
+  "files": [
+    {
+      "file": "web/public/promo/culture-desk-promo.mp4",
+      "bytes": 1675325
+    },
+    {
+      "file": "docs/media/culture-desk-promo.gif",
+      "bytes": 1373032
+    },
+    {
+      "file": "web/public/promo/culture-desk-promo-poster.png",
+      "bytes": 426259
+    }
+  ],
+  "captures": [
+    [
+      "start",
+      0
+    ],
+    [
+      "intro",
+      2.7
+    ],
+    [
+      "region",
+      6.8
+    ],
+    [
+      "middle",
+      10.8
+    ],
+    [
+      "refresh",
+      15.5
+    ],
+    [
+      "end",
+      20.2
+    ]
+  ]
+}

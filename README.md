@@ -1,14 +1,14 @@
 # Culture Desk
 
+[![Culture Desk 홍보 영상 — 전국 공연 검색, 지역 체크, 지도 탐색과 자동 갱신](docs/media/culture-desk-promo.gif)](https://culture-desk.vercel.app/promo/)
+
+**Vercel 서비스 주소: [https://culture-desk.vercel.app](https://culture-desk.vercel.app)**
+
+[홍보 영상 재생](https://culture-desk.vercel.app/promo/) · [MP4 다운로드](https://culture-desk.vercel.app/promo/culture-desk-promo.mp4) · [공연 지도 열기](https://culture-desk.vercel.app/#map)
+
 **전국 주요 공연을 지역별로 검색하고, 지도에서 공연장까지 확인하는 프로그램입니다.**
 
 KOPIS와 문화포털의 공연 정보를 모아 전국 230개 지역을 탐색합니다. 전시는 검색에서 제외하며, 공연 카드·표·지도와 Cesium 공연장 3D 보기를 제공합니다. 웹에서는 별도 설치나 로그인 없이 바로 이용할 수 있습니다.
-
-**[공연 검색 시작하기](https://culture-desk.vercel.app)** · **[지도에서 보기](https://culture-desk.vercel.app/#map)** · [자동 갱신 실행 이력](https://github.com/koul777/culture-desk/actions/workflows/refresh-performances.yml)
-
-![전국 공연을 지도와 목록으로 함께 탐색하는 Culture Desk 운영 화면](docs/verification/final-production-map-desktop.png)
-
-*2026-10-16 운영 화면. 공연 수와 일정은 갱신 및 검색 조건에 따라 달라집니다.*
 
 ## 주요 기능
 
@@ -59,11 +59,16 @@ KOPIS와 문화포털의 공연 정보를 모아 전국 230개 지역을 탐색�
 
 ## 지도와 공연장 3D
 
+![전국 공연을 지도와 목록으로 함께 탐색하는 Culture Desk 운영 화면](docs/verification/final-production-map-desktop.png)
+
+*2026-10-16 운영 화면. 공연 수와 일정은 갱신 및 검색 조건에 따라 달라집니다.*
+
 2D 지도는 **Leaflet + OpenStreetMap**, 3D 보기는 **CesiumJS + OpenStreetMap 건물 도형**을 사용합니다. 현재 구성에는 지도 API 키나 Cesium ion 키가 필요하지 않습니다. Cesium은 **공연장 3D 보기**를 누를 때 불러옵니다.
 
 - 실제 공연장 좌표를 사용합니다. 좌표가 없는 자료는 위치 미확인으로 표시하며, 도시 중심 좌표가 있는 지역은 중심 집계로 구분합니다.
 - 건물 도형과 높이가 확인되면 입체로 표시합니다. 층수로 계산한 높이는 **추정**이라고 표시합니다.
-- 높이가 없으면 외곽만, 일치하는 도형이 없거나 조회에 실패하면 공연장 위치만 표시합니다.
+- 실제 외곽은 있지만 높이가 없으면 **높이 가정 모형 · 실측 아님**으로 구분해 입체 미리보기를 제공합니다. 초기 가정값은 12m이며 슬라이더로 조절할 수 있습니다. 원본 높이 자료를 바꾸지는 않습니다.
+- 입체 보기·위에서 보기·초기 구도 복원을 지원합니다. 일치하는 도형이 없거나 조회에 실패하면 공연장 위치만 표시합니다.
 - 확인된 건물 자료에는 원주 백운아트홀, 안동문화예술의전당, 여수 예울마루가 포함됩니다. 백운아트홀의 6m는 2층 정보를 바탕으로 한 추정 높이입니다.
 
 다른 공연장은 Overpass에서 동적으로 조회합니다. 전국 모든 공연장의 입체 건물이나 실사 모델을 제공하는 것은 아니며, 건물 자료와 제공처 응답 여부에 따라 표시 범위가 달라집니다.

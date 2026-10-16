@@ -19,10 +19,39 @@
 .venue-3d-info .venue-3d-help { color: var(--ink-3); font-size: 12px; margin-top: 10px; }
 .map-popup .map-popup-3d { display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; min-height: 44px; margin: 10px 0 5px; border: 1px solid var(--teal); border-radius: 7px; color: var(--teal-strong); background: var(--teal-soft); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
 .detail-venue-3d { margin-left: 9px; min-height: 36px; font-size: 12px; }
+.venue-3d-toolbar { flex-wrap: wrap; gap: 10px; }
+.venue-3d-badge.is-assumed { background: #fff1d8; color: #785016; border: 1px solid #dfbd80; }
+.venue-3d-badge svg { flex-shrink: 0; }
+.venue-3d-view-switch { display: flex; padding: 3px; gap: 3px; background: #edf3f0; border-radius: 9px; }
+.venue-3d-view-switch button { display: flex; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: 6px; background: transparent; color: #52675f; min-height: 44px; padding: 0 13px; cursor: pointer; font: inherit; font-size: 13px; }
+.venue-3d-view-switch button[aria-pressed="true"] { background: #fff; color: #176d61; box-shadow: 0 1px 4px #173e3320; font-weight: 650; }
+.venue-3d-view-switch button:disabled { cursor: default; opacity: .55; }
+.venue-3d-canvas.is-preparing { opacity: 0; }
+.venue-3d-loading { background: #eef4ef; }
+.venue-3d-loading-steps { display: grid; gap: 10px; margin-top: 4px; color: #576e62; font-size: 13px; }
+.venue-3d-loading-steps span { display: flex; align-items: center; gap: 8px; }
+.venue-3d-controls { margin-top: 12px; justify-content: flex-end; }
+.venue-3d-controls .venue-3d-reset { width: auto; display: flex; gap: 6px; padding-inline: 12px; font-size: 13px; }
+.venue-3d-height-control { padding: 13px 15px 10px; margin-bottom: 13px; border: 1px solid #dfbd80; background: #fff8ea; border-radius: 10px; }
+.venue-3d-height-control > div { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; color: #654921; }
+.venue-3d-height-control label { font-size: 14px; font-weight: 650; }
+.venue-3d-height-control output { font-size: 20px; font-weight: 750; font-variant-numeric: tabular-nums; }
+.venue-3d-height-control > div > span { margin-left: auto; font-size: 12px; }
+.venue-3d-height-control input { display: block; accent-color: #9d702f; width: 100%; min-height: 44px; margin: 0; cursor: pointer; }
+.venue-3d-height-control p { font-size: 12px; line-height: 1.55; margin: 0; color: #775e39; }
+.venue-3d-info .venue-3d-warning { padding: 10px 12px; background: #fff4df; color: #77551d; border-radius: 8px; }
+.venue-3d-warning .text-button { font: inherit; }
+.venue-3d button:focus-visible, .venue-3d input:focus-visible { outline: 3px solid #187b6b; outline-offset: 3px; }
 @media(max-width: 600px) {
   .venue-3d-toolbar { flex-wrap: wrap; }
   .venue-3d-controls { width: 100%; justify-content: space-between; }
-  .venue-3d-controls button { flex: 1; }
+  .venue-3d-controls button { flex: 1; min-width: 44px; }
+  .venue-3d-controls .venue-3d-reset { flex: 1.8; padding-inline: 7px; font-size: 12px; }
+  .venue-3d-controls { gap: 6px; }
+  .venue-3d-view-switch { width: 100%; }
+  .venue-3d-view-switch button { flex: 1; }
+  .venue-3d-height-control { padding-inline: 12px; }
+  .venue-3d-height-control > div > span { margin-left: 0; }
   .venue-3d-stage { min-height: 330px; height: 47dvh; }
   .venue-3d-info { font-size: 12px; }
   .venue-3d-sub { font-size: 12px; }

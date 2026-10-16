@@ -1,0 +1,75 @@
+{
+  "method": "Real local API and OSM geometry/WebGL; timeout case explicitly intercepted only for failure simulation",
+  "errors": [],
+  "checks": [
+    {
+      "case": "floor-estimated real building",
+      "ready": true,
+      "controls": true,
+      "model": "실제 외곽 · 높이 6m (층수 기반 추정)"
+    },
+    {
+      "case": "assumed height 390px",
+      "overflow": false,
+      "buttons": [
+        {
+          "width": 58.484375,
+          "height": 44
+        },
+        {
+          "width": 58.484375,
+          "height": 44
+        },
+        {
+          "width": 58.484375,
+          "height": 44
+        },
+        {
+          "width": 58.484375,
+          "height": 44
+        },
+        {
+          "width": 96.0625,
+          "height": 44
+        }
+      ],
+      "slider": "32"
+    },
+    {
+      "case": "assumed height 375px",
+      "overflow": false,
+      "buttons": [
+        {
+          "width": 55.890625,
+          "height": 44
+        },
+        {
+          "width": 55.90625,
+          "height": 44
+        },
+        {
+          "width": 55.890625,
+          "height": 44
+        },
+        {
+          "width": 55.90625,
+          "height": 44
+        },
+        {
+          "width": 91.40625,
+          "height": 44
+        }
+      ],
+      "slider": "32"
+    },
+    {
+      "case": "source height preserved",
+      "heightMeters": null
+    },
+    {
+      "case": "building timeout",
+      "model": "none",
+      "text": "건물 자료 확인 시간이 초과되어 위치만 표시합니다. 다시 시도할 수 있습니다."
+    }
+  ]
+}

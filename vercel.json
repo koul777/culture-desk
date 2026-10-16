@@ -6,6 +6,8 @@
   "regions": ["sin1"],
   "functions": { "api/index.ts": { "maxDuration": 60 } },
   "rewrites": [
+    { "source": "/promo", "destination": "/promo/index.html" },
+    { "source": "/promo/", "destination": "/promo/index.html" },
     { "source": "/api/:path*", "destination": "/api/index" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],

@@ -38,6 +38,6 @@ JSON 조회와 Excel 다운로드는 응답 본문을 4 MiB까지만 전송합�
 
 전국 일괄 수집은 `scripts/collect-national.ts`로 별도 SQLite에 실행하고 `scripts/audit-national.ts`로 지역·출처·날짜구간 누락을 검사합니다. `scripts/publish-national.ts checkpoint.db national-20261001-20270116`은 운영 DB를 먼저 백업한 뒤 공연을 출처 ID로 병합하며, 완료한 수집 이력만 반영합니다. 기존 공연 ID와 개인 자료는 유지되고 같은 체크포인트를 반복 반영해도 이력이 중복되지 않습니다.
 
-Cesium 코드와 Workers·Assets는 정적 배포에 포함됩니다. 공연장 3D는 추가 ion 키 없이 OSM 배경과 타원체 지면으로 표시합니다. `/api/venues/building?performanceId=...`는 저장된 공연장의 좌표로 실제 건물 도형을 찾으며, 3개 확인된 공연장의 원자료 캐시와 허용된 Overpass 제공처를 사용합니다. 높이 정보가 없으면 높이를 임의로 생성하지 않습니다.
+Cesium 코드와 Workers·Assets는 정적 배포에 포함됩니다. 공연장 3D는 추가 ion 키 없이 OSM 배경과 타원체 지면으로 표시합니다. `/api/venues/building?performanceId=...`는 저장된 공연장의 좌표로 실제 건물 도형을 찾으며, 3개 확인된 공연장의 원자료 캐시와 허용된 Overpass 제공처를 사용합니다. 높이 기록이 있으면 해당 값이나 층수 기반 추정값을 구분해 표시합니다. 실제 외곽은 있으나 높이가 미확인이면 프런트엔드에서 초기 12m의 **높이 가정 모형·실측 아님**으로 표시하며, 슬라이더로 가정 높이를 바꾸거나 위에서 외곽을 볼 수 있습니다. 원본 API의 높이 `null`은 변경하지 않으며 실제 3D 원본을 추가 확보한 것은 아닙니다. 도형이 없으면 공연장 위치만 표시합니다.
 
 참고: [Vercel Node.js 함수](https://vercel.com/docs/functions/runtimes/node-js), [node-postgres 트랜잭션](https://node-postgres.com/features/transactions), [Neon 연결](https://neon.com/docs/connect/connect-from-any-app).
