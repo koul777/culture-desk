@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-16T12:17:23.544Z",
+  "origin": "https://culture-desk.vercel.app",
+  "reads": [
+    {
+      "path": "/api/bootstrap",
+      "status": 200,
+      "ms": 1161,
+      "mode": "snapshot"
+    },
+    {
+      "path": "/api/performances?from=2026-10-01&to=2027-01-16&limit=1",
+      "status": 200,
+      "ms": 135,
+      "mode": "snapshot"
+    },
+    {
+      "path": "/api/map?from=2026-10-01&to=2027-01-16",
+      "status": 200,
+      "ms": 1738,
+      "mode": "snapshot"
+    },
+    {
+      "path": "/api/maps/vworld/config",
+      "status": 200,
+      "ms": 350,
+      "mode": null
+    },
+    {
+      "path": "/api/performances?cities=wonju&from=2026-10-01&to=2027-01-16&limit=100",
+      "status": 200,
+      "ms": 109,
+      "mode": "snapshot"
+    },
+    {
+      "path": "/api/performances/149",
+      "status": 200,
+      "ms": 107,
+      "mode": "snapshot"
+    },
+    {
+      "path": "/api/export.xlsx?cities=wonju&from=2026-10-01&to=2027-01-16",
+      "status": 200,
+      "ms": 383,
+      "mode": "snapshot"
+    }
+  ],
+  "checks": {
+    "snapshotAt": "2026-10-16T11:19:02.370Z",
+    "total": 5615,
+    "mapItems": 5615,
+    "located": 5601,
+    "automaticRefresh": "unavailable",
+    "vworldAvailable": true,
+    "region": {
+      "city": "wonju",
+      "total": 19
+    },
+    "excelBytes": 12020,
+    "frame": {
+      "status": 200,
+      "frameOptions": "SAMEORIGIN"
+    },
+    "home": {
+      "status": 200,
+      "frameOptions": "DENY"
+    },
+    "invalidCollectionBlocked": {
+      "status": 503,
+      "retryAfter": "60"
+    }
+  },
+  "success": true
+}

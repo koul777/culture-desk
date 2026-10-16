@@ -1,0 +1,80 @@
+{
+  "checkedAt": "2026-10-16T12:19:20.011Z",
+  "origin": "https://culture-desk.vercel.app",
+  "method": "Real production GET responses and actual VWorld iframe; all non-GET/HEAD requests blocked before transport. SDK ready does not verify individual-building coverage.",
+  "checks": {
+    "snapshot": {
+      "mode": "snapshot",
+      "snapshotAt": "2026-10-16T11:19:02.370Z",
+      "reason": "database_unavailable",
+      "total": 5615
+    },
+    "initialVWorldRequests": {
+      "config": 0,
+      "frame": 0,
+      "provider": 0
+    },
+    "noneSelected": {
+      "searchTotal": 5615,
+      "mapTotal": 5615,
+      "returned": 5615,
+      "located": 5601,
+      "awaitingCoordinates": 14,
+      "truncated": false,
+      "cities": "nationwide"
+    },
+    "someSelected": {
+      "searchTotal": 50,
+      "mapTotal": 50,
+      "returned": 50,
+      "located": 50,
+      "awaitingCoordinates": 0,
+      "truncated": false,
+      "cities": "yeosu,wonju"
+    },
+    "allSelected": {
+      "searchTotal": 5615,
+      "mapTotal": 5615,
+      "returned": 5615,
+      "located": 5601,
+      "awaitingCoordinates": 14,
+      "truncated": false,
+      "cities": "nationwide"
+    },
+    "collectionDisabled": true,
+    "vworld": {
+      "status": "ready",
+      "venue": "원주백운아트홀",
+      "actualProvider": true,
+      "individualBuildingVerified": false,
+      "sameOrigin": true,
+      "canvasCount": 6,
+      "observedAfterReadyMs": 20000,
+      "desktop": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "width": 390,
+        "documentWidth": 390,
+        "overflow": false
+      },
+      "iframeRemovedOnClose": true
+    },
+    "readOnly": true
+  },
+  "writeAttempts": {
+    "app": 0,
+    "provider": 0,
+    "other": 0
+  },
+  "writesSent": 0,
+  "jsErrorCount": 0,
+  "consoleErrorCount": 0,
+  "screenshots": [
+    "docs/verification/vworld-recovery-production-desktop.png",
+    "docs/verification/vworld-recovery-production-mobile.png"
+  ],
+  "success": true
+}
