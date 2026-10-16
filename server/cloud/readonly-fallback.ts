@@ -1,9 +1,8 @@
 import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import ExcelJS from 'exceljs';
 import type { Performance, PublicRefreshStatus } from '../../shared/types.js';
-import { ROOT } from '../config.js';
 import { Store } from '../store.js';
 import { NATIONAL_CITIES } from '../providers/cities.js';
 
@@ -20,7 +19,7 @@ export interface FallbackMetadata {mode:'snapshot';snapshotAt:string;reason:'dat
 export interface ReadonlyModel {store:Store;metadata:FallbackMetadata}
 export const DATABASE_RECHECK_MS=45000;
 export const DATABASE_UNAVAILABLE_MESSAGE='저장소 연결이 제한되어 수집과 변경을 잠시 중단했습니다. 저장된 공개 자료는 임시 조회로 확인할 수 있습니다. 60초 후 다시 확인하세요.';
-const DEFAULT_ARTIFACT=path.join(ROOT,'server','data','public-snapshot.json.gz');
+const DEFAULT_ARTIFACT=fileURLToPath(new URL('../assets/public-snapshot.json.gz',import.meta.url));
 const models=new Map<string|Function,Promise<ReadonlyModel|undefined>>();
 const circuits=new WeakMap<object,{until:number;probing:boolean}>();
 export const defaultDatabaseCircuit={};

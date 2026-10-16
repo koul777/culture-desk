@@ -4,9 +4,6 @@ dist/
 .env.*
 !.env.example
 data/
-!server/data/
-server/data/*
-!server/data/public-snapshot.json.gz
 logs/
 test-results/
 playwright-report/

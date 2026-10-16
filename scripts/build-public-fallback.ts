@@ -100,7 +100,7 @@ function project(row: Record<string, unknown>): PublicFallbackPerformance {
 
 export function buildPublicFallback(options: { input?: string; output?: string } = {}) {
   const input = path.resolve(options.input ?? path.join(ROOT, 'data/performance-baseline/production-after.db'));
-  const output = path.resolve(options.output ?? path.join(ROOT, 'server/data/public-snapshot.json.gz'));
+  const output = path.resolve(options.output ?? path.join(ROOT, 'server/assets/public-snapshot.json.gz'));
   if (input === output || !output.endsWith('.json.gz')) throw new Error('Use a separate .json.gz output artifact.');
   if (existsSync(`${input}-wal`) && statSync(`${input}-wal`).size > 0) throw new Error('Use a closed, verified backup without an active WAL.');
   const before = readFileSync(input);
