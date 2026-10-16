@@ -12,6 +12,7 @@ import { createProviders } from '../server/providers/index.js';
 import { decodeSnapshot, getSnapshotRepository } from '../server/cloud/snapshot.js';
 import { auditRefreshCheckpoint, getRefreshJobRepository, refreshWindow, safeRefreshError, LeaseLostError } from '../server/cloud/refresh-jobs.js';
 import { importCollection } from '../server/import-collection.js';
+import { archiveCompletedCollectionRuns } from '../server/collection-history.js';
 
 // Runtime secrets win; ignored local files are only a convenience for operator verification.
 for (const filename of ['.env', '.env.vercel']) if (existsSync(path.join(ROOT, filename))) {
@@ -105,7 +106,9 @@ async function main() {
       // Completion is only recorded after the production merge succeeds.
       await getSnapshotRepository().withStore(true, async target => {
         await jobs.heartbeat(job.day, owner);
-        return importCollection(source, target, batch);
+        const imported = importCollection(source, target, batch);
+        if (audit.complete) archiveCompletedCollectionRuns(target);
+        return imported;
       });
       lastCheckpoint = checkpoint; lastSave = Date.now();
       log('refresh_checkpoint', { day: job.day, counts: audit.counts, complete: audit.complete });

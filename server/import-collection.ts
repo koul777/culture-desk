@@ -42,6 +42,11 @@ export function importCollection(source: DatabaseSync, target: Store, importKey:
       idMap.set(Number(row.id),targetId);
     }
     let addedRuns = 0;
+    const restoreCompletedHistory = target.db.prepare(`UPDATE sync_runs SET state='complete',error=''
+      WHERE source=? AND city_id=? AND state='partial' AND detail_only=0 AND from_date<=? AND to_date>=?
+      AND created_at<=? AND updated_at<=? AND error IN (
+      '후속 전국 수집이 진행 중이므로 이전 완료 범위만으로 전체 수집을 판단할 수 없습니다.',
+      '후속 수집이 진행 중이므로 이전 완료 범위만으로 전체 수집을 판단할 수 없습니다.')`);
     for (const run of runs) {
       const prior = target.db.prepare('SELECT run_id FROM collection_import_runs WHERE import_key=? AND source_run=?').get(importKey, run.id);
       const sourceConflict=!run.detail_only&&incompleteRuns.some(next=>next.source===run.source&&next.city_id===run.city_id
@@ -54,6 +59,9 @@ export function importCollection(source: DatabaseSync, target: Store, importKey:
         if(prior)target.db.prepare("UPDATE sync_runs SET state='partial',error='후속 수집이 진행 중이므로 이전 완료 범위만으로 전체 수집을 판단할 수 없습니다.' WHERE id=?").run(prior.run_id);
         continue;
       }
+      // A successfully refreshed range resolves this importer's temporary coverage warning.
+      // Restore only previously completed history, never an actual failed or partially collected run.
+      if(!run.detail_only)restoreCompletedHistory.run(run.source,run.city_id,run.to_date,run.from_date,run.created_at,run.updated_at);
       if(prior){
         target.db.prepare("UPDATE sync_runs SET state='complete',error='',updated_at=? WHERE id=?").run(run.updated_at,prior.run_id);
         continue;

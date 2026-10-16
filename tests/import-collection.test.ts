@@ -90,3 +90,22 @@ test('publishing older complete runs cannot hide newer live or source collection
   importCollection(source.db,legacy,'TEST_COVERAGE');
   assert.equal(legacy.search({cities:'andong',source:'kopis',from:'2026-10-01',to:'2026-10-31'}).partial,true);
 });
+
+test('finished refresh restores temporarily hidden completion history without disguising real failures',t=>{
+  const source=new Store(':memory:',DEFAULT_CITIES),target=new Store(':memory:',DEFAULT_CITIES);
+  t.after(()=>{source.close();target.close();});
+  const past=target.createRun('kopis','andong','2026-10-01','2026-10-31');target.finishTask(target.nextTask()!);
+  target.db.prepare('UPDATE sync_runs SET created_at=?,updated_at=? WHERE id=?').run('2026-10-01T00:00:00.000Z','2026-10-01T01:00:00.000Z',past);
+  const failed=target.createRun('kopis','andong','2026-10-01','2026-10-31');
+  target.db.prepare("UPDATE sync_runs SET state='partial',error='TEST_REAL_FAILURE',created_at='2026-10-02T00:00:00.000Z',updated_at='2026-10-02T01:00:00.000Z' WHERE id=?").run(failed);
+  source.createRun('kopis','andong','2026-10-01','2026-10-31');
+  importCollection(source.db,target,'TEST_DAILY_REFRESH');
+  assert.equal(target.runs().find(run=>run.id===past)?.state,'partial');
+  source.finishTask(source.nextTask()!);
+  importCollection(source.db,target,'TEST_DAILY_REFRESH');
+  const restored=target.runs().find(run=>run.id===past)!;
+  assert.equal(restored.state,'complete');assert.equal(restored.error,'');assert.equal(restored.tasksDone,1);
+  assert.equal(restored.updatedAt,'2026-10-01T01:00:00.000Z');
+  assert.equal(target.runs().find(run=>run.id===failed)?.error,'TEST_REAL_FAILURE');
+  assert.equal(target.runs().find(run=>run.id===failed)?.state,'partial');
+});

@@ -36,6 +36,10 @@ export class Store {
       CREATE INDEX IF NOT EXISTS task_queue ON sync_tasks(state,available_at);
       CREATE TABLE IF NOT EXISTS sync_items(run_id INTEGER NOT NULL REFERENCES sync_runs(id),performance_id INTEGER NOT NULL REFERENCES performances(id),
         PRIMARY KEY(run_id,performance_id));
+      CREATE TABLE IF NOT EXISTS sync_run_archive(run_id INTEGER PRIMARY KEY REFERENCES sync_runs(id),
+        tasks_total INTEGER NOT NULL,tasks_done INTEGER NOT NULL,tasks_failed INTEGER NOT NULL,
+        performances INTEGER NOT NULL,excluded INTEGER NOT NULL,review INTEGER NOT NULL,
+        list_evidence TEXT NOT NULL,archived_at TEXT NOT NULL);
       INSERT OR IGNORE INTO schema_migrations VALUES(1,datetime('now'));
     `);
     for (const c of defaults) this.db.prepare('INSERT OR IGNORE INTO cities VALUES(?,?)').run(c.id, JSON.stringify(c));
@@ -214,9 +218,10 @@ export class Store {
     return rows.map(r=>{
       const tasks=this.db.prepare('SELECT state,count(*) n FROM sync_tasks WHERE run_id=? GROUP BY state').all(r.id) as Row[];
       const items=this.db.prepare('SELECT p.classification,count(*) n FROM sync_items s JOIN performances p ON p.id=s.performance_id WHERE s.run_id=? GROUP BY p.classification').all(r.id) as Row[];
+      const archived=this.db.prepare('SELECT * FROM sync_run_archive WHERE run_id=?').get(r.id) as Row|undefined;
       return {id:Number(r.id),source:r.source,cityId:r.city_id,from:r.from_date,to:r.to_date,detailOnly:!!r.detail_only,state:r.state,createdAt:r.created_at,updatedAt:r.updated_at,
-        tasksTotal:tasks.reduce((n,t)=>n+Number(t.n),0),tasksDone:Number(tasks.find(t=>t.state==='done')?.n||0),tasksFailed:Number(tasks.find(t=>t.state==='failed')?.n||0),
-        items:Number(items.find(t=>t.classification==='performance')?.n||0),excluded:Number(items.find(t=>t.classification==='excluded')?.n||0),review:Number(items.find(t=>t.classification==='review')?.n||0),error:r.error};
+        tasksTotal:tasks.length?tasks.reduce((n,t)=>n+Number(t.n),0):Number(archived?.tasks_total||0),tasksDone:tasks.length?Number(tasks.find(t=>t.state==='done')?.n||0):Number(archived?.tasks_done||0),tasksFailed:tasks.length?Number(tasks.find(t=>t.state==='failed')?.n||0):Number(archived?.tasks_failed||0),
+        items:items.length?Number(items.find(t=>t.classification==='performance')?.n||0):Number(archived?.performances||0),excluded:items.length?Number(items.find(t=>t.classification==='excluded')?.n||0):Number(archived?.excluded||0),review:items.length?Number(items.find(t=>t.classification==='review')?.n||0):Number(archived?.review||0),error:r.error};
     });
   }
   lastCollectionSync(source: Source): string | null {
