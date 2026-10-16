@@ -61,7 +61,8 @@
 ## 현재 검증 근거와 남은 확인
 
 - README 홍보 영상과 3D 모형 조작 개선 후 자동 테스트 **154/154**와 빌드를 통과했다. 실제 건물·가정 높이 구분, 원본 높이 보존, 375/390px 모바일, 키보드 조작과 시간초과를 확인했다. [개선 테스트](verification/promo-3d-tests.txt) · [개선 빌드](verification/promo-3d-build.txt) · [3D 화면 검증](verification/venue-3d-refined-report.json)
-- 운영 배포에서도 원주 층수 기반 모형과 안동 높이 가정 모형을 확인했고, 홍보 영상은 `/promo/`·`/promo` 모두 데스크톱·모바일에서 21초 MP4 실제 재생과 링크를 확인했다. [운영 3D 검증](verification/promo/production-3d-check.json) · [운영 영상 검증](verification/promo/production-player-check.json)
+- 운영 배포에서도 원주 층수 기반 모형과 안동 높이 가정 모형을 확인했다. [운영 3D 검증](verification/promo/production-3d-check.json)
+- 홍보 영상은 README 전용으로 `docs/media`에 보관한다. 프로그램의 영상 페이지·정적 영상 파일·전용 경로는 제거했으며 Vercel 배포에 포함하지 않는다. 기존 영상 재생 검증 파일은 제거 전 이력이다.
 - 2026-10-16 기존 배포 검증에서 전국 수집·Cesium·지도 클러스터·자동 갱신·기록 보존을 포함한 **150/150 테스트가 통과**했고 TypeScript 검사와 Vite 빌드도 성공했다. 높이 가정 모형 UI를 추가하기 전의 검증 기록이다. [테스트 로그](verification/final-release-tests.txt) · [빌드 로그](verification/final-release-build.txt)
 - 운영 사이트에서 모의 요청 없이 원주 백운아트홀의 실제 도형과 층수 기반 추정 높이를 확인했다. 1440px 데스크톱·390px 모바일에서 Cesium을 열고 닫아 검색과 2D 지도로 복귀했으며, 모바일 가로 넘침·브라우저 오류는 없었다. [운영 검증 기록](verification/cesium-vercel-report.json) · [데스크톱](verification/cesium-vercel-desktop.png) · [모바일](verification/cesium-vercel-mobile.png)
 - 건물 API 검증은 실제 도형 연결, 충돌·모호한 연결 거부, 중정 보존, 높이 단위·층수 추정, 캐시·요청 병합·제공처 실패 처리와 확인된 원자료 캐시를 포함한다.

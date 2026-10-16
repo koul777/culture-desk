@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
-const output=path.join(root,'web/public/promo');
+const output=path.join(root,'docs/media');
 const previews=path.join(root,'docs/media');
 const verify=path.join(root,'docs/verification/promo');
 await Promise.all([output,previews,verify].map(p=>mkdir(p,{recursive:true})));

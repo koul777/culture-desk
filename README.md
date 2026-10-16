@@ -1,10 +1,10 @@
 # Culture Desk
 
-[![Culture Desk 홍보 영상 — 전국 공연 검색, 지역 체크, 지도 탐색과 자동 갱신](docs/media/culture-desk-promo.gif)](https://culture-desk.vercel.app/promo/)
+[![Culture Desk 홍보 영상 — 전국 공연 검색, 지역 체크, 지도 탐색과 자동 갱신](docs/media/culture-desk-promo.gif)](docs/media/culture-desk-promo.mp4)
 
 **Vercel 서비스 주소: [https://culture-desk.vercel.app](https://culture-desk.vercel.app)**
 
-[홍보 영상 재생](https://culture-desk.vercel.app/promo/) · [MP4 다운로드](https://culture-desk.vercel.app/promo/culture-desk-promo.mp4) · [공연 지도 열기](https://culture-desk.vercel.app/#map)
+[홍보 영상 MP4](docs/media/culture-desk-promo.mp4) · [공연 지도 열기](https://culture-desk.vercel.app/#map)
 
 **전국 주요 공연을 지역별로 검색하고, 지도에서 공연장까지 확인하는 프로그램입니다.**
 

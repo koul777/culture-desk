@@ -5,6 +5,7 @@ node_modules
 data
 logs
 docs
+scripts/promo
 test-results
 playwright-report
 tests
