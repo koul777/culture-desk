@@ -1,0 +1,65 @@
+{
+  "checkedAt": "2026-10-16T09:13:07.849Z",
+  "origin": "https://culture-desk.vercel.app",
+  "automaticRefresh": {
+    "status": "complete",
+    "day": "2026-10-16",
+    "from": "2026-10-01",
+    "to": "2027-01-16",
+    "counts": {
+      "doneTasks": 7494,
+      "remaining": 0,
+      "totalTasks": 7494,
+      "completeRuns": 460,
+      "expectedRuns": 460,
+      "performances": 5600
+    },
+    "lastSuccessAt": "2026-10-16T08:59:57.881Z",
+    "updatedAt": "2026-10-16T08:59:57.881Z",
+    "error": null,
+    "schedule": {
+      "timezone": "Asia/Seoul",
+      "primary": "04:17",
+      "retries": [
+        "06:47",
+        "12:47",
+        "20:47"
+      ]
+    },
+    "enabled": true
+  },
+  "map": {
+    "total": 5600,
+    "located": 5600,
+    "unknown": 0,
+    "truncated": false
+  },
+  "desktop": {
+    "refreshLink": "전국 갱신 완료\n마지막 완료 2026. 10. 16. 17:59",
+    "refreshPanel": "전국 자동갱신\n전국 갱신 완료\n\n이번 수집 범위의 전국 목록과 상세 정보 확인을 마쳤습니다.\n\n브라우저를 닫아도 자동갱신은 계속됩니다. 완료하지 못한 구간은 예약된 복구 실행에서 이어집니다.\n\n마지막 전국 완료\n2026. 10. 16. 17:59\n갱신 대상 기간\n2026.10.01 – 2027.01.16\n다음 실행 예약\n2026. 10. 17. 04:17\n수집 진행\n완료 구간 460 / 460\n\n요청 7,494 / 7,494건\n남은 요청 0건\n수집 공연 5,600건\n\n매일 04:17 · 미완료 시 06:47 / 12:47 / 20:47 복구 (한국 시간 · 예약 실행은 지연될 수 있음)\n\n상태 확인 2026. 10. 16. 17:59",
+    "map": {
+      "clusters": 10,
+      "markers": 10,
+      "performanceSum": 5600,
+      "overflow": false
+    },
+    "clusterClick": {
+      "clusters": 76,
+      "markers": 103,
+      "performanceSum": 5600,
+      "overflow": false
+    },
+    "venuePopup": "원주백운아트홀 (원주백운아트홀) · 11건",
+    "building": "실제 건물 외곽 · 높이 6m (층수 기반 추정)\n\n공연장 좌표와 건물명이 일치합니다. 건물 원자료\n\n드래그로 이동 · 휠로 확대 · Ctrl + 드래그로 회전 · 지형 높이는 반영하지 않은 평면 기준입니다."
+  },
+  "mobile": {
+    "connectionOverflow": false,
+    "map": {
+      "clusters": 5,
+      "markers": 5,
+      "performanceSum": 5600,
+      "overflow": false
+    }
+  },
+  "errors": []
+}
