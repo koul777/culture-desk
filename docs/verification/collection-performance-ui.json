@@ -1,0 +1,120 @@
+{
+  "checkedAt": "2026-10-16T11:21:40.185Z",
+  "origin": "https://culture-desk.vercel.app",
+  "expectedBundle": "index-CvamMX7-.js",
+  "transport": {
+    "neutralizedTicks": 17,
+    "otherWritesBlocked": [],
+    "writesSent": 0
+  },
+  "checks": {
+    "defaultCards": true,
+    "defaultRegion": "전국 모든 지역",
+    "nationwide": {
+      "searchTotal": 5615,
+      "mapTotal": 5615,
+      "mapItems": 5615,
+      "truncated": false,
+      "uiTotal": 5615,
+      "located": 5601,
+      "awaitingCoordinates": 14,
+      "markers": 10,
+      "clusters": 10,
+      "sum": 5601,
+      "searchFilter": {
+        "from": "2026-10-01",
+        "to": "2027-01-16",
+        "page": "1",
+        "limit": "30"
+      },
+      "mapFilter": {
+        "from": "2026-10-01",
+        "to": "2027-01-16"
+      }
+    },
+    "markerRetainedAfterRefresh": true,
+    "selectedRegions": {
+      "searchTotal": 50,
+      "mapTotal": 50,
+      "mapItems": 50,
+      "truncated": false,
+      "uiTotal": 50,
+      "located": 50,
+      "awaitingCoordinates": 0,
+      "markers": 2,
+      "clusters": 2,
+      "sum": 50,
+      "searchFilter": {
+        "cities": "yeosu,wonju",
+        "from": "2026-10-01",
+        "to": "2027-01-16",
+        "page": "1",
+        "limit": "30"
+      },
+      "mapFilter": {
+        "cities": "yeosu,wonju",
+        "from": "2026-10-01",
+        "to": "2027-01-16"
+      }
+    },
+    "allChecked": {
+      "searchTotal": 5615,
+      "mapTotal": 5615,
+      "mapItems": 5615,
+      "truncated": false,
+      "uiTotal": 5615,
+      "located": 5601,
+      "awaitingCoordinates": 14,
+      "markers": 10,
+      "clusters": 10,
+      "sum": 5601,
+      "searchFilter": {
+        "from": "2026-10-01",
+        "to": "2027-01-16",
+        "page": "1",
+        "limit": "30"
+      },
+      "mapFilter": {
+        "from": "2026-10-01",
+        "to": "2027-01-16"
+      }
+    },
+    "desktop": {
+      "viewport": 1440,
+      "document": 1440,
+      "overflow": false
+    },
+    "mobileMap": {
+      "viewport": 390,
+      "document": 390,
+      "overflow": false,
+      "markers": 5,
+      "clusters": 5,
+      "sum": 5601
+    },
+    "mobilePicker": {
+      "viewport": 390,
+      "document": 390,
+      "overflow": false
+    },
+    "mobileCards": {
+      "viewport": 390,
+      "document": 390,
+      "overflow": false
+    },
+    "venue3D": {
+      "info": "실제 외곽 · 높이 6m (층수 기반 추정)\n\n공연장 좌표와 건물명이 일치합니다. 건물 원자료\n\n건물 외곽과 높이로 만든 모형이며 실제 지붕·외벽의 모습을 재현하지는 않습니다.\n\n지도 배경 로딩 시간이 초과되었습니다. 확인된 모형과 위치는 계속 볼 수 있습니다. 다시 불러오기\n\n드래그로 이동 · 휠로 확대 · Ctrl + 드래그로 회전 · 지형 높이는 반영하지 않습니다.",
+      "heightKind": "levels",
+      "canvas": 1
+    }
+  },
+  "jsErrors": [],
+  "consoleErrors": [],
+  "bundle": "/assets/index-CvamMX7-.js",
+  "success": true,
+  "resumedAt": "2026-10-16T11:23:04.010Z",
+  "bootstrap": {
+    "pendingDetails": 14,
+    "activeRuns": 463
+  }
+}

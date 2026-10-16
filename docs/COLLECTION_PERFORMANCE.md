@@ -66,3 +66,21 @@ node --import tsx scripts/benchmark-cloud-collection.ts data/performance-baselin
 전체 자동 테스트 **189/189**와 TypeScript·배포 빌드를 통과했다. 중복 tick·출처별 요청 간격·한도와 인증 오류·3회 실패·취소 뒤 늦은 응답·중단/재개·임대 만료 뒤 재선점·저장 실패 뒤 복구·자동 갱신과 상세 버전 충돌·원본과 좌표 및 메모 보존을 포함한다. 전국·지역 검색 판정, 지도·3D·엑셀의 기존 테스트도 통과했다.
 
 [전체 테스트 로그](verification/collection-performance-tests.txt) · [빌드 로그](verification/collection-performance-build.txt)
+
+## 운영 배포 확인
+
+운영 주소는 https://culture-desk.vercel.app 이다. `65e11f6`의 배포에서 기존 대기 작업을 이어가는 tick을 1회 실행했다. 새 수집 범위는 만들지 않았다.
+
+- 실제 API 작업 20개를 3개 묶음으로 9.146초에 처리했다. 완료 작업 수는 8,175 → 8,195였다.
+- 해당 요청이 진행 중일 때 검색을 시작해 HTTP 200, 583ms 응답을 확인했다. 종료 후 검색은 281ms였다. 이는 각각 1회 측정이다.
+- 저장된 공연 수는 5,615건으로 같았다. 기존 자료를 확인·갱신했으므로 처리한 작업 수만큼 공연 수가 증가하는 것은 아니다.
+- 전체 6,011개 기존 레코드와 ID를 유지했고, 기존 좌표·완성 상세의 손실이나 하향 변경은 0건이었다. 메모·관심 저장 자료가 보존됐고 SQLite 무결성 검사도 통과했다.
+- 전국 자동 갱신의 완료 상태와 마지막 성공 시각을 유지했다.
+
+[운영 처리·검색 측정](verification/collection-performance-production.json) · [운영 자료 보존 검사](verification/collection-performance-integrity.json)
+
+운영 화면에서는 지역 미선택과 전체 선택이 모두 전국 5,615건, 여수·원주 선택이 50건으로 검색과 지도 응답이 일치했다. 전국 지도에는 좌표가 확인된 5,601건을 표시하고 기존 좌표 대기 14건은 별도로 안내했다. 진행 상태 갱신 후에도 기존 지도 마커를 유지했다. 1440px 데스크톱과 390px 모바일의 카드·지도·지역 선택 화면에 가로 넘침이 없었고 JavaScript·콘솔 오류는 0건이었다. 화면 검수 중 수집 POST는 중립 응답으로 대체했으며 실제 쓰기 요청은 보내지 않았다.
+
+원주 백운아트홀의 실제 건물 외곽과 층수 추정 높이 6m 모형이 표시되고 닫기 동작도 정상임을 확인했다. 다만 이 검수에서는 외부 배경 지도 타일이 12초 안에 로드되지 않아 시간 초과 안내가 표시됐다. 건물 모형은 계속 표시됐으며, 배경 지도까지 정상 로드됐다고 판정하지 않았다.
+
+[운영 화면 검수](verification/collection-performance-ui.json) · [검수 스크립트](verification/check-collection-performance-ui.mjs) · [모바일 화면](verification/collection-performance-mobile.png) · [3D 화면과 배경 지도 제한](verification/collection-performance-3d.png)

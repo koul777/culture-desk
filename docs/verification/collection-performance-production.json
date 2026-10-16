@@ -1,0 +1,66 @@
+{
+  "verifiedAt": "2026-10-16T11:18:03.364Z",
+  "deployment": "culture-desk-jlrkz64zy-hrkim.vercel.app",
+  "sourceCommit": "65e11f6",
+  "method": "One explicit tick continues existing queued work; no new collection ranges created. Search GET started while that tick was pending.",
+  "before": {
+    "status": 200,
+    "ms": 579,
+    "sources": [
+      {
+        "source": "kopis",
+        "count": 4351
+      },
+      {
+        "source": "culture",
+        "count": 1264
+      }
+    ],
+    "pendingDetails": 14,
+    "runs": 951,
+    "doneTasks": 8175,
+    "automaticStatus": "complete",
+    "lastSuccessAt": "2026-10-16T08:59:57.881Z"
+  },
+  "tick": {
+    "status": 200,
+    "ms": 9146,
+    "body": {
+      "ok": true,
+      "steps": 20,
+      "active": true,
+      "continueWhileOpen": true,
+      "batches": 3
+    }
+  },
+  "concurrentSearch": {
+    "status": 200,
+    "ms": 583,
+    "total": 5615,
+    "startedWhileCollecting": true
+  },
+  "after": {
+    "status": 200,
+    "ms": 484,
+    "sources": [
+      {
+        "source": "kopis",
+        "count": 4351
+      },
+      {
+        "source": "culture",
+        "count": 1264
+      }
+    ],
+    "pendingDetails": 14,
+    "runs": 951,
+    "doneTasks": 8195,
+    "automaticStatus": "complete",
+    "lastSuccessAt": "2026-10-16T08:59:57.881Z"
+  },
+  "repeatSearch": {
+    "status": 200,
+    "ms": 281,
+    "total": 5615
+  }
+}
