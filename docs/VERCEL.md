@@ -1,0 +1,43 @@
+# Vercel 운영
+
+운영 주소: https://culture-desk.vercel.app · 로그인이나 접속 암호 없이 바로 전국 공연을 검색합니다. 지역 미선택·전체 체크는 전국, 일부 체크는 해당 지역만 조회합니다. 기본 보기는 공연 카드이며 상단·메뉴·보기 전환 버튼에서 지도를 열 수 있습니다. 지도 바로가기: https://culture-desk.vercel.app/#map
+
+새 브라우저에서 쿠키 없이 검색·지역 복수 체크·지도·상세·엑셀을 확인했습니다. 이전 7개 기본 지역 선택은 초기화되며 새 설정부터 사용자의 선택을 저장합니다. 전국 검색은 현재 저장된 자료를 대상으로 하므로 전국 자료의 수집 완료를 의미하지 않습니다. [검색 전용 배포 검증](verification/search-only-vercel-checks.json) · [전국 기본 조회·UI 개선 배포 검증](verification/ux-vercel-checks.json)
+
+로컬 실행은 기존 SQLite와 상시 수집기를 사용합니다. Vercel에서는 프런트엔드를 정적 배포하고 하나의 Node.js 24 API 함수가 Neon Postgres에 저장한 SQLite 스냅샷을 사용합니다. 두 환경의 데이터는 최초 배포 시 복사한 뒤 각각 독립적으로 저장됩니다.
+
+## 환경 변수
+
+- `DATABASE_URL`: Vercel에 연결한 Neon 데이터베이스의 연결 문자열. `POSTGRES_URL`도 대체 이름으로 지원합니다.
+- `KOPIS_API_KEY`, `CULTURE_API_KEY`: 서버 API 인증키. 브라우저에는 전달하지 않습니다.
+- `CRON_SECRET`: Vercel Cron 호출 인증값. 공연 검색 이용자가 입력할 필요는 없습니다.
+
+환경 변수는 Vercel 서버 환경에만 등록합니다. `.env`, `.env.vercel`은 커밋하거나 배포 파일에 포함하지 않습니다. API 키를 URL·로그·프런트엔드 코드에 넣지 않습니다.
+
+## 접근 및 저장
+
+공연 검색·지도·상세·엑셀과 수집 작업은 로그인 없이 이용합니다. 로그인·관심 공연·메모 API, 원본 DB 백업 다운로드와 지역 수동 등록은 공개하지 않습니다. 기존 개인 메모는 삭제하지 않고 공개 JSON과 엑셀에서 제외합니다. 변경 API는 요청 표식과 동일 출처 검사를 통과해야 합니다. Cron은 별도의 서버 인증을 유지합니다.
+
+각 쓰기 요청은 Postgres의 동일한 행을 `SELECT FOR UPDATE`로 잠근 뒤 별도 임시 디렉터리에 SQLite를 복원합니다. 작업 성공 시 새 스냅샷과 리비전을 같은 트랜잭션으로 커밋합니다. 실패하면 롤백하여 이전 스냅샷을 보존합니다. 읽기는 마지막으로 커밋한 데이터를 사용합니다. 함수 종료 시 임시 디렉터리를 제거하며 `/tmp`를 영구 저장소로 취급하지 않습니다.
+
+최초 데이터 복사는 `getSnapshotRepository().seedIfEmpty(buffer)`로 수행합니다. SQLite 무결성과 필수 테이블을 확인하고, 클라우드 데이터가 비어 있을 때만 복사합니다. 기존 클라우드 메모를 배포 과정에서 덮어쓰지 않습니다.
+
+## 수집 실행
+
+화면이 열려 있고 수집 작업이 남아 있으면 클라이언트가 `POST /api/cloud/tick`을 반복 호출합니다. 한 호출은 최대 20단계를 진행하며 각 단계는 별도 트랜잭션으로 저장됩니다. 제공기관 호출은 단계마다 12초 후 중단하고 재시도 횟수와 대기 시간을 기록합니다. 같은 작업이 3번 실패하면 일부 실패 상태로 남기고 뒤의 작업을 진행하므로 느린 요청이 수집 전체를 계속 막지 않습니다. 상세정보를 이미 받아둔 공연은 재시도 실패로 지우지 않습니다. 실행 루프 예산은 35초이며 데이터베이스 연결·잠금 대기 시간은 별도입니다. Vercel 함수 제한은 60초입니다. 중복 호출은 Postgres 행 잠금으로 직렬화합니다.
+
+전국 자동 갱신은 별도의 GitHub Actions 예약 실행기가 브라우저 없이 끝까지 처리합니다. 한국 시간 04:17에 시작하고 06:47·12:47·20:47에 미완료 작업을 재개합니다. 날짜별 작업·120초 실행 잠금·30초 heartbeat·2분 체크포인트를 Neon의 `culture_refresh_job`에 보관합니다. 운영 DB 병합과 460개 범위의 상세 검증까지 성공해야 완료로 기록합니다. 기존 Vercel Cron은 `AUTOMATIC_REFRESH_ENABLED=1`일 때 상태만 확인하며 중복 수집을 만들지 않습니다. 수동 추가 수집은 위의 화면 기반 tick을 계속 사용합니다. [자동 갱신 운영](AUTOMATIC_REFRESH.md)
+
+## 규모와 백업
+
+매 쓰기마다 SQLite 스냅샷을 저장합니다. 전국 공연 원문·상세를 누락하지 않고 보관하도록 gzip 무손실 압축을 적용하며, 기존 비압축 스냅샷도 자동으로 읽습니다. 압축 저장본 상한은 16 MiB, 복원한 SQLite 상한은 128 MiB입니다. 초과 시 기존 데이터를 보존하고 HTTP 507과 `SNAPSHOT_CAPACITY` 코드로 저장 공간 한도 안내를 반환합니다. 대규모 동시 쓰기가 필요한 경우에는 Postgres 테이블을 직접 사용하는 저장 계층으로 전환해야 합니다.
+
+JSON 조회와 Excel 다운로드는 응답 본문을 4 MiB까지만 전송합니다. 초과 시 HTTP 413과 `RESPONSE_CAPACITY` 코드로 지역·기간 등 조회 조건을 좁히도록 안내합니다. 저장된 공연과 메모는 변경하지 않습니다. 지도는 별도로 항목 수와 응답 크기를 제한하고 잘림 여부를 표시합니다.
+
+클라우드 원본 DB 백업은 관리자 환경에서 `SnapshotRepository.withStore(false, store => store.backup(...))`로 생성합니다. Neon의 `culture_desk_snapshot.data`를 직접 추출했다면 `decodeSnapshot`으로 gzip 여부를 확인하고 복원해야 합니다. 웹 화면에서는 검색 결과 엑셀 다운로드를 제공합니다. 로컬 종료 기능은 클라우드에서 제공하지 않습니다.
+
+전국 일괄 수집은 `scripts/collect-national.ts`로 별도 SQLite에 실행하고 `scripts/audit-national.ts`로 지역·출처·날짜구간 누락을 검사합니다. `scripts/publish-national.ts checkpoint.db national-20261001-20270116`은 운영 DB를 먼저 백업한 뒤 공연을 출처 ID로 병합하며, 완료한 수집 이력만 반영합니다. 기존 공연 ID와 개인 자료는 유지되고 같은 체크포인트를 반복 반영해도 이력이 중복되지 않습니다.
+
+Cesium 코드와 Workers·Assets는 정적 배포에 포함됩니다. 공연장 3D는 추가 ion 키 없이 OSM 배경과 타원체 지면으로 표시합니다. `/api/venues/building?performanceId=...`는 저장된 공연장의 좌표로 실제 건물 도형을 찾으며, 3개 확인된 공연장의 원자료 캐시와 허용된 Overpass 제공처를 사용합니다. 높이 정보가 없으면 높이를 임의로 생성하지 않습니다.
+
+참고: [Vercel Node.js 함수](https://vercel.com/docs/functions/runtimes/node-js), [node-postgres 트랜잭션](https://node-postgres.com/features/transactions), [Neon 연결](https://neon.com/docs/connect/connect-from-any-app).

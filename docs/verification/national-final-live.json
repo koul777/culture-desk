@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-16T09:01:16.845Z",
+  "checks": [
+    {
+      "base": "https://culture-desk.vercel.app",
+      "total": 5600,
+      "pending": 0,
+      "partial": false,
+      "map": 5600,
+      "mapTruncated": false,
+      "venueCoordinates": 5600
+    },
+    {
+      "base": "http://127.0.0.1:4317",
+      "total": 5600,
+      "pending": 0,
+      "partial": false,
+      "map": 5600,
+      "mapTruncated": false,
+      "venueCoordinates": 5600
+    }
+  ]
+}
