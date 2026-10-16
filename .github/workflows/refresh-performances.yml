@@ -1,0 +1,50 @@
+name: Refresh nationwide performances
+
+on:
+  schedule:
+    # Korea: primary 04:17; recovery slots 06:47, 12:47, 20:47.
+    - cron: '17 19 * * *'
+    - cron: '47 21 * * *'
+    - cron: '47 3 * * *'
+    - cron: '47 11 * * *'
+  workflow_dispatch:
+    inputs:
+      probe:
+        description: 'Check both APIs and durable storage without starting a new collection'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nationwide-performance-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Resume and publish nationwide refresh
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
+          CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
+          NATIONAL_RUN_BUDGET_MINUTES: '50'
+          PROBE_ONLY: ${{ inputs.probe && '1' || '0' }}
+        run: |
+          if [ "$PROBE_ONLY" = "1" ]; then
+            node --import tsx scripts/run-scheduled-refresh.ts --probe
+          else
+            node --import tsx scripts/run-scheduled-refresh.ts
+          fi

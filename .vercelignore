@@ -1,0 +1,16 @@
+node_modules
+.env
+.env.*
+!.env.example
+data
+logs
+docs
+test-results
+playwright-report
+tests
+*.log
+*.vbs
+.git
+.agents
+.claude
+skills-lock.json

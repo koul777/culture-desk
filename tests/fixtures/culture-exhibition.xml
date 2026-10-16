@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL_SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <seq>9002</seq>
+        <title>미술 전시</title>
+        <startDate>2026-06-01</startDate>
+        <endDate>2026-06-30</endDate>
+        <realmCode>D000</realmCode>
+        <realmName>전시</realmName>
+        <serviceTp>A</serviceTp>
+        <place>강릉시립미술관</place>
+        <area>강원특별자치도 강릉시</area>
+      </item>
+    </items>
+    <totalCount>1</totalCount>
+  </body>
+</response>

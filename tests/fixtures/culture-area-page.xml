@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL_SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <seq>9001</seq>
+        <title>강릉 음악회</title>
+        <startDate>2026-06-01</startDate>
+        <endDate>2026-06-02</endDate>
+        <realmCode>B000</realmCode>
+        <realmName>음악/콘서트</realmName>
+        <serviceTp>A</serviceTp>
+        <place>강릉아트센터</place>
+        <sigungu>강릉시</sigungu>
+        <area>강원특별자치도 강릉시</area>
+        <gplace>강원특별자치도 강릉시 중앙로 1</gplace>
+      </item>
+    </items>
+    <numOfRows>1</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>2</totalCount>
+  </body>
+</response>
