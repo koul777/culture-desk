@@ -99,10 +99,11 @@ test('all cloud VWorld outcomes bypass the database and never disclose collectio
   assert.equal(databaseCalls,0);
 });
 
-function executeFrame(body:string,options:{sdk?:boolean;callback?:boolean;autoFlush?:boolean;sdkInitialFlight?:boolean;terrain?:{cached?:number;sample?:()=>unknown}}={}) {
+function executeFrame(body:string,options:{sdk?:boolean;callback?:boolean;autoFlush?:boolean;sdkInitialFlight?:boolean;buildingLayer?:'legacy'|'lookupThrow'|'showThrow'|'missing';terrain?:{cached?:number;sample?:()=>unknown}}={}) {
   const messages:any[]=[],listeners:Record<string,Function>={},timers=new Map<number,Function>(),timerDelays=new Map<number,number>();
   const elements={state:{textContent:'loading',hidden:false},caption:{textContent:''}};
   let buildings=0,destroyed=0,removed=0,viewCount=0,timerId=0,cancelledFlights=0,flightPending=false,marker:any,view:any,renderFailure:Function|undefined;
+  const buildingLookups:string[]=[];
   const viewer={entities:{add:(value:any)=>{marker=value;return value;}},camera:{viewBoundingSphere:(...args:any[])=>{view=args;viewCount++;},lookAtTransform:()=>{},cancelFlight:()=>{cancelledFlights++;flightPending=false;}},
     ...(options.terrain?{terrainProvider:{testProvider:true}}:{}),
     scene:{...(options.terrain?{globe:{getHeight:()=>options.terrain!.cached}}:{}),renderError:{addEventListener:(callback:Function)=>{renderFailure=callback;return ()=>{removed++;};}}},isDestroyed:()=>destroyed>0,destroy:()=>{destroyed++;}};
@@ -116,7 +117,16 @@ function executeFrame(body:string,options:{sdk?:boolean;callback?:boolean;autoFl
       HeadingPitchRange:Constructor,BoundingSphere:Constructor,Matrix4:{IDENTITY:'identity'},Math:{toRadians:(value:number)=>value*Math.PI/180}};
     if(options.terrain){context.Cesium.Cartographic={fromDegrees:(longitude:number,latitude:number)=>({longitude,latitude})};if(options.terrain.sample)context.Cesium.sampleTerrainMostDetailed=options.terrain.sample;}
     context.vw={CameraPosition:Constructor,CoordZ:Constructor,Direction:Constructor,Map:class{
-      setOption(){}setMapId(){}setInitPosition(){}getLayerElement(name:string){assert.equal(name,'facility_build');return {show:()=>{buildings++;}};}
+      setOption(){}setMapId(){}setInitPosition(){}getLayerElement(name:string){
+        assert.ok(['facility_build_all','facility_build'].includes(name));buildingLookups.push(name);
+        if(options.buildingLayer==='missing')return undefined;
+        if(name==='facility_build_all'){
+          if(options.buildingLayer==='legacy')return undefined;
+          if(options.buildingLayer==='lookupThrow')throw new Error('Unsupported layer lookup');
+          if(options.buildingLayer==='showThrow')return {show:()=>{throw new Error('Unsupported layer display');}};
+        }
+        return {show:()=>{buildings++;}};
+      }
       start(){if(options.callback!==false)context.vw.ws3dInitCallBack();if(options.sdkInitialFlight)flightPending=true;}
     }};
   }
@@ -124,15 +134,28 @@ function executeFrame(body:string,options:{sdk?:boolean;callback?:boolean;autoFl
   for(const match of body.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))if(match[1])vm.runInContext(match[1],context);
   const flushFocus=()=>{const entry=[...timerDelays].find(([,value])=>value===0);if(entry){const callback=timers.get(entry[0])!;timers.delete(entry[0]);timerDelays.delete(entry[0]);callback();}};
   if(options.autoFlush!==false)flushFocus();
-  return {context,elements,messages,listeners,timers,flushFocus,renderFailure:()=>renderFailure?.(),fireTimer:(delay:number)=>{const entry=[...timerDelays].find(([,value])=>value===delay);assert.ok(entry);const callback=timers.get(entry[0])!;timers.delete(entry[0]);timerDelays.delete(entry[0]);callback();if(options.autoFlush!==false)flushFocus();},finishSdkFlight:()=>{if(flightPending){view='SDK overview';flightPending=false;}},get flightPending(){return flightPending;},get cancelledFlights(){return cancelledFlights;},get buildings(){return buildings;},get destroyed(){return destroyed;},get removed(){return removed;},get marker(){return marker;},get view(){return view;},get viewCount(){return viewCount;}};
+  return {context,elements,messages,listeners,timers,flushFocus,buildingLookups,renderFailure:()=>renderFailure?.(),fireTimer:(delay:number)=>{const entry=[...timerDelays].find(([,value])=>value===delay);assert.ok(entry);const callback=timers.get(entry[0])!;timers.delete(entry[0]);timerDelays.delete(entry[0]);callback();if(options.autoFlush!==false)flushFocus();},finishSdkFlight:()=>{if(flightPending){view='SDK overview';flightPending=false;}},get flightPending(){return flightPending;},get cancelledFlights(){return cancelledFlights;},get buildings(){return buildings;},get destroyed(){return destroyed;},get removed(){return removed;},get marker(){return marker;},get view(){return view;},get viewCount(){return viewCount;}};
 }
 
 test('mocked official SDK displays the building layer, marks and centres the venue, then sends same-origin readiness and cleans up',async()=>{
   const mock=executeFrame(await html());assert.equal(mock.buildings,1);assert.equal(mock.marker.point.heightReference,'ground');
+  assert.deepEqual(mock.buildingLookups,['facility_build_all']);
   assert.deepEqual(Array.from(mock.marker.position),[126.978,37.5665]);assert.equal(mock.view[0].args[0][0],126.978);
   assert.equal(mock.elements.state.hidden,true);assert.equal(mock.timers.size,0);
   assert.equal(mock.messages.length,1);assert.deepEqual(mock.messages[0],{origin:'https://culture.test',message:{type:'culture-vworld',channel:'TestChannel123',status:'ready',message:'VWorld 3D 지도에 연결했습니다. 건물 표시는 제공 지역에 따라 다릅니다.'}});
   mock.listeners.pagehide();assert.equal(mock.destroyed,1);assert.equal(mock.removed,1);mock.renderFailure();assert.equal(mock.messages.length,1);
+});
+
+test('older or unsupported combined building layers fall back to LoD4 without weakening missing-layer errors',async()=>{
+  const body=await html();
+  for(const buildingLayer of ['legacy','lookupThrow','showThrow'] as const){
+    const mock=executeFrame(body,{buildingLayer});
+    assert.deepEqual(mock.buildingLookups,['facility_build_all','facility_build']);assert.equal(mock.buildings,1);
+    assert.equal(mock.messages.length,1);assert.equal(mock.messages[0].message.status,'ready');
+    assert.match(mock.messages[0].message.message,/제공 지역에 따라/);
+  }
+  const missing=executeFrame(body,{buildingLayer:'missing'});
+  assert.equal(missing.buildings,0);assert.equal(missing.messages[0].message.status,'error');assert.equal(missing.viewCount,0);
 });
 
 test('missing SDK, timeout and render failures report safe errors; a late callback never reports ready after timeout',async()=>{

@@ -58,7 +58,9 @@ function frame(input:FrameInput,apiKey:string,origin:string):string {
         const viewer=window.ws3d.viewer;
         let removeRenderError,terrainTimer,focusTimer,terrainSettled=false;
         state.onDispose(function(){terrainSettled=true;clearTimeout(terrainTimer);clearTimeout(focusTimer);if(typeof removeRenderError==='function')removeRenderError();if(typeof viewer.destroy==='function'&&(!viewer.isDestroyed||!viewer.isDestroyed()))viewer.destroy();});
-        const buildings=map.getLayerElement('facility_build');if(!buildings||typeof buildings.show!=='function')throw new Error('Building layer unavailable');buildings.show();
+        function showBuildings(id){try{const layer=map.getLayerElement(id);if(layer&&typeof layer.show==='function'){layer.show();return true;}}catch(_error){}return false;}
+        // Current SDK provides LoD1–4 together; older SDKs retain the LoD4 layer.
+        if(!showBuildings('facility_build_all')&&!showBuildings('facility_build'))throw new Error('Building layer unavailable');
         const target=Cesium.Cartesian3.fromDegrees(input.lon,input.lat);
         viewer.entities.add({name:'공연장 위치',position:target,
           point:{pixelSize:12,color:Cesium.Color.fromCssColorString('#ffbd9b'),outlineColor:Cesium.Color.WHITE,outlineWidth:2,heightReference:Cesium.HeightReference.CLAMP_TO_GROUND,disableDepthTestDistance:Number.POSITIVE_INFINITY}});

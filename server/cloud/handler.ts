@@ -6,7 +6,7 @@ import { getSnapshotRepository, SnapshotCapacityError, type SnapshotRepository }
 import { equalSecret, validMutationOrigin } from './auth.js';
 import { getRefreshJobRepository } from './refresh-jobs.js';
 import { runCloudCollection } from './collection.js';
-import { handleVWorldRequest } from '../vworld.js';
+import { handleVWorldRequest, isVWorldRoute } from '../vworld.js';
 import { annotateReadonlyExport, databaseFailed, databaseSucceeded, defaultDatabaseCircuit, DATABASE_UNAVAILABLE_MESSAGE,
   isReadonlyFallbackRoute, loadReadonlyFallback, mayAttemptDatabase, unavailableRefresh,
   type ReadonlyFallbackOptions, type ReadonlyModel } from './readonly-fallback.js';
@@ -24,6 +24,15 @@ export interface CloudOptions {
 const headers = { 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin' };
 export const MAX_API_RESPONSE_BYTES = 4 * 1024 * 1024;
 const capacityMessage = '조회 결과가 다운로드 한도를 초과했습니다. 지역·기간 등 조회 조건을 좁혀 다시 시도하세요.';
+function vworldRequest(request:Request,url:URL):Request {
+  // Vercel's /api/:path* rewrite forwards its unused capture as a query parameter.
+  // Remove only the single exact capture for this route; user input remains strict.
+  if(!['GET','HEAD'].includes(request.method.toUpperCase())||!isVWorldRoute(url.pathname))return request;
+  const captures=url.searchParams.getAll('path');
+  if(captures.length!==1||captures[0]!==url.pathname.slice('/api/'.length))return request;
+  const normalized=new URL(url);normalized.searchParams.delete('path');
+  return new Request(normalized,request);
+}
 function json(body: unknown, status = 200, extra: Record<string,string> = {}): Response {
   const serialized = JSON.stringify(body);
   if (Buffer.byteLength(serialized) > MAX_API_RESPONSE_BYTES) return responseCapacity();
@@ -97,7 +106,7 @@ export async function handleCloudRequest(request: Request, options: CloudOptions
   const url = new URL(request.url);
   const method = request.method.toUpperCase();
   const route = url.pathname.replace(/\/$/, '');
-  const vworld=handleVWorldRequest(request,{apiKey:env.VWORLD_API_KEY||''});
+  const vworld=handleVWorldRequest(vworldRequest(request,url),{apiKey:env.VWORLD_API_KEY||''});
   if(vworld)return vworld; // No snapshot hydration, DB connection, or collection credentials in map frames.
   if (route === '/api/health' && method === 'GET') return json({ ok: true, app: 'culture-desk', deployment: 'cloud' });
   const cron = route === '/api/cloud/cron';
