@@ -1,0 +1,435 @@
+{
+  "checkedAt": "2026-10-16T10:06:26.993Z",
+  "baseUrl": "https://culture-desk.vercel.app",
+  "passed": true,
+  "cases": [
+    {
+      "path": "/promo/",
+      "device": "desktop",
+      "status": 200,
+      "url": "https://culture-desk.vercel.app/promo/",
+      "metadata": {
+        "duration": 21,
+        "width": 1920,
+        "height": 1080,
+        "source": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+        "controls": true,
+        "playsInline": true,
+        "h264Support": "probably",
+        "error": null
+      },
+      "playing": {
+        "currentTime": 0.5414,
+        "paused": false,
+        "readyState": 4
+      },
+      "layout": {
+        "viewport": 1440,
+        "documentWidth": 1440,
+        "bodyWidth": 1440,
+        "links": [
+          {
+            "text": "Culture Desk",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 121.265625,
+            "left": 160,
+            "right": 281.265625
+          },
+          {
+            "text": "공연 검색으로 돌아가기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 168.078125,
+            "left": 1111.921875,
+            "right": 1280
+          },
+          {
+            "text": "홍보 영상 MP4 내려받기",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 0,
+            "left": 0,
+            "right": 0
+          },
+          {
+            "text": "공연 검색 시작하기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 198.828125,
+            "left": 160,
+            "right": 358.828125
+          },
+          {
+            "text": "지도에서 보기",
+            "href": "https://culture-desk.vercel.app/#map",
+            "width": 143.28125,
+            "left": 370.828125,
+            "right": 514.109375
+          },
+          {
+            "text": "MP4 다운로드",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 145.65625,
+            "left": 526.109375,
+            "right": 671.765625
+          },
+          {
+            "text": "culture-desk.vercel.app",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 135.109375,
+            "left": 160,
+            "right": 295.109375
+          }
+        ],
+        "videoRect": {
+          "x": 161,
+          "y": 294.171875,
+          "width": 1118,
+          "height": 628.875,
+          "top": 294.171875,
+          "right": 1279,
+          "bottom": 923.046875,
+          "left": 161
+        },
+        "horizontalOverflow": false
+      },
+      "errors": [],
+      "media": [
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo-poster.png",
+          "status": 200,
+          "contentType": "image/png"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        }
+      ],
+      "screenshot": "production-player-desktop.png"
+    },
+    {
+      "path": "/promo/",
+      "device": "mobile",
+      "status": 200,
+      "url": "https://culture-desk.vercel.app/promo/",
+      "metadata": {
+        "duration": 21,
+        "width": 1920,
+        "height": 1080,
+        "source": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+        "controls": true,
+        "playsInline": true,
+        "h264Support": "probably",
+        "error": null
+      },
+      "playing": {
+        "currentTime": 0.5095,
+        "paused": false,
+        "readyState": 4
+      },
+      "layout": {
+        "viewport": 390,
+        "documentWidth": 390,
+        "bodyWidth": 390,
+        "links": [
+          {
+            "text": "Culture Desk",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 109.03125,
+            "left": 16,
+            "right": 125.03125
+          },
+          {
+            "text": "공연 검색으로 돌아가기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 156.078125,
+            "left": 217.921875,
+            "right": 374
+          },
+          {
+            "text": "홍보 영상 MP4 내려받기",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 0,
+            "left": 0,
+            "right": 0
+          },
+          {
+            "text": "공연 검색 시작하기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 358,
+            "left": 16,
+            "right": 374
+          },
+          {
+            "text": "지도에서 보기",
+            "href": "https://culture-desk.vercel.app/#map",
+            "width": 173,
+            "left": 16,
+            "right": 189
+          },
+          {
+            "text": "MP4 다운로드",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 173,
+            "left": 201,
+            "right": 374
+          },
+          {
+            "text": "culture-desk.vercel.app",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 135.109375,
+            "left": 16,
+            "right": 151.109375
+          }
+        ],
+        "videoRect": {
+          "x": 17,
+          "y": 261.765625,
+          "width": 356,
+          "height": 200.25,
+          "top": 261.765625,
+          "right": 373,
+          "bottom": 462.015625,
+          "left": 17
+        },
+        "horizontalOverflow": false
+      },
+      "errors": [],
+      "media": [
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo-poster.png",
+          "status": 200,
+          "contentType": "image/png"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        }
+      ],
+      "screenshot": "production-player-mobile.png"
+    },
+    {
+      "path": "/promo",
+      "device": "desktop",
+      "status": 200,
+      "url": "https://culture-desk.vercel.app/promo",
+      "metadata": {
+        "duration": 21,
+        "width": 1920,
+        "height": 1080,
+        "source": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+        "controls": true,
+        "playsInline": true,
+        "h264Support": "probably",
+        "error": null
+      },
+      "playing": {
+        "currentTime": 0.5329,
+        "paused": false,
+        "readyState": 4
+      },
+      "layout": {
+        "viewport": 1440,
+        "documentWidth": 1440,
+        "bodyWidth": 1440,
+        "links": [
+          {
+            "text": "Culture Desk",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 121.265625,
+            "left": 160,
+            "right": 281.265625
+          },
+          {
+            "text": "공연 검색으로 돌아가기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 168.078125,
+            "left": 1111.921875,
+            "right": 1280
+          },
+          {
+            "text": "홍보 영상 MP4 내려받기",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 0,
+            "left": 0,
+            "right": 0
+          },
+          {
+            "text": "공연 검색 시작하기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 198.828125,
+            "left": 160,
+            "right": 358.828125
+          },
+          {
+            "text": "지도에서 보기",
+            "href": "https://culture-desk.vercel.app/#map",
+            "width": 143.28125,
+            "left": 370.828125,
+            "right": 514.109375
+          },
+          {
+            "text": "MP4 다운로드",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 145.65625,
+            "left": 526.109375,
+            "right": 671.765625
+          },
+          {
+            "text": "culture-desk.vercel.app",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 135.109375,
+            "left": 160,
+            "right": 295.109375
+          }
+        ],
+        "videoRect": {
+          "x": 161,
+          "y": 294.171875,
+          "width": 1118,
+          "height": 628.875,
+          "top": 294.171875,
+          "right": 1279,
+          "bottom": 923.046875,
+          "left": 161
+        },
+        "horizontalOverflow": false
+      },
+      "errors": [],
+      "media": [
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo-poster.png",
+          "status": 200,
+          "contentType": "image/png"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        }
+      ],
+      "screenshot": "production-player-desktop-no-slash.png"
+    },
+    {
+      "path": "/promo",
+      "device": "mobile",
+      "status": 200,
+      "url": "https://culture-desk.vercel.app/promo",
+      "metadata": {
+        "duration": 21,
+        "width": 1920,
+        "height": 1080,
+        "source": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+        "controls": true,
+        "playsInline": true,
+        "h264Support": "probably",
+        "error": null
+      },
+      "playing": {
+        "currentTime": 0.5192,
+        "paused": false,
+        "readyState": 4
+      },
+      "layout": {
+        "viewport": 390,
+        "documentWidth": 390,
+        "bodyWidth": 390,
+        "links": [
+          {
+            "text": "Culture Desk",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 109.03125,
+            "left": 16,
+            "right": 125.03125
+          },
+          {
+            "text": "공연 검색으로 돌아가기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 156.078125,
+            "left": 217.921875,
+            "right": 374
+          },
+          {
+            "text": "홍보 영상 MP4 내려받기",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 0,
+            "left": 0,
+            "right": 0
+          },
+          {
+            "text": "공연 검색 시작하기 ↗",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 358,
+            "left": 16,
+            "right": 374
+          },
+          {
+            "text": "지도에서 보기",
+            "href": "https://culture-desk.vercel.app/#map",
+            "width": 173,
+            "left": 16,
+            "right": 189
+          },
+          {
+            "text": "MP4 다운로드",
+            "href": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+            "width": 173,
+            "left": 201,
+            "right": 374
+          },
+          {
+            "text": "culture-desk.vercel.app",
+            "href": "https://culture-desk.vercel.app/",
+            "width": 135.109375,
+            "left": 16,
+            "right": 151.109375
+          }
+        ],
+        "videoRect": {
+          "x": 17,
+          "y": 261.765625,
+          "width": 356,
+          "height": 200.25,
+          "top": 261.765625,
+          "right": 373,
+          "bottom": 462.015625,
+          "left": 17
+        },
+        "horizontalOverflow": false
+      },
+      "errors": [],
+      "media": [
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo-poster.png",
+          "status": 200,
+          "contentType": "image/png"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        },
+        {
+          "url": "https://culture-desk.vercel.app/promo/culture-desk-promo.mp4",
+          "status": 206,
+          "contentType": "video/mp4"
+        }
+      ],
+      "screenshot": "production-player-mobile-no-slash.png"
+    }
+  ]
+}
