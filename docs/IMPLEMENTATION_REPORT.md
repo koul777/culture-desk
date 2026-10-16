@@ -60,6 +60,7 @@
 
 ## 현재 검증 근거와 남은 확인
 
+- 수집·조회 성능 개선 후 전체 테스트 **189/189**와 빌드를 통과했다. 운영 복사본의 동일 상세 40건은 38.98 → 11.52초, 스냅샷 저장은 40 → 12회였고 전체 6,011개 레코드의 데이터·원본 해시가 일치했다. 실제 API 속도 보장 수치는 아니다. [성능 비교·보존 검증](COLLECTION_PERFORMANCE.md)
 - README 홍보 영상과 3D 모형 조작 개선 후 자동 테스트 **154/154**와 빌드를 통과했다. 실제 건물·가정 높이 구분, 원본 높이 보존, 375/390px 모바일, 키보드 조작과 시간초과를 확인했다. [개선 테스트](verification/promo-3d-tests.txt) · [개선 빌드](verification/promo-3d-build.txt) · [3D 화면 검증](verification/venue-3d-refined-report.json)
 - 운영 배포에서도 원주 층수 기반 모형과 안동 높이 가정 모형을 확인했다. [운영 3D 검증](verification/promo/production-3d-check.json)
 - 홍보 영상은 README 전용으로 `docs/media`에 보관한다. 프로그램의 영상 페이지·정적 영상 파일·전용 경로는 제거했으며 Vercel 배포에 포함하지 않는다. 기존 영상 재생 검증 파일은 제거 전 이력이다.

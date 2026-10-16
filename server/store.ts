@@ -34,12 +34,14 @@ export class Store {
         page INTEGER NOT NULL DEFAULT 1,source_id TEXT NOT NULL DEFAULT '',state TEXT NOT NULL DEFAULT 'queued',
         attempts INTEGER NOT NULL DEFAULT 0,available_at TEXT NOT NULL,error TEXT NOT NULL DEFAULT '',UNIQUE(run_id,kind,task_key));
       CREATE INDEX IF NOT EXISTS task_queue ON sync_tasks(state,available_at);
+      CREATE INDEX IF NOT EXISTS task_run_state ON sync_tasks(run_id,state);
       CREATE TABLE IF NOT EXISTS sync_items(run_id INTEGER NOT NULL REFERENCES sync_runs(id),performance_id INTEGER NOT NULL REFERENCES performances(id),
         PRIMARY KEY(run_id,performance_id));
       CREATE TABLE IF NOT EXISTS sync_run_archive(run_id INTEGER PRIMARY KEY REFERENCES sync_runs(id),
         tasks_total INTEGER NOT NULL,tasks_done INTEGER NOT NULL,tasks_failed INTEGER NOT NULL,
         performances INTEGER NOT NULL,excluded INTEGER NOT NULL,review INTEGER NOT NULL,
         list_evidence TEXT NOT NULL,archived_at TEXT NOT NULL);
+      CREATE INDEX IF NOT EXISTS run_coverage ON sync_runs(city_id,source,state,from_date,to_date) WHERE detail_only=0;
       INSERT OR IGNORE INTO schema_migrations VALUES(1,datetime('now'));
     `);
     for (const c of defaults) this.db.prepare('INSERT OR IGNORE INTO cities VALUES(?,?)').run(c.id, JSON.stringify(c));
@@ -143,11 +145,18 @@ export class Store {
     const rows = this.db.prepare(`SELECT p.*,b.note,b.performance_id AS bookmarked ${filtered} ORDER BY p.start_date DESC,p.id DESC ${all ? '' : 'LIMIT ? OFFSET ?'}`).all(...params, ...(all ? [] : [limit, (page-1)*limit])) as Row[];
     const sources: Source[] = filters.source ? [filters.source] : ['kopis','culture'];
     const selectedCities = cities.length ? cities : this.cities().map(c => c.id);
-    const coverageIncomplete = selectedCities.some(city => sources.some(source => {
-      const complete=this.db.prepare(`SELECT id FROM sync_runs WHERE detail_only=0 AND city_id=? AND source=? AND state='complete' AND from_date<=? AND to_date>=? ORDER BY id DESC LIMIT 1`).get(city,source,filters.from||today(),filters.to||today()) as Row|undefined;
-      if(!complete)return true;
-      return !!this.db.prepare(`SELECT id FROM sync_runs WHERE detail_only=0 AND city_id=? AND source=? AND state!='complete' AND id>? AND from_date<=? AND to_date>=? LIMIT 1`).get(city,source,complete.id,filters.to||today(),filters.from||today());
-    }));
+    const from = filters.from || today(), to = filters.to || today();
+    // Compare the newest complete covering run with newer unfinished overlapping runs.
+    // One grouped query preserves that precedence without two reads per region/source.
+    const coverage = selectedCities.length ? this.db.prepare(`SELECT city_id,source,
+      MAX(CASE WHEN state='complete' AND from_date<=? AND to_date>=? THEN id END) AS complete_id,
+      MAX(CASE WHEN state!='complete' AND from_date<=? AND to_date>=? THEN id END) AS incomplete_id
+      FROM sync_runs WHERE detail_only=0 AND city_id IN (${selectedCities.map(()=>'?').join(',')})
+      AND source IN (${sources.map(()=>'?').join(',')}) GROUP BY city_id,source`)
+      .all(from,to,to,from,...selectedCities,...sources) as Row[] : [];
+    const covered = new Set(coverage.filter(row => row.complete_id !== null && (row.incomplete_id === null || Number(row.incomplete_id) < Number(row.complete_id)))
+      .map(row => JSON.stringify([row.city_id,row.source])));
+    const coverageIncomplete = selectedCities.some(city => sources.some(source => !covered.has(JSON.stringify([city,source]))));
     return { items: rows.map(r=>this.mapItem(r)), total, page, pages, sourceCounts, pendingDetails,
       partial: coverageIncomplete || (!!(filters.price || filters.age) && pendingDetails > 0), snapshotAt: timestamp() };
   }
@@ -212,16 +221,26 @@ export class Store {
   }
   runs(limit = 200, ids?: number[]): SyncRun[] {
     if(ids && !ids.length) return [];
-    const rows=(ids
-      ? this.db.prepare(`SELECT * FROM sync_runs WHERE id IN (${ids.map(()=>'?').join(',')}) ORDER BY id DESC`).all(...ids)
-      : this.db.prepare('SELECT * FROM sync_runs ORDER BY id DESC LIMIT ?').all(limit)) as Row[];
+    const selection = ids ? `WHERE id IN (${ids.map(()=>'?').join(',')}) ORDER BY id DESC` : 'ORDER BY id DESC LIMIT ?';
+    const rows=this.db.prepare(`WITH selected_runs AS MATERIALIZED (SELECT * FROM sync_runs ${selection}),
+      tasks AS (SELECT t.run_id,COUNT(*) AS total,
+        SUM(CASE WHEN t.state='done' THEN 1 ELSE 0 END) AS done,
+        SUM(CASE WHEN t.state='failed' THEN 1 ELSE 0 END) AS failed
+        FROM selected_runs r JOIN sync_tasks t ON t.run_id=r.id GROUP BY t.run_id),
+      items AS (SELECT s.run_id,
+        SUM(CASE WHEN p.classification='performance' THEN 1 ELSE 0 END) AS performances,
+        SUM(CASE WHEN p.classification='excluded' THEN 1 ELSE 0 END) AS excluded,
+        SUM(CASE WHEN p.classification='review' THEN 1 ELSE 0 END) AS review
+        FROM selected_runs r JOIN sync_items s ON s.run_id=r.id JOIN performances p ON p.id=s.performance_id GROUP BY s.run_id)
+      SELECT r.*,COALESCE(t.total,a.tasks_total,0) AS tasks_total,COALESCE(t.done,a.tasks_done,0) AS tasks_done,
+        COALESCE(t.failed,a.tasks_failed,0) AS tasks_failed,COALESCE(i.performances,a.performances,0) AS performances,
+        COALESCE(i.excluded,a.excluded,0) AS excluded,COALESCE(i.review,a.review,0) AS review
+      FROM selected_runs r LEFT JOIN tasks t ON t.run_id=r.id LEFT JOIN items i ON i.run_id=r.id
+        LEFT JOIN sync_run_archive a ON a.run_id=r.id ORDER BY r.id DESC`).all(...(ids || [limit])) as Row[];
     return rows.map(r=>{
-      const tasks=this.db.prepare('SELECT state,count(*) n FROM sync_tasks WHERE run_id=? GROUP BY state').all(r.id) as Row[];
-      const items=this.db.prepare('SELECT p.classification,count(*) n FROM sync_items s JOIN performances p ON p.id=s.performance_id WHERE s.run_id=? GROUP BY p.classification').all(r.id) as Row[];
-      const archived=this.db.prepare('SELECT * FROM sync_run_archive WHERE run_id=?').get(r.id) as Row|undefined;
       return {id:Number(r.id),source:r.source,cityId:r.city_id,from:r.from_date,to:r.to_date,detailOnly:!!r.detail_only,state:r.state,createdAt:r.created_at,updatedAt:r.updated_at,
-        tasksTotal:tasks.length?tasks.reduce((n,t)=>n+Number(t.n),0):Number(archived?.tasks_total||0),tasksDone:tasks.length?Number(tasks.find(t=>t.state==='done')?.n||0):Number(archived?.tasks_done||0),tasksFailed:tasks.length?Number(tasks.find(t=>t.state==='failed')?.n||0):Number(archived?.tasks_failed||0),
-        items:items.length?Number(items.find(t=>t.classification==='performance')?.n||0):Number(archived?.performances||0),excluded:items.length?Number(items.find(t=>t.classification==='excluded')?.n||0):Number(archived?.excluded||0),review:items.length?Number(items.find(t=>t.classification==='review')?.n||0):Number(archived?.review||0),error:r.error};
+        tasksTotal:Number(r.tasks_total),tasksDone:Number(r.tasks_done),tasksFailed:Number(r.tasks_failed),
+        items:Number(r.performances),excluded:Number(r.excluded),review:Number(r.review),error:r.error};
     });
   }
   lastCollectionSync(source: Source): string | null {

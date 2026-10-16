@@ -1,11 +1,11 @@
 import type { Provider, PublicRefreshStatus, Source } from '../../shared/types.js';
 import type { Config } from '../config.js';
 import { createApp, isSearchRoute } from '../app.js';
-import type { Store, Task } from '../store.js';
-import { Worker } from '../worker.js';
+import type { Store } from '../store.js';
 import { getSnapshotRepository, SnapshotCapacityError, type SnapshotRepository } from './snapshot.js';
 import { equalSecret, validMutationOrigin } from './auth.js';
 import { getRefreshJobRepository } from './refresh-jobs.js';
+import { runCloudCollection } from './collection.js';
 
 type Repository = Pick<SnapshotRepository, 'withStore'>;
 export interface CloudOptions {
@@ -63,7 +63,7 @@ export async function handleCloudRequest(request: Request, options: CloudOptions
   try {
     const repo = options.repository || getSnapshotRepository();
     if (cron && env.AUTOMATIC_REFRESH_ENABLED === '1') return json({ok:true,automaticRefresh:await automaticRefreshStatus(options)});
-    if ((route === '/api/cloud/tick' && method === 'POST') || cron) return json(await runCloudTicks(repo, env, options));
+    if ((route === '/api/cloud/tick' && method === 'POST') || cron) return json(await runCloudCollection({...options,repository:repo,env,signal:request.signal}));
     const write = !['GET','HEAD'].includes(method);
     const result = await repo.withStore(write, async store => {
       const config = cloudConfig(store, env);
@@ -97,41 +97,4 @@ export async function handleCloudRequest(request: Request, options: CloudOptions
       locations:failure.stack?.split('\n').filter(line=>/^\s+at /.test(line)).slice(0,4).map(line=>line.replace(/https?:\/\/\S+/g,'[url]'))}));
     return json({ error: '클라우드 연결을 처리하지 못했습니다. 잠시 후 다시 시도하세요.' }, 503, { 'Retry-After': '3' });
   }
-}
-async function runCloudTicks(repo: Repository, env: NodeJS.ProcessEnv, options: CloudOptions) {
-  const deadline = Date.now() + (options.tickBudgetMs ?? 35000);
-  const stepMs = options.tickStepMs ?? 12000;
-  let steps = 0; let active = true;
-  while (steps < 20 && Date.now() + stepMs < deadline && active) {
-    active = await repo.withStore(true, async store => {
-      const worker = new Worker(store, cloudConfig(store, env), options.providers);
-      // The durable scheduled runner owns daily nationwide refreshes; browser ticks only advance explicit user requests.
-      if(env.AUTOMATIC_REFRESH_ENABLED === '1')worker.refreshDue=()=>{};
-      let timedOutTask: Task | undefined;
-      const timer = setTimeout(() => {
-        // Local shutdown restores an interrupted task without consuming an attempt.
-        // A repeated cloud deadline is a real retryable failure and must not monopolize the queue.
-        timedOutTask = store.db.prepare("SELECT * FROM sync_tasks WHERE state='running' ORDER BY id LIMIT 1").get() as Task | undefined;
-        void worker.stop();
-      }, stepMs); timer.unref();
-      try {
-        await worker.tick();
-        if (timedOutTask) {
-          const task = timedOutTask;
-          store.transaction(() => {
-            store.db.prepare('UPDATE sync_tasks SET attempts=? WHERE id=?').run(task.attempts, task.id);
-            store.failTask(task, '클라우드 수집 응답 시간이 초과됐습니다. 재시도 후에도 실패하면 해당 작업을 재개하세요.', 'network');
-            if (task.kind === 'detail' && task.attempts >= 3) {
-              const item = store.internal(task.source, task.source_id);
-              if (item && item.detailState !== 'complete') store.upsert({ ...item, detailState: 'failed' });
-            }
-          });
-        }
-        return !!store.db.prepare("SELECT 1 FROM sync_runs WHERE state IN ('queued','running') LIMIT 1").get();
-      } finally { clearTimeout(timer); await worker.stop(); }
-    });
-    steps++;
-    if (active && Date.now() + stepMs + 350 < deadline) await new Promise(resolve => setTimeout(resolve, 350));
-  }
-  return { ok: true, steps, active, continueWhileOpen: true };
 }

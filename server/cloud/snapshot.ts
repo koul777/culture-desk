@@ -42,6 +42,9 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS culture_desk_snapshot (
 /** All writers hold the same PostgreSQL row lock through hydration and commit. */
 export class SnapshotRepository {
   private ready?: Promise<void>;
+  // Validate the revision in the same SELECT as the payload. A TTL-only cache
+  // could hide newly collected records or a pause from another instance.
+  private readCache?: { revision: string; data: Buffer | null };
   constructor(private readonly pool: SnapshotPool) {}
   async initialize(): Promise<void> {
     if (!this.ready) this.ready = (async () => {
@@ -50,7 +53,7 @@ export class SnapshotRepository {
     })().catch(error => { this.ready = undefined; throw error; });
     return this.ready;
   }
-  async withStore<T>(write: boolean, operation: (store: Store) => Promise<T>): Promise<T> {
+  async withStore<T>(write: boolean, operation: (store: Store) => Promise<T>, options: { skipUnchanged?: boolean } = {}): Promise<T> {
     await this.initialize();
     const client = await this.pool.connect();
     let store: Store | undefined;
@@ -61,18 +64,29 @@ export class SnapshotRepository {
         await client.query('BEGIN'); transaction = true;
         await client.query("SET LOCAL lock_timeout='8s'; SET LOCAL statement_timeout='15s'; SET LOCAL idle_in_transaction_session_timeout='25s'");
       }
-      const result = await client.query(`SELECT data FROM culture_desk_snapshot WHERE id=1${write ? ' FOR UPDATE' : ''}`);
-      const data = result.rows[0]?.data as Buffer | null;
+      const cached = !write ? this.readCache : undefined;
+      const result = cached
+        ? await client.query('SELECT CASE WHEN revision=$1::bigint THEN NULL ELSE data END AS data,revision FROM culture_desk_snapshot WHERE id=1', [cached.revision])
+        : await client.query(`SELECT data,revision FROM culture_desk_snapshot WHERE id=1${write ? ' FOR UPDATE' : ''}`);
+      const row = result.rows[0];
+      const revision = row?.revision === undefined ? undefined : String(row.revision);
+      const data = cached && revision === cached.revision ? cached.data : (row?.data ?? null) as Buffer | null;
       folder = await mkdtemp(path.join(os.tmpdir(), 'culture-cloud-'));
       const filename = path.join(folder, 'working.db');
       if (data) await writeFile(filename, decodeSnapshot(data));
       store = new Store(filename, NATIONAL_CITIES);
+      if (!write && revision && /^\d+$/.test(revision)) this.readCache = { revision, data };
+      // Opt-in for queue probes only. DDL by itself is not counted; callers
+      // that require a schema-only commit must use the default behavior.
+      const changesBefore = write && options.skipUnchanged ? store.db.prepare('SELECT total_changes() AS n').get()!.n : undefined;
       const output = await operation(store);
       if (write) {
-        const snapshot = path.join(folder, 'committed.db');
-        store.backup(snapshot);
-        const bytes = encodeSnapshot(await readFile(snapshot));
-        await client.query('UPDATE culture_desk_snapshot SET data=$1,revision=revision+1,updated_at=now() WHERE id=1', [bytes]);
+        if (changesBefore === undefined || changesBefore !== store.db.prepare('SELECT total_changes() AS n').get()!.n) {
+          const snapshot = path.join(folder, 'committed.db');
+          store.backup(snapshot);
+          const bytes = encodeSnapshot(await readFile(snapshot));
+          await client.query('UPDATE culture_desk_snapshot SET data=$1,revision=revision+1,updated_at=now() WHERE id=1', [bytes]);
+        }
         await client.query('COMMIT'); transaction = false;
       }
       return output;

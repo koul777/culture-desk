@@ -30,6 +30,23 @@ async function json<T>(path: string, init?: RequestInit): Promise<T> {
   catch { throw new ApiError('서버 응답을 읽을 수 없습니다.', res.status); }
 }
 
+/** Bound only the shared status read; long collection and export requests keep their own lifecycle. */
+async function bootstrap(): Promise<Bootstrap> {
+  const controller = new AbortController();
+  const timeoutError = new ApiError('서버 상태 조회가 30초를 초과했습니다. 다시 연결해 주세요.', 408);
+  const timer = setTimeout(() => controller.abort(timeoutError), 30_000);
+  try {
+    const result = await json<Bootstrap>('/api/bootstrap', { signal: controller.signal });
+    // Body decoding may finish after cancellation; a late snapshot must never reach app state.
+    if (controller.signal.aborted) throw timeoutError;
+    return result;
+  } catch (error) {
+    throw controller.signal.aborted ? timeoutError : error;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** Every state-changing request carries the JSON content type and the local-app header. */
 function mutate<T>(method: 'POST' | 'PUT' | 'DELETE', path: string, body: unknown = {}): Promise<T> {
   return json<T>(path, {
@@ -51,7 +68,7 @@ export interface CityInput { name: string; sido: string; sigungu: string; kopisS
 
 export const api = {
   cloudTick: () => mutate<{ ok: boolean }>('POST', '/api/cloud/tick'),
-  bootstrap: () => json<Bootstrap>('/api/bootstrap'),
+  bootstrap,
   search: (filters: SearchFilters) => json<SearchResult>(`/api/performances?${queryString(filters)}`),
   map: (filters: SearchFilters) => json<MapResult>(`/api/map?${queryString(filters)}`),
   performance: (id: number) => json<Performance>(`/api/performances/${id}`),

@@ -179,6 +179,7 @@ docs/                      API·운영·구현·검증 문서
 
 - [API 연결·신청 안내](docs/API_APPLICATIONS.md)
 - [전국 자동 갱신 운영](docs/AUTOMATIC_REFRESH.md)
+- [수집·조회 성능 비교와 데이터 일치 검증](docs/COLLECTION_PERFORMANCE.md)
 - [Vercel 배포·저장·운영](docs/VERCEL.md)
 - [구현 및 검증 보고서](docs/IMPLEMENTATION_REPORT.md)
 - [전국 수집 도구 사용법](scripts/README-national.md)

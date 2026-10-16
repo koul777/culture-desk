@@ -1,0 +1,71 @@
+{
+  "source": "data/performance-baseline/production-before.db (opened readOnly; SQLite backup; all changes on isolated copies)",
+  "inputBytes": 22634496,
+  "rows": {
+    "sync_runs": 951,
+    "sync_tasks": 11268,
+    "sync_items": 7922,
+    "sync_run_archive": 0,
+    "performances": 6011
+  },
+  "equal": {
+    "runs": 951,
+    "runVariants": 4,
+    "fullSearchResponses": 30,
+    "runsSha256": "ecf71240e49ba6def3ae426ef8425041b7246bf15395d2460fc8bb88b4f87a9d"
+  },
+  "constructorIncludingIndexCreation": {
+    "baselineMedianMs": 372.8544999999999,
+    "optimizedMedianMs": 381.7482
+  },
+  "runs": {
+    "baseline": {
+      "medianMs": 55.635299999999916,
+      "minMs": 50.73880000000008,
+      "maxMs": 76.78420000000006
+    },
+    "optimized": {
+      "medianMs": 12.92239999999947,
+      "minMs": 12.23869999999988,
+      "maxMs": 15.527099999999336
+    },
+    "baselineQueries": 2854,
+    "optimizedQueries": 1
+  },
+  "searchNationwide": {
+    "baseline": {
+      "medianMs": 16.291299999999865,
+      "minMs": 15.37880000000041,
+      "maxMs": 34.41390000000047
+    },
+    "optimized": {
+      "medianMs": 16.464700000000448,
+      "minMs": 15.918899999999667,
+      "maxMs": 34.58039999999983
+    },
+    "baselineQueries": 6,
+    "optimizedQueries": 5
+  },
+  "snapshot": {
+    "baseline": {
+      "databaseBytes": 22634496,
+      "gzipBytes": 3019945,
+      "vacuumMs": 421.9880999999996,
+      "gzipTiming": {
+        "medianMs": 172.17340000000058,
+        "minMs": 165.6211000000003,
+        "maxMs": 179.90300000000025
+      }
+    },
+    "optimized": {
+      "databaseBytes": 22872064,
+      "gzipBytes": 3060449,
+      "vacuumMs": 433.3684999999996,
+      "gzipTiming": {
+        "medianMs": 173.97090000000026,
+        "minMs": 170.34799999999996,
+        "maxMs": 193.94380000000092
+      }
+    }
+  }
+}

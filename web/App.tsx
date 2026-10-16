@@ -4,6 +4,7 @@ import type { Bootstrap, City, Performance } from '../shared/types';
 import { api, ApiError, errorText } from './api';
 import { DeskContext, type Desk, type ItemPatch } from './desk';
 import { loadFilters, saveFilters, type FilterState } from './lib/filters';
+import { createBootstrapRefresh, preserveCityReference } from './lib/bootstrap-refresh';
 import { isActive, number, sourceLabel } from './lib/format';
 import { useBusy, useHashView, useInterval } from './lib/hooks';
 import { Callout } from './components/Cells';
@@ -16,6 +17,7 @@ import { Sidebar } from './components/Sidebar';
 
 const ACTIVE_POLL_MS = 3000;
 const IDLE_POLL_MS = 60000;
+const POLL_COALESCE_MS = 1000;
 
 export function App() {
   return (
@@ -43,18 +45,25 @@ function CultureDesk() {
   const patchSeq = useRef(0);
   const ticking = useRef(false);
 
-  const refresh = useCallback(async () => {
+  const bootstrapReads = useMemo(() => createBootstrapRefresh(async () => {
+    const next = await api.bootstrap();
+    setBoot(previous => preserveCityReference(previous, next));
+    setBootError(null);
+    return next;
+  }), []);
+  const readBootstrap = useCallback(async (fresh: boolean) => {
     try {
-      const next = await api.bootstrap();
-      setBoot(next); setBootError(null);
-      return next;
+      return await (fresh ? bootstrapReads.fresh() : bootstrapReads.shared());
     } catch (e) {
       setBootError(errorText(e));
       return undefined;
     }
-  }, []);
+  }, [bootstrapReads]);
+  // User reconnects and reads after mutations must not join a stale, already-started poll.
+  const refresh = useCallback(() => readBootstrap(true), [readBootstrap]);
+  const pollBootstrap = useCallback(() => readBootstrap(false), [readBootstrap]);
 
-  useEffect(() => { void refresh(); }, [refresh]);
+  useEffect(() => { void pollBootstrap(); }, [pollBootstrap]);
   useEffect(() => { if (boot && !filters) setFilterState(loadFilters(boot)); }, [boot, filters]);
 
   const active = boot?.runs.some(isActive) ?? false;
@@ -74,12 +83,16 @@ function CultureDesk() {
   useEffect(()=>{if(browserTickEnabled)void tick();},[browserTickEnabled,tick]);
   useInterval(()=>{void tick();},browserTickEnabled&&!syncBlocked ? active ? 3000 : 60000 : null);
   // Collection progress is polled every 3 s; otherwise a slow check picks up scheduled refreshes.
-  useInterval(() => { if (active || !document.hidden) void refresh(); }, ended || !boot ? null : active ? ACTIVE_POLL_MS : IDLE_POLL_MS);
+  const pollInterval = active ? ACTIVE_POLL_MS : IDLE_POLL_MS;
+  useInterval(() => {
+    // Only skip adjacent reads; response latency must not turn the normal 3 s cadence into 6 s.
+    if ((active || !document.hidden) && bootstrapReads.isDue(POLL_COALESCE_MS)) void pollBootstrap();
+  }, ended || !boot ? null : pollInterval);
   useEffect(() => {
-    const onVisible = () => { if (!document.hidden && !ended) void refresh(); };
+    const onVisible = () => { if (!document.hidden && !ended) void pollBootstrap(); };
     document.addEventListener('visibilitychange', onVisible);
     return () => document.removeEventListener('visibilitychange', onVisible);
-  }, [refresh, ended]);
+  }, [pollBootstrap, ended]);
 
   // Move focus to the new view's content for keyboard and screen-reader users.
   const mainRef = useRef<HTMLElement>(null);

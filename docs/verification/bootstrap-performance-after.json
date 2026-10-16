@@ -1,0 +1,24 @@
+{
+  "label": "after",
+  "method": "Real local UI, frozen real GET payloads; ten visibility events while bootstrap delayed 400ms; all POST requests blocked",
+  "startup": {
+    "bootstrap": 1,
+    "search": 2,
+    "map": 2,
+    "activeBootstrap": 0,
+    "maxConcurrent": 1,
+    "posts": 0
+  },
+  "burst": {
+    "bootstrap": 1,
+    "maxConcurrent": 1,
+    "search": 0,
+    "map": 0
+  },
+  "markers": {
+    "sameNode": true,
+    "mutations": 0,
+    "sum": 5600
+  },
+  "posts": 0
+}

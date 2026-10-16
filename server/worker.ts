@@ -1,7 +1,63 @@
-import type { Provider, SearchFilters, Source, SyncRequest, PerformanceInput } from '../shared/types.js';
-import { Store } from './store.js';
+import type { Provider, SearchFilters, Source, SyncRequest, PerformanceInput, City, ListResponse } from '../shared/types.js';
+import { Store, type Task } from './store.js';
 import type { Config } from './config.js';
 import { createProviders } from './providers/index.js';
+
+export interface CollectionInput { task: Task; city?: City; item?: PerformanceInput }
+export type CollectionResult = {kind:'list';value:ListResponse}|{kind:'detail';value:PerformanceInput};
+export function readCollectionInput(store:Store,task:Task):CollectionInput {
+  if(task.kind==='list') {
+    const city=store.cities().find(c=>c.id===task.city_id);if(!city)throw new Error('city');
+    return {task,city};
+  }
+  const item=store.internal(task.source,task.source_id);if(!item)throw new Error('missing');
+  return {task,item};
+}
+/** Provider I/O is separate from persistence so cloud work need not hold a database lock. */
+export async function fetchCollectionTask(provider:Provider,input:CollectionInput,signal?:AbortSignal):Promise<CollectionResult> {
+  const {task}=input;
+  if(task.kind==='list') {
+    const value=await provider.list({city:input.city!,from:task.from_date,to:task.to_date,page:task.page,pageSize:100},signal);
+    if(value.hasMore&&task.page>=10000)throw Object.assign(new Error('pagination'),{kind:'schema'});
+    return {kind:'list',value};
+  }
+  return {kind:'detail',value:await provider.detail(input.item!,signal)};
+}
+export interface CollectionMergeGuard { observedAt:string }
+/** A cloud response may arrive after another writer has refreshed the same record. */
+export function applyCollectionResult(store:Store,task:Task,result:CollectionResult,guard?:CollectionMergeGuard) {
+  store.transaction(()=>{
+    const persist=(item:PerformanceInput)=>{
+      if(guard&&task.kind==='list') {
+        const current=store.db.prepare('SELECT id,data,updated_at FROM performances WHERE source=? AND source_id=?').get(item.source,item.sourceId);
+        const changed=current&&String(current.updated_at)>guard.observedAt;
+        if(current&&changed) {
+          store.db.prepare('INSERT OR IGNORE INTO sync_items VALUES(?,?)').run(task.run_id,current.id);
+          return JSON.parse(String(current.data)) as PerformanceInput;
+        }
+      }
+      store.upsert(item,task.run_id);return item;
+    };
+    if(result.kind==='list') {
+      for(const item of result.value.items) {
+        const saved=persist(item);
+        // Existing complete details are refreshed too; exclusions alone skip detail calls.
+        if(saved.classification!=='excluded')store.addTask(task.run_id,task.source,task.city_id,'detail',task.from_date,task.to_date,1,item.sourceId);
+      }
+      if(result.value.hasMore)store.addTask(task.run_id,task.source,task.city_id,'list',task.from_date,task.to_date,task.page+1,'');
+    }else persist(result.value);
+    store.finishTask(task);
+  });
+}
+export function applyCollectionFailure(store:Store,task:Task,error:unknown,messageOverride?:string) {
+  const kind=(error as {kind?:string})?.kind||'network';
+  const message=messageOverride||(kind==='auth'?'인증키가 거절되었습니다. 키와 승인을 확인한 뒤 재개하세요.':kind==='quota'?'제공기관 호출 한도에 도달했습니다. 한도가 회복되면 재개하세요.':kind==='schema'?'제공기관 응답 형식을 확인할 수 없습니다. 해당 구간을 재시도하세요.':'제공기관 연결에 실패했습니다. 잠시 후 다시 시도합니다.');
+  store.failTask(task,message,kind);
+  if(task.kind==='detail'&&task.attempts>=3) {
+    const item=store.internal(task.source,task.source_id);
+    if(item&&item.detailState!=='complete')store.upsert({...item,detailState:'failed'});
+  }
+}
 
 export class Worker {
   providers: Partial<Record<Source, Provider>>;
@@ -56,33 +112,11 @@ export class Worker {
     const provider=this.providers[task.source];
     if(!provider) { this.store.failTask(task,'API 키를 입력한 뒤 설정을 다시 읽고 재개하세요.','auth'); return; }
     try {
-      if(task.kind==='list') {
-        const city=this.store.cities().find(c=>c.id===task.city_id); if(!city) throw new Error('city');
-        const result=await provider.list({city,from:task.from_date,to:task.to_date,page:task.page,pageSize:100},this.abort.signal);
-        if(result.hasMore && task.page>=10000) { const e=new Error('pagination'); (e as any).kind='schema'; throw e; }
-        this.store.transaction(()=>{
-          for(const item of result.items) {
-            this.store.upsert(item,task.run_id);
-            // Detail refresh is part of the run, including records hydrated in an earlier run.
-            if(item.classification!=='excluded') this.store.addTask(task.run_id,task.source,task.city_id,'detail',task.from_date,task.to_date,1,item.sourceId);
-          }
-          if(result.hasMore) this.store.addTask(task.run_id,task.source,task.city_id,'list',task.from_date,task.to_date,task.page+1,'');
-          this.store.finishTask(task);
-        });
-      } else {
-        const item=this.store.internal(task.source,task.source_id); if(!item) throw new Error('missing');
-        const result=await provider.detail(item,this.abort.signal);
-        this.store.transaction(()=>{ this.store.upsert(result,task.run_id); this.store.finishTask(task); });
-      }
+      const result=await fetchCollectionTask(provider,readCollectionInput(this.store,task),this.abort.signal);
+      applyCollectionResult(this.store,task,result);
     } catch(error) {
       if(this.abort.signal.aborted) { this.store.db.prepare("UPDATE sync_tasks SET state='queued',attempts=MAX(0,attempts-1) WHERE id=?").run(task.id); return; }
-      const kind=(error as {kind?:string})?.kind || 'network';
-      const message=kind==='auth'?'인증키가 거절되었습니다. 키와 승인을 확인한 뒤 재개하세요.':kind==='quota'?'제공기관 호출 한도에 도달했습니다. 한도가 회복되면 재개하세요.':kind==='schema'?'제공기관 응답 형식을 확인할 수 없습니다. 해당 구간을 재시도하세요.':'제공기관 연결에 실패했습니다. 잠시 후 다시 시도합니다.';
-      this.store.failTask(task,message,kind);
-      if(task.kind==='detail' && task.attempts>=3) {
-        const item=this.store.internal(task.source,task.source_id);
-        if(item && item.detailState!=='complete') this.store.upsert({...item,detailState:'failed'} as PerformanceInput);
-      }
+      applyCollectionFailure(this.store,task,error);
     }
   }
   refreshDue() {

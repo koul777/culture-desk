@@ -1,0 +1,38 @@
+{
+  "measuredAt": "2026-10-16T11:14:28.014Z",
+  "fixture": {
+    "file": "data/performance-baseline/production-before.db",
+    "sqliteBytes": 22634496,
+    "compressedSeedBytes": 3061415,
+    "tasks": 40,
+    "sources": {
+      "kopis": 20,
+      "culture": 20
+    }
+  },
+  "methodology": "Offline production-copy SQLite snapshot hydration, VACUUM, gzip, and commit simulation. Identical complete detail responses with 25ms fake latency. No API or PostgreSQL network I/O. Legacy serial task+350ms delay; batched allows both sources and up to four concurrent tasks per source, each source still starts at least 350ms apart. Setup and final validation excluded from timing. Dates and personal metadata retained; whole-data/raw hash checked.",
+  "legacy": {
+    "durationMs": 38980,
+    "snapshotWrites": 40,
+    "providerCalls": 40,
+    "ticks": 40,
+    "minSourceIntervalMs": 798,
+    "performanceRecords": 6011,
+    "dataAndRawSha256": "67eb13d8f81eea835b7b77ff4208cc68016f5706f58999e170883d21bed6cf73",
+    "completedTasks": 40
+  },
+  "batched": {
+    "durationMs": 11520,
+    "snapshotWrites": 12,
+    "providerCalls": 40,
+    "ticks": 2,
+    "minSourceIntervalMs": 350,
+    "performanceRecords": 6011,
+    "dataAndRawSha256": "67eb13d8f81eea835b7b77ff4208cc68016f5706f58999e170883d21bed6cf73",
+    "completedTasks": 40
+  },
+  "speedup": 3.38,
+  "snapshotWriteReductionPercent": 70,
+  "identicalData": true,
+  "limitations": "One local measurement, not a production SLA. Actual provider latency, quotas, PostgreSQL network latency and venue cache hits affect live collection speed."
+}
