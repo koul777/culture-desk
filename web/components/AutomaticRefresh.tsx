@@ -7,6 +7,7 @@ import '../automatic-refresh.css';
 
 export function AutomaticRefreshLink() {
   const { boot } = useDesk();
+  if (boot.fallback) return <a className="refresh-status-link is-delayed" href="#connection"><Clock3 size={13} aria-hidden="true" /><span>저장 자료 조회 · 갱신 중단</span><ArrowUpRight size={13} aria-hidden="true" /></a>;
   const refresh = boot.automaticRefresh;
   if (!refresh?.enabled) return null;
   const presentation = refreshPresentation(refresh);
@@ -20,6 +21,11 @@ export function AutomaticRefreshLink() {
 
 export function AutomaticRefreshPanel() {
   const { boot } = useDesk();
+  if (boot.fallback) return <section className="panel automatic-refresh-panel" aria-labelledby="automatic-refresh-title">
+    <div className="panel-head"><h2 id="automatic-refresh-title"><CalendarClock size={20} aria-hidden="true" />전국 자동갱신</h2><Badge tone="warn">일시 중단</Badge></div>
+    <div className="refresh-intro"><p>저장소 연결 제한으로 자동 갱신·추가 수집이 일시 중단되었습니다. {formatDateTime(boot.fallback.snapshotAt)} 기준 저장된 공연 정보를 조회할 수 있습니다.</p>
+    <p className="muted">약 1분마다 저장소 연결을 다시 확인합니다. 복구되면 이 안내가 사라집니다.</p></div>
+  </section>;
   const refresh = boot.automaticRefresh;
   if (!refresh) return null;
   const presentation = refreshPresentation(refresh);

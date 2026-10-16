@@ -71,7 +71,7 @@ export function DetailDialog({ id, onClose }: { id: number; onClose: () => void 
       notify(fresh.detailState === 'complete' ? 'ok' : 'error',
         fresh.detailState === 'complete' ? '상세 정보를 반영했습니다.' : '상세 정보를 가져오지 못했습니다. 데이터 연결에서 오류를 확인한 뒤 다시 요청하세요.');
     }
-  }, watching ? POLL_MS : null);
+  }, watching && !boot.fallback ? POLL_MS : null);
 
   const source = item ? boot.sources.find(s => s.source === item.source) : undefined;
   const canRequest = !!source?.configured;
@@ -126,7 +126,7 @@ export function DetailDialog({ id, onClose }: { id: number; onClose: () => void 
               tone={item.detailState === 'failed' ? 'danger' : 'warn'}
               title={watching ? '상세 보충 진행 중' : item.detailState === 'failed' ? '상세 수집에 실패했습니다' : '상세 미수집'}
               action={!watching && canRequest ? (
-                <button type="button" className="button button-small" onClick={() => void requestDetail()} disabled={requesting} aria-busy={requesting}>
+                <button type="button" className="button button-small" onClick={() => void requestDetail()} disabled={requesting || !!boot.fallback} aria-busy={requesting}>
                   <ListChecks size={14} aria-hidden="true" />{item.detailState === 'failed' ? '다시 요청' : '상세 정보 가져오기'}
                 </button>
               ) : watching ? <span className="loading-inline"><LoaderCircle size={16} className="spin" aria-hidden="true" />3초마다 확인</span> : undefined}

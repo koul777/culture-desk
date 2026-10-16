@@ -5,7 +5,8 @@ import { api, ApiError, errorText } from './api';
 import { DeskContext, type Desk, type ItemPatch } from './desk';
 import { loadFilters, saveFilters, type FilterState } from './lib/filters';
 import { createBootstrapRefresh, preserveCityReference } from './lib/bootstrap-refresh';
-import { isActive, number, sourceLabel } from './lib/format';
+import { formatDateTime, isActive, number, sourceLabel } from './lib/format';
+import { snapshotAvailability } from './lib/snapshot-availability';
 import { useBusy, useHashView, useInterval } from './lib/hooks';
 import { Callout } from './components/Cells';
 import { ConnectionView } from './components/ConnectionView';
@@ -36,6 +37,7 @@ function CultureDesk() {
   const [view, go] = useHashView();
   const [boot, setBoot] = useState<Bootstrap | null>(null);
   const [bootError, setBootError] = useState<string | null>(null);
+  const [fallback, setFallback] = useState(snapshotAvailability.get);
   const [filters, setFilterState] = useState<FilterState | null>(null);
   const [detailId, setDetailId] = useState<number | null>(null);
   const [patch, setPatch] = useState<ItemPatch | null>(null);
@@ -63,18 +65,20 @@ function CultureDesk() {
   const refresh = useCallback(() => readBootstrap(true), [readBootstrap]);
   const pollBootstrap = useCallback(() => readBootstrap(false), [readBootstrap]);
 
+  useEffect(() => snapshotAvailability.subscribe(setFallback), []);
   useEffect(() => { void pollBootstrap(); }, [pollBootstrap]);
   useEffect(() => { if (boot && !filters) setFilterState(loadFilters(boot)); }, [boot, filters]);
 
-  const active = boot?.runs.some(isActive) ?? false;
+  const active = !fallback && (boot?.runs.some(isActive) ?? false);
   const cloud = boot?.deployment === 'cloud';
   // Scheduled nationwide refresh runs independently. The browser only advances manual jobs.
-  const browserTickEnabled = cloud && (!boot?.automaticRefresh?.enabled || active);
+  const browserTickEnabled = cloud && !fallback && (!boot?.automaticRefresh?.enabled || active);
   const tick = useCallback(async () => {
-    if(!browserTickEnabled || ticking.current || document.hidden || syncBlocked) return;
+    if(!browserTickEnabled || snapshotAvailability.get() || ticking.current || document.hidden || syncBlocked) return;
     ticking.current=true;
     try { await api.cloudTick(); await refresh(); }
     catch(e) {
+      if(snapshotAvailability.get()) return;
       if(e instanceof ApiError && e.status===507) {setSyncBlocked(true);setSyncError(errorText(e));}
       else setBootError(errorText(e));
     }
@@ -154,13 +158,14 @@ function CultureDesk() {
     return [
       boot.sources.map(s => `${s.source}:${s.count}:${s.configured ? 1 : 0}`).join(','),
       boot.pendingDetails, complete, boot.runs.filter(isActive).length,
+      fallback ? `snapshot:${fallback.snapshotAt}` : 'live',
     ].join('|');
-  }, [boot]);
+  }, [boot, fallback]);
 
   const desk = useMemo<Desk | null>(() => boot && {
-    boot, refresh, run, isBusy: is, openDetail: setDetailId, publish,
+    boot: { ...boot, fallback: fallback ?? undefined }, refresh, run, isBusy: is, openDetail: setDetailId, publish,
     reloadConfig, backup, shutdown, patch, go, signature,
-  }, [boot, refresh, run, is, publish, reloadConfig, backup, shutdown, patch, go, signature]);
+  }, [boot, fallback, refresh, run, is, publish, reloadConfig, backup, shutdown, patch, go, signature]);
 
   if (ended) {
     return (
@@ -195,6 +200,9 @@ function CultureDesk() {
       <div className="shell">
         <Sidebar view={view} />
         <main ref={mainRef} className="main" tabIndex={-1} aria-label="본문">
+          {fallback && <Callout tone="warn" title="저장된 공연 자료로 조회 중입니다">
+            저장소 연결 제한으로 {formatDateTime(fallback.snapshotAt)} 기준 저장 자료를 보여주고 있습니다. 자동 갱신·추가 수집은 일시 중단되었습니다. 검색·지역 선택·지도·3D·엑셀 내보내기는 계속 이용할 수 있습니다.
+          </Callout>}
           {syncError && <Callout tone="danger" title="수동 수집을 멈췄습니다"
             action={<button type="button" className="button" onClick={()=>{setSyncError(null);setSyncBlocked(false);}}>한도 조정 후 다시 시도</button>}>{syncError}</Callout>}
           {bootError && (

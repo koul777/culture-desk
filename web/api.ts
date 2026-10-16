@@ -1,6 +1,7 @@
 import type {
   Bootstrap, City, MapResult, Performance, SearchFilters, SearchResult, Source, SyncRequest, SyncRun,
 } from '../shared/types';
+import { snapshotAvailability } from './lib/snapshot-availability';
 
 export class ApiError extends Error {
   constructor(message: string, public status: number) { super(message); this.name = 'ApiError'; }
@@ -8,25 +9,31 @@ export class ApiError extends Error {
 
 const OFFLINE = '서버에 연결할 수 없습니다. Culture Desk가 실행 중인지 확인한 뒤 다시 시도하세요.';
 
-async function readError(res: Response): Promise<string> {
+async function readError(res: Response, request: number, signal?: AbortSignal | null): Promise<string> {
   const body = await res.json().catch(() => null) as { error?: unknown } | null;
+  if (!signal?.aborted) snapshotAvailability.observe(request, body);
   if (body && typeof body.error === 'string' && body.error.trim()) return body.error;
   return `요청을 처리하지 못했습니다. (HTTP ${res.status})`;
 }
 
-async function send(path: string, init?: RequestInit): Promise<Response> {
+async function send(path: string, init?: RequestInit, request = snapshotAvailability.begin()): Promise<Response> {
   let res: Response;
   try { res = await fetch(path, { credentials: 'same-origin', ...init }); }
   catch { throw new ApiError(OFFLINE, 0); }
   if (!res.ok) {
-    throw new ApiError(await readError(res), res.status);
+    throw new ApiError(await readError(res, request, init?.signal), res.status);
   }
   return res;
 }
 
 async function json<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await send(path, init);
-  try { return await res.json() as T; }
+  const request = snapshotAvailability.begin();
+  const res = await send(path, init, request);
+  try {
+    const value = await res.json() as T;
+    if (!init?.signal?.aborted) snapshotAvailability.observe(request, value, path === '/api/bootstrap');
+    return value;
+  }
   catch { throw new ApiError('서버 응답을 읽을 수 없습니다.', res.status); }
 }
 
@@ -49,6 +56,7 @@ async function bootstrap(): Promise<Bootstrap> {
 
 /** Every state-changing request carries the JSON content type and the local-app header. */
 function mutate<T>(method: 'POST' | 'PUT' | 'DELETE', path: string, body: unknown = {}): Promise<T> {
+  if (snapshotAvailability.get()) return Promise.reject(new ApiError('저장소 연결 제한으로 추가 수집과 변경 작업이 일시 중단되었습니다. 저장된 공연은 계속 조회할 수 있습니다.', 503));
   return json<T>(path, {
     method,
     headers: { 'Content-Type': 'application/json', 'X-Culture-Request': '1' },

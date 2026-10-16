@@ -10,6 +10,7 @@ import { NATIONAL_CITIES } from './providers/cities.js';
 import { isDate, today } from './dates.js';
 import { exportWorkbook } from './export.js';
 import { VenueBuildingService } from './venue-buildings.js';
+import { handleVWorldRequest, isVWorldRoute } from './vworld.js';
 import type { City, MapPerformance, MapResult, Performance, Provider, SearchFilters, Source, SyncRequest } from '../shared/types.js';
 
 const MAP_MAX_ITEMS = 10000;
@@ -30,7 +31,7 @@ function object(value: unknown): Record<string,any> { if(!value || typeof value!
 function validId(value: unknown): number { const n=Number(value); if(!Number.isSafeInteger(n)||n<1) bad('올바른 항목을 선택하세요.'); return n; }
 export function isSearchRoute(method: string, pathname: string): boolean {
   const route=pathname.replace(/\/$/,'');
-  if(['GET','HEAD'].includes(method)) return ['/api/health','/api/bootstrap','/api/performances','/api/map','/api/venues/building','/api/export.xlsx'].includes(route)||/^\/api\/performances\/[1-9]\d*$/.test(route);
+  if(['GET','HEAD'].includes(method)) return ['/api/health','/api/bootstrap','/api/performances','/api/map','/api/venues/building','/api/export.xlsx'].includes(route)||isVWorldRoute(route)||/^\/api\/performances\/[1-9]\d*$/.test(route);
   return method==='POST'&&(['/api/sync','/api/details'].includes(route)||/^\/api\/sync\/[1-9]\d*\/(pause|resume)$/.test(route)||/^\/api\/performances\/[1-9]\d*\/detail$/.test(route));
 }
 function filtersFrom(value: unknown): SearchFilters {
@@ -47,6 +48,7 @@ function filtersFrom(value: unknown): SearchFilters {
 export async function createApp(config: Config, options: { store?:Store; providers?:Partial<Record<Source,Provider>>; startWorker?:boolean; serveStatic?:boolean; searchOnly?:boolean; allowLocalManagement?:boolean; shutdown?:()=>void; configLoader?:()=>Config; venueBuildings?:Pick<VenueBuildingService,'lookup'> }={}) {
   const store=options.store||new Store(config.databasePath,NATIONAL_CITIES);
   const worker=new Worker(store,config,options.providers);
+  let vworld=config.vworld;
   const visibleItem=(item: Performance): Performance=>options.searchOnly?{...item,note:'',bookmarked:false}:item;
   const searchFilters=(value: unknown): SearchFilters=>{
     const filters=filtersFrom(value);
@@ -58,6 +60,7 @@ export async function createApp(config: Config, options: { store?:Store; provide
     const hostname=request.headers.host?.split(':')[0];
     if(hostname && !['127.0.0.1','localhost'].includes(hostname)) return reply.code(403).send({error:'로컬 컴퓨터에서만 사용할 수 있습니다.'});
     const pathname=new URL(request.url,'http://localhost').pathname.replace(/\/$/,'');
+    if(isVWorldRoute(pathname)&&!['GET','HEAD'].includes(request.method))return reply.code(405).header('Allow','GET, HEAD').send({error:'조회 요청만 허용됩니다.'});
     const localManagement=options.allowLocalManagement&&request.method==='POST'&&['/api/backup','/api/shutdown','/api/config/reload','/api/cities'].includes(pathname);
     if(options.searchOnly&&request.url.startsWith('/api/')&&!isSearchRoute(request.method,pathname)&&!localManagement)return reply.code(404).send({error:'요청을 찾을 수 없습니다.'});
     reply.header('X-Content-Type-Options','nosniff').header('Referrer-Policy','strict-origin-when-cross-origin');
@@ -71,6 +74,12 @@ export async function createApp(config: Config, options: { store?:Store; provide
   });
   app.setErrorHandler((error,_request,reply)=>{const e=error as {statusCode?:number;message:string};const status=e.statusCode&&e.statusCode>=400&&e.statusCode<500?e.statusCode:500; reply.code(status).send({error:status<500?e.message:'작업을 처리하지 못했습니다. 잠시 후 다시 시도하세요.'});});
   app.get('/api/health',async()=>({ok:true,app:'culture-desk'}));
+  for(const route of ['/api/maps/vworld/config','/api/maps/vworld/frame'])app.get(route,async(request,reply)=>{
+    const base=`${request.protocol}://${request.headers.host||`localhost:${config.port}`}`;
+    const response=handleVWorldRequest(new Request(new URL(request.url,base),{method:request.method}),vworld)!;
+    response.headers.forEach((value,key)=>reply.header(key,value));
+    return reply.code(response.status).send(request.method==='HEAD'?undefined:await response.text());
+  });
   app.get('/api/bootstrap',async()=>{
     const counts=store.counts(); const runs=store.runs(2000);
     return {cities:store.cities(),sources:(['kopis','culture'] as Source[]).map(source=>({source,label:source==='kopis'?'KOPIS':'문화포털',configured:!!worker.providers[source],count:counts.source[source],lastSync:store.lastCollectionSync(source),
@@ -134,7 +143,7 @@ export async function createApp(config: Config, options: { store?:Store; provide
     const city:City={id:'city-'+randomUUID().slice(0,8),name:b.name.trim(),sido:b.sido.trim(),sigungu:b.sigungu.trim(),kopisSido:b.kopisSido,kopisSigungu:b.kopisSigungu,aliases:[b.name.trim(),b.sigungu.trim()]};
     return store.addCity(city);
   });
-  app.post('/api/config/reload',async()=>{const fresh=(options.configLoader||readConfig)(); worker.configure({...config,keys:fresh.keys,requestIntervalMs:fresh.requestIntervalMs,syncIntervalHours:fresh.syncIntervalHours});return{ok:true};});
+  app.post('/api/config/reload',async()=>{const fresh=(options.configLoader||readConfig)();vworld=fresh.vworld; worker.configure({...config,keys:fresh.keys,vworld:fresh.vworld,requestIntervalMs:fresh.requestIntervalMs,syncIntervalHours:fresh.syncIntervalHours});return{ok:true};});
   app.post('/api/backup',async()=>{
     const dir=path.join(path.dirname(config.databasePath),'backups'); mkdirSync(dir,{recursive:true});
     const filename=`culture-${new Date().toISOString().replace(/[:.]/g,'-')}.db`;store.backup(path.join(dir,filename));return{filename};

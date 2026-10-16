@@ -41,6 +41,8 @@
 .venue-3d-height-control p { font-size: 12px; line-height: 1.55; margin: 0; color: #775e39; }
 .venue-3d-info .venue-3d-warning { padding: 10px 12px; background: #fff4df; color: #77551d; border-radius: 8px; }
 .venue-3d-warning .text-button { font: inherit; }
+.venue-3d-background-progress { display: flex; align-items: center; gap: 7px; color: var(--ink-3); }
+.venue-3d-background-progress svg { flex-shrink: 0; }
 .venue-3d button:focus-visible, .venue-3d input:focus-visible { outline: 3px solid #187b6b; outline-offset: 3px; }
 @media(max-width: 600px) {
   .venue-3d-toolbar { flex-wrap: wrap; }

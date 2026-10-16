@@ -34,6 +34,7 @@ const positionList = (ring: Ring) => Cartesian3.fromDegreesArray(ring.flatMap(po
 export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation; onClose: () => void }) {
   const host = useRef<HTMLDivElement>(null);
   const viewer = useRef<Viewer | null>(null);
+  const reloadBackground = useRef<(() => void) | null>(null);
   const buildingEntities = useRef<Entity[]>([]);
   const home = useRef({ center: Cartesian3.fromDegrees(item.longitude ?? 127.8, item.latitude ?? 36.2), range: 380, radius: 60, surface: null as Cartographic | null });
   const [sceneReady, setSceneReady] = useState(false);
@@ -47,7 +48,8 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
   const heightId = useId();
   const found = building?.status === 'available' ? building.building : null;
   const model = venueHeightModel(found ?? null, assumedHeight);
-  const loading = !sceneReady || tiles === 'loading' || buildingLoading;
+  // A slow basemap must not hide a ready venue or disable its controls.
+  const loading = !sceneReady || buildingLoading;
   const source = found ? safeUrl(found.sourceUrl) : null;
 
   const pose = (next: 'perspective' | 'top', reset = false) => {
@@ -79,7 +81,6 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
     let current: Viewer | undefined;
     let disposed = false;
     let buildingResolved = false;
-    let tileQueueSeen = false;
     let tileFailed = false;
     let visualReady = false;
     let renderedFrames = 0;
@@ -89,15 +90,18 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
     let renderTimer: ReturnType<typeof setTimeout> | undefined;
     const controller = new AbortController();
     let resize: ResizeObserver | undefined;
+    const newImagery = () => {
+      const imagery = new OpenStreetMapImageryProvider({ url: 'https://tile.openstreetmap.org/', maximumLevel: 19,
+        credit: new Credit('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors', true) });
+      imagery.errorEvent.addEventListener(() => { tileFailed = true; });
+      return imagery;
+    };
     setSceneReady(false); setTiles('loading'); setError(''); setBuilding(null); setBuildingLoading(true);
     setAssumedHeight(DEFAULT_ASSUMED_HEIGHT); setMode('perspective'); buildingEntities.current = [];
     try {
       Ion.defaultAccessToken = '';
-      const imagery = new OpenStreetMapImageryProvider({ url: 'https://tile.openstreetmap.org/', maximumLevel: 19,
-        credit: new Credit('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors', true) });
-      imagery.errorEvent.addEventListener(() => { tileFailed = true; });
       current = new Viewer(host.current, {
-        baseLayer: new ImageryLayer(imagery), terrainProvider: new EllipsoidTerrainProvider(),
+        baseLayer: new ImageryLayer(newImagery()), terrainProvider: new EllipsoidTerrainProvider(),
         baseLayerPicker: false, animation: false, timeline: false, geocoder: false, homeButton: false,
         sceneModePicker: false, navigationHelpButton: false, fullscreenButton: false,
         infoBox: false, selectionIndicator: false, scene3DOnly: true, skyBox: false, skyAtmosphere: false,
@@ -127,11 +131,12 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
       });
       home.current = { center: Cartesian3.fromDegrees(item.longitude!, item.latitude!), range: 380, radius: 60, surface: null };
       pose('perspective', true);
-      current.scene.globe.tileLoadProgressEvent.addEventListener((count: number) => { if (count > 0) tileQueueSeen = true; });
       current.scene.postRender.addEventListener(() => {
         if (disposed || !current) return;
         renderedFrames++;
-        if (renderedFrames > 1 && tileQueueSeen && current.scene.globe.tilesLoaded) {
+        // Cached tiles may be ready without a positive queue event. Wait until the
+        // venue camera has been framed, then use Cesium's public readiness flag.
+        if (renderedFrames > 1 && buildingResolved && current.scene.globe.tilesLoaded) {
           setTiles(tileFailed ? 'partial' : 'ready'); clearTimeout(tileTimer);
         }
         if (!visualReady && renderedFrames > 1 && buildingResolved && current.dataSourceDisplay.ready) {
@@ -139,6 +144,13 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
         }
       });
       tileTimer = setTimeout(() => { if (!disposed) setTiles('timeout'); }, TILE_TIMEOUT_MS);
+      reloadBackground.current = () => {
+        if (disposed || !current || current.isDestroyed()) return;
+        clearTimeout(tileTimer); tileFailed = false; setTiles('loading'); renderedFrames = 0;
+        current.imageryLayers.removeAll(); current.imageryLayers.addImageryProvider(newImagery());
+        tileTimer = setTimeout(() => { if (!disposed) setTiles('timeout'); }, TILE_TIMEOUT_MS);
+        current.scene.requestRender();
+      };
       renderTimer = setTimeout(() => { if (!disposed && !visualReady) setError('3D 화면 준비가 지연되고 있습니다. 연결 상태를 확인하고 다시 시도해주세요.'); }, RENDER_TIMEOUT_MS);
       resize = new ResizeObserver(() => { if (current && !current.isDestroyed()) { current.resize(); current.scene.requestRender(); } });
       resize.observe(host.current);
@@ -202,7 +214,7 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
       setBuildingLoading(false);
     }
     return () => {
-      disposed = true; controller.abort(); clearTimeout(tileTimer); clearTimeout(requestTimer); clearTimeout(renderTimer);
+      disposed = true; reloadBackground.current = null; controller.abort(); clearTimeout(tileTimer); clearTimeout(requestTimer); clearTimeout(renderTimer);
       resize?.disconnect(); if (current && !current.isDestroyed()) current.destroy(); viewer.current = null; buildingEntities.current = [];
     };
   }, [item.id, item.latitude, item.longitude, attempt]);
@@ -221,7 +233,7 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
 
   const controlsDisabled = loading || !!error;
   return <Modal open onClose={onClose} title={`${item.venue || '공연장'} · 3D`} subtitle={<p className="venue-3d-sub">확인된 건물 외곽을 입체 모형으로 둘러보세요.</p>}>
-    <section className="venue-3d" data-testid="venue-3d" data-ready={!loading && !error} data-geometry={found ? 'building' : 'location'} data-height-kind={model?.kind ?? 'none'}>
+    <section className="venue-3d" data-testid="venue-3d" data-ready={!loading && !error} data-background-state={tiles} data-geometry={found ? 'building' : 'location'} data-height-kind={model?.kind ?? 'none'}>
       <div className="venue-3d-toolbar">
         <span className={`venue-3d-badge${model ? model.kind === 'assumed' ? ' is-assumed' : ' has-building' : ''}`}><Box size={15} aria-hidden="true" />{buildingLoading ? '건물 정보 확인 중' : model?.label ?? '위치만 표시'}</span>
         <div className="venue-3d-view-switch" role="group" aria-label="3D 보기 방식">
@@ -253,7 +265,8 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
         <strong>{buildingLoading ? '실제 건물 외곽과 높이 정보를 확인하고 있습니다.' : model ? model.kind === 'assumed' ? `실제 외곽 · 높이 ${model.meters}m 가정 모형 (실측 아님)` : model.kind === 'levels' ? `실제 외곽 · 높이 ${model.meters}m (층수 기반 추정)` : `실제 외곽 · 높이 ${model.meters}m (OSM 기록)` : building?.message || '확인된 건물 외곽이 없어 공연장 위치만 표시합니다.'}</strong>
         {found && <p>{found.confidence === 'coordinate' ? '공연장 좌표를 포함하는 외곽입니다. 건물명 일치는 확인되지 않았습니다.' : found.confidence === 'name_nearby' ? '공연장명과 가까운 위치가 일치한 외곽입니다.' : '공연장 좌표와 건물명이 일치합니다.'}{source && <> <a href={source} target="_blank" rel="noopener noreferrer">건물 원자료 <ExternalLink size={12} aria-hidden="true" /></a></>}</p>}
         {model && <p>건물 외곽과 높이로 만든 모형이며 실제 지붕·외벽의 모습을 재현하지는 않습니다.</p>}
-        {(tiles === 'partial' || tiles === 'timeout') && <p className="venue-3d-warning">지도 배경 {tiles === 'timeout' ? '로딩 시간이 초과되었습니다' : '일부를 가져오지 못했습니다'}. 확인된 모형과 위치는 계속 볼 수 있습니다. <button type="button" className="text-button" onClick={() => setAttempt(value => value + 1)}>다시 불러오기</button></p>}
+        {!loading && tiles === 'loading' && <p className="venue-3d-background-progress"><LoaderCircle size={14} className="spin" aria-hidden="true" />지도 배경을 불러오는 중입니다. 공연장 화면은 먼저 둘러볼 수 있습니다.</p>}
+        {(tiles === 'partial' || tiles === 'timeout') && <p className="venue-3d-warning">지도 배경 {tiles === 'timeout' ? '로딩 시간이 초과되었습니다' : '일부를 가져오지 못했습니다'}. 확인된 모형과 위치는 계속 볼 수 있습니다. <button type="button" className="text-button" onClick={() => reloadBackground.current?.()}>배경만 다시 불러오기</button></p>}
         {!buildingLoading && !model && !error && <button type="button" className="text-button" onClick={() => setAttempt(value => value + 1)}>건물 자료 다시 확인</button>}
         <p className="venue-3d-help">드래그로 이동 · 휠로 확대 · Ctrl + 드래그로 회전 · 지형 높이는 반영하지 않습니다.</p>
       </div>

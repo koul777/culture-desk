@@ -1,0 +1,29 @@
+{
+  "method": "Local real app with config and same-origin iframe fixtures. No real VWorld SDK or building imagery; all API writes blocked.",
+  "checks": {
+    "initialRequests": {
+      "config": 0,
+      "frame": 0,
+      "sdk": 0
+    },
+    "trustedFrameOnly": true,
+    "mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "dialogs": 1,
+      "buttonMinHeight": 44
+    },
+    "escapeFromIframe": true,
+    "errorRetryTimeoutUnmount": true,
+    "manualFallback": true,
+    "unconfiguredAutomaticFallback": true
+  },
+  "writesBlocked": 0,
+  "errors": [],
+  "requests": {
+    "config": 6,
+    "frame": 3,
+    "sdk": 0
+  },
+  "success": true
+}

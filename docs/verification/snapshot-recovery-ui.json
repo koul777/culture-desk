@@ -1,0 +1,18 @@
+{
+  "method": "Local application with frozen real read payloads plus explicit outage/recovery metadata fixtures; no provider keys or live writes.",
+  "checks": {
+    "snapshotSearch": {
+      "datedNotice": "저장된 공연 자료로 조회 중입니다\n저장소 연결 제한으로 2026. 10. 16. 20:00 기준 저장 자료를 보여주고 있습니다. 자동 갱신·추가 수집은 일시 중단되었습니다. 검색·지역 선택·지도·3D·엑셀 내보내기는 계속 이용할 수 있습니다.",
+      "exportEnabled": true,
+      "cards": 30
+    },
+    "collectionDisabled": true,
+    "mobileOverflow": false,
+    "sixtySecondRecoveryPoll": true,
+    "healthyBootstrapRestoresActions": true,
+    "searchFirstOutageVisible": true
+  },
+  "postRequests": 0,
+  "errors": [],
+  "success": true
+}

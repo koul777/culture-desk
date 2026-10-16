@@ -1,0 +1,36 @@
+{
+  "method": "Real local building API seed and Cesium WebGL; config explicitly unavailable; only OSM imagery requests delayed 20 seconds then failed. No VWorld rendering claim.",
+  "tileRequests": 8,
+  "buildingRequests": 2,
+  "writes": 0,
+  "errors": [],
+  "readyMs": 8258,
+  "initial": {
+    "ready": "true",
+    "background": "loading",
+    "opacity": "1",
+    "disabledControls": 0,
+    "width": 390,
+    "scrollWidth": 390
+  },
+  "building": {
+    "performanceId": 149,
+    "osmId": 581720573,
+    "heightMeters": 6,
+    "heightSource": "levels"
+  },
+  "retry": {
+    "buildingRequestsBefore": 2,
+    "buildingRequestsAfter": 2,
+    "newTileRequests": 4,
+    "sameCanvas": true,
+    "modelTextUnchanged": true,
+    "exactCanvasPixelsUnchanged": true,
+    "beforeSha256": "46b476b1baeb9f9f79adf63e0fa61e7fca0d2ccd5ca01c7cbbbdc7dd0e519ecb",
+    "afterSha256": "46b476b1baeb9f9f79adf63e0fa61e7fca0d2ccd5ca01c7cbbbdc7dd0e519ecb",
+    "ready": "true",
+    "opacity": "1",
+    "disabledControls": 0
+  },
+  "success": true
+}

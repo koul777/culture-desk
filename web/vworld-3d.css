@@ -1,0 +1,21 @@
+.vworld-subtitle { margin: 5px 0 0; color: var(--ink-3); font-size: 14px; line-height: 1.5; }
+.vworld-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 12px; }
+.vworld-badge { display: inline-flex; gap: 7px; align-items: center; padding: 8px 11px; border-radius: 8px; background: var(--teal-soft); color: var(--teal-strong); font-size: 14px; font-weight: 650; }
+.vworld-connection { display: inline-flex; gap: 5px; align-items: center; color: var(--ink-3); font-size: 13px; }
+.vworld-stage { position: relative; min-height: 340px; height: min(57dvh, 520px); overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #eef3ef; }
+.vworld-stage iframe { display: block; width: 100%; height: 100%; border: 0; }
+.vworld-stage iframe.is-loading { opacity: 0; pointer-events: none; }
+.vworld-state { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; padding: 24px; text-align: center; background: #eef3ef; color: var(--ink-2); }
+.vworld-state strong { font-size: 16px; line-height: 1.5; }
+.vworld-state p { max-width: 410px; margin: 0; color: var(--ink-3); font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.vworld-state .button, .vworld-footer .button { min-height: 44px; }
+.vworld-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 0 6px; }
+.vworld-footer p { flex: 1 1 260px; margin: 0; font-size: 14px; line-height: 1.65; color: var(--ink-2); }
+.vworld-footer .button { flex: 0 0 auto; }
+.vworld-help { font-size: 12px; line-height: 1.65; color: var(--ink-3); margin: 7px 0 0; }
+.vworld-viewer button:focus-visible, .vworld-stage iframe:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .vworld-stage { min-height: 320px; height: 47dvh; }
+  .vworld-footer .button { width: 100%; justify-content: center; }
+  .vworld-state { padding: 20px 16px; }
+}

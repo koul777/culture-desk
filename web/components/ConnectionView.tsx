@@ -54,7 +54,7 @@ function SourcesSection() {
                   <th scope="row">{s.label}</th>
                   <td data-label="인증키">{s.configured ? <Badge tone="ok">설정됨</Badge> : <Badge>미연결 · 키 없음</Badge>}</td>
                   <td data-label="수집 상태">
-                    <Badge tone={state.tone}>{state.label}</Badge>
+                    <Badge tone={boot.fallback ? 'warn' : state.tone}>{boot.fallback ? '저장소 제한 · 수집 중단' : state.label}</Badge>
                     {state.error && <small className="error-text">{state.error}</small>}
                   </td>
                   <td data-label="등록 자료" className="nums">{number(s.count)}건</td>
@@ -83,7 +83,7 @@ function SourcesSection() {
         상세 미수집 {number(boot.pendingDetails)}건 · 전시 등 제외 {number(boot.excludedCount)}건 · 분류 검토 대기 {number(boot.reviewCount)}건
         <span className="muted"> (제외·검토 대기는 기본 검색 결과에 넣지 않습니다)</span>
         {boot.pendingDetails > 0 && (
-          <button type="button" className="text-button" onClick={() => void requestAll()} disabled={requestingAll} aria-busy={requestingAll}>
+          <button type="button" className="text-button" onClick={() => void requestAll()} disabled={requestingAll || !!boot.fallback} aria-busy={requestingAll}>
             <ListChecks size={14} aria-hidden="true" />전체 상세 보충 요청
           </button>
         )}
@@ -132,7 +132,7 @@ function SyncSection({ filters }: { filters: FilterState }) {
           검색 조건의 도시·기간 가져오기
         </button>
       </div>
-      {boot.deployment === 'cloud' && <p className="manual-sync-note">아래에서 직접 시작한 수집은 이 화면을 열어두어야 진행됩니다. 완료한 구간은 저장되며 다음 접속에서 이어집니다.{boot.automaticRefresh?.enabled && ' 전국 자동갱신은 이 화면과 관계없이 별도로 실행됩니다.'}</p>}
+      {boot.fallback ? <p className="manual-sync-note">저장소 연결이 복구되면 추가 수집을 다시 이용할 수 있습니다. 현재는 저장된 자료를 조회하는 상태입니다.</p> : boot.deployment === 'cloud' && <p className="manual-sync-note">아래에서 직접 시작한 수집은 이 화면을 열어두어야 진행됩니다. 완료한 구간은 저장되며 다음 접속에서 이어집니다.{boot.automaticRefresh?.enabled && ' 전국 자동갱신은 이 화면과 관계없이 별도로 실행됩니다.'}</p>}
       <form className="sync-form" onSubmit={start} noValidate>
         <CityChips legend="수집 도시" cities={boot.cities} selected={cities} onChange={setCities} />
         <PeriodFields legend="수집 기간" from={range.from} to={range.to} today={boot.today} onChange={setRange} />
@@ -161,7 +161,7 @@ function SyncSection({ filters }: { filters: FilterState }) {
         </div>
         {problem && <p className="field-error" role="alert">{problem}</p>}
         <div className="form-actions">
-          <button type="submit" className="button button-primary" disabled={!!problem || starting} aria-busy={starting}>
+          <button type="submit" className="button button-primary" disabled={!!problem || starting || !!boot.fallback} aria-busy={starting}>
             <Play size={16} aria-hidden="true" />{starting ? '등록 중…' : '수집 시작'}
           </button>
         </div>
@@ -212,10 +212,10 @@ function RunsSection() {
       <div className="panel-head">
         <h2 id="runs-title">수집 상태</h2>
         <div className="head-actions">
-          <button type="button" className="button" onClick={() => void bulk('pause')} disabled={!pausable.length || bulkBusy} aria-busy={bulkBusy}>
+          <button type="button" className="button" onClick={() => void bulk('pause')} disabled={!pausable.length || bulkBusy || !!boot.fallback} aria-busy={bulkBusy}>
             <Pause size={16} aria-hidden="true" />진행 중 모두 중단 ({number(pausable.length)})
           </button>
-          <button type="button" className="button" onClick={() => void bulk('resume')} disabled={!resumable.length || bulkBusy} aria-busy={bulkBusy}>
+          <button type="button" className="button" onClick={() => void bulk('resume')} disabled={!resumable.length || bulkBusy || !!boot.fallback} aria-busy={bulkBusy}>
             <RotateCcw size={16} aria-hidden="true" />중단·실패·한도 대기 모두 재개 ({number(resumable.length)})
           </button>
         </div>
@@ -232,7 +232,7 @@ function RunsSection() {
               </button>
             ))}
           </div>
-          <p className="muted small">최근 {number(boot.runs.length)}개 실행을 표시합니다. 도시·기간 수집과 상세 보충을 구분해 기록합니다. 진행 중이면 3초마다 갱신합니다.</p>
+          <p className="muted small">최근 {number(boot.runs.length)}개 실행을 표시합니다. 도시·기간 수집과 상세 보충을 구분해 기록합니다. {boot.fallback ? '저장소 연결은 약 1분마다 다시 확인합니다.' : '진행 중이면 3초마다 갱신합니다.'}</p>
           <div className="table-wrap">
             <table className="data-table compact runs-table">
               <caption className="visually-hidden">수집 실행 목록</caption>
@@ -264,12 +264,12 @@ function RunsSection() {
                       <td data-label="갱신" className="nums">{formatDateTime(r.updatedAt)}</td>
                       <td data-label="동작">
                         {canPause(r) && (
-                          <button type="button" className="button button-small" onClick={() => void act(r, 'pause')} disabled={busy} aria-busy={busy}>
+                          <button type="button" className="button button-small" onClick={() => void act(r, 'pause')} disabled={busy || !!boot.fallback} aria-busy={busy}>
                             <Pause size={14} aria-hidden="true" />중단
                           </button>
                         )}
                         {canResume(r) && (
-                          <button type="button" className="button button-small" onClick={() => void act(r, 'resume')} disabled={busy} aria-busy={busy}>
+                          <button type="button" className="button button-small" onClick={() => void act(r, 'resume')} disabled={busy || !!boot.fallback} aria-busy={busy}>
                             <Play size={14} aria-hidden="true" />{r.state === 'partial' ? '실패 구간 재시도' : '재개'}
                           </button>
                         )}
@@ -416,7 +416,7 @@ export function ConnectionView({ filters, onCityAdded }: { filters: FilterState;
           <p className="view-sub">전국 자동갱신 상태와 API 연결을 확인하고, 필요한 지역·기간을 직접 수집합니다.</p>
         </div>
       </header>
-      {noKeys && (
+      {noKeys && !boot.fallback && (
         <Callout tone="info" title="연결된 API가 없습니다">
           두 API 모두 인증키가 설정되지 않았습니다. 신청 후 키를 입력하면 수집할 수 있습니다. 키가 없는 동안 실제 자료는 표시되지 않습니다.
         </Callout>

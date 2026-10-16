@@ -4,7 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/client",
   "regions": ["sin1"],
-  "functions": { "api/index.ts": { "maxDuration": 60 } },
+  "functions": { "api/index.ts": { "maxDuration": 60, "includeFiles": "server/data/**" } },
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/index" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
@@ -12,7 +12,12 @@
   "crons": [{ "path": "/api/cloud/cron", "schedule": "0 19 * * *" }],
   "headers": [{ "source": "/(.*)", "headers": [
     { "key": "X-Content-Type-Options", "value": "nosniff" },
-    { "key": "X-Frame-Options", "value": "DENY" },
     { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+  ] },
+  { "source": "/((?!api/maps/vworld/frame(?:/|$)).*)", "headers": [
+    { "key": "X-Frame-Options", "value": "DENY" }
+  ] },
+  { "source": "/api/maps/vworld/frame", "headers": [
+    { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
   ] }]
 }

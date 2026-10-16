@@ -47,7 +47,11 @@ export interface PublicRefreshStatus {
   error: string | null;
   schedule: { timezone: 'Asia/Seoul'; primary: string; retries: readonly string[] };
 }
+export interface SnapshotFallback {
+  mode: 'snapshot'; snapshotAt: string; reason: 'database_unavailable';
+}
 export interface Bootstrap {
+  fallback?: SnapshotFallback;
   deployment?: 'local' | 'cloud';
   automaticRefresh?: PublicRefreshStatus & { enabled: boolean };
   cities: City[]; sources: SourceStatus[]; bookmarkCount: number;
@@ -61,6 +65,7 @@ export interface SearchFilters {
   bookmarked?: string; page?: string; limit?: string;
 }
 export interface SearchResult {
+  fallback?: SnapshotFallback;
   items: Performance[]; total: number; page: number; pages: number;
   sourceCounts: Record<Source, number>; pendingDetails: number;
   partial: boolean; snapshotAt: string;

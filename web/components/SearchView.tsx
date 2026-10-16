@@ -199,7 +199,7 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
             {result && !problem && detailFilter && pending > 0 && (
               <Callout tone="warn" title={`부분 결과 · 상세 미수집 ${number(pending)}건은 관람료·연령 조건을 아직 판단하지 못했습니다`}
                 action={(
-                  <button type="button" className="button button-small" onClick={() => void requestDetails()} disabled={requesting} aria-busy={requesting}>
+                  <button type="button" className="button button-small" onClick={() => void requestDetails()} disabled={requesting || !!boot.fallback} aria-busy={requesting}>
                     <ListChecks size={14} aria-hidden="true" />상세 보충 요청
                   </button>
                 )}>
@@ -216,7 +216,7 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
             {result && !problem && !detailFilter && pending > 0 && (
               <p className="inline-note">
                 상세 미수집 {number(pending)}건 · 관람료·연령·출연진은 상세 수집 후 표시됩니다.
-                <button type="button" className="text-button" onClick={() => void requestDetails()} disabled={requesting} aria-busy={requesting}>상세 보충 요청</button>
+                <button type="button" className="text-button" onClick={() => void requestDetails()} disabled={requesting || !!boot.fallback} aria-busy={requesting}>상세 보충 요청</button>
               </p>
             )}
 

@@ -166,9 +166,9 @@ test('three cloud deadlines mark the stalled task failed and allow later queue w
 
 test('public cloud database failures return safe errors', async () => {
   const unavailable = { withStore: async () => { throw new Error('postgres://secret-password@private-host'); } };
-  const response = await handleCloudRequest(request('/api/bootstrap'), { env, repository: unavailable });
+  const response = await handleCloudRequest(request('/api/bootstrap'), { env, repository: unavailable,readonlyFallback:{load:async()=>undefined} });
   assert.equal(response.status, 503); assert.ok(!(await response.text()).includes('secret'));
-  assert.equal(response.headers.get('retry-after'), '3');
+  assert.equal(response.headers.get('retry-after'), '60');
 });
 
 test('snapshot capacity rejection preserves prior data and returns a non-retryable storage explanation', async () => {
