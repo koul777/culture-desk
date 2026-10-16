@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-16T09:13:09.257Z",
+  "automaticRefresh": {
+    "status": "complete",
+    "day": "2026-10-16",
+    "from": "2026-10-01",
+    "to": "2027-01-16",
+    "counts": {
+      "doneTasks": 7494,
+      "remaining": 0,
+      "totalTasks": 7494,
+      "completeRuns": 460,
+      "expectedRuns": 460,
+      "performances": 5600
+    },
+    "lastSuccessAt": "2026-10-16T08:59:57.881Z",
+    "updatedAt": "2026-10-16T08:59:57.881Z",
+    "error": null,
+    "schedule": {
+      "timezone": "Asia/Seoul",
+      "primary": "04:17",
+      "retries": [
+        "06:47",
+        "12:47",
+        "20:47"
+      ]
+    },
+    "enabled": true
+  },
+  "pending": 0,
+  "sources": [
+    {
+      "source": "kopis",
+      "count": 4336,
+      "configured": true
+    },
+    {
+      "source": "culture",
+      "count": 1264,
+      "configured": true
+    }
+  ],
+  "regions": 230
+}

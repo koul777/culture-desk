@@ -1,0 +1,63 @@
+https://culture-desk-h685mdtia-hrkim.vercel.app
+Vercel CLI 62.1.0 (Node.js 24.14.0)
+Deploying culture-desk
+  Inspect         https://vercel.com/hrkim/culture-desk/44Cok1GEAvm7yCdzsaX786btdqv2
+  Production      https://culture-desk-h685mdtia-hrkim.vercel.app
+Building…
+Building…
+Running build in Cleveland, USA (East) – cle1
+Build machine configuration: 4 cores, 8 GB
+Retrieving list of deployment files...
+Downloading 439 deployment files...
+Restored build cache from previous deployment (CSQZq8RBH4voDQvHHoAGyRmaEua7)
+Running "vercel build"
+Vercel CLI 64.0.2
+Installing dependencies...
+npm warn Unknown env config "cache-dir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+up to date in 870ms
+126 packages are looking for funding
+run `npm fund` for details
+npm warn install-scripts 1 package has install scripts not yet covered by allowScripts:
+npm warn install-scripts   esbuild@0.28.2 (postinstall: node install.js)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+npm warn Unknown env config "cache-dir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+> culture-desk@1.0.0 build
+> tsc --noEmit && vite build
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 3567 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/index.html                             0.86 kB │ gzip:     0.54 kB
+dist/client/assets/Venue3DDialog-DfJF8jO8.css     26.52 kB │ gzip:     5.98 kB
+dist/client/assets/index-DjSAS5Lv.css             96.75 kB │ gzip:    22.49 kB
+dist/client/assets/index-BA595iMG.js             484.81 kB │ gzip:   147.15 kB
+dist/client/assets/Venue3DDialog-DLAIswb5.js   4,176.44 kB │ gzip: 1,120.73 kB
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.48s
+Using TypeScript 7.0.2 (local user-provided)
+Using the TypeScript 7.0.2 compiler executable for transpilation.
+Build Completed in /vercel/output [7s]
+Deploying outputs...
+[2K[1A[2K[G  Production      https://culture-desk-h685mdtia-hrkim.vercel.app
+Completing…
+▲ Aliased         https://culture-desk.vercel.app
+
+✓ Ready in 21s
+
+! Deployment Protection is on for this project (Vercel Authentication). Use `vercel curl` to access it.
+
+Next steps:
+- Automatically deploy changes on every push by connecting Git:
+  vercel git connect
+- Check the production response:
+  vercel curl https://culture-desk.vercel.app
+- View build logs:
+  vercel inspect culture-desk-h685mdtia-hrkim.vercel.app --logs
+- Create a new deployment from the same source:
+  vercel redeploy culture-desk-h685mdtia-hrkim.vercel.app
