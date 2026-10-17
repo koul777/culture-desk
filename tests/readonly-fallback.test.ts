@@ -109,7 +109,7 @@ test('the bundled public artifact is usable and cached without inventing complet
   assert.ok(model.store.counts().source.kopis>0);assert.ok(model.store.counts().source.culture>0);
   // Only the audited coverage recorded in the artifact becomes completed runs, nothing else.
   const artifact=await readPublicSnapshot(fileURLToPath(new URL('../server/assets/public-snapshot.json',import.meta.url)));
-  const runs=model.store.runs();assert.equal(runs.length,artifact.coverage?.pairs.length??0);
+  const runs=model.store.runs(1000);assert.equal(runs.length,artifact.coverage?.pairs.length??0);
   assert.ok(runs.every(run=>run.state==='complete'&&run.from===artifact.coverage!.from&&run.to===artifact.coverage!.to&&artifact.coverage!.pairs.includes(`${run.source}:${run.cityId}`)));
   assert.equal(model.store.db.prepare('PRAGMA query_only').get()!.query_only,1);assert.equal(model.metadata.reason,'database_unavailable');
 });
