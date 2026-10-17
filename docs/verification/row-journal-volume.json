@@ -1,0 +1,30 @@
+{
+  "dataset": {
+    "performances": 5615,
+    "changedPerformances": 112,
+    "regions": 230,
+    "sourceRuns": 460
+  },
+  "compressedProductionBytes": 2515484,
+  "compressedCheckpointBytes": 2504183,
+  "previousDailyRefresh": {
+    "merges": 20,
+    "bytesReadFromDatabase": 50309680,
+    "bytesWrittenToDatabase": 100393340
+  },
+  "newDailyRefresh": {
+    "merges": 1,
+    "checkpointSaves": 4,
+    "journalRowsWritten": 1492,
+    "journalBytesWritten": 539280,
+    "baseRewrites": 0,
+    "bytesWrittenToDatabase": 10556012,
+    "bytesReadFromDatabase": 3012566
+  },
+  "readers": {
+    "previousEveryReadAfterAnyChange": 2515484,
+    "newWarmInstanceAfterDailyRefresh": 562244,
+    "newColdInstance": 3012566,
+    "newUnchangedRead": 0
+  }
+}

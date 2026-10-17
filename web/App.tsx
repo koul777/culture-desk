@@ -17,7 +17,9 @@ import { SearchView } from './components/SearchView';
 import { Sidebar } from './components/Sidebar';
 
 const ACTIVE_POLL_MS = 3000;
-const IDLE_POLL_MS = 60000;
+// Data changes about once a day. A slow idle check lets the database compute suspend between
+// checks; returning to the tab triggers an immediate refresh.
+const IDLE_POLL_MS = 15 * 60_000;
 const POLL_COALESCE_MS = 1000;
 
 export function App() {

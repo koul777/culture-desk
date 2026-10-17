@@ -109,3 +109,25 @@ test('finished refresh restores temporarily hidden completion history without di
   assert.equal(target.runs().find(run=>run.id===failed)?.error,'TEST_REAL_FAILURE');
   assert.equal(target.runs().find(run=>run.id===failed)?.state,'partial');
 });
+
+test('a summarized daily import keeps run totals and coverage without copying task or item rows',t=>{
+  const source=new Store(':memory:',DEFAULT_CITIES),target=new Store(':memory:',DEFAULT_CITIES),copied=new Store(':memory:',DEFAULT_CITIES);
+  t.after(()=>{source.close();target.close();copied.close();});
+  const run=source.createRun('kopis','andong','2026-10-01','2026-10-31');
+  source.upsert(item('TEST_SUMMARY_A'),run);
+  source.upsert(item('TEST_SUMMARY_B',{classification:'excluded'}),run);
+  for(let task=source.nextTask();task;task=source.nextTask())source.finishTask(task);
+  const failed=source.createRun('culture','andong','2026-10-01','2026-10-31');
+  source.db.prepare("UPDATE sync_tasks SET state='failed' WHERE run_id=?").run(failed);source.recomputeRun(failed);
+  importCollection(source.db,target,'TEST_SUMMARY',{summarizeCompletedRuns:true});
+  importCollection(source.db,copied,'TEST_SUMMARY');
+  assert.equal(Number(target.db.prepare('SELECT COUNT(*) n FROM sync_tasks').get()!.n),0);
+  assert.equal(Number(target.db.prepare('SELECT COUNT(*) n FROM sync_items').get()!.n),0);
+  const summarized=target.runs().map(({id:_id,...rest})=>rest),full=copied.runs().map(({id:_id,...rest})=>rest);
+  assert.deepEqual(summarized,full,'run totals match a full copy');
+  assert.equal(summarized[0].items,1);assert.equal(summarized[0].excluded,1);
+  const filters={cities:'andong',from:'2026-10-05',to:'2026-10-06',source:'kopis'} as any;
+  assert.equal(target.search(filters).partial,copied.search(filters).partial,'coverage claims match');
+  importCollection(source.db,target,'TEST_SUMMARY',{summarizeCompletedRuns:true});
+  assert.equal(target.runs().length,1,'repeat publication stays idempotent');
+});
