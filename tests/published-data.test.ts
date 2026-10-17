@@ -109,6 +109,7 @@ test('a scheduled run merges into the earlier public rows, publishes partial pro
   assert.ok(out.performances.find(item => item.sourceId === 'TEST_1')!.venueInfo, 'seeded rows keep published venue facts');
   assert.ok(!existsSync(path.join(stateDirectory, 'collect', 'checkpoint-1.db')));
   assert.ok(readFileSync(snapshotPath, 'utf8').split('\n').length >= out.performances.length + 2, 'one record per line');
+  assert.equal(readFileSync(path.join(stateDirectory, 'public-snapshot.json'), 'utf8'), readFileSync(snapshotPath, 'utf8'), 'the state artifact carries the published data');
 
   const second = await runDailyPublish({ stateDirectory, snapshotPath, collect: completeCollect, window, now: () => new Date('2026-10-17T21:50:00Z') });
   assert.ok(!('skipped' in second) && second.state.status === 'complete');

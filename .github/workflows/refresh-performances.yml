@@ -1,7 +1,7 @@
 name: Refresh nationwide performances
 
-# Collects both public APIs, then commits the public snapshot that Vercel serves.
-# No database service: the collector's state travels between runs as an artifact.
+# Collects both public APIs and deploys the public snapshot to Vercel; no database service.
+# The collector's state, including the latest snapshot, travels between runs as an artifact.
 on:
   schedule:
     # Korea: primary 04:17; recovery slots 06:47, 12:47, 20:47.
@@ -15,9 +15,13 @@ on:
         description: 'Collection budget in minutes (5–55)'
         required: false
         default: '50'
+  # Code changes deploy with the latest collected data instead of the committed baseline.
+  push:
+    branches: [main]
+    paths-ignore: ['docs/**', '**/*.md']
 
 permissions:
-  contents: write # commit the published snapshot
+  contents: read
   actions: read # restore the previous run's collection state
 
 concurrency:
@@ -30,25 +34,9 @@ jobs:
     timeout-minutes: 58
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-      # Recovery slots cost under a minute once today's snapshot is published.
-      - name: Check today's published refresh
-        id: today
-        run: |
-          day=$(TZ=Asia/Seoul date +%F)
-          published=$(jq -r '(.refresh.day // "") + " " + (.refresh.status // "")' server/assets/public-snapshot.json)
-          if [ "$published" = "$day complete" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Today's refresh is already published."
-          fi
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
-        if: steps.today.outputs.skip != 'true'
         with:
-          node-version: '24'
-          cache: npm
-      - if: steps.today.outputs.skip != 'true'
-        run: npm ci --ignore-scripts
+          persist-credentials: false
       - name: Restore collection state
-        if: steps.today.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -63,40 +51,58 @@ jobs:
           else
             echo "No collection state; continuing from the committed snapshot."
           fi
+      # Recovery slots cost under a minute once today's refresh is complete.
+      - name: Plan this run
+        id: plan
+        run: |
+          day=$(TZ=Asia/Seoul date +%F)
+          state=$(jq -r '(.day // "") + " " + (.status // "")' data/daily/job.json 2>/dev/null || true)
+          collect=true; deploy=true
+          if [ "$state" = "$day complete" ] || [ "$GITHUB_EVENT_NAME" = push ]; then collect=false; fi
+          if [ "$collect" = false ] && [ "$GITHUB_EVENT_NAME" = schedule ]; then deploy=false; fi
+          echo "collect=$collect" >> "$GITHUB_OUTPUT"
+          echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
+          echo "Published state: ${state:-none}; collect=$collect, deploy=$deploy."
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        if: steps.plan.outputs.deploy == 'true'
+        with:
+          node-version: '24'
+          cache: npm
+      - if: steps.plan.outputs.collect == 'true'
+        run: npm ci --ignore-scripts
       - name: Collect and build the public snapshot
-        if: steps.today.outputs.skip != 'true'
+        if: steps.plan.outputs.collect == 'true'
         env:
           KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
           CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
           NATIONAL_RUN_BUDGET_MINUTES: ${{ inputs.budget || '50' }}
         run: node --import tsx scripts/run-daily-publish.ts
       - name: Save collection state
-        if: always() && steps.today.outputs.skip != 'true' && hashFiles('data/daily/production.db') != ''
+        if: always() && steps.plan.outputs.collect == 'true' && hashFiles('data/daily/production.db') != ''
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: culture-desk-state
           path: data/daily
           retention-days: 7
           if-no-files-found: error
-      - name: Publish the snapshot
-        if: steps.today.outputs.skip != 'true'
+      - name: Use the latest published snapshot
+        if: steps.plan.outputs.deploy == 'true' && steps.plan.outputs.collect != 'true'
+        run: |
+          if [ -f data/daily/public-snapshot.json ]; then cp data/daily/public-snapshot.json server/assets/public-snapshot.json; fi
+      - name: Deploy to Vercel
+        if: steps.plan.outputs.deploy == 'true'
+        env:
+          # The CLI reads the token from the environment; it never appears in arguments or logs.
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- server/assets/public-snapshot.json; then echo "Nothing new to publish."; exit 0; fi
-          cp server/assets/public-snapshot.json "$RUNNER_TEMP/public-snapshot.json"
-          # Vercel builds commits whose author can deploy the project, so keep the repository author.
-          name=$(git log -1 --format=%an); email=$(git log -1 --format=%ae)
-          day=$(TZ=Asia/Seoul date +%F)
-          for attempt in 1 2 3; do
-            git fetch -q --depth=1 origin "$GITHUB_REF_NAME"
-            git checkout -q -f -B publish-snapshot FETCH_HEAD
-            cp "$RUNNER_TEMP/public-snapshot.json" server/assets/public-snapshot.json
-            git add server/assets/public-snapshot.json
-            if git diff --cached --quiet; then echo "Already published."; exit 0; fi
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-              commit -q --author="$name <$email>" -m "data: publish nationwide performances for $day"
-            if git push -q origin "HEAD:$GITHUB_REF_NAME"; then echo "Published $day snapshot."; exit 0; fi
-            sleep 5
-          done
-          echo "Could not push the snapshot." >&2
-          exit 1
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::error::Add the VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID repository secrets to deploy."
+            exit 1
+          fi
+          # Only main is production; a manual run on another branch makes a preview deployment.
+          args=(deploy --yes)
+          if [ "$GITHUB_REF_NAME" = main ]; then args+=(--prod); fi
+          npx --yes vercel@64.0.2 "${args[@]}"

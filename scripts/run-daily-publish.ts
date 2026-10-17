@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -14,8 +14,8 @@ import { buildPublicFallback } from './build-public-fallback.js';
 
 /**
  * Scheduled refresh without a database service. GitHub Actions restores `stateDirectory` from the
- * previous run's artifact, this script collects into it and rewrites the committed public snapshot,
- * and the workflow uploads the directory again and commits the snapshot for Vercel to deploy.
+ * previous run's artifact, this script collects into it and rewrites the public snapshot, and the
+ * workflow uploads the directory again and deploys the snapshot to Vercel.
  */
 export interface CollectResult { exitCode: number | null }
 export type Collect = (window: RefreshWindow, directory: string, batch: string) => Promise<CollectResult>;
@@ -88,6 +88,8 @@ export async function runDailyPublish(options: DailyPublishOptions) {
     counts, lastSuccessAt, updatedAt: at, error: complete ? null : INCOMPLETE };
   writeFileSync(stateFile, JSON.stringify(state, null, 2));
   const published = buildPublicFallback({ input: production, output: options.snapshotPath, snapshotAt: at, refresh: state });
+  // Deployments for code changes reuse the latest published data from the state artifact.
+  copyFileSync(options.snapshotPath, path.join(options.stateDirectory, 'public-snapshot.json'));
   return { state, collectorExit: exitCode, published };
 }
 

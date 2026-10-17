@@ -2,67 +2,39 @@
 
 운영 주소: https://culture-desk.vercel.app · 로그인이나 접속 암호 없이 바로 전국 공연을 검색합니다. 지역 미선택·전체 체크는 전국, 일부 체크는 해당 지역만 조회합니다. 기본 보기는 공연 카드이며 상단·메뉴·보기 전환 버튼에서 지도를 열 수 있습니다. 지도 바로가기: https://culture-desk.vercel.app/#map
 
-새 브라우저에서 쿠키 없이 검색·지역 복수 체크·지도·상세·엑셀을 확인했습니다. 이전 7개 기본 지역 선택은 초기화되며 새 설정부터 사용자의 선택을 저장합니다. 전국 검색은 현재 저장된 자료를 대상으로 하므로 전국 자료의 수집 완료를 의미하지 않습니다. [검색 전용 배포 검증](verification/search-only-vercel-checks.json) · [전국 기본 조회·UI 개선 배포 검증](verification/ux-vercel-checks.json)
-
-로컬 실행은 기존 SQLite와 상시 수집기를 사용합니다. Vercel에서는 프런트엔드를 정적 배포하고 하나의 Node.js 24 API 함수가 Neon Postgres에 저장한 SQLite 스냅샷을 사용합니다. 두 환경의 데이터는 최초 배포 시 복사한 뒤 각각 독립적으로 저장됩니다.
+로컬 실행은 기존 SQLite와 상시 수집기를 사용합니다. Vercel에서는 프런트엔드를 정적 배포하고, 하나의 Node.js 24 API 함수가 배포에 포함된 공개 스냅샷(`server/assets/public-snapshot.json`)을 읽습니다. 스냅샷은 매일 GitHub Actions가 수집해 만들고 Vercel CLI로 배포합니다. 웹 서비스는 DB 서비스에 접속하지 않습니다. [전국 자동 갱신](AUTOMATIC_REFRESH.md)
 
 ## 환경 변수
 
-- `DATABASE_URL`: Vercel에 연결한 Neon 데이터베이스의 연결 문자열. `POSTGRES_URL`도 대체 이름으로 지원합니다.
-- `KOPIS_API_KEY`, `CULTURE_API_KEY`: 서버 API 인증키. 브라우저에는 전달하지 않습니다.
-- `CRON_SECRET`: Vercel Cron 호출 인증값. 공연 검색 이용자가 입력할 필요는 없습니다.
 - `VWORLD_API_KEY`: 선택 항목. 브이월드 WebGL 3D API 3.0용 브라우저 지도 키이며, Production에 등록한 뒤 재배포합니다. 브이월드에 `https://culture-desk.vercel.app` 서비스 도메인을 등록합니다. 미설정이면 기존 Cesium 외곽 모형을 사용합니다.
+- `CULTURE_DATA_SOURCE=database`: 이전 Neon 구조로 되돌릴 때만 씁니다. 평소에는 설정하지 않습니다.
 
-환경 변수는 Vercel 서버 환경에 등록합니다. `.env`, `.env.vercel`은 커밋하거나 배포 파일에 포함하지 않습니다. 공연 API 키와 DB 인증정보는 URL·로그·프런트엔드 코드에 넣지 않습니다. 브이월드 키만 지도 SDK 사용을 위해 3D 프레임의 SDK 요청에 전달되므로 제공기관의 도메인 제한이 필요합니다. 설정 API는 키 값 없이 사용 가능 여부만 반환합니다.
+공연 API 키(`KOPIS_API_KEY`, `CULTURE_API_KEY`)는 GitHub Actions Secrets에만 있으면 됩니다. `.env`, `.env.vercel`은 커밋하거나 배포 파일에 포함하지 않습니다. 브이월드 키만 지도 SDK 사용을 위해 3D 프레임의 SDK 요청에 전달되므로 제공기관의 도메인 제한이 필요합니다. 설정 API는 키 값 없이 사용 가능 여부만 반환합니다.
 
-`/api/maps/vworld/config`와 `/api/maps/vworld/frame`은 공연 DB에 접근하지 않습니다. 지도 프레임 경로만 `X-Frame-Options: SAMEORIGIN`과 `frame-ancestors 'self'`로 같은 사이트의 3D 창에 포함할 수 있게 하며, 나머지 화면의 외부 프레임 삽입 차단은 유지합니다. 상세 신청 절차는 [API 신청 안내](API_APPLICATIONS.md)를 참고하세요.
+`/api/maps/vworld/config`와 `/api/maps/vworld/frame`은 공연 자료에 접근하지 않습니다. 지도 프레임 경로만 `X-Frame-Options: SAMEORIGIN`과 `frame-ancestors 'self'`로 같은 사이트의 3D 창에 포함할 수 있게 하며, 나머지 화면의 외부 프레임 삽입 차단은 유지합니다. 상세 신청 절차는 [API 신청 안내](API_APPLICATIONS.md)를 참고하세요.
 
-## 접근 및 저장
+## 공개 스냅샷
 
-공연 검색·지도·상세·엑셀과 수집 작업은 로그인 없이 이용합니다. 로그인·관심 공연·메모 API, 원본 DB 백업 다운로드와 지역 수동 등록은 공개하지 않습니다. 기존 개인 메모는 삭제하지 않고 공개 JSON과 엑셀에서 제외합니다. 변경 API는 요청 표식과 동일 출처 검사를 통과해야 합니다. Cron은 별도의 서버 인증을 유지합니다.
+공개 스냅샷에는 검색 대상 공연의 공개 필드, 공연장 정보(관별 객석 수·편의시설·예매처·홈페이지), 자동 갱신 상태와 완료가 확인된 지역·출처 범위만 넣습니다. 원본 API 응답·개인 메모·관심 표시·수집 큐·인증정보는 넣지 않습니다. 공연 한 건을 한 줄로 저장하여 매일 바뀌는 부분만 작게 비교됩니다.
 
-각 쓰기 요청은 Postgres의 동일한 행을 `SELECT FOR UPDATE`로 잠근 뒤 별도 임시 디렉터리에 SQLite를 복원합니다. 작업 성공 시 새 스냅샷과 리비전을 같은 트랜잭션으로 커밋합니다. 실패하면 롤백하여 이전 스냅샷을 보존합니다. 읽기는 마지막으로 커밋한 데이터를 사용합니다. 함수 종료 시 임시 디렉터리를 제거하며 `/tmp`를 영구 저장소로 취급하지 않습니다.
+API 함수는 스냅샷을 인스턴스마다 한 번 메모리 SQLite로 복원하고 `query_only`로 잠급니다. 검색·지도·상세·공연장 외곽·엑셀 조회를 제공하며, 수집·상세 보충·Cron 요청은 HTTP 404로 거절합니다. 화면은 자료 기준 시각과 자동 갱신 상태를 표시하고 수동 수집 화면을 숨깁니다. 스냅샷을 읽지 못하면 빈 결과 대신 HTTP 503과 `SNAPSHOT_UNAVAILABLE` 코드를 반환합니다.
 
-읽기 요청은 revision과 필요한 payload를 같은 SQL로 확인합니다. revision이 같으면 이미 검증한 압축본을 재사용하여 전체 파일 전송을 생략합니다. 다른 서버에서 수집·중단·재개를 저장한 다음 조회는 새 revision의 자료를 받습니다. 고정 TTL 때문에 최신 자료가 가려지는 캐시는 사용하지 않습니다.
-
-최초 데이터 복사는 `getSnapshotRepository().seedIfEmpty(buffer)`로 수행합니다. SQLite 무결성과 필수 테이블을 확인하고, 클라우드 데이터가 비어 있을 때만 복사합니다. 기존 클라우드 메모를 배포 과정에서 덮어쓰지 않습니다.
-
-## 저장소 장애 시 임시 조회
-
-2026-10-16 운영 장애는 Vercel 정적 홈페이지가 아닌 Neon 연결 단계의 `53000` 사용량 한도 초과였습니다. 당시 홈페이지·health는 HTTP 200, 공연 조회는 HTTP 503이었으며 직접 읽기 연결에서도 같은 거절을 확인했습니다. 어느 과금 항목의 한도인지는 오류만으로 구분할 수 없습니다. 실제 갱신 재개에는 Neon 콘솔에서 해당 프로젝트의 사용량 제한 해소가 필요합니다.
-
-연결 실패 시 `server/assets/public-snapshot.json.gz`의 공개 공연만 메모리 SQLite에 복원하고 `query_only`로 잠급니다. 검색·지도·상세·공연장 외곽·엑셀 조회는 유지하며, 수집과 변경 요청은 HTTP 503 및 `Retry-After: 60`으로 차단합니다. 임시 자료의 기준 시각은 JSON·응답 헤더·화면 안내·엑셀 조회 근거에 표시합니다. 자동 갱신을 성공으로 처리하지 않습니다.
-
-기본 비상 자료는 2026-10-16 20:19:02 한국 시간에 검증한 운영 백업의 공개 공연 5,615건입니다. 기존 공연 ID·좌표·공개 상세 필드는 유지하고 원본 응답·개인 메모·관심 표시·수집 큐·인증정보는 포함하지 않습니다. 원본 운영 DB를 덮어쓰지 않습니다. 비상 자료를 새로 만들 때는 읽기 전용으로 검증한 백업에 아래 명령을 적용한 뒤 재배포합니다.
+저장소의 스냅샷은 상태 아티팩트가 없을 때의 시작점입니다. 운영 자료는 매일 배포 때 새 스냅샷으로 바뀝니다. 검증한 백업에서 새로 만들 때는 아래 명령을 사용합니다.
 
 ```powershell
 node --import tsx scripts/build-public-fallback.ts data/backups/검증한백업.db
 ```
 
-서버 인스턴스는 연결 실패 후 45초 동안 DB 재접속을 줄이고 이후 재확인합니다. 화면은 임시 조회 중 약 60초마다 상태를 확인하여 정상 연결이면 운영 데이터 조회로 복귀합니다. 서버 함수에만 비상 자료를 포함하도록 `vercel.json`의 `includeFiles`를 설정했습니다. 일반 `data` 폴더는 배포에서 제외되므로 검증한 공개 자료는 `server/assets`에 별도로 둡니다. 스냅샷은 자동 갱신 DB의 대체 저장소가 아니며, 복구 전에는 최신 자료로 보장하지 않습니다.
+## 응답 한도
 
-## 수집 실행
+JSON 조회와 Excel 다운로드는 응답 본문을 4 MiB까지만 전송합니다. 초과 시 HTTP 413과 `RESPONSE_CAPACITY` 코드로 지역·기간 등 조회 조건을 좁히도록 안내합니다. 지도는 별도로 항목 수와 응답 크기를 제한하고 잘림 여부를 표시합니다.
 
-화면이 열려 있고 수집 작업이 남아 있으면 클라이언트가 `POST /api/cloud/tick`을 반복 호출합니다. 한 호출은 최대 20개 작업을 처리하며, 한 묶음은 최대 8개(출처별 4개)입니다. 짧은 트랜잭션에서 작업을 예약하고, DB 잠금을 해제한 상태에서 제공기관을 조회한 뒤, 다시 짧은 트랜잭션에서 결과를 묶어 저장합니다. 원본 API 응답을 기다리는 동안 검색·중단·재개 요청의 저장소 잠금을 잡지 않습니다.
-
-제공기관별 실제 HTTP 요청 시작 간격은 350ms, 동시 요청은 최대 4개입니다. 공연장 조회도 이 제한에 포함합니다. 한 호출 안에서는 provider와 공연장 조회 캐시를 재사용하되 공연별 상세 갱신은 생략하지 않습니다. 출처가 한도·인증 오류를 반환하면 그 출처의 새 요청을 멈춥니다.
-
-작업의 첫 실제 요청 시작부터 12초 후 취소하고, 같은 작업이 3번 실패하면 일부 실패 상태로 남겨 후속 작업을 진행합니다. 기존 완성 상세는 실패로 지우지 않습니다. 전체 실행 루프 예산은 35초이고 DB 연결·저장 시간은 별도이며, Vercel 함수 제한은 60초입니다. 다음 묶음을 온전히 실행할 시간 여유가 없으면 새 API 요청을 시작하지 않습니다.
-
-90초의 수집 임대와 작업별 토큰·재시도 횟수·예약 시각을 확인해 중복 실행과 오래된 응답 반영을 막습니다. 종료·저장 실패로 남은 예약은 임대 만료 뒤 재시도할 수 있습니다. 중단·재개 후 이전 요청의 결과는 적용하지 않으며, 상세를 받는 동안 다른 쓰기가 해당 공연을 변경했으면 기존 자료를 보존하고 다시 조회합니다. 빈 큐·다른 실행의 임대·재시도 대기만 확인한 요청은 불필요한 스냅샷 쓰기를 생략합니다. [성능 비교와 데이터 일치 검증](COLLECTION_PERFORMANCE.md)
-
-전국 자동 갱신은 별도의 GitHub Actions 예약 실행기가 브라우저 없이 끝까지 처리합니다. 한국 시간 04:17에 시작하고 06:47·12:47·20:47에 미완료 작업을 재개합니다. 날짜별 작업·120초 실행 잠금·30초 heartbeat·2분 체크포인트를 Neon의 `culture_refresh_job`에 보관합니다. 운영 DB 병합과 460개 범위의 상세 검증까지 성공해야 완료로 기록합니다. 기존 Vercel Cron은 `AUTOMATIC_REFRESH_ENABLED=1`일 때 상태만 확인하며 중복 수집을 만들지 않습니다. 수동 추가 수집은 위의 화면 기반 tick을 계속 사용합니다. [자동 갱신 운영](AUTOMATIC_REFRESH.md)
-
-## 규모와 백업
-
-매 쓰기마다 SQLite 스냅샷을 저장합니다. 전국 공연 원문·상세를 누락하지 않고 보관하도록 gzip 무손실 압축을 적용하며, 기존 비압축 스냅샷도 자동으로 읽습니다. 압축 저장본 상한은 16 MiB, 복원한 SQLite 상한은 128 MiB입니다. 초과 시 기존 데이터를 보존하고 HTTP 507과 `SNAPSHOT_CAPACITY` 코드로 저장 공간 한도 안내를 반환합니다. 대규모 동시 쓰기가 필요한 경우에는 Postgres 테이블을 직접 사용하는 저장 계층으로 전환해야 합니다.
-
-JSON 조회와 Excel 다운로드는 응답 본문을 4 MiB까지만 전송합니다. 초과 시 HTTP 413과 `RESPONSE_CAPACITY` 코드로 지역·기간 등 조회 조건을 좁히도록 안내합니다. 저장된 공연과 메모는 변경하지 않습니다. 지도는 별도로 항목 수와 응답 크기를 제한하고 잘림 여부를 표시합니다.
-
-클라우드 원본 DB 백업은 관리자 환경에서 `SnapshotRepository.withStore(false, store => store.backup(...))`로 생성합니다. Neon의 `culture_desk_snapshot.data`를 직접 추출했다면 `decodeSnapshot`으로 gzip 여부를 확인하고 복원해야 합니다. 웹 화면에서는 검색 결과 엑셀 다운로드를 제공합니다. 로컬 종료 기능은 클라우드에서 제공하지 않습니다.
-
-전국 일괄 수집은 `scripts/collect-national.ts`로 별도 SQLite에 실행하고 `scripts/audit-national.ts`로 지역·출처·날짜구간 누락을 검사합니다. `scripts/publish-national.ts checkpoint.db national-20261001-20270116`은 운영 DB를 먼저 백업한 뒤 공연을 출처 ID로 병합하며, 완료한 수집 이력만 반영합니다. 기존 공연 ID와 개인 자료는 유지되고 같은 체크포인트를 반복 반영해도 이력이 중복되지 않습니다.
+## 공연장 3D
 
 Cesium 코드와 Workers·Assets는 정적 배포에 포함됩니다. 공연장 3D는 추가 ion 키 없이 OSM 배경과 타원체 지면으로 표시합니다. `/api/venues/building?performanceId=...`는 저장된 공연장의 좌표로 실제 건물 도형을 찾으며, 3개 확인된 공연장의 원자료 캐시와 허용된 Overpass 제공처를 사용합니다. 높이 기록이 있으면 해당 값이나 층수 기반 추정값을 구분해 표시합니다. 실제 외곽은 있으나 높이가 미확인이면 프런트엔드에서 초기 12m의 **높이 가정 모형·실측 아님**으로 표시하며, 슬라이더로 가정 높이를 바꾸거나 위에서 외곽을 볼 수 있습니다. 원본 API의 높이 `null`은 변경하지 않으며 실제 3D 원본을 추가 확보한 것은 아닙니다. 도형이 없으면 공연장 위치만 표시합니다.
 
-참고: [Vercel Node.js 함수](https://vercel.com/docs/functions/runtimes/node-js), [node-postgres 트랜잭션](https://node-postgres.com/features/transactions), [Neon 연결](https://neon.com/docs/connect/connect-from-any-app).
+## 이전 구조(Neon)
+
+2026-10-17까지는 SQLite 전체를 gzip 한 덩어리로 Neon Postgres의 한 행에 저장하고, 쓰기마다 전체를 읽고 다시 썼습니다. 수집 배치마다 두 번, Actions 실행 중 2분마다 전체(약 2.9 MB)를 주고받는 구조였고, 2026-10-16 Neon 무료 사용량 한도(`53000`)에 걸려 연결이 거부되었습니다. 어느 한도인지는 확인하지 못했습니다. 관련 코드(`server/cloud/snapshot.ts`, `collection.ts`, `refresh-jobs.ts`, `scripts/run-scheduled-refresh.ts`)는 정리 전까지 남아 있으며 `CULTURE_DATA_SOURCE=database`일 때만 사용합니다.
+
+참고: [Vercel Node.js 함수](https://vercel.com/docs/functions/runtimes/node-js), [Vercel CLI 배포](https://vercel.com/docs/cli/deploy).
