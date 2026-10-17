@@ -1,50 +1,27 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { randomBytes } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
+import { gzipSync } from 'node:zlib';
 import ExcelJS from 'exceljs';
-import { SnapshotRepository, SnapshotCapacityError, MAX_SNAPSHOT_BYTES, MAX_DATABASE_BYTES, encodeSnapshot, decodeSnapshot, type SnapshotClient, type SnapshotPool } from '../server/cloud/snapshot.js';
+import { SnapshotRepository, SnapshotCapacityError, MAX_SNAPSHOT_BYTES, MAX_DATABASE_BYTES, encodeSnapshot, decodeSnapshot } from '../server/cloud/snapshot.js';
 import { equalSecret, validMutationOrigin } from '../server/cloud/auth.js';
 import { handleCloudRequest, MAX_API_RESPONSE_BYTES } from '../server/cloud/handler.js';
 import { DEFAULT_CITIES } from '../server/providers/cities.js';
 import { Store } from '../server/store.js';
 import { createApp } from '../server/app.js';
 import type { PerformanceInput, Provider } from '../shared/types.js';
+import { PglitePool } from './helpers/pglite-pool.js';
+import { committedRevision, durableState, installLegacySnapshot, plainSqliteBytes } from './helpers/cloud-storage.js';
 
-// Models the PostgreSQL lock/commit boundary while exercising real SQLite files and Fastify routes.
-class TransactionPool implements SnapshotPool {
-  bytes: Buffer | null = null;
-  writes = 0;
-  active = 0;
-  maxActive = 0;
-  failWrite = false;
-  private pending: Promise<void> = Promise.resolve();
-  async connect(): Promise<SnapshotClient> {
-    let unlock: (() => void) | undefined;
-    let staged: Buffer | undefined;
-    const owner = this;
-    return {
-      async query(text, values = []) {
-        if (text.includes('FOR UPDATE')) {
-          const previous = owner.pending;
-          owner.pending = new Promise<void>(resolve => { unlock = resolve; });
-          await previous;
-          owner.active++; owner.maxActive = Math.max(owner.maxActive, owner.active);
-        }
-        if (text.startsWith('SELECT data')) return { rows: [{ data: owner.bytes }] };
-        if (text.startsWith('UPDATE culture_desk_snapshot')) {
-          if (owner.failWrite) throw new Error('simulated persistence failure');
-          staged = Buffer.from(values[0]); return { rows: [], rowCount: 1 };
-        }
-        if (text === 'COMMIT') {
-          if (staged) { owner.bytes = staged; owner.writes++; }
-          if (unlock) { owner.active--; unlock(); unlock = undefined; }
-        }
-        if (text === 'ROLLBACK' && unlock) { owner.active--; unlock(); unlock = undefined; }
-        return { rows: [] };
-      },
-      release() { assert.equal(unlock, undefined, 'the PostgreSQL transaction must finish before releasing its client'); },
-    };
-  }
+// Real PostgreSQL semantics (PGlite) for the lock/commit boundary, with real SQLite files and Fastify routes.
+// A persistence failure is injected on the statement that stores the changed rows or a rewritten base.
+const FAIL_PERSISTENCE = /INSERT INTO culture_desk_delta|UPDATE culture_desk_base/;
+const city = (id: string) => ({ ...DEFAULT_CITIES[0], id });
+const cityIds = (repo: SnapshotRepository) => repo.withStore(false, async store => store.cities().map(value => value.id));
+/** Runs a test body against a fresh in-process PostgreSQL and always shuts it down. */
+async function withCloud(body: (repo: SnapshotRepository, pool: PglitePool) => Promise<void>): Promise<void> {
+  const pool = new PglitePool();
+  try { await body(new SnapshotRepository(pool), pool); } finally { await pool.close(); }
 }
 const env = { CRON_SECRET: 'TEST_CRON_SECRET', KOPIS_API_KEY: 'TEST_KEY_NO_NETWORK' };
 const request = (route: string, method = 'GET', body?: unknown, extra: Record<string,string> = {}) => new Request(`https://culture.test${route}`, {
@@ -67,100 +44,135 @@ test('cloud mutation origin protection rejects cross-site and missing request ma
 });
 
 test('cloud snapshots serialize concurrent writers and preserve both mutations', async () => {
-  const pool = new TransactionPool(); const repo = new SnapshotRepository(pool);
-  await Promise.all([
-    repo.withStore(true, async store => { store.addCity({ ...DEFAULT_CITIES[0], id: 'test-first' }); await new Promise(resolve => setTimeout(resolve, 40)); }),
-    repo.withStore(true, async store => { store.addCity({ ...DEFAULT_CITIES[0], id: 'test-second' }); }),
-  ]);
-  assert.equal(pool.maxActive, 1); assert.equal(pool.writes, 2);
-  await repo.withStore(false, async store => {
-    assert.ok(store.cities().some(city => city.id === 'test-first'));
-    assert.ok(store.cities().some(city => city.id === 'test-second'));
-  });
+  const pool = new PglitePool(); const repo = new SnapshotRepository(pool);
+  try {
+    await repo.initialize();
+    const writes = pool.writes, revision = await committedRevision(pool);
+    await Promise.all([
+      repo.withStore(true, async store => { store.addCity(city('test-first')); await new Promise(resolve => setTimeout(resolve, 40)); }),
+      repo.withStore(true, async store => { store.addCity(city('test-second')); }),
+    ]);
+    assert.equal(pool.maxActive, 1); assert.equal(pool.writes - writes, 2);
+    assert.equal(await committedRevision(pool), revision + 2, 'each writer committed its own revision');
+    assert.ok((await cityIds(repo)).includes('test-first'));
+    assert.ok((await cityIds(repo)).includes('test-second'));
+
+    // Separate instances (each with its own cache) must also hydrate inside the lock and keep every mutation.
+    const other = new SnapshotRepository(pool);
+    await cityIds(other); // warm, so whichever writer loses the race holds a stale cache when it gets the lock
+    await Promise.all([
+      repo.withStore(true, async store => { store.addCity(city('test-third')); await new Promise(resolve => setTimeout(resolve, 40)); }),
+      other.withStore(true, async store => { store.addCity(city('test-fourth')); }),
+    ]);
+    assert.equal(pool.maxActive, 1); assert.equal(pool.writes - writes, 4);
+    for (const [label, reader] of [['a cold instance', new SnapshotRepository(pool)], ['the first writer', repo], ['the second writer', other]] as const) {
+      const visible = await cityIds(reader);
+      for (const id of ['test-first', 'test-second', 'test-third', 'test-fourth']) assert.ok(visible.includes(id), `${label} sees ${id}`);
+    }
+  } finally { await pool.close(); }
 });
 
 test('failed cloud mutation cannot replace the last durable snapshot', async () => {
-  const pool = new TransactionPool(); const repo = new SnapshotRepository(pool);
-  await repo.withStore(true, async store => { store.addCity({ ...DEFAULT_CITIES[0], id: 'test-kept' }); });
-  const before = Buffer.from(pool.bytes!);
-  await assert.rejects(repo.withStore(true, async store => { store.addCity({ ...DEFAULT_CITIES[0], id: 'test-rolled-back' }); throw new Error('simulated failure'); }));
-  assert.deepEqual(pool.bytes, before); assert.equal(pool.writes, 1);
-  await repo.withStore(false, async store => { assert.equal(store.cities().some(city => city.id === 'test-rolled-back'), false); });
-  pool.failWrite = true;
-  await assert.rejects(repo.withStore(true, async store => { store.addCity({ ...DEFAULT_CITIES[0], id: 'test-persist-failure' }); }));
-  assert.deepEqual(pool.bytes, before); assert.equal(pool.writes, 1);
-  pool.failWrite = false;
-  await repo.withStore(false, async store => { assert.equal(store.cities().some(city => city.id === 'test-persist-failure'), false); });
+  const pool = new PglitePool(); const repo = new SnapshotRepository(pool);
+  try {
+    await repo.withStore(true, async store => { store.addCity(city('test-kept')); });
+    const before = await durableState(pool), writes = pool.writes;
+    await assert.rejects(repo.withStore(true, async store => { store.addCity(city('test-rolled-back')); throw new Error('simulated failure'); }), /simulated failure/);
+    assert.deepEqual(await durableState(pool), before); assert.equal(pool.writes, writes);
+    await repo.withStore(false, async store => { assert.equal(store.cities().some(value => value.id === 'test-rolled-back'), false); });
+
+    pool.failOn = FAIL_PERSISTENCE;
+    await assert.rejects(repo.withStore(true, async store => { store.addCity(city('test-persist-failure')); }), /simulated persistence failure/);
+    assert.equal(pool.failOn, null, 'the injected persistence failure was reached');
+    assert.deepEqual(await durableState(pool), before); assert.equal(pool.writes, writes);
+    await repo.withStore(false, async store => {
+      assert.equal(store.cities().some(value => value.id === 'test-persist-failure'), false);
+      assert.ok(store.cities().some(value => value.id === 'test-kept'));
+    });
+    assert.equal((await cityIds(new SnapshotRepository(pool))).includes('test-persist-failure'), false, 'no instance can read the failed write');
+
+    // The COMMIT itself failing (for example a lost connection) is also all-or-nothing.
+    pool.failOn = /^COMMIT/;
+    await assert.rejects(repo.withStore(true, async store => { store.addCity(city('test-commit-failure')); }), /simulated persistence failure/);
+    assert.equal(pool.failOn, null, 'the injected commit failure was reached');
+    assert.deepEqual(await durableState(pool), before); assert.equal(pool.writes, writes);
+    assert.equal((await cityIds(repo)).includes('test-commit-failure'), false);
+    assert.equal((await cityIds(new SnapshotRepository(pool))).includes('test-commit-failure'), false);
+  } finally { await pool.close(); }
 });
 
 test('cloud search is public without password configuration or cookies and cron remains authenticated', async () => {
-  const repo = new SnapshotRepository(new TransactionPool()); const options = { env, repository: repo, providers: {} };
-  let response = await handleCloudRequest(request('/api/bootstrap'), options);
-  assert.equal(response.headers.get('referrer-policy'), 'strict-origin-when-cross-origin');
-  assert.equal(response.status, 200); const boot = await response.text(); assert.match(boot, /"deployment":"cloud"/); assert.ok(!boot.includes(env.KOPIS_API_KEY));
-  assert.equal(response.headers.has('set-cookie'), false);
-  for(const route of ['/api/performances','/api/map','/api/export.xlsx'])assert.equal((await handleCloudRequest(request(route),options)).status,200);
-  for(const method of ['GET','POST','DELETE'])assert.equal((await handleCloudRequest(request('/api/auth',method,method==='GET'?undefined:{}),options)).status,404);
-  response = await handleCloudRequest(request('/api/cloud/cron'), options); assert.equal(response.status, 401);
-  response = await handleCloudRequest(request('/api/cloud/cron', 'POST', {}, { authorization: `Bearer ${env.CRON_SECRET}` }), options); assert.equal(response.status, 401);
-  response = await handleCloudRequest(request('/api/cloud/cron', 'GET', undefined, { authorization: `Bearer ${env.CRON_SECRET}` }),options);assert.equal(response.status,200);
-  response = await handleCloudRequest(request('/api/cloud/cron', 'GET', undefined, { authorization: 'Bearer ' }), {...options,env:{}});assert.equal(response.status,401);
+  await withCloud(async repo => {
+    const options = { env, repository: repo, providers: {} };
+    let response = await handleCloudRequest(request('/api/bootstrap'), options);
+    assert.equal(response.headers.get('referrer-policy'), 'strict-origin-when-cross-origin');
+    assert.equal(response.status, 200); const boot = await response.text(); assert.match(boot, /"deployment":"cloud"/); assert.ok(!boot.includes(env.KOPIS_API_KEY));
+    assert.equal(response.headers.has('set-cookie'), false);
+    for(const route of ['/api/performances','/api/map','/api/export.xlsx'])assert.equal((await handleCloudRequest(request(route),options)).status,200);
+    for(const method of ['GET','POST','DELETE'])assert.equal((await handleCloudRequest(request('/api/auth',method,method==='GET'?undefined:{}),options)).status,404);
+    response = await handleCloudRequest(request('/api/cloud/cron'), options); assert.equal(response.status, 401);
+    response = await handleCloudRequest(request('/api/cloud/cron', 'POST', {}, { authorization: `Bearer ${env.CRON_SECRET}` }), options); assert.equal(response.status, 401);
+    response = await handleCloudRequest(request('/api/cloud/cron', 'GET', undefined, { authorization: `Bearer ${env.CRON_SECRET}` }),options);assert.equal(response.status,200);
+    response = await handleCloudRequest(request('/api/cloud/cron', 'GET', undefined, { authorization: 'Bearer ' }), {...options,env:{}});assert.equal(response.status,401);
+  });
 });
 
 test('cloud tick commits completed queue work and aborts a slow provider without losing its task', async () => {
-  const repo = new SnapshotRepository(new TransactionPool());
-  await repo.withStore(true, async store => { store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31'); });
-  let receivedAbort = false;
-  const slow: Provider = { source: 'kopis', detail: async item => item, list: async (_input, signal) => new Promise((_resolve, reject) => {
-    signal?.addEventListener('abort', () => { receivedAbort = true; reject(new Error('aborted')); }, { once: true });
-  }) };
-  // The batch budget includes snapshot I/O and the 350ms cross-request cooldown; the task still gets only 30ms.
-  const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: slow }, tickStepMs: 30, tickBudgetMs: 800 });
-  assert.equal(response.status, 200); assert.equal(receivedAbort, true);
-  await repo.withStore(false, async store => {
-    const row = store.db.prepare('SELECT state,attempts,available_at FROM sync_tasks').get()!;
-    assert.equal(row.state, 'queued'); assert.equal(row.attempts, 1); assert.ok(Date.parse(String(row.available_at)) > Date.now());
+  await withCloud(async repo => {
+    await repo.withStore(true, async store => { store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31'); });
+    let receivedAbort = false;
+    const slow: Provider = { source: 'kopis', detail: async item => item, list: async (_input, signal) => new Promise((_resolve, reject) => {
+      signal?.addEventListener('abort', () => { receivedAbort = true; reject(new Error('aborted')); }, { once: true });
+    }) };
+    // The batch budget includes snapshot I/O and the 350ms cross-request cooldown; the task still gets only 30ms.
+    const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: slow }, tickStepMs: 30, tickBudgetMs: 800 });
+    assert.equal(response.status, 200); assert.equal(receivedAbort, true);
+    await repo.withStore(false, async store => {
+      const row = store.db.prepare('SELECT state,attempts,available_at FROM sync_tasks').get()!;
+      assert.equal(row.state, 'queued'); assert.equal(row.attempts, 1); assert.ok(Date.parse(String(row.available_at)) > Date.now());
+    });
+    await repo.withStore(true, async store => { store.db.prepare("UPDATE sync_tasks SET available_at='2000-01-01T00:00:00.000Z'").run(); });
+    const quick: Provider = { ...slow, list: async () => ({ items: [], hasMore: false }) };
+    const done = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: quick } });
+    assert.equal(done.status, 200);
+    await repo.withStore(false, async store => { assert.equal(store.runs()[0].state, 'complete'); });
   });
-  await repo.withStore(true, async store => { store.db.prepare("UPDATE sync_tasks SET available_at='2000-01-01T00:00:00.000Z'").run(); });
-  const quick: Provider = { ...slow, list: async () => ({ items: [], hasMore: false }) };
-  const done = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: quick } });
-  assert.equal(done.status, 200);
-  await repo.withStore(false, async store => { assert.equal(store.runs()[0].state, 'complete'); });
 });
 
 test('three cloud deadlines mark the stalled task failed and allow later queue work to finish', async () => {
-  const repo = new SnapshotRepository(new TransactionPool());
-  let slowId = 0; let laterId = 0;
-  await repo.withStore(true, async store => {
-    slowId = store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31');
-    laterId = store.createRun('kopis', 'gongju', '2026-10-01', '2026-10-31');
-    store.setRunState(laterId, 'paused');
-  });
-  const provider: Provider = { source: 'kopis', detail: async item => item, list: async (input, signal) => {
-    if (input.city.id === 'gongju') return { items: [], hasMore: false };
-    return new Promise((_resolve, reject) => { signal?.addEventListener('abort', () => reject(new Error('deadline')), { once: true }); });
-  } };
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    await repo.withStore(true, async store => { store.db.prepare("UPDATE sync_tasks SET available_at='2000-01-01T00:00:00.000Z' WHERE run_id=?").run(slowId); });
-    // Allow the cross-request 350ms API cooldown while retaining the 30ms task deadline.
-    const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider }, tickStepMs: 30, tickBudgetMs: 800 });
+  await withCloud(async repo => {
+    let slowId = 0; let laterId = 0;
+    await repo.withStore(true, async store => {
+      slowId = store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31');
+      laterId = store.createRun('kopis', 'gongju', '2026-10-01', '2026-10-31');
+      store.setRunState(laterId, 'paused');
+    });
+    const provider: Provider = { source: 'kopis', detail: async item => item, list: async (input, signal) => {
+      if (input.city.id === 'gongju') return { items: [], hasMore: false };
+      return new Promise((_resolve, reject) => { signal?.addEventListener('abort', () => reject(new Error('deadline')), { once: true }); });
+    } };
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      await repo.withStore(true, async store => { store.db.prepare("UPDATE sync_tasks SET available_at='2000-01-01T00:00:00.000Z' WHERE run_id=?").run(slowId); });
+      // Allow the cross-request 350ms API cooldown while retaining the 30ms task deadline.
+      const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider }, tickStepMs: 30, tickBudgetMs: 800 });
+      assert.equal(response.status, 200);
+      await repo.withStore(false, async store => {
+        const task = store.db.prepare('SELECT attempts,state,error FROM sync_tasks WHERE run_id=?').get(slowId)!;
+        assert.equal(task.attempts, attempt);
+        assert.equal(task.state, attempt === 3 ? 'failed' : 'queued');
+        assert.match(String(task.error), /응답 시간이 초과/);
+      });
+    }
+    await repo.withStore(true, async store => {
+      assert.equal(store.runs().find(run => run.id === slowId)!.state, 'partial');
+      store.setRunState(laterId, 'queued');
+    });
+    const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider } });
     assert.equal(response.status, 200);
     await repo.withStore(false, async store => {
-      const task = store.db.prepare('SELECT attempts,state,error FROM sync_tasks WHERE run_id=?').get(slowId)!;
-      assert.equal(task.attempts, attempt);
-      assert.equal(task.state, attempt === 3 ? 'failed' : 'queued');
-      assert.match(String(task.error), /응답 시간이 초과/);
+      assert.equal(store.runs().find(run => run.id === laterId)!.state, 'complete');
+      assert.equal(store.runs().find(run => run.id === slowId)!.state, 'partial');
     });
-  }
-  await repo.withStore(true, async store => {
-    assert.equal(store.runs().find(run => run.id === slowId)!.state, 'partial');
-    store.setRunState(laterId, 'queued');
-  });
-  const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider } });
-  assert.equal(response.status, 200);
-  await repo.withStore(false, async store => {
-    assert.equal(store.runs().find(run => run.id === laterId)!.state, 'complete');
-    assert.equal(store.runs().find(run => run.id === slowId)!.state, 'partial');
   });
 });
 
@@ -172,20 +184,31 @@ test('public cloud database failures return safe errors', async () => {
 });
 
 test('snapshot capacity rejection preserves prior data and returns a non-retryable storage explanation', async () => {
-  const pool = new TransactionPool(); const repo = new SnapshotRepository(pool);
-  await repo.withStore(true, async store => { store.addCity({ ...DEFAULT_CITIES[0], id: 'test-capacity-preserved' }); });
-  const before = Buffer.from(pool.bytes!);
-  await assert.rejects(repo.withStore(true, async store => {
-    store.db.exec('CREATE TABLE test_capacity(data BLOB)');
-    store.db.prepare('INSERT INTO test_capacity VALUES(randomblob(?))').run(MAX_SNAPSHOT_BYTES);
-  }), (error: unknown) => error instanceof SnapshotCapacityError && error.code === 'SNAPSHOT_CAPACITY');
-  assert.deepEqual(pool.bytes, before); assert.equal(pool.writes, 1);
-  await assert.rejects(repo.seedIfEmpty(Buffer.alloc(MAX_DATABASE_BYTES + 1)), SnapshotCapacityError);
-  const failing = { withStore: async () => { throw new SnapshotCapacityError(); } };
-  const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: failing });
-  assert.equal(response.status, 507); assert.equal(response.headers.has('retry-after'), false);
-  const body = await response.json(); assert.equal(body.code, 'SNAPSHOT_CAPACITY'); assert.match(body.error, /기존 자료는 유지됩니다/);
-  await repo.withStore(false, async store => { assert.ok(store.cities().some(city => city.id === 'test-capacity-preserved')); });
+  const pool = new PglitePool(); const repo = new SnapshotRepository(pool);
+  try {
+    await repo.withStore(true, async store => { store.addCity(city('test-capacity-preserved')); });
+    const before = await durableState(pool), writes = pool.writes;
+    const isCapacity = (error: unknown) => error instanceof SnapshotCapacityError && error.code === 'SNAPSHOT_CAPACITY';
+    // A schema change replaces the base; random bytes cannot be compressed below the limit.
+    await assert.rejects(repo.withStore(true, async store => {
+      store.db.exec('CREATE TABLE test_capacity(data BLOB)');
+      store.db.prepare('INSERT INTO test_capacity VALUES(randomblob(?))').run(MAX_SNAPSHOT_BYTES);
+    }), isCapacity);
+    assert.deepEqual(await durableState(pool), before); assert.equal(pool.writes, writes);
+    // A journal too large to append is folded into a new base, which hits the same limit.
+    await assert.rejects(repo.withStore(true, async store => {
+      store.db.prepare("UPDATE cities SET data=randomblob(?) WHERE id='test-capacity-preserved'").run(MAX_SNAPSHOT_BYTES);
+    }), isCapacity);
+    assert.deepEqual(await durableState(pool), before); assert.equal(pool.writes, writes);
+    await assert.rejects(repo.seedIfEmpty(Buffer.alloc(MAX_DATABASE_BYTES + 1)), SnapshotCapacityError);
+    assert.deepEqual(await durableState(pool), before); assert.equal(pool.writes, writes);
+    const failing = { withStore: async () => { throw new SnapshotCapacityError(); } };
+    const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: failing });
+    assert.equal(response.status, 507); assert.equal(response.headers.has('retry-after'), false);
+    const body = await response.json(); assert.equal(body.code, 'SNAPSHOT_CAPACITY'); assert.match(body.error, /기존 자료는 유지됩니다/);
+    assert.ok((await cityIds(repo)).includes('test-capacity-preserved'), 'the writer cache still holds the prior data');
+    assert.ok((await cityIds(new SnapshotRepository(pool))).includes('test-capacity-preserved'), 'and so does the database');
+  } finally { await pool.close(); }
 });
 
 test('compressed snapshots retain complete large datasets and transparently read legacy SQLite bytes',async()=>{
@@ -193,13 +216,29 @@ test('compressed snapshots retain complete large datasets and transparently read
   const encoded=encodeSnapshot(large);
   assert.ok(encoded.length<MAX_SNAPSHOT_BYTES);
   assert.deepEqual(decodeSnapshot(encoded),large);
-  const pool=new TransactionPool(),repo=new SnapshotRepository(pool);
-  await repo.withStore(true,async store=>{store.addCity({...DEFAULT_CITIES[0],id:'test-legacy'});});
-  const legacy=decodeSnapshot(pool.bytes!);pool.bytes=legacy;
-  await repo.withStore(false,async store=>{assert.ok(store.cities().find(city=>city.id==='test-legacy'));});
-  await repo.withStore(true,async store=>{store.addCity({...DEFAULT_CITIES[0],id:'test-compressed'});});
-  assert.equal(pool.bytes![0],0x1f);assert.equal(pool.bytes![1],0x8b);
-  await repo.withStore(false,async store=>{assert.ok(store.cities().find(city=>city.id==='test-compressed'));});
+  const plain=plainSqliteBytes(store=>{store.addCity(city('test-legacy'));});
+  assert.deepEqual(plain.subarray(0,16),Buffer.from('SQLite format 3\0'),'the fixture is an uncompressed snapshot');
+  const base=async(pool:PglitePool)=>(await pool.sql("SELECT encode(substr(data,1,2),'hex') AS head,md5(data) AS digest FROM culture_desk_base"))[0];
+  // Deployments stored either plain SQLite or, later, gzip in the single-row table that the first start moves.
+  for(const [label,legacy] of [['uncompressed',plain],['compressed',gzipSync(plain,{level:9})]] as const) {
+    const pool=new PglitePool();
+    try {
+      await installLegacySnapshot(pool,legacy);
+      const repo=new SnapshotRepository(pool);
+      assert.ok((await cityIds(repo)).includes('test-legacy'),`${label} legacy snapshot is read`);
+      const moved=await base(pool);
+      assert.equal(moved.digest,createHash('md5').update(legacy).digest('hex'),`${label} legacy bytes were moved unchanged`);
+      // Journal rows apply on top of a legacy base without rewriting it.
+      await repo.withStore(true,async store=>{store.addCity(city('test-journal'));});
+      assert.deepEqual(await base(pool),moved);
+      assert.ok((await cityIds(new SnapshotRepository(pool))).includes('test-journal'));
+      // The next base written (a schema change forces one) is compressed.
+      await repo.withStore(true,async store=>{store.addCity(city('test-compressed'));store.db.exec('CREATE TABLE test_schema_change(id INTEGER PRIMARY KEY)');});
+      assert.equal((await base(pool)).head,'1f8b',`${label} legacy base was replaced by a gzip base`);
+      const ids=await cityIds(new SnapshotRepository(pool));
+      for(const id of ['test-legacy','test-journal','test-compressed'])assert.ok(ids.includes(id),`${label}: ${id} survived`);
+    } finally { await pool.close(); }
+  }
 });
 
 const cloudPerformance = (id: number, changes: Partial<PerformanceInput> = {}): PerformanceInput => ({
@@ -305,34 +344,36 @@ test('oversized real Excel exports return JSON filter guidance instead of a plat
 });
 
 test('cloud queue activity includes older runs outside the visible recent-history window', async () => {
-  const repo = new SnapshotRepository(new TransactionPool());
-  let first = 0; let second = 0;
-  await repo.withStore(true, async store => {
-    first = store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31');
-    second = store.createRun('kopis', 'gongju', '2026-10-01', '2026-10-31');
-    for (let index = 0; index < 201; index++) store.recomputeRun(store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31', true));
+  await withCloud(async repo => {
+    let first = 0; let second = 0;
+    await repo.withStore(true, async store => {
+      first = store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31');
+      second = store.createRun('kopis', 'gongju', '2026-10-01', '2026-10-31');
+      for (let index = 0; index < 201; index++) store.recomputeRun(store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31', true));
+    });
+    let calls = 0;
+    const provider: Provider = { source: 'kopis', list: async () => { calls++; return { items: [], hasMore: false }; }, detail: async item => item };
+    const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider } });
+    assert.equal(response.status, 200); assert.equal(calls, 2); assert.equal((await response.json()).active, false);
+    await repo.withStore(false, async store => { assert.ok(store.runs(1000).filter(run => run.id === first || run.id === second).every(run => run.state === 'complete')); });
   });
-  let calls = 0;
-  const provider: Provider = { source: 'kopis', list: async () => { calls++; return { items: [], hasMore: false }; }, detail: async item => item };
-  const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider } });
-  assert.equal(response.status, 200); assert.equal(calls, 2); assert.equal((await response.json()).active, false);
-  await repo.withStore(false, async store => { assert.ok(store.runs(1000).filter(run => run.id === first || run.id === second).every(run => run.state === 'complete')); });
 });
 
 test('scheduled refresh status is public, but a status outage does not hide search data', async () => {
-  const repo = new SnapshotRepository(new TransactionPool());
-  const automatic={status:'complete' as const,day:'2026-10-16',from:'2026-10-01',to:'2027-01-16',
-    lastSuccessAt:'2026-10-16T08:53:00.000Z',updatedAt:'2026-10-16T08:53:00.000Z',counts:null,error:null,
-    schedule:{timezone:'Asia/Seoul' as const,primary:'04:17',retries:['06:47','12:47','20:47']}};
-  const options={env:{...env,AUTOMATIC_REFRESH_ENABLED:'1'},repository:repo,providers:{},refreshStatus:async()=>automatic};
-  const response=await handleCloudRequest(request('/api/bootstrap'),options);
-  assert.equal(response.status,200);
-  const boot=await response.json();assert.equal(boot.automaticRefresh.enabled,true);
-  assert.equal(boot.automaticRefresh.lastSuccessAt,automatic.lastSuccessAt);assert.equal(boot.runtime.backgroundSync,true);
-  assert.ok(!JSON.stringify(boot).includes(env.KOPIS_API_KEY));
-  const unavailable=await handleCloudRequest(request('/api/bootstrap'),{...options,refreshStatus:async()=>{throw new Error('TEST_SECRET_DATABASE_URL');}});
-  const failed=await unavailable.json();assert.equal(unavailable.status,200);assert.equal(failed.automaticRefresh.status,'unavailable');
-  assert.ok(!JSON.stringify(failed).includes('TEST_SECRET_DATABASE_URL'));
+  await withCloud(async repo => {
+    const automatic={status:'complete' as const,day:'2026-10-16',from:'2026-10-01',to:'2027-01-16',
+      lastSuccessAt:'2026-10-16T08:53:00.000Z',updatedAt:'2026-10-16T08:53:00.000Z',counts:null,error:null,
+      schedule:{timezone:'Asia/Seoul' as const,primary:'04:17',retries:['06:47','12:47','20:47']}};
+    const options={env:{...env,AUTOMATIC_REFRESH_ENABLED:'1'},repository:repo,providers:{},refreshStatus:async()=>automatic};
+    const response=await handleCloudRequest(request('/api/bootstrap'),options);
+    assert.equal(response.status,200);
+    const boot=await response.json();assert.equal(boot.automaticRefresh.enabled,true);
+    assert.equal(boot.automaticRefresh.lastSuccessAt,automatic.lastSuccessAt);assert.equal(boot.runtime.backgroundSync,true);
+    assert.ok(!JSON.stringify(boot).includes(env.KOPIS_API_KEY));
+    const unavailable=await handleCloudRequest(request('/api/bootstrap'),{...options,refreshStatus:async()=>{throw new Error('TEST_SECRET_DATABASE_URL');}});
+    const failed=await unavailable.json();assert.equal(unavailable.status,200);assert.equal(failed.automaticRefresh.status,'unavailable');
+    assert.ok(!JSON.stringify(failed).includes('TEST_SECRET_DATABASE_URL'));
+  });
 });
 
 test('durable scheduling disables legacy browser refresh while preserving explicit collection work', async () => {
