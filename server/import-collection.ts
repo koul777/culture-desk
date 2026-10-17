@@ -36,9 +36,10 @@ export function importCollection(source: DatabaseSync, target: Store, importKey:
       if(existing&&(String(existing.updated_at)>String(row.updated_at)||(old?.detailState==='complete'&&item.detailState==='failed'))){
         idMap.set(Number(row.id),Number(existing.id));skippedItems++;continue;
       }
-      const targetId=target.upsert(item);
+      const {id:targetId,changed}=target.upsertTracked(item);
       // Retain the provider checkpoint version, not the publication time, so newer detail can merge later.
-      target.db.prepare('UPDATE performances SET updated_at=? WHERE id=?').run(row.updated_at,targetId);
+      // Unchanged records keep their row as-is: a daily refresh only writes what the providers changed.
+      if(changed)target.db.prepare('UPDATE performances SET updated_at=? WHERE id=?').run(row.updated_at,targetId);
       idMap.set(Number(row.id),targetId);
     }
     let addedRuns = 0;

@@ -14,10 +14,12 @@ const timestamp = () => new Date().toISOString();
 export class Store {
   db: DatabaseSync;
   private defaultCities: City[];
-  constructor(public filename: string, defaults: City[]) {
+  /** `onOpen` runs on the new connection before schema setup, e.g. to capture changes. */
+  constructor(public filename: string, defaults: City[], hooks: { onOpen?: (db: DatabaseSync) => void } = {}) {
     this.defaultCities = defaults;
     if (filename !== ':memory:') mkdirSync(path.dirname(filename), { recursive: true });
     this.db = new DatabaseSync(filename);
+    hooks.onOpen?.(this.db);
     this.db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
       CREATE TABLE IF NOT EXISTS schema_migrations(version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS cities(id TEXT PRIMARY KEY, data TEXT NOT NULL);
@@ -78,8 +80,14 @@ export class Store {
   }
   addCity(city: City) { this.db.prepare('INSERT INTO cities VALUES(?,?)').run(city.id, JSON.stringify(city)); return city; }
   transaction<T>(fn: () => T): T { this.db.exec('BEGIN IMMEDIATE'); try { const v = fn(); this.db.exec('COMMIT'); return v; } catch (e) { this.db.exec('ROLLBACK'); throw e; } }
-  upsert(input: PerformanceInput, runId?: number): number {
-    const previous = this.db.prepare('SELECT id,data FROM performances WHERE source=? AND source_id=?').get(input.source, input.sourceId) as Row | undefined;
+  upsert(input: PerformanceInput, runId?: number): number { return this.upsertTracked(input, runId).id; }
+  /**
+   * Saves a provider record. Identical data leaves the row untouched, including
+   * `updated_at`, so a daily refresh of unchanged performances writes nothing.
+   */
+  upsertTracked(input: PerformanceInput, runId?: number): { id: number; changed: boolean } {
+    const previous = this.db.prepare(`SELECT p.id,p.city_id,p.start_date,p.end_date,p.classification,p.detail_state,p.data,s.raw
+      FROM performances p LEFT JOIN performance_sources s ON s.performance_id=p.id WHERE p.source=? AND p.source_id=?`).get(input.source, input.sourceId) as Row | undefined;
     // A new list refresh must not erase already hydrated detail fields or user notes.
     let value = input;
     if (previous && input.detailState === 'pending') {
@@ -95,14 +103,18 @@ export class Store {
     }
     const { raw, ...safe } = value;
     const now = timestamp();
-    this.db.prepare(`INSERT INTO performances(source,source_id,city_id,start_date,end_date,classification,detail_state,data,updated_at)
+    const data = JSON.stringify(safe), rawData = JSON.stringify(raw ?? null);
+    const sameRecord = !!previous && previous.city_id === value.cityId && previous.start_date === value.startDate && previous.end_date === value.endDate
+      && previous.classification === value.classification && previous.detail_state === value.detailState && previous.data === data;
+    if (!sameRecord) this.db.prepare(`INSERT INTO performances(source,source_id,city_id,start_date,end_date,classification,detail_state,data,updated_at)
       VALUES(?,?,?,?,?,?,?,?,?) ON CONFLICT(source,source_id) DO UPDATE SET city_id=excluded.city_id,start_date=excluded.start_date,
       end_date=excluded.end_date,classification=excluded.classification,detail_state=excluded.detail_state,data=excluded.data,updated_at=excluded.updated_at`)
-      .run(value.source, value.sourceId, value.cityId, value.startDate, value.endDate, value.classification, value.detailState, JSON.stringify(safe), now);
-    const id = Number((this.db.prepare('SELECT id FROM performances WHERE source=? AND source_id=?').get(value.source, value.sourceId) as Row).id);
-    this.db.prepare(`INSERT INTO performance_sources VALUES(?,?,?) ON CONFLICT(performance_id) DO UPDATE SET raw=excluded.raw,updated_at=excluded.updated_at`).run(id, JSON.stringify(raw ?? null), now);
+      .run(value.source, value.sourceId, value.cityId, value.startDate, value.endDate, value.classification, value.detailState, data, now);
+    const id = previous ? Number(previous.id) : Number((this.db.prepare('SELECT id FROM performances WHERE source=? AND source_id=?').get(value.source, value.sourceId) as Row).id);
+    const sameRaw = !!previous && previous.raw === rawData;
+    if (!sameRaw) this.db.prepare(`INSERT INTO performance_sources VALUES(?,?,?) ON CONFLICT(performance_id) DO UPDATE SET raw=excluded.raw,updated_at=excluded.updated_at`).run(id, rawData, now);
     if (runId) this.db.prepare('INSERT OR IGNORE INTO sync_items VALUES(?,?)').run(runId, id);
-    return id;
+    return { id, changed: !sameRecord || !sameRaw };
   }
   internal(source: Source, sourceId: string): PerformanceInput | undefined {
     const r = this.db.prepare('SELECT p.data,s.raw FROM performances p LEFT JOIN performance_sources s ON s.performance_id=p.id WHERE source=? AND source_id=?').get(source, sourceId) as Row | undefined;
