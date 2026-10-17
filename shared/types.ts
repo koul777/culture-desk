@@ -20,8 +20,16 @@ export interface PerformanceInput {
   detailState: DetailState; classification: Classification; reviewReason: string;
   raw: unknown;
 }
+export interface VenueHall { name: string; seats?: number; disabledSeats?: number; stageArea?: string; current?: boolean }
+/** Public KOPIS facility facts derived for the detail view. Seat maps are not provided by any public API. */
+export interface VenueInfo {
+  facility: string; seats?: number; halls: VenueHall[]; amenities: string[];
+  homepage?: string; booking: { name: string; url: string }[];
+}
 export interface Performance extends Omit<PerformanceInput, 'raw'> {
   id: number; updatedAt: string; bookmarked: boolean; note: string;
+  /** Detail responses only. */
+  venueInfo?: VenueInfo;
 }
 /** Only fields used by venue markers and 3D launchers. Full details are fetched by ID. */
 export type MapPerformance = Pick<Performance,
@@ -50,8 +58,11 @@ export interface PublicRefreshStatus {
 export interface SnapshotFallback {
   mode: 'snapshot'; snapshotAt: string; reason: 'database_unavailable';
 }
+/** The web service shows the daily published snapshot: read-only, collected by the scheduled job only. */
+export interface PublishedData { mode: 'published'; snapshotAt: string }
 export interface Bootstrap {
   fallback?: SnapshotFallback;
+  published?: PublishedData;
   deployment?: 'local' | 'cloud';
   automaticRefresh?: PublicRefreshStatus & { enabled: boolean };
   cities: City[]; sources: SourceStatus[]; bookmarkCount: number;

@@ -14,8 +14,8 @@ export function Sidebar({ view }: { view: View }) {
     { id: 'map', label: '지도 보기', Icon: Map, meta: '', metaLabel: '' },
     {
       id: 'connection', label: '데이터 연결', Icon: Database,
-      meta: progress.active ? '수집 중' : `키 ${keys}/${boot.sources.length}`,
-      metaLabel: progress.active ? '수집 진행 중' : `인증키 ${keys}개 설정됨`,
+      meta: boot.published ? '매일 갱신' : progress.active ? '수집 중' : `키 ${keys}/${boot.sources.length}`,
+      metaLabel: boot.published ? '매일 자동갱신' : progress.active ? '수집 진행 중' : `인증키 ${keys}개 설정됨`,
     },
   ];
   return (

@@ -11,6 +11,7 @@ import { Badge, Callout, DetailStateBadge } from './Cells';
 import { Modal } from './Modal';
 import { useNotify } from './Notices';
 import { canViewVenue3D, Venue3D } from './Venue3D';
+import { VenueInfoSection } from './VenueInfoSection';
 
 const POLL_MS = 3000;
 const MAX_POLLS = 100; // about five minutes, then the user can resume watching
@@ -74,7 +75,8 @@ export function DetailDialog({ id, onClose }: { id: number; onClose: () => void 
   }, watching && !boot.fallback ? POLL_MS : null);
 
   const source = item ? boot.sources.find(s => s.source === item.source) : undefined;
-  const canRequest = !!source?.configured;
+  // A published deployment never collects; the next scheduled refresh retries missing details.
+  const canRequest = !!source?.configured && !boot.published;
   const requestKey = `detail:${id}`;
   const requesting = isBusy(requestKey);
   const requestDetail = () => run(requestKey, async () => {
@@ -133,6 +135,8 @@ export function DetailDialog({ id, onClose }: { id: number; onClose: () => void 
             >
               {watching
                 ? '수집 작업이 처리되면 이 화면에 바로 반영됩니다. 창을 닫아도 작업은 계속됩니다.'
+                : boot.published
+                  ? '관람료·연령·출연진 등은 다음 자동갱신에서 다시 확인합니다. ‘상세 미수집’은 원문에 값이 없다는 뜻이 아닙니다.'
                 : !canRequest
                   ? `${source?.label ?? '해당 출처'} API 키가 설정되지 않아 상세를 요청할 수 없습니다. 아래 ‘상세 미수집’ 항목은 원문에 값이 없다는 뜻이 아닙니다.`
                   : polls >= MAX_POLLS
@@ -165,6 +169,7 @@ export function DetailDialog({ id, onClose }: { id: number; onClose: () => void 
               <Row label="자료 갱신"><span className="nums">{formatDateTime(item.updatedAt)}</span></Row>
             </dl>
           </div>
+          <VenueInfoSection item={item} />
           {item.description.trim() && (
             <section className="detail-section" aria-labelledby={`desc-${item.id}`}>
               <h3 id={`desc-${item.id}`}>소개</h3>

@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { Expand, MapPin, Navigation } from 'lucide-react';
 import type { City, MapPerformance } from '../../shared/types';
 import { useDesk } from '../desk';
+import { directionLinks } from '../lib/directions';
 import { formatPeriod, number } from '../lib/format';
 import { clusterProjectedPoints } from '../lib/map-clusters';
 import '../map-refinement.css';
@@ -178,11 +179,17 @@ export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFoc
       const marker = L.marker([item.latitude!, item.longitude!], { icon, keyboard: true, title: label, alt: label, zIndexOffset: 100 });
       const popup = document.createElement('div'); popup.className = 'map-popup';
       const heading = document.createElement('strong'); heading.textContent = `${item.venue || '공연장'} · ${group.length}건`;
-      const hint = document.createElement('p'); hint.textContent = '공연장 3D 또는 공연 상세를 확인하세요.';
+      const hint = document.createElement('p'); hint.textContent = '공연장 3D, 길찾기 또는 공연 상세를 확인하세요.';
       popup.append(heading, hint);
       const threeD = document.createElement('button'); threeD.type = 'button'; threeD.className = 'map-popup-3d';
       threeD.textContent = '공연장 3D로 보기'; threeD.setAttribute('aria-label', `${item.venue || '공연장'} 3D로 보기`);
       threeD.onclick = () => setVenue3D(item); popup.append(threeD);
+      const route = directionLinks(item);
+      if (route) {
+        const link = document.createElement('a'); link.className = 'map-popup-route'; link.href = route.kakao;
+        link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = route.precise ? '카카오맵 길찾기' : '카카오맵에서 찾기';
+        link.setAttribute('aria-label', `${item.venue || '공연장'} ${link.textContent} (새 창)`); popup.append(link);
+      }
       for (const show of group) {
         const button = document.createElement('button'); button.type = 'button'; button.className = 'map-popup-show';
         button.setAttribute('aria-label', `${show.title} 상세 보기`);

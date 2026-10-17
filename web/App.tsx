@@ -71,8 +71,9 @@ function CultureDesk() {
 
   const active = !fallback && (boot?.runs.some(isActive) ?? false);
   const cloud = boot?.deployment === 'cloud';
-  // Scheduled nationwide refresh runs independently. The browser only advances manual jobs.
-  const browserTickEnabled = cloud && !fallback && (!boot?.automaticRefresh?.enabled || active);
+  // Scheduled nationwide refresh runs independently. The browser only advances manual jobs,
+  // which a published (read-only) deployment does not have.
+  const browserTickEnabled = cloud && !fallback && !boot?.published && (!boot?.automaticRefresh?.enabled || active);
   const tick = useCallback(async () => {
     if(!browserTickEnabled || snapshotAvailability.get() || ticking.current || document.hidden || syncBlocked) return;
     ticking.current=true;

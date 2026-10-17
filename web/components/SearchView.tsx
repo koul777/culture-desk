@@ -198,7 +198,7 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
 
             {result && !problem && detailFilter && pending > 0 && (
               <Callout tone="warn" title={`부분 결과 · 상세 미수집 ${number(pending)}건은 관람료·연령 조건을 아직 판단하지 못했습니다`}
-                action={(
+                action={boot.published ? undefined : (
                   <button type="button" className="button button-small" onClick={() => void requestDetails()} disabled={requesting || !!boot.fallback} aria-busy={requesting}>
                     <ListChecks size={14} aria-hidden="true" />상세 보충 요청
                   </button>
@@ -210,13 +210,13 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
             {result && !problem && result.partial && !(detailFilter && pending > 0) && (
               <details className="coverage-note">
                 <summary>현재 수집된 공연 자료를 표시합니다 <span>수집 범위 안내</span></summary>
-                <div><p>선택한 지역·기간 중 아직 수집하지 않은 범위가 있습니다. 결과가 없더라도 해당 지역에 공연이 없다는 뜻은 아닙니다.{progress.active > 0 && ` 현재 수집 ${number(progress.active)}개가 진행 중입니다.`}</p><button type="button" className="text-button" onClick={() => go('connection')}>공연 더 가져오기<ArrowUpRight size={14} aria-hidden="true" /></button></div>
+                <div><p>선택한 지역·기간 중 아직 수집하지 않은 범위가 있습니다. 결과가 없더라도 해당 지역에 공연이 없다는 뜻은 아닙니다.{progress.active > 0 && ` 현재 수집 ${number(progress.active)}개가 진행 중입니다.`}</p><button type="button" className="text-button" onClick={() => go('connection')}>{boot.published ? '갱신 상태 보기' : '공연 더 가져오기'}<ArrowUpRight size={14} aria-hidden="true" /></button></div>
               </details>
             )}
             {result && !problem && !detailFilter && pending > 0 && (
               <p className="inline-note">
                 상세 미수집 {number(pending)}건 · 관람료·연령·출연진은 상세 수집 후 표시됩니다.
-                <button type="button" className="text-button" onClick={() => void requestDetails()} disabled={requesting || !!boot.fallback} aria-busy={requesting}>상세 보충 요청</button>
+                {!boot.published && <button type="button" className="text-button" onClick={() => void requestDetails()} disabled={requesting || !!boot.fallback} aria-busy={requesting}>상세 보충 요청</button>}
               </p>
             )}
 

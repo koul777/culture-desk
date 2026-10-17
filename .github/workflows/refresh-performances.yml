@@ -1,5 +1,7 @@
 name: Refresh nationwide performances
 
+# Collects both public APIs, then commits the public snapshot that Vercel serves.
+# No database service: the collector's state travels between runs as an artifact.
 on:
   schedule:
     # Korea: primary 04:17; recovery slots 06:47, 12:47, 20:47.
@@ -9,14 +11,14 @@ on:
     - cron: '47 11 * * *'
   workflow_dispatch:
     inputs:
-      probe:
-        description: 'Check both APIs and durable storage without starting a new collection'
+      budget:
+        description: 'Collection budget in minutes (5–55)'
         required: false
-        type: boolean
-        default: false
+        default: '50'
 
 permissions:
-  contents: read
+  contents: write # commit the published snapshot
+  actions: read # restore the previous run's collection state
 
 concurrency:
   group: nationwide-performance-refresh
@@ -28,23 +30,73 @@ jobs:
     timeout-minutes: 58
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-        with:
-          persist-credentials: false
+      # Recovery slots cost under a minute once today's snapshot is published.
+      - name: Check today's published refresh
+        id: today
+        run: |
+          day=$(TZ=Asia/Seoul date +%F)
+          published=$(jq -r '(.refresh.day // "") + " " + (.refresh.status // "")' server/assets/public-snapshot.json)
+          if [ "$published" = "$day complete" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Today's refresh is already published."
+          fi
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        if: steps.today.outputs.skip != 'true'
         with:
           node-version: '24'
           cache: npm
-      - run: npm ci --ignore-scripts
-      - name: Resume and publish nationwide refresh
+      - if: steps.today.outputs.skip != 'true'
+        run: npm ci --ignore-scripts
+      - name: Restore collection state
+        if: steps.today.outputs.skip != 'true'
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p data/daily
+          id=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=culture-desk-state&per_page=100" \
+            --jq '[.artifacts[] | select(.expired | not)] | sort_by(.created_at) | last | .id // empty')
+          if [ -n "$id" ]; then
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$id/zip" > "$RUNNER_TEMP/state.zip"
+            unzip -o -q "$RUNNER_TEMP/state.zip" -d data/daily
+            echo "Restored collection state artifact $id."
+          else
+            echo "No collection state; continuing from the committed snapshot."
+          fi
+      - name: Collect and build the public snapshot
+        if: steps.today.outputs.skip != 'true'
+        env:
           KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
           CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
-          NATIONAL_RUN_BUDGET_MINUTES: '50'
-          PROBE_ONLY: ${{ inputs.probe && '1' || '0' }}
+          NATIONAL_RUN_BUDGET_MINUTES: ${{ inputs.budget || '50' }}
+        run: node --import tsx scripts/run-daily-publish.ts
+      - name: Save collection state
+        if: always() && steps.today.outputs.skip != 'true' && hashFiles('data/daily/production.db') != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: culture-desk-state
+          path: data/daily
+          retention-days: 7
+          if-no-files-found: error
+      - name: Publish the snapshot
+        if: steps.today.outputs.skip != 'true'
         run: |
-          if [ "$PROBE_ONLY" = "1" ]; then
-            node --import tsx scripts/run-scheduled-refresh.ts --probe
-          else
-            node --import tsx scripts/run-scheduled-refresh.ts
-          fi
+          set -euo pipefail
+          if git diff --quiet -- server/assets/public-snapshot.json; then echo "Nothing new to publish."; exit 0; fi
+          cp server/assets/public-snapshot.json "$RUNNER_TEMP/public-snapshot.json"
+          # Vercel builds commits whose author can deploy the project, so keep the repository author.
+          name=$(git log -1 --format=%an); email=$(git log -1 --format=%ae)
+          day=$(TZ=Asia/Seoul date +%F)
+          for attempt in 1 2 3; do
+            git fetch -q --depth=1 origin "$GITHUB_REF_NAME"
+            git checkout -q -f -B publish-snapshot FETCH_HEAD
+            cp "$RUNNER_TEMP/public-snapshot.json" server/assets/public-snapshot.json
+            git add server/assets/public-snapshot.json
+            if git diff --cached --quiet; then echo "Already published."; exit 0; fi
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -q --author="$name <$email>" -m "data: publish nationwide performances for $day"
+            if git push -q origin "HEAD:$GITHUB_REF_NAME"; then echo "Published $day snapshot."; exit 0; fi
+            sleep 5
+          done
+          echo "Could not push the snapshot." >&2
+          exit 1

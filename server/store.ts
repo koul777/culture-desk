@@ -3,6 +3,7 @@ import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 import type { City, PerformanceInput, Performance, SearchFilters, SearchResult, Source, SyncRun, SyncState } from '../shared/types.js';
 import { today, dateChunks } from './dates.js';
+import { cleanVenueInfo, venueInfoFromSource } from './venue-info.js';
 
 export interface Task {
   id: number; run_id: number; kind: 'list' | 'detail'; source: Source; city_id: string;
@@ -81,10 +82,12 @@ export class Store {
   upsert(input: PerformanceInput, runId?: number): number {
     const previous = this.db.prepare('SELECT id,data FROM performances WHERE source=? AND source_id=?').get(input.source, input.sourceId) as Row | undefined;
     // A new list refresh must not erase already hydrated detail fields or user notes.
-    let value = input;
+    let value = input, keepRaw = false;
     if (previous && input.detailState === 'pending') {
       const old = JSON.parse(previous.data) as PerformanceInput;
       if (old.detailState === 'complete') {
+        // The detail payload (facility, booking sites) is a superset of a list row's payload.
+        keepRaw = true;
         value = { ...old, ...input, detailState: 'complete' };
         for (const key of ['address','price','priceType','age','runtime','cast','producer','organizer','contact','schedule','description'] as const) (value as any)[key] = old[key];
         // A list response has less location detail than the facility/detail response.
@@ -100,7 +103,7 @@ export class Store {
       end_date=excluded.end_date,classification=excluded.classification,detail_state=excluded.detail_state,data=excluded.data,updated_at=excluded.updated_at`)
       .run(value.source, value.sourceId, value.cityId, value.startDate, value.endDate, value.classification, value.detailState, JSON.stringify(safe), now);
     const id = Number((this.db.prepare('SELECT id FROM performances WHERE source=? AND source_id=?').get(value.source, value.sourceId) as Row).id);
-    this.db.prepare(`INSERT INTO performance_sources VALUES(?,?,?) ON CONFLICT(performance_id) DO UPDATE SET raw=excluded.raw,updated_at=excluded.updated_at`).run(id, JSON.stringify(raw ?? null), now);
+    this.db.prepare(`INSERT INTO performance_sources VALUES(?,?,?) ON CONFLICT(performance_id) DO ${keepRaw ? 'NOTHING' : 'UPDATE SET raw=excluded.raw,updated_at=excluded.updated_at'}`).run(id, JSON.stringify(raw ?? null), now);
     if (runId) this.db.prepare('INSERT OR IGNORE INTO sync_items VALUES(?,?)').run(runId, id);
     return id;
   }
@@ -109,10 +112,19 @@ export class Store {
     return r ? { ...JSON.parse(r.data), raw: JSON.parse(r.raw || 'null') } : undefined;
   }
   item(id: number): Performance | undefined {
-    const r = this.db.prepare('SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.id=?').get(id) as Row | undefined;
-    return r ? this.mapItem(r) : undefined;
+    const r = this.db.prepare(`SELECT p.*,b.note,b.performance_id AS bookmarked,s.raw FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id
+      LEFT JOIN performance_sources s ON s.performance_id=p.id WHERE p.id=?`).get(id) as Row | undefined;
+    if (!r) return undefined;
+    const item = this.mapItem(r);
+    // The public fallback has no provider payloads, so it carries venue facts already derived.
+    const venueInfo = venueInfoFromSource(JSON.parse(r.raw || 'null'), item.venue) ?? cleanVenueInfo(JSON.parse(r.data).venueInfo, item.venue);
+    return venueInfo ? { ...item, venueInfo } : item;
   }
-  private mapItem(r: Row): Performance { return { ...JSON.parse(r.data), id: Number(r.id), updatedAt: r.updated_at, bookmarked: !!r.bookmarked, note: r.note || '' }; }
+  private mapItem(r: Row): Performance {
+    // Venue facts are detail-only, keeping list and map responses at their previous size.
+    const { venueInfo: _venueInfo, ...data } = JSON.parse(r.data);
+    return { ...data, id: Number(r.id), updatedAt: r.updated_at, bookmarked: !!r.bookmarked, note: r.note || '' };
+  }
   bookmark(id: number, selected: boolean, note?: string) {
     if (!this.item(id)) throw new Error('공연을 찾을 수 없습니다.');
     if (selected) this.db.prepare(`INSERT INTO bookmarks VALUES(?,?,?) ON CONFLICT(performance_id) DO UPDATE SET note=COALESCE(?,bookmarks.note)`).run(id, note ?? '', timestamp(), note ?? null);

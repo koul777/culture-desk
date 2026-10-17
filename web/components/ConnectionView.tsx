@@ -52,10 +52,10 @@ function SourcesSection() {
               return (
                 <tr key={s.source}>
                   <th scope="row">{s.label}</th>
-                  <td data-label="인증키">{s.configured ? <Badge tone="ok">설정됨</Badge> : <Badge>미연결 · 키 없음</Badge>}</td>
+                  <td data-label="인증키">{boot.published ? <Badge tone="ok">자동 수집에 사용</Badge> : s.configured ? <Badge tone="ok">설정됨</Badge> : <Badge>미연결 · 키 없음</Badge>}</td>
                   <td data-label="수집 상태">
-                    <Badge tone={boot.fallback ? 'warn' : state.tone}>{boot.fallback ? '저장소 제한 · 수집 중단' : state.label}</Badge>
-                    {state.error && <small className="error-text">{state.error}</small>}
+                    {boot.published ? <Badge tone="ok">매일 자동 갱신</Badge> : <Badge tone={boot.fallback ? 'warn' : state.tone}>{boot.fallback ? '저장소 제한 · 수집 중단' : state.label}</Badge>}
+                    {!boot.published && state.error && <small className="error-text">{state.error}</small>}
                   </td>
                   <td data-label="등록 자료" className="nums">{number(s.count)}건</td>
                   <td data-label="마지막 완료 수집" className="nums">{formatDateTime(s.lastSync)}</td>
@@ -74,15 +74,16 @@ function SourcesSection() {
         <KeyRound size={18} aria-hidden="true" />
         <div>
           <p>
-            {cloud ? '연결된 출처에서 선택한 지역과 기간의 공연 정보를 가져옵니다.' : <>키는 프로그램 폴더의 <code>.env</code> 파일에 <code>KOPIS_API_KEY</code>, <code>CULTURE_API_KEY</code>로 입력하고 ‘설정 다시 읽기’를 누릅니다. 키 값은 이 화면·응답·엑셀에 표시되지 않습니다.</>}
+            {boot.published ? '공연 정보는 매일 새벽 예약 작업이 두 공공 API에서 수집해 이 사이트에 게시합니다. 웹에서는 직접 수집하지 않습니다.'
+              : cloud ? '연결된 출처에서 선택한 지역과 기간의 공연 정보를 가져옵니다.' : <>키는 프로그램 폴더의 <code>.env</code> 파일에 <code>KOPIS_API_KEY</code>, <code>CULTURE_API_KEY</code>로 입력하고 ‘설정 다시 읽기’를 누릅니다. 키 값은 이 화면·응답·엑셀에 표시되지 않습니다.</>}
           </p>
-          <p className="muted">‘설정됨’은 키가 입력되었다는 뜻입니다. 실제 연결은 해당 출처의 수집이 완료되어야 확인됩니다.</p>
+          <p className="muted">{boot.published ? '원하는 지역·기간을 직접 수집하려면 PC 버전을 이용하세요.' : '‘설정됨’은 키가 입력되었다는 뜻입니다. 실제 연결은 해당 출처의 수집이 완료되어야 확인됩니다.'}</p>
         </div>
       </div>
       <p className="inline-note">
         상세 미수집 {number(boot.pendingDetails)}건 · 전시 등 제외 {number(boot.excludedCount)}건 · 분류 검토 대기 {number(boot.reviewCount)}건
         <span className="muted"> (제외·검토 대기는 기본 검색 결과에 넣지 않습니다)</span>
-        {boot.pendingDetails > 0 && (
+        {boot.pendingDetails > 0 && !boot.published && (
           <button type="button" className="text-button" onClick={() => void requestAll()} disabled={requestingAll || !!boot.fallback} aria-busy={requestingAll}>
             <ListChecks size={14} aria-hidden="true" />전체 상세 보충 요청
           </button>
@@ -413,18 +414,17 @@ export function ConnectionView({ filters, onCityAdded }: { filters: FilterState;
       <header className="view-head">
         <div>
           <h1 id="connection-title">데이터 연결</h1>
-          <p className="view-sub">전국 자동갱신 상태와 API 연결을 확인하고, 필요한 지역·기간을 직접 수집합니다.</p>
+          <p className="view-sub">{boot.published ? '매일 자동갱신한 공연 자료의 상태와 출처를 확인합니다.' : '전국 자동갱신 상태와 API 연결을 확인하고, 필요한 지역·기간을 직접 수집합니다.'}</p>
         </div>
       </header>
-      {noKeys && !boot.fallback && (
+      {noKeys && !boot.fallback && !boot.published && (
         <Callout tone="info" title="연결된 API가 없습니다">
           두 API 모두 인증키가 설정되지 않았습니다. 신청 후 키를 입력하면 수집할 수 있습니다. 키가 없는 동안 실제 자료는 표시되지 않습니다.
         </Callout>
       )}
       <AutomaticRefreshPanel />
       <SourcesSection />
-      <SyncSection filters={filters} />
-      <RunsSection />
+      {!boot.published && <><SyncSection filters={filters} /><RunsSection /></>}
       {boot.deployment !== 'cloud' && <><CitySection onAdded={onCityAdded} /><MaintenanceSection /></>}
     </section>
   );

@@ -1,0 +1,14 @@
+/* Detail view: venue facts, booking links and map-app directions. */
+.venue-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.venue-actions .button { text-decoration: none; }
+.venue-note { font-size: 12.5px; }
+.venue-halls { width: 100%; border-collapse: collapse; font-size: 14px; }
+.venue-halls th, .venue-halls td { padding: 7px 8px; border-bottom: 1px dashed var(--line); text-align: left; font-weight: 400; }
+.venue-halls thead th { color: var(--ink-3); font-size: 12.5px; font-weight: 600; border-bottom-style: solid; }
+.venue-halls thead th + th, .venue-halls td { text-align: right; white-space: nowrap; }
+.venue-halls tr.is-current > * { background: var(--teal-soft); font-weight: 600; }
+.venue-amenities { font-size: 14px; }
+.venue-amenities .muted { margin-right: 6px; font-size: 12.5px; font-weight: 600; }
+@media (max-width: 480px) {
+  .venue-actions .button { flex: 1 1 100%; }
+}

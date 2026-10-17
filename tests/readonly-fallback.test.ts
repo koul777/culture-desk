@@ -3,7 +3,8 @@ import { test } from 'node:test';
 import { randomBytes } from 'node:crypto';
 import ExcelJS from 'exceljs';
 import { handleCloudRequest, MAX_API_RESPONSE_BYTES, type CloudOptions } from '../server/cloud/handler.js';
-import { hydrateReadonlySnapshot, loadReadonlyFallback, DATABASE_RECHECK_MS, type PublicReadonlySnapshot } from '../server/cloud/readonly-fallback.js';
+import { fileURLToPath } from 'node:url';
+import { hydrateReadonlySnapshot, loadReadonlyFallback, readPublicSnapshot, DATABASE_RECHECK_MS, type PublicReadonlySnapshot } from '../server/cloud/readonly-fallback.js';
 import { Store } from '../server/store.js';
 import { DEFAULT_CITIES } from '../server/providers/cities.js';
 import type { Performance } from '../shared/types.js';
@@ -105,6 +106,10 @@ test('fallback JSON and Excel preserve the 4MiB response cap, including empty HE
 
 test('the bundled public artifact is usable and cached without inventing completed collection history',async()=>{
   const model=await loadReadonlyFallback();assert.ok(model);assert.equal(await loadReadonlyFallback(),model);
-  assert.ok(model.store.counts().source.kopis>0);assert.ok(model.store.counts().source.culture>0);assert.equal(model.store.runs().length,0);
+  assert.ok(model.store.counts().source.kopis>0);assert.ok(model.store.counts().source.culture>0);
+  // Only the audited coverage recorded in the artifact becomes completed runs, nothing else.
+  const artifact=await readPublicSnapshot(fileURLToPath(new URL('../server/assets/public-snapshot.json',import.meta.url)));
+  const runs=model.store.runs();assert.equal(runs.length,artifact.coverage?.pairs.length??0);
+  assert.ok(runs.every(run=>run.state==='complete'&&run.from===artifact.coverage!.from&&run.to===artifact.coverage!.to&&artifact.coverage!.pairs.includes(`${run.source}:${run.cityId}`)));
   assert.equal(model.store.db.prepare('PRAGMA query_only').get()!.query_only,1);assert.equal(model.metadata.reason,'database_unavailable');
 });
