@@ -178,3 +178,62 @@ test('a daily import of mostly unchanged performances writes only the changed ro
     assert.ok((await new SnapshotRepository(pool).withStore(false, async store => titles(store))).includes('TEST changed title'));
   } finally { await pool.close(); rmSync(folder, { recursive: true, force: true }); }
 });
+
+test('after the move the legacy table rejects writes from old code but stays readable', async () => {
+  const pool = new PglitePool();
+  try {
+    await pool.sql('CREATE TABLE culture_desk_snapshot(id SMALLINT PRIMARY KEY,data BYTEA,revision BIGINT NOT NULL DEFAULT 0)');
+    await pool.sql('INSERT INTO culture_desk_snapshot(id) VALUES(1)');
+    await new SnapshotRepository(pool).initialize();
+    await assert.rejects(pool.sql('UPDATE culture_desk_snapshot SET revision=revision+1 WHERE id=1'), /retired/);
+    await pool.sql('INSERT INTO culture_desk_snapshot(id) VALUES(1) ON CONFLICT DO NOTHING');
+    assert.equal((await pool.sql('SELECT COUNT(*)::int AS n FROM culture_desk_snapshot'))[0].n, 1);
+  } finally { await pool.close(); }
+});
+
+test('a cold start on an initialized database runs no DDL', async () => {
+  const pool = new PglitePool();
+  try {
+    await new SnapshotRepository(pool).withStore(true, async store => { seed(store, 2); });
+    const from = pool.statements.length;
+    await new SnapshotRepository(pool).withStore(false, async store => titles(store));
+    assert.equal(pool.statements.slice(from).some(sql => /^\s*(CREATE|ALTER|DROP)\b/i.test(sql)), false);
+  } finally { await pool.close(); }
+});
+
+test('a restored database with reused revision numbers is never mixed with a cached copy', async () => {
+  const pool = new PglitePool();
+  try {
+    const writer = new SnapshotRepository(pool), reader = new SnapshotRepository(pool);
+    await writer.withStore(true, async store => { seed(store, 3); });
+    const restorePoint = (await pool.sql('SELECT revision,commit_id FROM culture_desk_state'))[0];
+    const savedCommit = await pool.sql('SELECT rev,id FROM culture_desk_commit');
+    await writer.withStore(true, async store => { store.upsert(performance(50, 'TEST discarded history')); });
+    assert.ok((await reader.withStore(false, async store => titles(store))).includes('TEST discarded history'));
+    // Simulate a point-in-time restore to the earlier revision, then new writes in the new history.
+    await pool.sql('DELETE FROM culture_desk_delta WHERE rev>$1', [restorePoint.revision]);
+    await pool.sql('DELETE FROM culture_desk_commit');
+    for (const row of savedCommit) await pool.sql('INSERT INTO culture_desk_commit VALUES($1,$2)', [row.rev, row.id]);
+    await pool.sql('UPDATE culture_desk_state SET revision=$1,commit_id=$2', [restorePoint.revision, restorePoint.commit_id]);
+    const restored = new SnapshotRepository(pool);
+    await restored.withStore(true, async store => { store.upsert(performance(60, 'TEST after restore A')); });
+    await restored.withStore(true, async store => { store.upsert(performance(61, 'TEST after restore B')); });
+    const seen = await reader.withStore(false, async store => titles(store));
+    assert.equal(seen.includes('TEST discarded history'), false, 'the stale cached copy is discarded');
+    assert.ok(seen.includes('TEST after restore A') && seen.includes('TEST after restore B'));
+  } finally { await pool.close(); }
+});
+
+test('opening the cloud store does not rewrite live run states, so idle probes commit nothing', async () => {
+  const pool = new PglitePool();
+  try {
+    const repo = new SnapshotRepository(pool);
+    await repo.withStore(true, async store => {
+      const run = store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31');
+      store.nextTask(); assert.equal(store.runs()[0].state, 'running'); return run;
+    });
+    const writes = pool.writes;
+    await new SnapshotRepository(pool).withStore(true, async store => { assert.equal(store.runs()[0].state, 'running'); });
+    assert.equal(pool.writes, writes);
+  } finally { await pool.close(); }
+});

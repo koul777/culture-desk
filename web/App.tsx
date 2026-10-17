@@ -19,7 +19,9 @@ import { Sidebar } from './components/Sidebar';
 const ACTIVE_POLL_MS = 3000;
 // Data changes about once a day. A slow idle check lets the database compute suspend between
 // checks; returning to the tab triggers an immediate refresh.
-const IDLE_POLL_MS = 15 * 60_000;
+const IDLE_POLL_MS = 30 * 60_000;
+// While serving the read-only fallback, check for the database's return as the server advises.
+const FALLBACK_POLL_MS = 60_000;
 const POLL_COALESCE_MS = 1000;
 
 export function App() {
@@ -89,7 +91,7 @@ function CultureDesk() {
   useEffect(()=>{if(browserTickEnabled)void tick();},[browserTickEnabled,tick]);
   useInterval(()=>{void tick();},browserTickEnabled&&!syncBlocked ? active ? 3000 : 60000 : null);
   // Collection progress is polled every 3 s; otherwise a slow check picks up scheduled refreshes.
-  const pollInterval = active ? ACTIVE_POLL_MS : IDLE_POLL_MS;
+  const pollInterval = active ? ACTIVE_POLL_MS : fallback ? FALLBACK_POLL_MS : IDLE_POLL_MS;
   useInterval(() => {
     // Only skip adjacent reads; response latency must not turn the normal 3 s cadence into 6 s.
     if ((active || !document.hidden) && bootstrapReads.isDue(POLL_COALESCE_MS)) void pollBootstrap();

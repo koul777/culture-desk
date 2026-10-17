@@ -14,8 +14,12 @@ const timestamp = () => new Date().toISOString();
 export class Store {
   db: DatabaseSync;
   private defaultCities: City[];
-  /** `onOpen` runs on the new connection before schema setup, e.g. to capture changes. */
-  constructor(public filename: string, defaults: City[], hooks: { onOpen?: (db: DatabaseSync) => void } = {}) {
+  /**
+   * `onOpen` runs on the new connection before schema setup, e.g. to capture changes.
+   * `recoverRunning: false` skips the single-server restart recovery; the cloud store keeps
+   * claimed tasks queued and must not rewrite live run states on every request.
+   */
+  constructor(public filename: string, defaults: City[], hooks: { onOpen?: (db: DatabaseSync) => void; recoverRunning?: boolean } = {}) {
     this.defaultCities = defaults;
     if (filename !== ':memory:') mkdirSync(path.dirname(filename), { recursive: true });
     this.db = new DatabaseSync(filename);
@@ -49,7 +53,7 @@ export class Store {
     for (const c of defaults) this.db.prepare('INSERT OR IGNORE INTO cities VALUES(?,?)').run(c.id, JSON.stringify(c));
     this.upgradeKnownRegions(defaults);
     // A single server owns this DB; process lock is enforced by the launcher/server.
-    this.db.exec("UPDATE sync_tasks SET state='queued' WHERE state='running'; UPDATE sync_runs SET state='queued' WHERE state='running';");
+    if (hooks.recoverRunning !== false) this.db.exec("UPDATE sync_tasks SET state='queued' WHERE state='running'; UPDATE sync_runs SET state='queued' WHERE state='running';");
   }
   private upgradeKnownRegions(defaults: City[]) {
     // Upgrade only the exact original seed codes; preserve custom cities, names and user data.
@@ -71,7 +75,12 @@ export class Store {
   }
   close() { this.db.close(); }
   cities(): City[] {
-    return (this.db.prepare('SELECT data FROM cities ORDER BY rowid').all() as Row[]).map(r => {
+    // Default regions keep their catalogue order and custom regions follow in insertion order.
+    // Row ids alone are not stable across cloud instances that replay changed rows.
+    const order = new Map(this.defaultCities.map((city, index) => [city.id, index]));
+    const rows = (this.db.prepare('SELECT id,data,rowid AS position FROM cities').all() as Row[])
+      .sort((a, b) => (order.get(a.id) ?? Infinity) - (order.get(b.id) ?? Infinity) || Number(a.position) - Number(b.position));
+    return rows.map(r => {
       const city = JSON.parse(r.data) as City;
       const seed = this.defaultCities.find(c => c.id === city.id);
       // Supply map centres for existing installs without overwriting user coordinates or names.

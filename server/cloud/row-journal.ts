@@ -12,6 +12,12 @@ export interface CollectedChanges { rows: JournalRow[]; bytes: number; fullRewri
 interface TableInfo { name: string; columns: string[]; pk: string[] }
 
 const quote = (name: string) => `"${name.replaceAll('"', '""')}"`;
+/** Keys must survive a JSON round trip exactly; anything else falls back to a full base rewrite. */
+function parseKey(pk: string): (string | number)[] | undefined {
+  const values = JSON.parse(pk) as unknown[];
+  return values.every(value => typeof value === 'string' || (typeof value === 'number' && Number.isSafeInteger(value))) && JSON.stringify(values) === pk
+    ? values as (string | number)[] : undefined;
+}
 const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 
 /** Every user table in the main schema with its column order and primary key columns. */
@@ -89,12 +95,13 @@ export class ChangeTracker {
       const table = byName.get(String(change.tbl));
       if (!table) return { rows: [], bytes: 0, fullRewrite: true };
       if (!select.has(table.name)) select.set(table.name, db.prepare(`SELECT * FROM main.${quote(table.name)} WHERE ${table.pk.map(column => `${quote(column)}=?`).join(' AND ')}`));
-      const values = JSON.parse(String(change.pk)) as (string | number | null)[];
+      const values = parseKey(String(change.pk));
+      if (!values) return { rows: [], bytes: 0, fullRewrite: true };
       const row = select.get(table.name)!.get(...values) as Record<string, unknown> | undefined;
       if (!row && !Number(change.existed)) continue;
       const data = row ? encodeRow(row) : null;
       rows.push({ tbl: table.name, pk: String(change.pk), data });
-      bytes += table.name.length + String(change.pk).length + (data?.length ?? 0);
+      bytes += Buffer.byteLength(table.name) + Buffer.byteLength(String(change.pk)) + (data === null ? 0 : Buffer.byteLength(data));
     }
     return { rows, bytes, fullRewrite: false };
   }
@@ -115,7 +122,9 @@ export function applyJournal(db: DatabaseSync, rows: JournalRow[]): void {
   try {
     for (const row of rows) if (row.data === null) {
       const info = table(row.tbl);
-      statement(`DELETE FROM main.${quote(info.name)} WHERE ${info.pk.map(column => `${quote(column)}=?`).join(' AND ')}`).run(...JSON.parse(row.pk));
+      const key = parseKey(row.pk);
+      if (!key) throw new Error('Journal does not match the base snapshot');
+      statement(`DELETE FROM main.${quote(info.name)} WHERE ${info.pk.map(column => `${quote(column)}=?`).join(' AND ')}`).run(...key);
     }
     for (const row of rows) if (row.data !== null) {
       const info = table(row.tbl);

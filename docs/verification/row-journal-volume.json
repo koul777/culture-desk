@@ -5,26 +5,26 @@
     "regions": 230,
     "sourceRuns": 460
   },
-  "compressedProductionBytes": 2515484,
-  "compressedCheckpointBytes": 2504183,
+  "compressedProductionBytes": 2516158,
+  "compressedCheckpointBytes": 2504856,
   "previousDailyRefresh": {
     "merges": 20,
-    "bytesReadFromDatabase": 50309680,
-    "bytesWrittenToDatabase": 100393340
+    "bytesReadFromDatabase": 50323160,
+    "bytesWrittenToDatabase": 100420280
   },
   "newDailyRefresh": {
     "merges": 1,
     "checkpointSaves": 4,
     "journalRowsWritten": 1492,
-    "journalBytesWritten": 539280,
+    "journalBytesWritten": 587182,
     "baseRewrites": 0,
-    "bytesWrittenToDatabase": 10556012,
-    "bytesReadFromDatabase": 3012566
+    "bytesWrittenToDatabase": 10606606,
+    "bytesReadFromDatabase": 3103337
   },
   "readers": {
-    "previousEveryReadAfterAnyChange": 2515484,
-    "newWarmInstanceAfterDailyRefresh": 562244,
-    "newColdInstance": 3012566,
+    "previousEveryReadAfterAnyChange": 2516158,
+    "newWarmInstanceAfterDailyRefresh": 587182,
+    "newColdInstance": 3103337,
     "newUnchangedRead": 0
   }
 }
