@@ -1,0 +1,77 @@
+Final CSS and late regression supplemental checks
+
+
+> culture-desk@1.0.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 3576 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/index.html                              0.86 kB │ gzip:     0.54 kB
+dist/client/assets/VWorld3DDialog-Vi7lc0Xk.css      1.79 kB │ gzip:     0.67 kB
+dist/client/assets/Venue3DDialog-B0i6nS9C.css      28.92 kB │ gzip:     6.55 kB
+dist/client/assets/index-D_BgyHRP.css              98.10 kB │ gzip:    22.72 kB
+dist/client/assets/VWorld3DDialog-oKHFvk4p.js       3.95 kB │ gzip:     1.64 kB
+dist/client/assets/index-CjDBsj7L.js              495.56 kB │ gzip:   150.56 kB
+dist/client/assets/Venue3DDialog-C2lYVjan.js    4,182.82 kB │ gzip: 1,122.64 kB
+
+node.exe : [plugin builtin:vite-reporter] 
+위치 줄:1 문자:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([plugin builtin:vite-reporter] :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeS
+plitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.88s
+
+
+Browser suite after final CSS
+
+> culture-desk@1.0.0 test:e2e
+> playwright test
+
+node.exe : [WebServer] (node:47940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+위치 줄:1 문자:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:47940) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+
+Running 6 tests using 1 worker
+
+(node:33384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop-chromium] › tests\e2e\published.spec.ts:4:1 › published search, cards, table, map, detail and export share the same regional results (4.0s)
+  ✓  2 [desktop-chromium] › tests\e2e\published.spec.ts:54:1 › obsolete searches are aborted and cannot replace the newest result (1.9s)
+  ✓  3 [desktop-chromium] › tests\e2e\published.spec.ts:81:1 › search failure retries cleanly and restores the requested result (1.2s)
+  ✓  4 [desktop-chromium] › tests\e2e\published.spec.ts:104:1 › map exit cancels its request and reentry works when external tiles fail (1.3s)
+  ✓  5 [desktop-chromium] › tests\e2e\published.spec.ts:136:1 › region dialog supports keyboard dismissal and restores focus (888ms)
+(node:33616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  6 [mobile-chromium] › tests\e2e\mobile.spec.ts:3:1 › mobile cards, region selector, detail, table and map fit a 375px viewport (6.0s)
+
+  6 passed (22.7s)
+
+
+New composed recovery case
+(node:4352) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ planner recovery rebuilds a corrupt saved export for a complete day and prepares it without recollection (4495.7063ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6025.6093

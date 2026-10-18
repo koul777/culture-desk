@@ -1,11 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { ArrowUpRight, CalendarDays, Check, FileSpreadsheet, LayoutGrid, ListChecks, LoaderCircle, Map, RefreshCw, Search, SlidersHorizontal, Table2 } from 'lucide-react';
 import type { MapResult, SearchResult } from '../../shared/types';
 import { api, downloadExport, errorText } from '../api';
 import { useDesk } from '../desk';
 import { PAGE_SIZES, defaultFilters, filterProblem, toSearchFilters, usesDetailFilter, type FilterState } from '../lib/filters';
-import { SOURCES, formatDate, formatDateTime, number, sourceLabel } from '../lib/format';
+import { SOURCES, formatDate, formatDateTime, isIsoDate, number, sourceLabel } from '../lib/format';
 import { useDebounced } from '../lib/hooks';
+import { markAfterPaint, markPerformance, type ResultTrace } from '../lib/performance';
 import { activeSummary, sourceState } from '../lib/runs';
 import {
   Badge, Callout, CityCell, GenreCell, PeriodCell, PriceCell, SourceCell, TitleCell, VenueCell,
@@ -15,7 +16,7 @@ import { FilterPanel } from './FilterPanel';
 import { useNotify } from './Notices';
 import { SetupGuide } from './SetupGuide';
 import { PerformanceCard } from './PerformanceCard';
-import { PerformanceMap } from './PerformanceMap';
+import { DeferredPerformanceMap, preloadPerformanceMap } from './DeferredPerformanceMap';
 import { RegionPicker } from './RegionPicker';
 import { AutomaticRefreshLink } from './AutomaticRefresh';
 
@@ -57,12 +58,18 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
   const [mapFailed, setMapFailed] = useState(false);
   const q = useDebounced(filters.q, 350);
   const age = useDebounced(filters.age, 350);
+  const filtersPending = filters.q.trim() !== q.trim() || filters.age.trim() !== age.trim();
   const effective = useMemo(() => ({ ...filters, cities: nationwide ? [] : filters.cities, q, age }), [filters, nationwide, q, age]);
   const searchFilters = useMemo(() => toSearchFilters(effective), [effective]);
+  const filterKey = JSON.stringify(searchFilters);
   const key = JSON.stringify([searchFilters, effective.limit]);
   const [pageState, setPageState] = useState({ key, page: 1 });
   const page = pageState.key === key ? pageState.page : 1;
   const problem = filterProblem(effective);
+  const periodErrorId = useId();
+  const reversedPeriod = isIsoDate(filters.from) && isIsoDate(filters.to) && filters.from > filters.to;
+  const fromInvalid = !isIsoDate(filters.from) || reversedPeriod;
+  const toInvalid = !isIsoDate(filters.to) || reversedPeriod;
   const hasData = boot.sources.some(s => s.count > 0);
 
   const [result, setResult] = useState<SearchResult | null>(null);
@@ -70,27 +77,55 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
   const [error, setError] = useState<string | null>(null);
   const [retry, setRetry] = useState(0);
   const seq = useRef(0);
+  const mapSeq = useRef(0);
+  const searchTrace = useRef<{ result: SearchResult; context: ResultTrace } | null>(null);
+  const mapTrace = useRef<{ result: MapResult; context: ResultTrace } | null>(null);
 
   useEffect(() => {
     const id = ++seq.current;
+    setError(null);
     if (problem || !hasData) { setLoading(false); return; }
+    const controller = new AbortController();
+    const current = () => id === seq.current && !controller.signal.aborted;
+    const context: ResultTrace = { requestId: id, filterKey, page, dataSource: 'search' };
+    markPerformance('search-request', { ...context });
     setLoading(true);
-    api.search(toSearchFilters(effective, page))
-      .then(r => { if (id === seq.current) { setResult(r); setError(null); } })
-      .catch(e => { if (id === seq.current) setError(errorText(e)); })
-      .finally(() => { if (id === seq.current) setLoading(false); });
+    api.search(toSearchFilters(effective, page), controller.signal)
+      .then(r => { if (current()) {
+        markPerformance('search-response', { ...context, count: r.items.length, total: r.total });
+        searchTrace.current = { result: r, context };
+        setResult(r); setError(null);
+      } })
+      .catch(e => { if (current()) setError(errorText(e)); })
+      .finally(() => { if (current()) setLoading(false); });
+    return () => controller.abort();
     // `key` captures every effective filter value; `signature` refetches as collection progresses.
   }, [key, page, signature, problem, hasData, retry]);
 
   useEffect(() => {
     if (problem || !hasData || display !== 'map') return;
-    let cancelled = false;
+    // The module and data load together, including direct visits to #map.
+    void preloadPerformanceMap().catch(() => { /* The map placeholder offers a page reload after a chunk failure. */ });
+    const controller = new AbortController();
+    const context: ResultTrace = { requestId: ++mapSeq.current, filterKey, dataSource: 'map' };
+    mapTrace.current = null;
+    markPerformance('map-request', { ...context });
     setMapResult(null); setMapFailed(false); setFocusedId(null);
-    api.map(searchFilters)
-      .then(r => { if (!cancelled) setMapResult(r); })
-      .catch(() => { if (!cancelled) setMapFailed(true); });
-    return () => { cancelled = true; };
-  }, [JSON.stringify(searchFilters), signature, display, problem, hasData, retry]);
+    api.map(searchFilters, controller.signal)
+      .then(r => { if (!controller.signal.aborted) {
+        markPerformance('map-response', { ...context, count: r.items.length, total: r.total });
+        mapTrace.current = { result: r, context };
+        setMapResult(r);
+      } })
+      .catch(() => { if (!controller.signal.aborted) setMapFailed(true); });
+    return () => controller.abort();
+  }, [filterKey, signature, display, problem, hasData, retry]);
+
+  useEffect(() => {
+    const trace = searchTrace.current;
+    if (loading || !result || trace?.result !== result || trace.context.requestId !== seq.current) return;
+    return markAfterPaint('search-ready', { ...trace.context, count: result.items.length, total: result.total });
+  }, [result, loading, key, page]);
 
   useEffect(() => {
     if (patch) setResult(r => r && { ...r, items: r.items.map(i => (i.id === patch.item.id ? patch.item : i)) });
@@ -157,9 +192,15 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
             <p className="region-search-help">미선택·전체 선택은 전국, 일부 선택은 해당 지역만 조회합니다.</p>
             <div className="search-toolbar">
               <label className="quick-search"><Search size={18} aria-hidden="true" /><span className="visually-hidden">공연명·공연장 검색</span><input type="search" value={filters.q} maxLength={200} placeholder="어떤 공연을 찾고 계신가요?" onChange={e => setFilters({ ...filters, q: e.target.value })} /></label>
-              <div className="quick-period"><CalendarDays size={17} aria-hidden="true" /><label><span className="visually-hidden">빠른 조회 시작일</span><input type="date" value={filters.from} onChange={e => setFilters({ ...filters, from: e.target.value })} /></label><span className="muted">—</span><label><span className="visually-hidden">빠른 조회 종료일</span><input type="date" value={filters.to} onChange={e => setFilters({ ...filters, to: e.target.value })} /></label></div>
+              <div className="quick-period">
+                <CalendarDays size={17} aria-hidden="true" />
+                <label><span className="visually-hidden">빠른 조회 시작일</span><input type="date" value={filters.from} required aria-invalid={fromInvalid} aria-describedby={fromInvalid ? periodErrorId : undefined} onChange={e => setFilters({ ...filters, from: e.target.value })} /></label>
+                <span className="muted">–</span>
+                <label><span className="visually-hidden">빠른 조회 종료일</span><input type="date" value={filters.to} required aria-invalid={toInvalid} aria-describedby={toInvalid ? periodErrorId : undefined} onChange={e => setFilters({ ...filters, to: e.target.value })} /></label>
+              </div>
               <button type="button" className={`button filter-toggle${filtersOpen ? ' is-open' : ''}`} aria-expanded={filtersOpen} aria-controls="search-filters" onClick={() => setFiltersOpen(o => !o)}><SlidersHorizontal size={17} aria-hidden="true" />상세 조건{changed > 0 && <span className="filter-count">{changed}</span>}</button>
             </div>
+            {problem && <p id={periodErrorId} className="field-error" role="alert">{problem}</p>}
           </div>
           <FilterPanel filters={filters} onChange={setFilters} onReset={() => setFilters(base)} open={filtersOpen} />
 
@@ -182,13 +223,12 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
                   {([{ id: 'cards', label: '카드', Icon: LayoutGrid }, { id: 'table', label: '표', Icon: Table2 }, { id: 'map', label: '지도 + 목록', Icon: Map }] as const).map(({ id, label, Icon }) => <button key={id} type="button" aria-pressed={display === id} onClick={() => setDisplay(id)}><Icon size={17} aria-hidden="true" />{label}</button>)}
                 </div>
                 {loading && <span className="loading-inline" role="status"><LoaderCircle size={16} className="spin" aria-hidden="true" />불러오는 중</span>}
-                <button type="button" className="button" onClick={() => void exportResults()} disabled={exporting || !!problem || !result} aria-busy={exporting}>
+                <button type="button" className="button" onClick={() => void exportResults()} disabled={exporting || filtersPending || loading || !!error || !!problem || !result} aria-busy={exporting}>
                   <FileSpreadsheet size={16} aria-hidden="true" />{exporting ? '내보내는 중…' : '엑셀 내보내기'}
                 </button>
               </div>
             </div>
 
-            {problem && <Callout tone="warn" title="검색 조건을 확인하세요">{problem}</Callout>}
             {error && !problem && (
               <Callout tone="danger" title="검색 결과를 불러오지 못했습니다"
                 action={<button type="button" className="button button-small" onClick={() => setRetry(n => n + 1)}><RefreshCw size={14} aria-hidden="true" />다시 시도</button>}>
@@ -222,7 +262,8 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
 
             {result && !problem && display === 'map' && <>
               <div className="map-result-layout">
-                <PerformanceMap items={mapResult?.items ?? result.items} selectedCities={mapCities} focusedId={focusedId} onCity={id => setFilters({ ...filters, cities: [id] })} onFocus={setFocusedId} />
+                <DeferredPerformanceMap items={mapResult?.items ?? result.items} selectedCities={mapCities} focusedId={focusedId} onCity={id => setFilters({ ...filters, cities: [id] })} onFocus={setFocusedId}
+                  trace={mapResult && mapTrace.current?.result === mapResult ? mapTrace.current.context : searchTrace.current ? { ...searchTrace.current.context, dataSource: 'page' } : undefined} />
                 <div className="map-results-column">
                   <div className="map-list-heading"><span>공연 둘러보기</span><span>{number(start)}–{number(end)} / {number(result.total)}건</span></div>
                   <div className="map-result-list">{result.items.map(p => <PerformanceCard key={p.id} item={p} compact active={focusedId === p.id} onLocate={() => setFocusedId(p.id)} />)}{!result.items.length && <div className="empty"><Search size={28} aria-hidden="true" /><h3>조건에 맞는 자료가 없습니다</h3><p>기간을 넓히거나 상세 조건을 조정해 보세요.</p><button type="button" className="button" onClick={() => setFilters(base)}>조건 초기화</button></div>}</div>

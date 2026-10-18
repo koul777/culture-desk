@@ -1,7 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
-import ExcelJS from 'exceljs';
 import type { Performance, PublicRefreshStatus } from '../../shared/types.js';
 import { Store } from '../store.js';
 import { NATIONAL_CITIES } from '../providers/cities.js';
@@ -113,6 +112,7 @@ export function unavailableRefresh(enabled:boolean):PublicRefreshStatus&{enabled
     schedule:{timezone:'Asia/Seoul',primary:'04:17',retries:['06:47','12:47','20:47']}};
 }
 export async function annotateReadonlyExport(bytes:Buffer,metadata:FallbackMetadata):Promise<Buffer> {
+  const { default: ExcelJS } = await import('exceljs');
   const workbook=new ExcelJS.Workbook();await workbook.xlsx.load(bytes as any);
   const evidence=workbook.getWorksheet('조회 근거')||workbook.addWorksheet('조회 근거');
   evidence.addRow(['임시 조회 자료','저장소 연결 제한으로 제공하는 공개 스냅샷입니다. 현재 수집·갱신 완료를 의미하지 않습니다.']);

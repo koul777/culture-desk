@@ -216,7 +216,11 @@ export function matchVenueBuilding(item: VenueItem, payload: unknown, now = Date
 }
 
 async function boundedJson(response: Response): Promise<unknown> {
-  if (Number(response.headers.get('content-length')) > MAX_BYTES || !response.body) throw new Error('building response too large');
+  if (Number(response.headers.get('content-length')) > MAX_BYTES) {
+    await response.body?.cancel().catch(() => undefined);
+    throw new Error('building response too large');
+  }
+  if (!response.body) throw new Error('building response too large');
   const reader = response.body.getReader();
   const chunks: Uint8Array[] = []; let size = 0;
   try {

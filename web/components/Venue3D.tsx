@@ -3,6 +3,7 @@ import { LoaderCircle } from 'lucide-react';
 import type { MapPerformance } from '../../shared/types';
 import { Modal } from './Modal';
 import { vworldAvailable } from '../lib/vworld-client';
+import { startVenueBuildingRequest, type BuildingRequest } from '../lib/venue-building-client';
 
 const ViewerDialog = lazy(() => import('./Venue3DDialog'));
 const VWorldDialog = lazy(() => import('./VWorld3DDialog'));
@@ -26,6 +27,23 @@ export function canViewVenue3D(item: Venue3DLocation): boolean {
     && item.latitude! >= 33 && item.latitude! <= 39 && item.longitude! >= 124 && item.longitude! <= 132;
 }
 
+function OsmSession({ item, onClose, pending }: { item: Venue3DLocation; onClose: () => void; pending: ReactNode }) {
+  const [attempt, setAttempt] = useState(0);
+  const key = `${item.id}:${item.latitude}:${item.longitude}:${attempt}`;
+  const [session, setSession] = useState<{ key: string; request: BuildingRequest } | null>(null);
+  useEffect(() => {
+    const request: BuildingRequest = canViewVenue3D(item) ? startVenueBuildingRequest(item.id)
+      : { result: Promise.resolve({ kind: 'cancelled' }), cancel: () => {} };
+    setSession({ key, request });
+    return request.cancel;
+  }, [key]);
+  // This session commits outside Suspense, so its request starts while the lazy
+  // renderer loads. A renderer error unmounts it through ViewerLoadBoundary.
+  return <Suspense fallback={pending}>
+    {session?.key === key ? <ViewerDialog key={key} item={item} onClose={onClose} buildingRequest={session.request} onRetry={() => setAttempt(value => value + 1)} /> : pending}
+  </Suspense>;
+}
+
 /** Configuration and either viewer are fetched only after an explicit 3D action. */
 export function Venue3D({ item, onClose }: { item: Venue3DLocation; onClose: () => void }) {
   const [provider, setProvider] = useState<'checking' | 'vworld' | 'osm'>('checking');
@@ -40,7 +58,8 @@ export function Venue3D({ item, onClose }: { item: Venue3DLocation; onClose: () 
   const pending = <Modal open onClose={onClose} title="공연장 3D 불러오는 중"><p className="loading-inline" role="status"><LoaderCircle className="spin" size={18} aria-hidden="true" />3D 지도를 준비하고 있습니다.</p></Modal>;
   if (provider === 'checking') return pending;
   const fallback = () => setProvider('osm');
-  return <ViewerLoadBoundary key={provider} onClose={onClose} onFallback={provider === 'vworld' ? fallback : undefined}><Suspense fallback={pending}>
-    {provider === 'vworld' ? <VWorldDialog item={item} onClose={onClose} onFallback={fallback} /> : <ViewerDialog item={item} onClose={onClose} />}
-  </Suspense></ViewerLoadBoundary>;
+  return <ViewerLoadBoundary key={provider} onClose={onClose} onFallback={provider === 'vworld' ? fallback : undefined}>
+    {provider === 'vworld' ? <Suspense fallback={pending}><VWorldDialog item={item} onClose={onClose} onFallback={fallback} /></Suspense>
+      : <OsmSession item={item} onClose={onClose} pending={pending} />}
+  </ViewerLoadBoundary>;
 }

@@ -25,6 +25,14 @@ API 함수는 스냅샷을 인스턴스마다 한 번 메모리 SQLite로 복원
 node --import tsx scripts/build-public-fallback.ts data/backups/검증한백업.db
 ```
 
+## 배포 검증과 재시도
+
+GitHub Actions는 배포 전에 `npm run quality`로 타입 검사·자동 테스트·프로덕션 빌드·외부망을 사용하지 않는 Playwright 검증을 실행합니다. 실패하면 Vercel 배포를 진행하지 않습니다. 실패 화면과 보고서는 `release-quality-<실행 ID>-<시도 번호>` 아티팩트에서 확인합니다. 로컬에서도 같은 명령을 사용하며, 최초 브라우저 설치는 `npx playwright install chromium`입니다.
+
+수집 완료(`job.json`)와 배포 성공(`deployment.json`)은 별개입니다. 먼저 공개 스냅샷과 진행분을 체크포인트 아티팩트로 보존하고, Vercel CLI가 성공한 뒤에만 정확한 스냅샷 SHA-256·커밋·환경을 담은 배포 기록을 최종 아티팩트에 저장합니다. 수집 완료 뒤 배포가 실패하면 다음 예약이나 수동 재실행은 재수집 없이 저장된 스냅샷을 다시 검증·배포합니다. 최종 저장이 실패한 경우에도 다음 실행은 안전하게 재배포합니다.
+
+운영 상태는 `culture-desk-state-production-*`, 미리보기 상태는 `culture-desk-state-preview-<Git ref 해시>-*`로 분리하고, 복구 시 저장소와 브랜치까지 확인합니다. `refs/heads/main`만 `--prod`로 배포합니다. 다른 브랜치의 수동 실행은 해당 브랜치의 상태 또는 저장소 기준 스냅샷에서 시작합니다. 자세한 복구·보존 규칙은 [전국 자동 갱신](AUTOMATIC_REFRESH.md)을 참고하세요. CLI 성공 이후 실제 주소에서 검색·지도·다운로드를 확인하는 운영 검수는 별도로 진행합니다.
+
 ## 응답 한도
 
 JSON 조회와 Excel 다운로드는 응답 본문을 4 MiB까지만 전송합니다. 초과 시 HTTP 413과 `RESPONSE_CAPACITY` 코드로 지역·기간 등 조회 조건을 좁히도록 안내합니다. 지도는 별도로 항목 수와 응답 크기를 제한하고 잘림 여부를 표시합니다.

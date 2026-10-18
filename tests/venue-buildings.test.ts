@@ -110,8 +110,12 @@ test('service handles quota cooldown, provider fallback and short negative-cache
 });
 
 test('service refuses excessive response bodies and bounds simultaneous distinct venue lookups', async () => {
-  const tooLarge = new VenueBuildingService({ endpoints: ['https://one.invalid'], fetch: (async () => new Response('{}', { headers: { 'content-length': String(3 * 1024 * 1024) } })) as typeof fetch });
+  let cancelled = false;
+  const tooLarge = new VenueBuildingService({ endpoints: ['https://one.invalid'], fetch: (async () => new Response(new ReadableStream({
+    cancel() { cancelled = true; },
+  }), { headers: { 'content-length': String(3 * 1024 * 1024) } })) as typeof fetch });
   assert.equal((await tooLarge.lookup(venue)).reason, 'upstream_unavailable');
+  assert.equal(cancelled, true, 'a rejected oversized response releases the upstream body');
   const releases: (() => void)[] = [];
   const service = new VenueBuildingService({ endpoints: ['https://one.invalid'], fetch: (async () => {
     await new Promise<void>(resolve => releases.push(resolve)); return json([way()]);

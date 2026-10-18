@@ -4,9 +4,10 @@ import { encodeSnapshot, type SnapshotPool } from './snapshot.js';
 import { NATIONAL_CITIES } from '../providers/cities.js';
 import { dateChunks, isDate } from '../dates.js';
 import type { PublicRefreshStatus } from '../../shared/types.js';
+import { REFRESH_SCHEDULE } from './refresh-schedule.js';
 export type { PublicRefreshStatus } from '../../shared/types.js';
+export { REFRESH_SCHEDULE } from './refresh-schedule.js';
 
-export const REFRESH_SCHEDULE: PublicRefreshStatus['schedule'] = { timezone: 'Asia/Seoul', primary: '04:17', retries: ['06:47', '12:47', '20:47'] };
 export const LEASE_SECONDS = 120;
 export interface RefreshWindow { day: string; from: string; to: string }
 export interface RefreshCounts { expectedRuns: number; completeRuns: number; totalTasks: number; doneTasks: number; remaining: number; performances: number }

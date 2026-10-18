@@ -1,0 +1,66 @@
+{
+    "recordedAt":  "2026-10-18T13:50:40.5569005Z",
+    "command":  "npm run quality",
+    "fullPipeline":  {
+                         "startedAt":  "2026-10-18T13:47:14.909Z",
+                         "steps":  [
+                                       {
+                                           "name":  "typecheck",
+                                           "durationMs":  660,
+                                           "exitCode":  0
+                                       },
+                                       {
+                                           "name":  "unit",
+                                           "durationMs":  34344,
+                                           "exitCode":  0
+                                       },
+                                       {
+                                           "name":  "build",
+                                           "durationMs":  2805,
+                                           "exitCode":  0
+                                       },
+                                       {
+                                           "name":  "browser",
+                                           "durationMs":  22977,
+                                           "exitCode":  0
+                                       }
+                                   ],
+                         "passed":  true,
+                         "completedAt":  "2026-10-18T13:48:15.701Z"
+                     },
+    "unitSweep":  {
+                      "passed":  268,
+                      "failed":  0
+                  },
+    "lateChangeValidation":  {
+                                 "browser":  {
+                                                 "startTime":  "2026-10-18T13:49:41.942Z",
+                                                 "duration":  22743.045,
+                                                 "expected":  6,
+                                                 "skipped":  0,
+                                                 "unexpected":  0,
+                                                 "flaky":  0
+                                             },
+                                 "newComposedRecovery":  "1/1 passed",
+                                 "typecheckAndBuild":  "passed",
+                                 "note":  "Final CSS and one added test landed after the full sweep. Rebuilt and reran browser suite plus the added recovery case; did not repeat the entire unit suite."
+                             },
+    "totalDistinctUnitCasesVerified":  269,
+    "screenshotCount":  7,
+    "screenshots":  [
+                        "qa-desktop-cards.png",
+                        "qa-desktop-map.png",
+                        "qa-mobile-cards.png",
+                        "qa-mobile-regions.png",
+                        "qa-mobile-detail.png",
+                        "qa-mobile-map.png",
+                        "qa-mobile-loading.png"
+                    ],
+    "workbook":  "qa-regional-results.xlsx",
+    "scope":  "Synthetic 36-row published snapshot through production API and built UI; browser remote resources and server fetch blocked. 375px mobile and desktop Chromium.",
+    "limitations":  [
+                        "No live provider collection or deployment performed",
+                        "Synthetic map tiles; no live imagery, 3D GPU, Safari or Firefox verification",
+                        "PR merge blocking needs repository branch protection; refresh deployment already gates on quality"
+                    ]
+}

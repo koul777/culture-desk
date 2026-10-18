@@ -1,0 +1,214 @@
+{
+  "measuredAt": "2026-10-18T13:46:09.948Z",
+  "node": "v24.14.0",
+  "platform": "win32",
+  "handler": "/C:/workspace/cultureapi/server/cloud/benchmark-baseline.tmp.ts",
+  "scope": "Offline handleCloudRequest + response serialization; excludes process import/startup, network and browser rendering",
+  "snapshotBytes": 8559524,
+  "snapshotHash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+  "performances": 5649,
+  "coldRead": {
+    "samples": 5,
+    "medianMs": 225.986,
+    "p95Ms": 380.775,
+    "minMs": 212.74
+  },
+  "measurements": [
+    {
+      "name": "bootstrap",
+      "route": "/api/bootstrap",
+      "firstMs": 158.104,
+      "samples": 30,
+      "medianMs": 11.881,
+      "p95Ms": 15.756,
+      "minMs": 10.911,
+      "bytes": 42318,
+      "responseHash": "955d21c99c0dfbb7a9b02492fce067b87d9b5b4a0ef7fedcb4c3913af650fd40"
+    },
+    {
+      "name": "national-search",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "firstMs": 13.603,
+      "samples": 30,
+      "medianMs": 27.552,
+      "p95Ms": 36.309,
+      "minMs": 12.274,
+      "bytes": 33958,
+      "responseHash": "d36c1a77e3e31b2636a956a28aa5b1d3930d46564b23b05ed2b3bcad4307a10a"
+    },
+    {
+      "name": "regional-search",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "firstMs": 11.568,
+      "samples": 30,
+      "medianMs": 9.494,
+      "p95Ms": 13.37,
+      "minMs": 5.207,
+      "bytes": 32637,
+      "responseHash": "28675df7f4e3e2641a409bbfeb595f2f78170aacc78c644e82c13a8952fdbed5"
+    },
+    {
+      "name": "national-map",
+      "route": "/api/map?from=2026-10-01&to=2027-01-17",
+      "firstMs": 362.396,
+      "samples": 30,
+      "medianMs": 368.126,
+      "p95Ms": 435.385,
+      "minMs": 318.364,
+      "bytes": 1654588,
+      "responseHash": "84b31e140dd4b332715b4bfaf5cfb745b8f429fdc61fe08c392faa1b82c17437"
+    },
+    {
+      "name": "regional-map",
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "firstMs": 9.617,
+      "samples": 30,
+      "medianMs": 10.004,
+      "p95Ms": 12.456,
+      "minMs": 7.31,
+      "bytes": 14697,
+      "responseHash": "13609a9729d6e2dbd39e70e214660a38624b89d9618d693d8342d6447b481511"
+    },
+    {
+      "name": "detail",
+      "route": "/api/performances/1",
+      "firstMs": 9.358,
+      "samples": 30,
+      "medianMs": 6.769,
+      "p95Ms": 7.844,
+      "minMs": 5.247,
+      "bytes": 1520,
+      "responseHash": "1e12845155e9847bd524867d469ac22d1fd2f30ae933c559e6d9e89d47a0b4c3"
+    }
+  ],
+  "parity": [
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "hash": "d36c1a77e3e31b2636a956a28aa5b1d3930d46564b23b05ed2b3bcad4307a10a"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&cities=andong",
+      "hash": "f9e47d2cd0fd06469d0c4ff34ec7aa7396bd3234267c14abbb27b098dd939e6d"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "hash": "28675df7f4e3e2641a409bbfeb595f2f78170aacc78c644e82c13a8952fdbed5"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&source=kopis",
+      "hash": "46125bdeb36e67f4085bceb31dae92a94d127929059170caa344b81d3624a8d8"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&source=culture",
+      "hash": "9bd3aeec0462b33b95503b70398429dc072734460ab6d2cd3497c683f16455ff"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&price=free",
+      "hash": "01cafe39ac3d332dd4a2dc8ec846df427754188db9a0eef69a1169f42c0d5a68"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&price=paid",
+      "hash": "e50027c0950f56477419d749a0681f4f5e987ec8049952965b307a0cc8e268e8"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&price=unknown",
+      "hash": "257d970dee245430b46332d553d0753c4dc5659f7dd33dbf821a41c289a4957d"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&q=음악",
+      "hash": "5f62dc7106148fcb00986bb47975e3b1340d5b2255fa45766046be51385b28b9"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&genre=연극",
+      "hash": "d09cc141b563959d2822ab86ec7ae9e75c91cc7e6159c6c7dff798ec0d1a793f"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&page=2&limit=20",
+      "hash": "4335ffd27bad505a3773429746bfe69f6201c5cca22b19dd0005d501cbce227d"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&status=upcoming",
+      "hash": "1d620c85e94dc04001039e648ec578c00aab0baee85d24ab551ba27d79bbdc08"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&cities=gangneung",
+      "hash": "1482e0f6c3e5439e678fc5d5e295793b00ae3c3cfe2e566cbbbd7f9329c98338"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&q=%25",
+      "hash": "abcbc3e33e0b9359fe7367a34c167652ed1f55b0d4b6f4816f91cf57609d7ad0"
+    },
+    {
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17&age=전체",
+      "hash": "17443be6af93f034fb5fcf4dc36c11eea9dddab6a054626ed5b24f64dd0ad264"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17",
+      "hash": "84b31e140dd4b332715b4bfaf5cfb745b8f429fdc61fe08c392faa1b82c17437"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&cities=andong",
+      "hash": "af07378467cba706f1c23bd5234daa8918e9215064a065b992688f87c37ed3cf"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "hash": "13609a9729d6e2dbd39e70e214660a38624b89d9618d693d8342d6447b481511"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+      "hash": "0288e9cce845a8daae4aede53896b9bde9df7fe9d347f827a4f4ed5177a0d283"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+      "hash": "ce7300f32ca5e27e17e4727e0c04ae49f23660dc22e5f7ca12edc26b594e84ea"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&price=free",
+      "hash": "6d894fb127b607e1ca75dee61a19983f3150c6b2912e473ac4d935aba8a9b182"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&price=paid",
+      "hash": "4a41b590415ece53bb8fa5f757af10a03123c37d97705a5ca7f45ead46089d03"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&price=unknown",
+      "hash": "ef6c30da902ae4cb6742f3edf5492963cb51ff1d90eea9f0bd8709c8dfbc3618"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&q=음악",
+      "hash": "92647cd518c2f06f31792ca9c210866ce8b72648ecbe35bccfe5d5e24451675e"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&genre=연극",
+      "hash": "cacaa0efb043ef33f0272bbc73e01fcd449e5ecba277496f487220576cdede75"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&page=2&limit=20",
+      "hash": "208d3959141ee374b6416d3352fba335e6178006da9a71f67f874a552bcc6ade"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&status=upcoming",
+      "hash": "562c46ec1de4ada1ee1155787c8be792c5bd03204a19ddc0b5e08931a7c6c340"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&cities=gangneung",
+      "hash": "e8af7d5f26f7b05228fbaba4b4ff3923f6dca36cbd7ea691372e25129ae654e4"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&q=%25",
+      "hash": "cca413f6f0a5360f557790c3e8b364550aa861129c47557e344311dd13d57c27"
+    },
+    {
+      "route": "/api/map?from=2026-10-01&to=2027-01-17&age=전체",
+      "hash": "06738d43578d9ce047d05f1015c37a4a886d385d5a2af08ecc1d2c822ab48832"
+    }
+  ],
+  "export": {
+    "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+    "samples": 1,
+    "elapsedMs": 135.257,
+    "bytes": 16808,
+    "rows": 51,
+    "contentsHash": "8ab245b1ef3466c68197fa5b0f480867e066c5f9ed8cb368def5ba6cee77f417"
+  }
+}

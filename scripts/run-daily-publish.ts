@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -11,6 +11,7 @@ import { archiveCompletedCollectionRuns } from '../server/collection-history.js'
 import { auditRefreshCheckpoint, refreshWindow, type RefreshWindow } from '../server/cloud/refresh-jobs.js';
 import { insertPublicSnapshot, readPublicSnapshot, type PublishedRefresh } from '../server/cloud/readonly-fallback.js';
 import { buildPublicFallback } from './build-public-fallback.js';
+import { copyFileAtomic, inspectSnapshot, sameCollection, writeJsonAtomic } from './release-state.js';
 
 /**
  * Scheduled refresh without a database service. GitHub Actions restores `stateDirectory` from the
@@ -52,12 +53,32 @@ export async function runDailyPublish(options: DailyPublishOptions) {
   const directory = path.join(options.stateDirectory, 'collect');
   mkdirSync(options.stateDirectory, { recursive: true });
   const previous = readState(stateFile);
-  if (previous?.day === window.day && previous.status === 'complete') return { skipped: 'complete' as const, state: previous };
+  const savedSnapshot = path.join(options.stateDirectory, 'public-snapshot.json');
+  if (previous?.day === window.day && previous.status === 'complete') {
+    let saved;
+    try { saved = inspectSnapshot(savedSnapshot); } catch { /* Rebuild a missing or invalid saved export from the database. */ }
+    if (sameCollection(previous, saved?.refresh)) {
+      copyFileAtomic(savedSnapshot, options.snapshotPath);
+      return { skipped: 'complete' as const, state: previous };
+    }
+    if (existsSync(production)) {
+      buildPublicFallback({ input: production, output: options.snapshotPath, snapshotAt: previous.updatedAt ?? now().toISOString(), refresh: previous });
+      copyFileAtomic(options.snapshotPath, savedSnapshot);
+      return { skipped: 'complete' as const, state: previous };
+    }
+  }
   let lastSuccessAt = previous?.lastSuccessAt ?? null;
-  if (!existsSync(production)) lastSuccessAt = (await seedProduction(production, options.snapshotPath)) ?? lastSuccessAt;
+  if (!existsSync(production)) {
+    let seedSnapshot = options.snapshotPath;
+    try { if (inspectSnapshot(savedSnapshot)) seedSnapshot = savedSnapshot; } catch { /* Fall back to the committed snapshot if the saved file is damaged. */ }
+    lastSuccessAt = (await seedProduction(production, seedSnapshot)) ?? lastSuccessAt;
+  }
   // A previous day's partial collection is superseded by today's full range.
   if (previous?.day !== window.day) rmSync(directory, { recursive: true, force: true });
   mkdirSync(directory, { recursive: true });
+  // Persist the window before starting. A collector/export crash must resume this day's checkpoint.
+  writeJsonAtomic(stateFile, { status: 'retry_wait', day: window.day, from: window.from, to: window.to,
+    counts: previous?.day === window.day ? previous.counts : null, lastSuccessAt, updatedAt: now().toISOString(), error: INCOMPLETE } satisfies PublishedRefresh);
   for (const name of ['stop.request', 'progress.json', 'collection.db.lock']) rmSync(path.join(directory, name), { force: true });
   const collection = path.join(directory, 'collection.db');
   if (existsSync(collection)) {
@@ -83,13 +104,15 @@ export async function runDailyPublish(options: DailyPublishOptions) {
     } finally { collected.close(); target.close(); }
   }
   const at = now().toISOString();
-  if (complete) { lastSuccessAt = at; rmSync(directory, { recursive: true, force: true }); }
+  if (complete) lastSuccessAt = at;
   const state: PublishedRefresh = { status: complete ? 'complete' : 'retry_wait', day: window.day, from: window.from, to: window.to,
     counts, lastSuccessAt, updatedAt: at, error: complete ? null : INCOMPLETE };
-  writeFileSync(stateFile, JSON.stringify(state, null, 2));
   const published = buildPublicFallback({ input: production, output: options.snapshotPath, snapshotAt: at, refresh: state });
-  // Deployments for code changes reuse the latest published data from the state artifact.
-  copyFileSync(options.snapshotPath, path.join(options.stateDirectory, 'public-snapshot.json'));
+  // A complete collection is acknowledged only after its validated export is durable.
+  // Deployment acknowledgement is separate and written by the workflow after Vercel succeeds.
+  copyFileAtomic(options.snapshotPath, savedSnapshot);
+  writeJsonAtomic(stateFile, state);
+  if (complete) rmSync(directory, { recursive: true, force: true });
   return { state, collectorExit: exitCode, published };
 }
 

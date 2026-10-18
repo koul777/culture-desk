@@ -11,6 +11,8 @@
     "build": "tsc --noEmit && vite build",
     "start": "node --import tsx server/index.ts",
     "test": "node --import tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "quality": "node scripts/quality.mjs",
     "typecheck": "tsc --noEmit",
     "backup": "node --import tsx scripts/backup.ts",
     "restore": "node --import tsx scripts/restore.ts"

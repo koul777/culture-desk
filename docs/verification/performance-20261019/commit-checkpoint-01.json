@@ -1,0 +1,57 @@
+{
+  "status": "verified_checkpoint_during_ongoing_10_hour_session",
+  "verifiedAt": "2026-10-18T17:55:04.293Z",
+  "testedGitTree": "5133a31c6bb05fd0943f065e8a91b2e892ab75d1",
+  "method": "Exported Git index into an isolated directory, linked the installed lockfile dependencies, and ran npm run quality. Unverified popup drafts were absent.",
+  "node": "v24.14.0",
+  "packageLockSha256": "d8dd3eebd16844fa14e51cb0919fe51f81c53da5ee1a81f28a4eae61d2cf1c7d",
+  "publicSnapshotSha256": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+  "unit": {
+    "passed": 300,
+    "failed": 0
+  },
+  "browser": {
+    "startTime": "2026-10-18T17:54:28.820Z",
+    "duration": 34750.07,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "quality": {
+    "startedAt": "2026-10-18T17:53:28.734Z",
+    "steps": [
+      {
+        "name": "typecheck",
+        "durationMs": 1150,
+        "exitCode": 0
+      },
+      {
+        "name": "unit",
+        "durationMs": 53722,
+        "exitCode": 0
+      },
+      {
+        "name": "build",
+        "durationMs": 4405,
+        "exitCode": 0
+      },
+      {
+        "name": "browser",
+        "durationMs": 36278,
+        "exitCode": 0
+      }
+    ],
+    "passed": true,
+    "completedAt": "2026-10-18T17:55:04.293Z"
+  },
+  "postVerificationNonRuntimeChanges": [
+    "quality workflow artifact name includes run_attempt",
+    "add the README-linked poster replay protocol",
+    "add this verification receipt"
+  ],
+  "limitations": [
+    "Local Chromium uses offline fixtures, not live provider or production deployment validation.",
+    "This checkpoint does not represent completion of the requested 10-hour session."
+  ]
+}

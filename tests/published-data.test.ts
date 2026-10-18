@@ -1,13 +1,16 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { handleCloudRequest, type CloudOptions } from '../server/cloud/handler.js';
 import { readPublicSnapshot, type PublicReadonlySnapshot } from '../server/cloud/readonly-fallback.js';
 import { Store } from '../server/store.js';
 import { NATIONAL_CITIES } from '../server/providers/cities.js';
 import { runDailyPublish, type Collect } from '../scripts/run-daily-publish.js';
+import { inspectSnapshot, prepareDeployment } from '../scripts/release-state.js';
 import type { PerformanceInput } from '../shared/types.js';
 
 const snapshotAt = '2026-10-17T00:30:00.000Z';
@@ -131,4 +134,82 @@ test('a new day discards the previous day\'s partial collection but keeps its me
   assert.equal(resumed, false);
   const out = await readPublicSnapshot(snapshotPath);
   assert.ok(out.performances.some(item => item.sourceId === 'TEST_NEW')); assert.equal(out.refresh?.status, 'retry_wait'); assert.equal(out.refresh?.day, '2026-10-19');
+});
+
+test('export failure retains the previous public snapshot and resumes the completed collection', async t => {
+  const { snapshotPath, stateDirectory } = setup(t);
+  const before = readFileSync(snapshotPath, 'utf8');
+  await assert.rejects(runDailyPublish({ stateDirectory, snapshotPath, window,
+    collect: async (range, directory, batch) => {
+      await completeCollect(range, directory, batch);
+      const store = new Store(path.join(directory, 'collection.db'), NATIONAL_CITIES);
+      try { store.upsert({ ...performance('INVALID_EXPORT'), sourceUrl: 'https://provider.test?api_key=TEST_SECRET' }); }
+      finally { store.close(); }
+      return { exitCode: 0 };
+    } }), /Public export rejected/);
+  assert.equal(readFileSync(snapshotPath, 'utf8'), before);
+  assert.equal(JSON.parse(readFileSync(path.join(stateDirectory, 'job.json'), 'utf8')).status, 'retry_wait');
+  assert.ok(existsSync(path.join(stateDirectory, 'collect', 'collection.db')));
+  const result = await runDailyPublish({ stateDirectory, snapshotPath, window,
+    collect: async (_range, directory) => {
+      const store = new Store(path.join(directory, 'collection.db'), NATIONAL_CITIES);
+      try {
+        assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM sync_runs').get()!.n, 460, 'completed checkpoints survive export failure');
+        store.upsert(performance('INVALID_EXPORT'));
+      } finally { store.close(); }
+      return { exitCode: 0 };
+    } });
+  assert.equal(result.state.status, 'complete');
+  assert.ok(!existsSync(path.join(stateDirectory, 'collect')));
+  assert.equal((await readPublicSnapshot(snapshotPath)).performances.length, 3);
+});
+
+test('a completed day restores its saved snapshot or rebuilds a missing export without recollection', async t => {
+  const { snapshotPath, stateDirectory } = setup(t);
+  await runDailyPublish({ stateDirectory, snapshotPath, collect: completeCollect, window });
+  const saved = readFileSync(snapshotPath, 'utf8');
+  writeFileSync(snapshotPath, JSON.stringify(published()));
+  const collect: Collect = async () => { assert.fail('a completed day must not collect again'); };
+  await runDailyPublish({ stateDirectory, snapshotPath, collect, window });
+  assert.equal(readFileSync(snapshotPath, 'utf8'), saved);
+  rmSync(path.join(stateDirectory, 'public-snapshot.json'));
+  await runDailyPublish({ stateDirectory, snapshotPath, collect, window });
+  assert.equal((await readPublicSnapshot(snapshotPath)).refresh?.status, 'complete');
+  assert.ok(existsSync(path.join(stateDirectory, 'public-snapshot.json')));
+});
+
+test('a missing production database is seeded from the saved snapshot before the older checkout baseline', async t => {
+  const { snapshotPath, stateDirectory } = setup(t);
+  await runDailyPublish({ stateDirectory, snapshotPath, collect: partialCollect, window });
+  rmSync(path.join(stateDirectory, 'production.db'));
+  writeFileSync(snapshotPath, JSON.stringify(published()));
+  await runDailyPublish({ stateDirectory, snapshotPath, window: { day: '2026-10-19', from: '2026-10-19', to: '2026-10-19' },
+    collect: async () => ({ exitCode: 1 }) });
+  const out = await readPublicSnapshot(snapshotPath);
+  assert.ok(out.performances.some(item => item.sourceId === 'TEST_NEW'), 'newer published rows survive loss of the collection database');
+  assert.equal(out.refresh?.lastSuccessAt, snapshotAt);
+});
+
+test('planner recovery rebuilds a corrupt saved export for a complete day and prepares it without recollection', async t => {
+  const { snapshotPath, stateDirectory } = setup(t);
+  const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  const currentWindow = { day, from: day, to: day };
+  await runDailyPublish({ stateDirectory, snapshotPath, collect: completeCollect, window: currentWindow });
+  assert.ok(existsSync(path.join(stateDirectory, 'production.db')));
+  assert.equal(JSON.parse(readFileSync(path.join(stateDirectory, 'job.json'), 'utf8')).status, 'complete');
+  writeFileSync(path.join(stateDirectory, 'public-snapshot.json'), '{broken');
+  const script = fileURLToPath(new URL('../scripts/release-state.ts', import.meta.url));
+  const planned = spawnSync(process.execPath, [script, 'plan'], { cwd: path.dirname(snapshotPath), encoding: 'utf8', env: {
+    ...process.env, DAILY_STATE_DIRECTORY: stateDirectory, GITHUB_REF: 'refs/heads/main', GITHUB_SHA: 'recovery-commit', GITHUB_EVENT_NAME: 'schedule', GITHUB_OUTPUT: '',
+  } });
+  assert.equal(planned.status, 0, planned.stderr);
+  assert.match(planned.stdout, /collect=true/);
+  assert.match(planned.stdout, /deploy=true/);
+  const rebuilt = await runDailyPublish({ stateDirectory, snapshotPath, window: currentWindow,
+    collect: async () => { assert.fail('the complete database must rebuild its snapshot without API recollection'); } });
+  assert.ok('skipped' in rebuilt);
+  const prepared = prepareDeployment(stateDirectory, snapshotPath, 'production', 'recovery-commit');
+  assert.equal(prepared.snapshotSha256, inspectSnapshot(snapshotPath)!.sha256);
+  assert.equal(inspectSnapshot(path.join(stateDirectory, 'public-snapshot.json'))!.refresh?.status, 'complete');
+  assert.equal((await readPublicSnapshot(snapshotPath)).performances.length, 2);
 });

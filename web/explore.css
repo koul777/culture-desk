@@ -792,7 +792,7 @@ input, select, textarea { font-size: 14px; }
   .performance-grid .card-art img { padding: 0; }
   .performance-grid .card-city { display: none; }
   .performance-grid .card-body { padding: 0; }
-  .performance-grid .card-body h3 { height: auto; max-height: 47px; min-height: 24px; margin-bottom: 10px; }
+  .performance-grid .card-body h3 { height: auto; max-height: none; min-height: 24px; margin-bottom: 10px; }
   .performance-grid .card-body h3 button { font-size: 15px; }
   .performance-grid .card-topline { font-size: 12px; margin-bottom: 5px; }
   .performance-grid .card-facts p { font-size: 12px; }
@@ -840,7 +840,8 @@ input, select, textarea { font-size: 14px; }
   .is-map-view .results-view-context { order: 2; margin: 0; font-size: 11px; }
   .is-map-view .results-head h2, .is-map-view .result-total { font-size: 19px; }
   .is-map-view .result-counts { display: none; }
-  .is-map-view .results-actions { gap: 7px; flex-wrap: nowrap; }
+  .is-map-view .results-actions { gap: 7px; flex-wrap: wrap; }
+  .is-map-view .results-actions > .loading-inline { order: 1; flex-basis: 100%; }
   .is-map-view .view-switch { width: auto; flex: 1; padding: 3px; }
   .is-map-view .view-switch button { min-height: 38px; font-size: 11px; gap: 4px; padding-inline: 6px; }
   .is-map-view .view-switch button svg { width: 14px; }
@@ -850,3 +851,32 @@ input, select, textarea { font-size: 14px; }
   .is-map-view .coverage-note summary { font-size: 11px; }
   .is-map-view .coverage-note summary > span { font-size: 11px; margin-left: 6px; }
 }
+
+/* Keep the first result closer to mobile search controls. Map navigation remains
+   in the primary navigation and view switch; region rules are in its dialog. */
+@media (max-width: 760px) {
+  .nav-label { min-width: 0; white-space: normal; }
+  .explore-view .view-switch button { white-space: normal; }
+  .explore-view:not(.is-map-view) .explore-head-actions,
+  .explore-view:not(.is-map-view) .region-search-help { display: none; }
+  .explore-view:not(.is-map-view) .explore-region-bar { margin-bottom: 8px; }
+  .explore-view .results-actions > .button { min-height: 44px; }
+}
+
+/* Native date controls need enough room for the complete value and picker. */
+@media (max-width: 360px) {
+  .explore-view .quick-period { grid-column: 1 / -1; }
+  .explore-view .filter-toggle { grid-column: 2; justify-self: end; }
+}
+
+/* Keep touch targets usable after the compact mobile/map overrides above. */
+@media (pointer: coarse) {
+  .results-foot .pagination .icon-button { width: 44px; height: 44px; }
+  .is-map-view .explore-head .map-discovery-link,
+  .is-map-view .region-trigger,
+  .is-map-view .view-switch button { min-height: 44px; }
+}
+
+.map-module-state { display: grid; place-items: center; padding: 24px; text-align: center; }
+.map-module-state > div { display: grid; justify-items: center; gap: 12px; max-width: 32em; }
+.map-module-state p { color: var(--ink-2); }

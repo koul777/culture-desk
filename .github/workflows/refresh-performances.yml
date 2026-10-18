@@ -1,7 +1,6 @@
 name: Refresh nationwide performances
 
-# Collects both public APIs and deploys the public snapshot to Vercel; no database service.
-# The collector's state, including the latest snapshot, travels between runs as an artifact.
+# Collection checkpoints and successful deployment receipts are separate durable artifacts.
 on:
   schedule:
     # Korea: primary 04:17; recovery slots 06:47, 12:47, 20:47.
@@ -12,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       budget:
-        description: 'Collection budget in minutes (5–55)'
+        description: 'Collection budget in minutes (5-55)'
         required: false
         default: '50'
   # Code changes deploy with the latest collected data instead of the committed baseline.
@@ -22,54 +21,55 @@ on:
 
 permissions:
   contents: read
-  actions: read # restore the previous run's collection state
+  actions: read
 
 concurrency:
+  # Branch state is isolated, while collectors sharing provider keys remain serialized.
   group: nationwide-performance-refresh
   cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 58
+    # Includes the 55-minute maximum collection, quality checks, deploy, and state uploads.
+    timeout-minutes: 80
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
-      - name: Restore collection state
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Resolve deployment state scope
+        id: scope
+        run: node scripts/release-state.ts scope
+      - name: Restore collection and deployment state
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p data/daily
-          id=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=culture-desk-state&per_page=100" \
-            --jq '[.artifacts[] | select(.expired | not)] | sort_by(.created_at) | last | .id // empty')
+          # Failed runs may contain the newest resumable collection. Never restore another branch
+          # or a fork. The legacy artifact is accepted only on main for a one-way migration.
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/artifacts?per_page=100" > "$RUNNER_TEMP/state-index.json"
+          id=$(node scripts/release-state.ts select-artifact "$RUNNER_TEMP/state-index.json")
           if [ -n "$id" ]; then
             gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$id/zip" > "$RUNNER_TEMP/state.zip"
             unzip -o -q "$RUNNER_TEMP/state.zip" -d data/daily
-            echo "Restored collection state artifact $id."
+            echo "Restored state artifact $id."
           else
-            echo "No collection state; continuing from the committed snapshot."
+            echo "No state for this branch; continuing from the committed snapshot."
           fi
-      # Recovery slots cost under a minute once today's refresh is complete.
       - name: Plan this run
         id: plan
-        run: |
-          day=$(TZ=Asia/Seoul date +%F)
-          state=$(jq -r '(.day // "") + " " + (.status // "")' data/daily/job.json 2>/dev/null || true)
-          collect=true; deploy=true
-          if [ "$state" = "$day complete" ] || [ "$GITHUB_EVENT_NAME" = push ]; then collect=false; fi
-          if [ "$collect" = false ] && [ "$GITHUB_EVENT_NAME" = schedule ]; then deploy=false; fi
-          echo "collect=$collect" >> "$GITHUB_OUTPUT"
-          echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
-          echo "Published state: ${state:-none}; collect=$collect, deploy=$deploy."
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        run: node scripts/release-state.ts plan
+      - name: Install dependencies
         if: steps.plan.outputs.deploy == 'true'
-        with:
-          node-version: '24'
-          cache: npm
-      - if: steps.plan.outputs.collect == 'true'
         run: npm ci --ignore-scripts
+      - name: Install browser for quality checks
+        if: steps.plan.outputs.deploy == 'true'
+        run: npx playwright install --with-deps chromium
       - name: Collect and build the public snapshot
         if: steps.plan.outputs.collect == 'true'
         env:
@@ -77,22 +77,35 @@ jobs:
           CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
           NATIONAL_RUN_BUDGET_MINUTES: ${{ inputs.budget || '50' }}
         run: node --import tsx scripts/run-daily-publish.ts
-      - name: Save collection state
-        if: always() && steps.plan.outputs.collect == 'true' && hashFiles('data/daily/production.db') != ''
+      - name: Prepare the exact snapshot for deployment
+        if: steps.plan.outputs.deploy == 'true'
+        run: node scripts/release-state.ts prepare
+      - name: Save resumable collection before deployment
+        if: always() && steps.plan.outputs.deploy == 'true' && (hashFiles('data/daily/production.db') != '' || hashFiles('data/daily/public-snapshot.json') != '' || hashFiles('data/daily/collect/collection.db') != '')
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: culture-desk-state
+          name: ${{ steps.scope.outputs.artifact }}-checkpoint-${{ github.run_id }}-${{ github.run_attempt }}
           path: data/daily
           retention-days: 7
           if-no-files-found: error
-      - name: Use the latest published snapshot
-        if: steps.plan.outputs.deploy == 'true' && steps.plan.outputs.collect != 'true'
-        run: |
-          if [ -f data/daily/public-snapshot.json ]; then cp data/daily/public-snapshot.json server/assets/public-snapshot.json; fi
-      - name: Deploy to Vercel
+      - name: Verify release quality
         if: steps.plan.outputs.deploy == 'true'
+        run: npm run quality
+      - name: Preserve release quality evidence
+        if: always() && steps.plan.outputs.deploy == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-quality-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 14
+          if-no-files-found: ignore
+      - name: Deploy to Vercel
+        id: deploy
+        if: steps.plan.outputs.deploy == 'true'
+        timeout-minutes: 12
         env:
-          # The CLI reads the token from the environment; it never appears in arguments or logs.
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -102,7 +115,18 @@ jobs:
             echo "::error::Add the VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID repository secrets to deploy."
             exit 1
           fi
-          # Only main is production; a manual run on another branch makes a preview deployment.
           args=(deploy --yes)
-          if [ "$GITHUB_REF_NAME" = main ]; then args+=(--prod); fi
+          if [ "$GITHUB_REF" = refs/heads/main ]; then args+=(--prod); fi
           npx --yes vercel@64.0.2 "${args[@]}"
+      - name: Acknowledge successful deployment
+        id: acknowledge
+        if: steps.deploy.outcome == 'success'
+        run: node scripts/release-state.ts acknowledge
+      - name: Save successful deployment receipt
+        if: steps.acknowledge.outcome == 'success'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ steps.scope.outputs.artifact }}-final-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/daily
+          retention-days: 7
+          if-no-files-found: error

@@ -11,20 +11,11 @@ import { isDate, today } from './dates.js';
 import { exportWorkbook } from './export.js';
 import { VenueBuildingService } from './venue-buildings.js';
 import { handleVWorldRequest, isVWorldRoute } from './vworld.js';
-import type { City, MapPerformance, MapResult, Performance, Provider, SearchFilters, Source, SyncRequest } from '../shared/types.js';
+import { buildMapResult } from './map-response.js';
+import type { SearchPerformanceTrace } from './search-performance.js';
+import type { City, Performance, Provider, SearchFilters, Source, SyncRequest } from '../shared/types.js';
 
-const MAP_MAX_ITEMS = 10000;
-const MAP_MAX_BYTES = 3 * 1024 * 1024;
 const venueBuildings = new VenueBuildingService();
-function mapItem(item: Performance): MapPerformance {
-  // The map opens full details by ID. Do not send notes, descriptions or poster URLs in every marker.
-  return {
-    id: item.id, title: item.title, venue: item.venue, cityId: item.cityId,
-    startDate: item.startDate, endDate: item.endDate,
-    latitude: item.latitude, longitude: item.longitude, locationPrecision: item.locationPrecision,
-    source: item.source,
-  };
-}
 
 function bad(message: string, statusCode=400): never { throw Object.assign(new Error(message),{statusCode}); }
 function object(value: unknown): Record<string,any> { if(!value || typeof value!=='object' || Array.isArray(value)) bad('요청 내용을 확인하세요.'); return value as Record<string,any>; }
@@ -45,8 +36,8 @@ function filtersFrom(value: unknown): SearchFilters {
   for(const key of ['page','limit']) if(result[key]&&(!/^[1-9]\d*$/.test(result[key])||!Number.isSafeInteger(Number(result[key]))||Number(result[key])>(key==='limit'?100:1000000))) bad('페이지와 조회 건수는 올바른 양의 정수로 입력하세요.');
   return result as SearchFilters;
 }
-export async function createApp(config: Config, options: { store?:Store; providers?:Partial<Record<Source,Provider>>; startWorker?:boolean; serveStatic?:boolean; searchOnly?:boolean; allowLocalManagement?:boolean; shutdown?:()=>void; configLoader?:()=>Config; venueBuildings?:Pick<VenueBuildingService,'lookup'> }={}) {
-  const store=options.store||new Store(config.databasePath,NATIONAL_CITIES);
+export async function createApp(config: Config, options: { store?:Store; providers?:Partial<Record<Source,Provider>>; startWorker?:boolean; serveStatic?:boolean; searchOnly?:boolean; allowLocalManagement?:boolean; shutdown?:()=>void; configLoader?:()=>Config; venueBuildings?:Pick<VenueBuildingService,'lookup'>; readonlySnapshotAt?:string; performanceTrace?:SearchPerformanceTrace }={}) {
+  const store=options.store||new Store(config.databasePath,NATIONAL_CITIES,{performanceTrace:options.performanceTrace});
   const worker=new Worker(store,config,options.providers);
   let vworld=config.vworld;
   const visibleItem=(item: Performance): Performance=>options.searchOnly?{...item,note:'',bookmarked:false}:item;
@@ -56,6 +47,16 @@ export async function createApp(config: Config, options: { store?:Store; provide
     return filters;
   };
   const app=Fastify({logger:false,bodyLimit:256*1024});
+  if(options.performanceTrace){
+    const started=new WeakMap<object,number>();
+    app.addHook('preSerialization',(request,_reply,payload,done)=>{started.set(request,performance.now());done(null,payload);});
+    app.addHook('onSend',(request,_reply,payload,done)=>{
+      const at=started.get(request);
+      if(at!==undefined)options.performanceTrace!({phase:'fastify.serialize',durationMs:performance.now()-at,
+        ...(typeof payload==='string'?{bytes:Buffer.byteLength(payload)}:Buffer.isBuffer(payload)?{bytes:payload.byteLength}:{})});
+      done(null,payload);
+    });
+  }
   app.addHook('onRequest',async(request,reply)=>{
     const hostname=request.headers.host?.split(':')[0];
     if(hostname && !['127.0.0.1','localhost'].includes(hostname)) return reply.code(403).send({error:'로컬 컴퓨터에서만 사용할 수 있습니다.'});
@@ -85,21 +86,11 @@ export async function createApp(config: Config, options: { store?:Store; provide
     return {cities:store.cities(),sources:(['kopis','culture'] as Source[]).map(source=>({source,label:source==='kopis'?'KOPIS':'문화포털',configured:!!worker.providers[source],count:counts.source[source],lastSync:store.lastCollectionSync(source),
       applicationUrl:source==='kopis'?'https://kopis.or.kr/por/cs/openapi/openApiInfo.do?menuId=MNU_00074':'https://www.data.go.kr/data/15138937/openapi.do'})),bookmarkCount:options.searchOnly?0:counts.bookmarks,pendingDetails:counts.pending,reviewCount:counts.review,excludedCount:counts.excluded,runs,today:today()};
   });
-  app.get('/api/performances',async request=>{const result=store.search(searchFilters(request.query));return {...result,items:result.items.map(visibleItem)};});
+  app.get('/api/performances',async request=>{const result=store.search(searchFilters(request.query));return {...result,
+    ...(options.readonlySnapshotAt?{snapshotAt:options.readonlySnapshotAt}:{}),items:result.items.map(visibleItem)};});
   app.get('/api/map',async request=>{
-    const result=store.search(searchFilters(request.query),true);
-    const response: MapResult = { ...result, items: [], truncated: false };
-    // Include the envelope and JSON separators in the UTF-8 budget, retaining whole titles/venues.
-    let bytes = Buffer.byteLength(JSON.stringify(response));
-    for (const item of result.items) {
-      if (response.items.length >= MAP_MAX_ITEMS) break;
-      const marker = mapItem(item);
-      const extra = Buffer.byteLength(JSON.stringify(marker)) + (response.items.length ? 1 : 0);
-      if (bytes + extra > MAP_MAX_BYTES) break;
-      response.items.push(marker); bytes += extra;
-    }
-    response.truncated = response.items.length < result.items.length;
-    return response;
+    const result=store.searchMap(searchFilters(request.query));
+    return buildMapResult({...result,...(options.readonlySnapshotAt?{snapshotAt:options.readonlySnapshotAt}:{})},options.performanceTrace);
   });
   app.get<{Params:{id:string}}>('/api/performances/:id',async request=>visibleItem(store.item(validId(request.params.id))||bad('공연을 찾을 수 없습니다.',404)));
   app.get<{Querystring:{performanceId?:string}}>('/api/venues/building',async request=>{

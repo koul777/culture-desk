@@ -1,5 +1,7 @@
 export function stripHtml(input: string): string {
   if (!input) return '';
+  // Plain text cannot match any of the HTML/entity rules below.
+  if (!input.includes('<') && !input.includes('&')) return input.replace(/\s+/g, ' ').trim();
   return input
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')

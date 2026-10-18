@@ -1,9 +1,12 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import path from 'node:path';
-import type { City, PerformanceInput, Performance, SearchFilters, SearchResult, Source, SyncRun, SyncState } from '../shared/types.js';
+import type { City, MapPerformance, PerformanceInput, Performance, SearchFilters, SearchResult, Source, SyncRun, SyncState } from '../shared/types.js';
 import { today, dateChunks } from './dates.js';
 import { cleanVenueInfo, venueInfoFromSource } from './venue-info.js';
+import type { SearchPerformanceTrace } from './search-performance.js';
+import { MAP_ROW_COLUMNS, mapQueryRow } from './map-query.js';
+import { MAP_CTE_MIN_ROWS, MAP_QUERY_ROWS } from './map-limits.js';
 
 export interface Task {
   id: number; run_id: number; kind: 'list' | 'detail'; source: Source; city_id: string;
@@ -15,7 +18,7 @@ const timestamp = () => new Date().toISOString();
 export class Store {
   db: DatabaseSync;
   private defaultCities: City[];
-  constructor(public filename: string, defaults: City[]) {
+  constructor(public filename: string, defaults: City[], private diagnostics: { performanceTrace?: SearchPerformanceTrace } = {}) {
     this.defaultCities = defaults;
     if (filename !== ':memory:') mkdirSync(path.dirname(filename), { recursive: true });
     this.db = new DatabaseSync(filename);
@@ -132,6 +135,15 @@ export class Store {
     return this.item(id)!;
   }
   search(filters: SearchFilters, all = false): SearchResult {
+    return this.searchProjected(filters, all, 'p.*,b.note,b.performance_id AS bookmarked', row => this.mapItem(row));
+  }
+  /** Large map reads retain metadata and a bounded ordered prefix for truncation. */
+  searchMap(filters: SearchFilters): Omit<SearchResult, 'items'> & { items: MapPerformance[] } {
+    return this.searchProjected(filters, true, MAP_ROW_COLUMNS, mapQueryRow, { mapRowLimit: MAP_QUERY_ROWS });
+  }
+  private searchProjected<T>(filters: SearchFilters, all: boolean, columns: string, project: (row: Row) => T,
+    options: { mapRowLimit?: number } = {}): Omit<SearchResult, 'items'> & { items: T[] } {
+    const trace = this.diagnostics.performanceTrace;
     const clauses = ["p.classification='performance'"]; const params: (string|number)[] = [];
     const cities = filters.cities?.split(',').filter(Boolean) || [];
     if (cities.length) { clauses.push(`p.city_id IN (${cities.map(() => '?').join(',')})`); params.push(...cities); }
@@ -144,17 +156,42 @@ export class Store {
     if (filters.status === 'upcoming') { clauses.push('p.start_date>?'); params.push(today()); }
     if (filters.status === 'ongoing') { clauses.push('p.start_date<=? AND p.end_date>=?'); params.push(today(),today()); }
     if (filters.status === 'ended') { clauses.push('p.end_date<?'); params.push(today()); }
-    const base = `FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE ${clauses.join(' AND ')}`;
-    const pendingDetails = Number((this.db.prepare(`SELECT count(*) AS n ${base} AND p.detail_state!='complete'`).get(...params) as Row).n);
-    if (filters.price) { clauses.push("p.detail_state='complete' AND json_extract(p.data,'$.priceType')=?"); params.push(filters.price); }
-    if (filters.age) { clauses.push("p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0"); params.push(filters.age); }
+    // Count-only reads do not need bookmark rows unless the bookmark filter is active.
+    const countFrom = `FROM performances p ${filters.bookmarked === 'true' ? 'JOIN bookmarks b ON b.performance_id=p.id' : ''}`;
+    const base = `${countFrom} WHERE ${clauses.join(' AND ')}`;
+    let started = trace ? performance.now() : 0;
+    let pendingDetails: number, countRows: Row[];
+    if (!filters.price && !filters.age) {
+      countRows = this.db.prepare(`SELECT p.source,count(*) AS n,
+        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending ${base} GROUP BY p.source`).all(...params) as Row[];
+      pendingDetails = countRows.reduce((sum, row) => sum + Number(row.pending), 0);
+      if (trace) { trace({ phase: 'search.counts', durationMs: performance.now() - started, rows: countRows.length }); started = performance.now(); }
+    } else {
+      // Pending detail belongs to the base selection, before admission filters. Keep admission
+      // predicates before GROUP BY: grouping a CASE over wide JSON makes these reads slower.
+      pendingDetails = Number((this.db.prepare(`SELECT count(*) AS n ${base} AND p.detail_state!='complete'`).get(...params) as Row).n);
+      if (trace) { trace({ phase: 'search.pending', durationMs: performance.now() - started, rows: 1 }); started = performance.now(); }
+      if (filters.price) { clauses.push("p.detail_state='complete' AND json_extract(p.data,'$.priceType')=?"); params.push(filters.price); }
+      if (filters.age) { clauses.push("p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0"); params.push(filters.age); }
+      countRows = this.db.prepare(`SELECT p.source,count(*) AS n ${countFrom} WHERE ${clauses.join(' AND ')} GROUP BY p.source`).all(...params) as Row[];
+      if (trace) { trace({ phase: 'search.sourceCounts', durationMs: performance.now() - started, rows: countRows.length }); started = performance.now(); }
+    }
     const filtered = `FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE ${clauses.join(' AND ')}`;
-    const countRows = this.db.prepare(`SELECT p.source,count(*) AS n ${filtered} GROUP BY p.source`).all(...params) as Row[];
     const sourceCounts = { kopis: 0, culture: 0 }; for (const r of countRows) sourceCounts[r.source as Source] = Number(r.n);
     const total = sourceCounts.kopis + sourceCounts.culture;
     const limit = Math.max(1, Math.min(100, Math.floor(Number(filters.limit)) || 30));
     const pages = Math.max(1, Math.ceil(total/limit)); const page = Math.max(1, Math.min(pages, Math.floor(Number(filters.page))||1));
-    const rows = this.db.prepare(`SELECT p.*,b.note,b.performance_id AS bookmarked ${filtered} ORDER BY p.start_date DESC,p.id DESC ${all ? '' : 'LIMIT ? OFFSET ?'}`).all(...params, ...(all ? [] : [limit, (page-1)*limit])) as Row[];
+    // Use all selected source groups, including historical sources omitted from the
+    // public total. countRows already includes admission predicates; no extra scan.
+    // Small map selections keep the original plan. Search/export never set this option.
+    const mapRowLimit = options.mapRowLimit !== undefined && countRows.reduce((sum, row) => sum + Number(row.n), 0) >= MAP_CTE_MIN_ROWS
+      ? options.mapRowLimit : undefined;
+    const rows = mapRowLimit === undefined
+      ? this.db.prepare(`SELECT ${columns} ${filtered} ORDER BY p.start_date DESC,p.id DESC ${all ? '' : 'LIMIT ? OFFSET ?'}`).all(...params, ...(all ? [] : [limit, (page-1)*limit])) as Row[]
+      : this.db.prepare(`WITH selected AS MATERIALIZED (
+          SELECT p.id,p.start_date ${filtered} ORDER BY p.start_date DESC,p.id DESC LIMIT ?
+        ) SELECT ${columns} FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC`).all(...params, mapRowLimit) as Row[];
+    if (trace) { trace({ phase: 'search.rows', durationMs: performance.now() - started, rows: rows.length }); started = performance.now(); }
     const sources: Source[] = filters.source ? [filters.source] : ['kopis','culture'];
     const selectedCities = cities.length ? cities : this.cities().map(c => c.id);
     const from = filters.from || today(), to = filters.to || today();
@@ -169,7 +206,10 @@ export class Store {
     const covered = new Set(coverage.filter(row => row.complete_id !== null && (row.incomplete_id === null || Number(row.incomplete_id) < Number(row.complete_id)))
       .map(row => JSON.stringify([row.city_id,row.source])));
     const coverageIncomplete = selectedCities.some(city => sources.some(source => !covered.has(JSON.stringify([city,source]))));
-    return { items: rows.map(r=>this.mapItem(r)), total, page, pages, sourceCounts, pendingDetails,
+    if (trace) { trace({ phase: 'search.coverage', durationMs: performance.now() - started, rows: coverage.length }); started = performance.now(); }
+    const items = rows.map(project);
+    if (trace) trace({ phase: 'search.decode', durationMs: performance.now() - started, rows: rows.length });
+    return { items, total, page, pages, sourceCounts, pendingDetails,
       partial: coverageIncomplete || (!!(filters.price || filters.age) && pendingDetails > 0), snapshotAt: timestamp() };
   }
   counts() {

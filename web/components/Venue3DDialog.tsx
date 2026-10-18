@@ -8,30 +8,22 @@ import {
 import 'cesium/Build/Cesium/Widgets/widgets.css';
 import '../venue-3d.css';
 import { safeUrl } from '../lib/format';
-import { buildingCameraRange, DEFAULT_ASSUMED_HEIGHT, MAX_ASSUMED_HEIGHT, MIN_ASSUMED_HEIGHT, venueHeightModel, zoomedDistance, type BuildingHeight } from '../lib/venue-3d';
+import { buildingCameraRange, DEFAULT_ASSUMED_HEIGHT, MAX_ASSUMED_HEIGHT, MIN_ASSUMED_HEIGHT, venueHeightModel, zoomedDistance } from '../lib/venue-3d';
+import type { BuildingRequest, BuildingResult } from '../lib/venue-building-client';
 import { Modal } from './Modal';
 import { canViewVenue3D, type Venue3DLocation } from './Venue3D';
 
 type Ring = number[][];
-interface VenueBuilding extends BuildingHeight {
-  type: 'Polygon' | 'MultiPolygon'; coordinates: number[][][] | number[][][][];
-  name: string; sourceUrl: string; osmType: string; osmId: number;
-  confidence: 'coordinate_and_name' | 'coordinate' | 'name_nearby'; matchMethod: string; distanceMeters: number;
-}
-interface BuildingResult {
-  status: 'available' | 'unavailable'; performanceId: number; source: string; attribution: string;
-  building: VenueBuilding | null; message: string; reason?: string; checkedAt: string;
-}
 type TileState = 'loading' | 'ready' | 'partial' | 'timeout';
 type ViewMode = 'perspective' | 'top' | 'custom';
 const PITCH = -32;
 const TILE_TIMEOUT_MS = 12000;
-// The server can try two providers for up to 10 seconds each.
-const BUILDING_TIMEOUT_MS = 25000;
 const RENDER_TIMEOUT_MS = 30000;
 const positionList = (ring: Ring) => Cartesian3.fromDegreesArray(ring.flatMap(point => [point[0], point[1]]));
 
-export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation; onClose: () => void }) {
+export default function Venue3DDialog({ item, onClose, buildingRequest, onRetry }: {
+  item: Venue3DLocation; onClose: () => void; buildingRequest: BuildingRequest; onRetry: () => void;
+}) {
   const host = useRef<HTMLDivElement>(null);
   const viewer = useRef<Viewer | null>(null);
   const reloadBackground = useRef<(() => void) | null>(null);
@@ -44,7 +36,6 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
   const [buildingLoading, setBuildingLoading] = useState(true);
   const [assumedHeight, setAssumedHeight] = useState(DEFAULT_ASSUMED_HEIGHT);
   const [mode, setMode] = useState<ViewMode>('perspective');
-  const [attempt, setAttempt] = useState(0);
   const heightId = useId();
   const found = building?.status === 'available' ? building.building : null;
   const model = venueHeightModel(found ?? null, assumedHeight);
@@ -86,9 +77,7 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
     let renderedFrames = 0;
     let buildingTimedOut = false;
     let tileTimer: ReturnType<typeof setTimeout> | undefined;
-    let requestTimer: ReturnType<typeof setTimeout> | undefined;
     let renderTimer: ReturnType<typeof setTimeout> | undefined;
-    const controller = new AbortController();
     let resize: ResizeObserver | undefined;
     const newImagery = () => {
       const imagery = new OpenStreetMapImageryProvider({ url: 'https://tile.openstreetmap.org/', maximumLevel: 19,
@@ -154,14 +143,13 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
       renderTimer = setTimeout(() => { if (!disposed && !visualReady) setError('3D 화면 준비가 지연되고 있습니다. 연결 상태를 확인하고 다시 시도해주세요.'); }, RENDER_TIMEOUT_MS);
       resize = new ResizeObserver(() => { if (current && !current.isDestroyed()) { current.resize(); current.scene.requestRender(); } });
       resize.observe(host.current);
-      requestTimer = setTimeout(() => { buildingTimedOut = true; controller.abort(); }, BUILDING_TIMEOUT_MS);
       void (async () => {
         try {
-          const response = await fetch(`/api/venues/building?performanceId=${item.id}`, { credentials: 'same-origin', signal: controller.signal });
-          if (!response.ok) throw new Error('건물 정보를 가져오지 못했습니다. 공연장 위치만 표시합니다.');
-          const result = await response.json() as BuildingResult;
+          const outcome = await buildingRequest.result;
           if (disposed || !current || current.isDestroyed()) return;
-          clearTimeout(requestTimer);
+          if (outcome.kind === 'cancelled') return;
+          if (outcome.kind === 'failed') { buildingTimedOut = outcome.reason === 'timeout'; throw new Error('Building request failed'); }
+          const result = outcome.value;
           setBuilding(result); setBuildingLoading(false);
           const shape = result.status === 'available' ? result.building : null;
           const height = venueHeightModel(shape, DEFAULT_ASSUMED_HEIGHT);
@@ -205,19 +193,21 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
               reason: buildingTimedOut ? 'timeout' : 'upstream_unavailable', checkedAt: '' });
           }
         } finally {
-          clearTimeout(requestTimer);
           if (!disposed) { buildingResolved = true; setBuildingLoading(false); current?.scene.requestRender(); }
         }
       })();
     } catch {
+      buildingRequest.cancel();
       setError('이 브라우저에서 WebGL 3D를 시작할 수 없습니다. 하드웨어 가속을 지원하는 Chrome 또는 Edge에서 다시 열어주세요.');
       setBuildingLoading(false);
     }
     return () => {
-      disposed = true; reloadBackground.current = null; controller.abort(); clearTimeout(tileTimer); clearTimeout(requestTimer); clearTimeout(renderTimer);
+      // The parent session owns request cancellation. React StrictMode can replay
+      // this Viewer effect while reusing the same still-active request.
+      disposed = true; reloadBackground.current = null; clearTimeout(tileTimer); clearTimeout(renderTimer);
       resize?.disconnect(); if (current && !current.isDestroyed()) current.destroy(); viewer.current = null; buildingEntities.current = [];
     };
-  }, [item.id, item.latitude, item.longitude, attempt]);
+  }, [item.id, item.latitude, item.longitude, buildingRequest]);
 
   useEffect(() => {
     const current = viewer.current;
@@ -252,7 +242,7 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
           <LoaderCircle size={25} className="spin" aria-hidden="true" /><strong>공연장 화면을 준비하고 있습니다</strong>
           <div className="venue-3d-loading-steps"><span>{tiles === 'loading' ? <LoaderCircle size={14} className="spin" /> : <Check size={14} />}지도 배경 {tiles === 'loading' ? '불러오는 중' : tiles === 'ready' ? '준비됨' : '연결 확인 필요'}</span><span>{buildingLoading ? <LoaderCircle size={14} className="spin" /> : <Check size={14} />}건물 자료 {buildingLoading ? '확인 중' : model ? '확인됨' : '위치만 제공'}</span></div>
         </div>}
-        {error && <div className="venue-3d-loading venue-3d-error" role="alert"><strong>3D 화면을 준비하지 못했습니다</strong><p>{error}</p><button type="button" className="button" onClick={() => setAttempt(value => value + 1)}>다시 시도</button></div>}
+        {error && <div className="venue-3d-loading venue-3d-error" role="alert"><strong>3D 화면을 준비하지 못했습니다</strong><p>{error}</p><button type="button" className="button" onClick={onRetry}>다시 시도</button></div>}
       </div>
       <div className="venue-3d-controls" role="group" aria-label="3D 지도 조작">
         <button type="button" disabled={controlsDisabled} onClick={() => zoom('in')} aria-label="3D 지도 확대"><Plus size={18} aria-hidden="true" /></button>
@@ -267,7 +257,7 @@ export default function Venue3DDialog({ item, onClose }: { item: Venue3DLocation
         {model && <p>건물 외곽과 높이로 만든 모형이며 실제 지붕·외벽의 모습을 재현하지는 않습니다.</p>}
         {!loading && tiles === 'loading' && <p className="venue-3d-background-progress"><LoaderCircle size={14} className="spin" aria-hidden="true" />지도 배경을 불러오는 중입니다. 공연장 화면은 먼저 둘러볼 수 있습니다.</p>}
         {(tiles === 'partial' || tiles === 'timeout') && <p className="venue-3d-warning">지도 배경 {tiles === 'timeout' ? '로딩 시간이 초과되었습니다' : '일부를 가져오지 못했습니다'}. 확인된 모형과 위치는 계속 볼 수 있습니다. <button type="button" className="text-button" onClick={() => reloadBackground.current?.()}>배경만 다시 불러오기</button></p>}
-        {!buildingLoading && !model && !error && <button type="button" className="text-button" onClick={() => setAttempt(value => value + 1)}>건물 자료 다시 확인</button>}
+        {!buildingLoading && !model && !error && <button type="button" className="text-button" onClick={onRetry}>건물 자료 다시 확인</button>}
         <p className="venue-3d-help">드래그로 이동 · 휠로 확대 · Ctrl + 드래그로 회전 · 지형 높이는 반영하지 않습니다.</p>
       </div>
     </section>

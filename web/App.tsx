@@ -158,7 +158,8 @@ function CultureDesk() {
     const complete = boot.runs.filter(r => r.state === 'complete').length;
     return [
       boot.sources.map(s => `${s.source}:${s.count}:${s.configured ? 1 : 0}`).join(','),
-      boot.pendingDetails, complete, boot.runs.filter(isActive).length,
+      boot.today, boot.pendingDetails, complete, boot.runs.filter(isActive).length,
+      boot.published ? `published:${boot.published.snapshotAt}` : '',
       fallback ? `snapshot:${fallback.snapshotAt}` : 'live',
     ].join('|');
   }, [boot, fallback]);

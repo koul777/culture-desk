@@ -11,15 +11,21 @@ const OFFLINE = '서버에 연결할 수 없습니다. Culture Desk가 실행 �
 
 async function readError(res: Response, request: number, signal?: AbortSignal | null): Promise<string> {
   const body = await res.json().catch(() => null) as { error?: unknown } | null;
-  if (!signal?.aborted) snapshotAvailability.observe(request, body);
+  signal?.throwIfAborted();
+  snapshotAvailability.observe(request, body);
   if (body && typeof body.error === 'string' && body.error.trim()) return body.error;
   return `요청을 처리하지 못했습니다. (HTTP ${res.status})`;
 }
 
 async function send(path: string, init?: RequestInit, request = snapshotAvailability.begin()): Promise<Response> {
+  init?.signal?.throwIfAborted();
   let res: Response;
   try { res = await fetch(path, { credentials: 'same-origin', ...init }); }
-  catch { throw new ApiError(OFFLINE, 0); }
+  catch {
+    init?.signal?.throwIfAborted();
+    throw new ApiError(OFFLINE, 0);
+  }
+  init?.signal?.throwIfAborted();
   if (!res.ok) {
     throw new ApiError(await readError(res, request, init?.signal), res.status);
   }
@@ -31,10 +37,15 @@ async function json<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await send(path, init, request);
   try {
     const value = await res.json() as T;
-    if (!init?.signal?.aborted) snapshotAvailability.observe(request, value, path === '/api/bootstrap');
+    // Some transports finish decoding despite cancellation. Never apply their late data or status.
+    init?.signal?.throwIfAborted();
+    snapshotAvailability.observe(request, value, path === '/api/bootstrap');
     return value;
   }
-  catch { throw new ApiError('서버 응답을 읽을 수 없습니다.', res.status); }
+  catch {
+    init?.signal?.throwIfAborted();
+    throw new ApiError('서버 응답을 읽을 수 없습니다.', res.status);
+  }
 }
 
 /** Bound only the shared status read; long collection and export requests keep their own lifecycle. */
@@ -77,8 +88,8 @@ export interface CityInput { name: string; sido: string; sigungu: string; kopisS
 export const api = {
   cloudTick: () => mutate<{ ok: boolean }>('POST', '/api/cloud/tick'),
   bootstrap,
-  search: (filters: SearchFilters) => json<SearchResult>(`/api/performances?${queryString(filters)}`),
-  map: (filters: SearchFilters) => json<MapResult>(`/api/map?${queryString(filters)}`),
+  search: (filters: SearchFilters, signal?: AbortSignal) => json<SearchResult>(`/api/performances?${queryString(filters)}`, { signal }),
+  map: (filters: SearchFilters, signal?: AbortSignal) => json<MapResult>(`/api/map?${queryString(filters)}`, { signal }),
   performance: (id: number) => json<Performance>(`/api/performances/${id}`),
   requestDetail: (id: number) => mutate<{ queued: boolean }>('POST', `/api/performances/${id}/detail`),
   requestDetails: (filters: SearchFilters) => mutate<{ queued: number }>('POST', '/api/details', { filters }),

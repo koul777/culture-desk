@@ -42,6 +42,11 @@
 .map-panel-refined .map-empty-state strong { font-size: 13px; }
 .map-panel-refined .map-empty-state span { font-size: 11px; line-height: 1.6; }
 .map-panel-refined .map-tile-error { bottom: 118px; font-size: 11px; }
+@media (prefers-reduced-motion: reduce) {
+  /* A nonzero transition-duration on every descendant delays inherited visibility
+     one level per frame after Leaflet reveals its popup, blocking keyboard focus. */
+  .leaflet-popup, .leaflet-popup * { transition: none !important; }
+}
 @media (max-width: 600px) {
   .map-panel-refined .map-heading { top: 10px; left: 10px; padding: 9px 11px; max-width: calc(100% - 120px); }
   .map-panel-refined .map-heading strong { font-size: 12px; }

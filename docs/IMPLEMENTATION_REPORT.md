@@ -1,6 +1,8 @@
 ﻿# Culture Desk 구현·검증 결과
 
-2026-10-16 갱신 · [운영 사이트](https://culture-desk.vercel.app) · [지도 바로가기](https://culture-desk.vercel.app/#map)
+2026-10-16 검증 기록 · [운영 사이트](https://culture-desk.vercel.app) · [지도 바로가기](https://culture-desk.vercel.app/#map)
+
+이 문서는 당시의 배포·자료 검증을 보존한다. 이후 공개 웹은 GitHub Actions 수집 → 공개 JSON 스냅샷 → Vercel 배포로 전환했다. 현재 운영 구조와 검증 명령은 [프로그램 계획](PROGRAM_PLAN.md), [자동 갱신 운영](AUTOMATIC_REFRESH.md), [README](../README.md)를 기준으로 한다. 아래 DB·수집 API·인증키 연결 상태는 현재 운영의 재검증 결과가 아니다.
 
 현재 제품은 **전국 주요 공연 검색 프로그램**이다. 로그인·접속 암호 없이 지역 체크와 기간 조건으로 공연을 찾고, 카드·표·지도·공연장 3D·상세·엑셀을 이용한다. 전시는 제외한다. 기획 메모·관심 보관함은 공개 화면에서 제거했으며 기존 개인 자료는 DB에 보존한다.
 

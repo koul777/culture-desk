@@ -6,6 +6,8 @@ import os from 'node:os';
 import { Store } from '../store.js';
 import { NATIONAL_CITIES } from '../providers/cities.js';
 import { gzipSync, gunzipSync } from 'node:zlib';
+import { SnapshotCapacityError } from './snapshot-errors.js';
+export { SnapshotCapacityError } from './snapshot-errors.js';
 
 export const MAX_SNAPSHOT_BYTES = 16 * 1024 * 1024;
 export const MAX_DATABASE_BYTES = 128 * 1024 * 1024;
@@ -25,10 +27,6 @@ export function decodeSnapshot(snapshot: Buffer): Buffer {
   if(database.byteLength>MAX_DATABASE_BYTES)throw new SnapshotCapacityError();
   if(!database.subarray(0,SQLITE_HEADER.length).equals(SQLITE_HEADER))throw new Error('Invalid database snapshot');
   return database;
-}
-export class SnapshotCapacityError extends Error {
-  readonly code = 'SNAPSHOT_CAPACITY';
-  constructor() { super('Cloud snapshot capacity exceeded'); this.name = 'SnapshotCapacityError'; }
 }
 export interface SnapshotClient {
   query(text: string, values?: any[]): Promise<{ rows: any[]; rowCount?: number | null }>;

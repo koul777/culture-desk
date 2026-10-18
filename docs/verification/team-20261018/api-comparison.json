@@ -1,0 +1,87 @@
+{
+  "measuredAt": "2026-10-18T13:47:00.372Z",
+  "snapshotHash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+  "performances": 5649,
+  "jsonScenariosEqual": 30,
+  "repeatedResponsesEqual": 6,
+  "exportRowsEqual": 51,
+  "scope": "Same public snapshot, no concurrent team builds/tests; warm medians include response body decoding but exclude client/network/rendering. After measurements are in-process cache hits. First/cold measurements are separate.",
+  "measurements": [
+    {
+      "name": "bootstrap",
+      "beforeMedianMs": 11.881,
+      "afterMedianMs": 0.257,
+      "reductionPercent": 97.84,
+      "beforeP95Ms": 15.756,
+      "afterP95Ms": 0.421
+    },
+    {
+      "name": "national-search",
+      "beforeMedianMs": 27.552,
+      "afterMedianMs": 0.259,
+      "reductionPercent": 99.06,
+      "beforeP95Ms": 36.309,
+      "afterP95Ms": 0.385
+    },
+    {
+      "name": "regional-search",
+      "beforeMedianMs": 9.494,
+      "afterMedianMs": 0.224,
+      "reductionPercent": 97.64,
+      "beforeP95Ms": 13.37,
+      "afterP95Ms": 0.336
+    },
+    {
+      "name": "national-map",
+      "beforeMedianMs": 368.126,
+      "afterMedianMs": 2.612,
+      "reductionPercent": 99.29,
+      "beforeP95Ms": 435.385,
+      "afterP95Ms": 7.337
+    },
+    {
+      "name": "regional-map",
+      "beforeMedianMs": 10.004,
+      "afterMedianMs": 0.209,
+      "reductionPercent": 97.91,
+      "beforeP95Ms": 12.456,
+      "afterP95Ms": 0.321
+    },
+    {
+      "name": "detail",
+      "beforeMedianMs": 6.769,
+      "afterMedianMs": 0.146,
+      "reductionPercent": 97.84,
+      "beforeP95Ms": 7.844,
+      "afterP95Ms": 0.256
+    }
+  ],
+  "coldBefore": {
+    "samples": 5,
+    "medianMs": 225.986,
+    "p95Ms": 380.775,
+    "minMs": 212.74
+  },
+  "coldAfter": {
+    "samples": 5,
+    "medianMs": 209.689,
+    "p95Ms": 346.843,
+    "minMs": 192.351
+  },
+  "exportBefore": {
+    "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+    "samples": 1,
+    "elapsedMs": 135.257,
+    "bytes": 16808,
+    "rows": 51,
+    "contentsHash": "8ab245b1ef3466c68197fa5b0f480867e066c5f9ed8cb368def5ba6cee77f417"
+  },
+  "exportAfter": {
+    "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+    "samples": 1,
+    "elapsedMs": 138.58,
+    "bytes": 16807,
+    "rows": 51,
+    "contentsHash": "8ab245b1ef3466c68197fa5b0f480867e066c5f9ed8cb368def5ba6cee77f417"
+  }
+}

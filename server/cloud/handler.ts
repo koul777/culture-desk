@@ -2,11 +2,13 @@ import type { Provider, PublicRefreshStatus, Source } from '../../shared/types.j
 import type { Config } from '../config.js';
 import { createApp, isSearchRoute } from '../app.js';
 import type { Store } from '../store.js';
-import { getSnapshotRepository, SnapshotCapacityError, type SnapshotRepository } from './snapshot.js';
+import type { SnapshotRepository } from './snapshot.js';
+import { SnapshotCapacityError } from './snapshot-errors.js';
 import { equalSecret, validMutationOrigin } from './auth.js';
-import { getRefreshJobRepository, REFRESH_SCHEDULE } from './refresh-jobs.js';
-import { runCloudCollection } from './collection.js';
+import { REFRESH_SCHEDULE } from './refresh-schedule.js';
 import { handleVWorldRequest, isVWorldRoute } from '../vworld.js';
+import { today } from '../dates.js';
+import { PublishedResponseCache } from './published-response-cache.js';
 import { annotateReadonlyExport, databaseFailed, databaseSucceeded, defaultDatabaseCircuit, DATABASE_UNAVAILABLE_MESSAGE,
   isReadonlyFallbackRoute, loadReadonlyFallback, mayAttemptDatabase, unavailableRefresh,
   type ReadonlyFallbackOptions, type ReadonlyModel } from './readonly-fallback.js';
@@ -24,6 +26,24 @@ export interface CloudOptions {
 const headers = { 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin' };
 export const MAX_API_RESPONSE_BYTES = 4 * 1024 * 1024;
 const capacityMessage = '조회 결과가 다운로드 한도를 초과했습니다. 지역·기간 등 조회 조건을 좁혀 다시 시도하세요.';
+const readonlyRuntimes = new WeakMap<ReadonlyModel, ReturnType<typeof createApp>>();
+const publishedResponses = new WeakMap<ReadonlyModel, PublishedResponseCache>();
+
+// A snapshot owns a query-only store for the lifetime of this process. Reuse its router;
+// mutable/database stores still get an isolated runtime that closes after each request.
+function readonlyRuntime(model: ReadonlyModel) {
+  let ready = readonlyRuntimes.get(model);
+  if (!ready) {
+    ready = (async () => {
+      const runtime = await createApp(cloudConfig(model.store, {}), { store: model.store, providers: {}, startWorker: false, serveStatic: false, searchOnly: true, readonlySnapshotAt: model.metadata.snapshotAt });
+      try { await runtime.app.ready(); return runtime; }
+      catch (error) { await runtime.app.close(); throw error; }
+    })();
+    readonlyRuntimes.set(model, ready);
+    void ready.catch(() => { if (readonlyRuntimes.get(model) === ready) readonlyRuntimes.delete(model); });
+  }
+  return ready;
+}
 function vworldRequest(request:Request,url:URL):Request {
   // Vercel's /api/:path* rewrite forwards its unused capture as a query parameter.
   // Remove only the single exact capture for this route; user input remains strict.
@@ -41,7 +61,9 @@ function json(body: unknown, status = 200, extra: Record<string,string> = {}): R
 function responseCapacity(): Response { return json({ code: 'RESPONSE_CAPACITY', error: capacityMessage }, 413); }
 async function automaticRefreshStatus(options: CloudOptions): Promise<PublicRefreshStatus & {enabled:true}> {
   try {
-    return { ...(await (options.refreshStatus ? options.refreshStatus() : getRefreshJobRepository().publicStatus())), enabled:true };
+    const status = options.refreshStatus ? await options.refreshStatus()
+      : await (await import('./refresh-jobs.js')).getRefreshJobRepository().publicStatus();
+    return { ...status, enabled:true };
   } catch {
     return {enabled:true,status:'unavailable',day:null,from:null,to:null,lastSuccessAt:null,updatedAt:null,counts:null,
       error:'자동 갱신 상태를 확인하지 못했습니다. 잠시 후 다시 확인하세요.',
@@ -71,13 +93,21 @@ async function servePublished(request:Request,options:CloudOptions):Promise<Resp
     const response=json({code:'SNAPSHOT_UNAVAILABLE',error:'공연 자료를 불러오지 못했습니다. 잠시 후 다시 시도하세요.'},503,{'Retry-After':'60'});
     return method==='HEAD'?new Response(null,{status:response.status,headers:response.headers}):response;
   }
-  return serveStoredRequest(model.store,request,options,undefined,model,true);
+  // Date-dependent filters and bootstrap.today expire at the same day boundary as Store.
+  // Export and external building lookups keep their independent freshness/lifecycle.
+  const cacheable=method==='GET'&&(['/api/bootstrap','/api/performances','/api/map'].includes(route)||/^\/api\/performances\/[1-9]\d*$/.test(route));
+  const serve=()=>serveStoredRequest(model.store,request,options,undefined,model,true);
+  if(!cacheable)return serve();
+  let cache=publishedResponses.get(model);
+  if(!cache){cache=new PublishedResponseCache();publishedResponses.set(model,cache);}
+  const url=new URL(request.url);
+  return cache.read(url.pathname+url.search,today(),serve);
 }
 async function serveStoredRequest(store:Store,request:Request,options:CloudOptions,body?:string,fallback?:ReadonlyModel,published=false):Promise<Response> {
   const env=options.env||process.env,url=new URL(request.url),route=url.pathname.replace(/\/$/,''),method=request.method.toUpperCase();
   const capacity=()=>{const response=responseCapacity();return method==='HEAD'?new Response(null,{status:response.status,headers:response.headers}):response;};
   const config=cloudConfig(store,env);
-  const runtime=await createApp(config,{store,providers:fallback?{}:options.providers,startWorker:false,serveStatic:false,searchOnly:true,configLoader:()=>config});
+  const runtime=fallback?await readonlyRuntime(fallback):await createApp(config,{store,providers:options.providers,startWorker:false,serveStatic:false,searchOnly:true,configLoader:()=>config});
   try {
     // HEAD executes the same read path but returns no body, including fallback metadata transformations.
     const injected=await runtime.app.inject({method:(method==='HEAD'?'GET':method) as any,url:url.pathname+url.search,
@@ -100,8 +130,8 @@ async function serveStoredRequest(store:Store,request:Request,options:CloudOptio
         bootstrap.automaticRefresh=unavailableRefresh(env.AUTOMATIC_REFRESH_ENABLED==='1');
       }else if(env.AUTOMATIC_REFRESH_ENABLED==='1')bootstrap.automaticRefresh=await automaticRefreshStatus(options);
       response=json(bootstrap);
-    }else if(fallback&&['/api/performances','/api/map'].includes(route)&&injected.statusCode===200){
-      response=json({...injected.json<Record<string,unknown>>(),snapshotAt:fallback.metadata.snapshotAt,...(published?{}:{fallback:fallback.metadata})});
+    }else if(fallback&&!published&&['/api/performances','/api/map'].includes(route)&&injected.statusCode===200){
+      response=json({...injected.json<Record<string,unknown>>(),fallback:fallback.metadata});
     }else{
       const responseHeaders=new Headers(headers);
       for(const name of ['content-type','content-disposition'])if(injected.headers[name])responseHeaders.set(name,String(injected.headers[name]));
@@ -111,7 +141,7 @@ async function serveStoredRequest(store:Store,request:Request,options:CloudOptio
     }
     if(fallback){response.headers.set('X-Culture-Data-Mode',published?'published':'snapshot');response.headers.set('X-Culture-Snapshot-At',fallback.metadata.snapshotAt);}
     return method==='HEAD'?new Response(null,{status:response.status,headers:response.headers}):response;
-  }finally{await runtime.app.close();}
+  }finally{if(!fallback)await runtime.app.close();}
 }
 async function databaseUnavailable(request:Request,options:CloudOptions):Promise<Response> {
   const model=await loadReadonlyFallback(options.readonlyFallback);
@@ -145,13 +175,14 @@ export async function handleCloudRequest(request: Request, options: CloudOptions
   const circuit=options.repository||defaultDatabaseCircuit,now=()=>options.readonlyFallback?.now?.()??Date.now();
   if(!mayAttemptDatabase(circuit,now()))return databaseUnavailable(request,options);
   try {
-    const repo = options.repository || getSnapshotRepository();
+    const repo = options.repository || (await import('./snapshot.js')).getSnapshotRepository();
     if (cron && env.AUTOMATIC_REFRESH_ENABLED === '1') {
       const status=await automaticRefreshStatus(options);
       if(status.status==='unavailable')databaseFailed(circuit,now());else databaseSucceeded(circuit);
       return json({ok:true,automaticRefresh:status});
     }
     if ((route === '/api/cloud/tick' && method === 'POST') || cron) {
+      const { runCloudCollection } = await import('./collection.js');
       const result=await runCloudCollection({...options,repository:repo,env,signal:request.signal});databaseSucceeded(circuit);return json(result);
     }
     const write = !['GET','HEAD'].includes(method);

@@ -146,12 +146,16 @@ REQUEST_INTERVAL_MS=350
 | `npm run dev` | API 서버와 Vite 개발 서버 실행 |
 | `npm run typecheck` | TypeScript 검사 |
 | `npm test` | 자동 테스트 |
+| `npm run quality` | 타입 검사 → 전체 테스트 → 빌드 → 격리된 브라우저 검수 |
+| `npm run test:e2e` | 빌드된 화면의 데스크톱·모바일 브라우저 검수 |
 | `npm run build` | 타입 검사 및 배포 빌드 |
 | `npm start` | 로컬 서버 실행 |
 | `npm run backup` | 로컬 DB를 `data/backups/`에 백업 |
 | `npm run restore -- data/backups/백업파일.db` | 백업으로 로컬 DB 복원 |
 
 복원 전에는 로컬 프로그램을 종료합니다. 복원 도구는 DB 무결성과 스키마를 확인하고 기존 DB를 별도 파일로 보존합니다. `.env`는 DB 백업에 포함되지 않습니다.
+
+개발용 브라우저 검수는 최초 1회 `npx playwright install chromium`으로 Chromium을 준비합니다. `npm run quality`는 실패한 단계에서 멈추며 결과를 `test-results/quality-summary.json`에 남깁니다. 브라우저 검수는 별도 TEST 자료와 실제 공개 API 처리 코드를 사용하며 외부 공연 API를 호출하지 않습니다. 단독 `npm run test:e2e` 실행 전에는 `npm run build`가 필요합니다.
 
 구성은 **React · TypeScript · Vite / Fastify · SQLite / Vercel / GitHub Actions**입니다.
 
@@ -189,6 +193,7 @@ docs/                      API·운영·구현·검증 문서
 - [API 연결·신청 안내](docs/API_APPLICATIONS.md)
 - [전국 자동 갱신 운영](docs/AUTOMATIC_REFRESH.md)
 - [수집·조회 성능 비교와 데이터 일치 검증](docs/COLLECTION_PERFORMANCE.md)
+- [공개 API 속도·배포 복구·검증 자동화 개선](docs/QUALITY_SPEED_REPORT_2026-10-18.md)
 - [Vercel 배포·저장·운영](docs/VERCEL.md)
 - [구현 및 검증 보고서](docs/IMPLEMENTATION_REPORT.md)
 - [전국 수집 도구 사용법](scripts/README-national.md)

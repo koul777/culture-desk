@@ -7,6 +7,8 @@ import { useDesk } from '../desk';
 import { directionLinks } from '../lib/directions';
 import { formatPeriod, number } from '../lib/format';
 import { clusterProjectedPoints } from '../lib/map-clusters';
+import { groupVenueCoordinates } from '../lib/map-data';
+import { markAfterPaint, measurePerformance, startPerformanceMeasure, type ResultTrace } from '../lib/performance';
 import '../map-refinement.css';
 import { Venue3D } from './Venue3D';
 
@@ -28,28 +30,24 @@ function cityIcon(city: City, count: number, active: boolean, zoom: number) {
   return L.divIcon({ className: 'city-map-marker', html: el, iconSize: zoom < 10 ? [34, 34] : [100, 44], iconAnchor: zoom < 10 ? [17, 17] : [50, 22] });
 }
 
-function accessibleMarker(marker: L.Marker, label: string, popup?: HTMLElement) {
+function accessibleMarker(marker: L.Marker, label: string, openPopupFromKeyboard?: () => void) {
   marker.on('add', () => {
     const element = marker.getElement();
     if (!element) return;
     element.setAttribute('role', 'button');
     element.setAttribute('aria-label', label);
-    if (popup) element.setAttribute('aria-haspopup', 'dialog');
+    if (openPopupFromKeyboard) element.setAttribute('aria-haspopup', 'dialog');
     element.addEventListener('keydown', event => {
       if (event.key === ' ' || event.key === 'Enter') {
         event.preventDefault(); event.stopPropagation();
-        marker.fire('click', { originalEvent: event });
-        if (popup) {
-          const container = element.closest('.performance-map');
-          // Focusing a result can also move the map and replace its popup during React's next effect.
-          window.setTimeout(() => {
-            container?.querySelector<HTMLButtonElement>('.map-popup-show')?.focus({ preventScroll: true });
-          }, 0);
-        }
+        if (openPopupFromKeyboard) openPopupFromKeyboard();
+        else marker.fire('click', { originalEvent: event });
       }
     });
   });
-  if (!popup) return;
+}
+
+function accessiblePopup(popup: HTMLElement, marker: L.Marker, label: string) {
   popup.setAttribute('role', 'dialog');
   popup.setAttribute('aria-label', label);
   popup.addEventListener('keydown', event => {
@@ -59,16 +57,30 @@ function accessibleMarker(marker: L.Marker, label: string, popup?: HTMLElement) 
   });
 }
 
-export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFocus }: {
+function updatePopupKeepingFocus(popup: L.Popup) {
+  const active = document.activeElement;
+  const restore = active instanceof HTMLElement && popup.getElement()?.contains(active);
+  popup.update();
+  // Leaflet hides the container, detaches/reappends its content, then makes it visible.
+  // Restore only after update() returns; contentupdate fires while it is still hidden.
+  if (restore && active.isConnected) active.focus({ preventScroll: true });
+}
+
+export interface PerformanceMapProps {
   items: MapPerformance[]; selectedCities: string[]; focusedId: number | null;
   onCity: (cityId: string) => void; onFocus: (id: number) => void;
-}) {
+  trace?: ResultTrace;
+}
+
+export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFocus, trace }: PerformanceMapProps) {
   const { boot, openDetail } = useDesk();
   const host = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const layers = useRef<L.LayerGroup | null>(null);
   const markers = useRef(new Map<number, L.Marker>());
   const pendingFocus = useRef<number | null>(null);
+  const pendingKeyboardFocus = useRef<number | null>(null);
+  const popupFocusFrame = useRef<number | null>(null);
   const actions = useRef({ onCity, onFocus, openDetail });
   actions.current = { onCity, onFocus, openDetail };
   const [tileError, setTileError] = useState(false);
@@ -81,6 +93,7 @@ export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFoc
   const regions = useMemo(() => boot.cities.filter(c => selectedSet.has(c.id)), [boot.cities, selectedSet]);
   const selectedItems = useMemo(() => items.filter(p => selectedSet.has(p.cityId)), [items, selectedSet]);
   const venueItems = useMemo(() => selectedItems.filter(hasVenueLocation), [selectedItems]);
+  const venueGroups = useMemo(() => measurePerformance('map-group', { count: venueItems.length }, () => groupVenueCoordinates(venueItems)), [venueItems]);
   const nationwide = !selectedCities.length || regions.length === boot.cities.length;
   const unknownItems = selectedItems.length - venueItems.length;
   const focusedItem = selectedItems.find(p => p.id === focusedId);
@@ -102,6 +115,8 @@ export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFoc
     else map.current?.fitBounds([[33.1, 125.6], [38.6, 129.7]], { padding: [22, 30], animate: false });
   };
 
+  useEffect(() => { pendingKeyboardFocus.current = null; }, [items, selectionKey]);
+
   useEffect(() => {
     if (!host.current) return;
     const instance = L.map(host.current, { center: [36.25, 127.8], zoom: 7, minZoom: 5, maxZoom: 18, zoomSnap: .25,
@@ -118,15 +133,27 @@ export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFoc
     const resize = new ResizeObserver(() => {
       if (map.current !== instance) return;
       instance.invalidateSize({ pan: false });
-      instance.eachLayer(layer => { if (layer instanceof L.Popup && layer.isOpen()) layer.update(); });
+      instance.eachLayer(layer => { if (layer instanceof L.Popup && layer.isOpen()) updatePopupKeepingFocus(layer); });
     });
     resize.observe(host.current);
     setMapReady(true);
-    return () => { resize.disconnect(); instance.stop(); instance.remove(); map.current = null; layers.current = null; };
+    return () => {
+      if (popupFocusFrame.current !== null) window.cancelAnimationFrame(popupFocusFrame.current);
+      pendingKeyboardFocus.current = null;
+      resize.disconnect(); instance.stop(); instance.remove(); map.current = null; layers.current = null;
+    };
   }, []);
 
   useEffect(() => {
     if (!mapReady || !map.current || !layers.current) return;
+    const detail = { ...trace, count: selectedItems.length, locatedCount: venueItems.length, venueCount: venueGroups.length, zoom };
+    const projected = measurePerformance('map-project', detail, () => venueGroups.map(group => {
+      const position: L.LatLngTuple = [group[0].latitude!, group[0].longitude!];
+      const point = map.current!.project(position, zoom);
+      return { group, position, x: point.x, y: point.y };
+    }));
+    const bundles = measurePerformance('map-cluster', detail, () => clusterProjectedPoints(projected, zoom));
+    const finishLayers = startPerformanceMeasure('map-layers', detail);
     layers.current.clearLayers(); markers.current.clear();
     for (const city of centreCities) {
       const pos = cityPosition(city); if (!pos) continue;
@@ -138,18 +165,7 @@ export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFoc
       marker.on('click', () => actions.current.onCity(city.id));
       marker.addTo(layers.current);
     }
-    const groups = new Map<string, MapPerformance[]>();
-    for (const item of venueItems) {
-      const key = `${item.latitude!.toFixed(5)},${item.longitude!.toFixed(5)}`;
-      const existing = groups.get(key);
-      if (existing) existing.push(item); else groups.set(key, [item]);
-    }
-    const projected = [...groups.values()].map(group => {
-      const position: L.LatLngTuple = [group[0].latitude!, group[0].longitude!];
-      const point = map.current!.project(position, zoom);
-      return { group, position, x: point.x, y: point.y };
-    });
-    for (const bundle of clusterProjectedPoints(projected, zoom)) {
+    for (const bundle of bundles) {
       if (bundle.length > 1) {
         const count = bundle.reduce((sum, venue) => sum + venue.group.length, 0);
         const centre = L.point(bundle.reduce((sum, venue) => sum + venue.x, 0) / bundle.length, bundle.reduce((sum, venue) => sum + venue.y, 0) / bundle.length);
@@ -177,40 +193,84 @@ export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFoc
       const icon = L.divIcon({ className: 'venue-map-marker', html: dot, iconSize: [44, 44], iconAnchor: [22, 22] });
       const label = `${item.venue || '공연장'} · 공연 ${group.length}건 · 공연 목록 열기`;
       const marker = L.marker([item.latitude!, item.longitude!], { icon, keyboard: true, title: label, alt: label, zIndexOffset: 100 });
-      const popup = document.createElement('div'); popup.className = 'map-popup';
-      const heading = document.createElement('strong'); heading.textContent = `${item.venue || '공연장'} · ${group.length}건`;
-      const hint = document.createElement('p'); hint.textContent = '공연장 3D, 길찾기 또는 공연 상세를 확인하세요.';
-      popup.append(heading, hint);
-      const threeD = document.createElement('button'); threeD.type = 'button'; threeD.className = 'map-popup-3d';
-      threeD.textContent = '공연장 3D로 보기'; threeD.setAttribute('aria-label', `${item.venue || '공연장'} 3D로 보기`);
-      threeD.onclick = () => setVenue3D(item); popup.append(threeD);
-      const route = directionLinks(item);
-      if (route) {
-        const link = document.createElement('a'); link.className = 'map-popup-route'; link.href = route.kakao;
-        link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = route.precise ? '카카오맵 길찾기' : '카카오맵에서 찾기';
-        link.setAttribute('aria-label', `${item.venue || '공연장'} ${link.textContent} (새 창)`); popup.append(link);
-      }
-      for (const show of group) {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'map-popup-show';
-        button.setAttribute('aria-label', `${show.title} 상세 보기`);
-        const title = document.createElement('span'); title.textContent = show.title;
-        const date = document.createElement('small'); date.textContent = formatPeriod(show.startDate, show.endDate);
-        const more = document.createElement('span'); more.className = 'map-popup-more'; more.textContent = '상세 보기 →';
-        button.append(title, date, more); button.addEventListener('click', () => { actions.current.onFocus(show.id); actions.current.openDetail(show.id); });
-        popup.append(button); markers.current.set(show.id, marker);
-      }
-      accessibleMarker(marker, label, popup);
+      // Keep locate-by-id available before opening a popup; popup DOM is needed only on demand.
+      for (const show of group) markers.current.set(show.id, marker);
+      let popup: HTMLElement | undefined;
+      const popupContent = () => popup ??= measurePerformance('map-popup', { ...detail, count: group.length }, () => {
+        const content = document.createElement('div'); content.className = 'map-popup';
+        const heading = document.createElement('strong'); heading.textContent = `${item.venue || '공연장'} · ${group.length}건`;
+        const hint = document.createElement('p'); hint.textContent = '공연장 3D, 길찾기 또는 공연 상세를 확인하세요.';
+        content.append(heading, hint);
+        const threeD = document.createElement('button'); threeD.type = 'button'; threeD.className = 'map-popup-3d';
+        threeD.textContent = '공연장 3D로 보기'; threeD.setAttribute('aria-label', `${item.venue || '공연장'} 3D로 보기`);
+        threeD.onclick = () => setVenue3D(item); content.append(threeD);
+        const route = directionLinks(item);
+        if (route) {
+          const link = document.createElement('a'); link.className = 'map-popup-route'; link.href = route.kakao;
+          link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = route.precise ? '카카오맵 길찾기' : '카카오맵에서 찾기';
+          link.setAttribute('aria-label', `${item.venue || '공연장'} ${link.textContent} (새 창)`); content.append(link);
+        }
+        for (const show of group) {
+          const button = document.createElement('button'); button.type = 'button'; button.className = 'map-popup-show';
+          button.setAttribute('aria-label', `${show.title} 상세 보기`);
+          const title = document.createElement('span'); title.textContent = show.title;
+          const date = document.createElement('small'); date.textContent = formatPeriod(show.startDate, show.endDate);
+          const more = document.createElement('span'); more.className = 'map-popup-more'; more.textContent = '상세 보기 →';
+          button.append(title, date, more); button.addEventListener('click', () => { actions.current.onFocus(show.id); actions.current.openDetail(show.id); });
+          content.append(button);
+        }
+        accessiblePopup(content, marker, label);
+        return content;
+      });
+      accessibleMarker(marker, label, () => {
+        const instance = map.current;
+        if (!instance) return;
+        pendingKeyboardFocus.current = item.id;
+        if (instance.getZoom() < 14) {
+          pendingFocus.current = item.id;
+          instance.setView(marker.getLatLng(), 15, { animate: false });
+        } else marker.openPopup();
+        actions.current.onFocus(item.id);
+      });
       marker.on('add', () => { const element = marker.getElement(); if (element) element.dataset.performanceCount = String(group.length); });
-      marker.bindPopup(popup, { maxWidth: 300, minWidth: 210, autoPanPaddingTopLeft: [20, 80], autoPanPaddingBottomRight: [20, 30] });
+      marker.bindPopup(popupContent, { maxWidth: 300, minWidth: 210, autoPanPaddingTopLeft: [20, 80], autoPanPaddingBottomRight: [20, 30] });
+      marker.on('popupopen', () => {
+        // The focus effect zooms to 15 and replaces low-zoom markers. Carry keyboard
+        // intent to that final popup instead of focusing DOM about to be removed.
+        if (map.current!.getZoom() < 14 || !group.some(show => show.id === pendingKeyboardFocus.current)) return;
+        if (popupFocusFrame.current !== null) window.cancelAnimationFrame(popupFocusFrame.current);
+        let remainingFrames = 30;
+        const focusVisiblePopup = () => {
+          popupFocusFrame.current = null;
+          if (!marker.isPopupOpen() || !popup?.isConnected || !group.some(show => show.id === pendingKeyboardFocus.current)) return;
+          const target = popup.querySelector<HTMLButtonElement>('.map-popup-show');
+          // Leaflet can still be finishing popup visibility at popupopen/first frame.
+          // A hidden connected control ignores focus; wait for visibility, with cleanup and a bound.
+          if (target && getComputedStyle(target).visibility !== 'visible') {
+            if (remainingFrames-- > 0) popupFocusFrame.current = window.requestAnimationFrame(focusVisiblePopup);
+            else pendingKeyboardFocus.current = null;
+            return;
+          }
+          target?.focus({ preventScroll: true });
+          pendingKeyboardFocus.current = null;
+        };
+        popupFocusFrame.current = window.requestAnimationFrame(focusVisiblePopup);
+      });
       marker.on('click', () => actions.current.onFocus(item.id)); marker.addTo(layers.current);
     }
     if (pendingFocus.current !== null) {
       const marker = markers.current.get(pendingFocus.current);
       if (marker) { marker.openPopup(); pendingFocus.current = null; }
     }
-  }, [items, boot.cities, selectionKey, mapReady, zoom]);
+    finishLayers();
+    const cancelReady = markAfterPaint('map-ready', { ...detail, markers: layers.current.getLayers().length });
+    return () => {
+      cancelReady();
+      if (popupFocusFrame.current !== null) { window.cancelAnimationFrame(popupFocusFrame.current); popupFocusFrame.current = null; }
+    };
+  }, [items, boot.cities, selectionKey, mapReady, zoom, trace?.requestId, trace?.filterKey, trace?.dataSource]);
 
-  const locationKey = venueItems.map(p => `${p.id}:${p.latitude}:${p.longitude}`).join('|');
+  const locationKey = useMemo(() => venueItems.map(p => `${p.id}:${p.latitude}:${p.longitude}`).join('|'), [venueItems]);
   useEffect(() => {
     if (!mapReady || !map.current) return;
     fitResults();
@@ -226,7 +286,10 @@ export function PerformanceMap({ items, selectedCities, focusedId, onCity, onFoc
       return;
     }
     const marker = markers.current.get(focusedId);
-    if (marker) { map.current.setView(marker.getLatLng(), Math.max(13, map.current.getZoom()), { animate: false }); marker.openPopup(); }
+    if (marker) {
+      map.current.setView(marker.getLatLng(), Math.max(13, map.current.getZoom()), { animate: false });
+      if (!marker.isPopupOpen()) marker.openPopup();
+    }
     else {
       const item = missingFocus;
       if (!item) { map.current.closePopup(); return; }
