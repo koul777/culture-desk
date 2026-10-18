@@ -1,9 +1,15 @@
 import type { DatabaseSync } from 'node:sqlite';
 import type { City, PerformanceInput } from '../shared/types.js';
 import type { Store } from './store.js';
+import { insertRunSummary, summarizeRun } from './collection-history.js';
+
+export interface ImportOptions {
+  /** Store completed runs as archive totals instead of copying every task and item row (used by the daily refresh). */
+  summarizeCompletedRuns?: boolean;
+}
 
 /** Merge a verified collection checkpoint without replacing live IDs, bookmarks, or newer detail fields. */
-export function importCollection(source: DatabaseSync, target: Store, importKey: string) {
+export function importCollection(source: DatabaseSync, target: Store, importKey: string, options: ImportOptions = {}) {
   if (!/^[a-zA-Z0-9_-]{1,100}$/.test(importKey)) throw new Error('Invalid collection identifier');
   const check = source.prepare('PRAGMA quick_check').get();
   if (Object.values(check || {})[0] !== 'ok') throw new Error('Invalid collection database');
@@ -36,9 +42,10 @@ export function importCollection(source: DatabaseSync, target: Store, importKey:
       if(existing&&(String(existing.updated_at)>String(row.updated_at)||(old?.detailState==='complete'&&item.detailState==='failed'))){
         idMap.set(Number(row.id),Number(existing.id));skippedItems++;continue;
       }
-      const targetId=target.upsert(item);
+      const {id:targetId,changed}=target.upsertTracked(item);
       // Retain the provider checkpoint version, not the publication time, so newer detail can merge later.
-      target.db.prepare('UPDATE performances SET updated_at=? WHERE id=?').run(row.updated_at,targetId);
+      // Unchanged records keep their row as-is: a daily refresh only writes what the providers changed.
+      if(changed)target.db.prepare('UPDATE performances SET updated_at=? WHERE id=?').run(row.updated_at,targetId);
       idMap.set(Number(row.id),targetId);
     }
     let addedRuns = 0;
@@ -69,12 +76,20 @@ export function importCollection(source: DatabaseSync, target: Store, importKey:
       const result = target.db.prepare(`INSERT INTO sync_runs(source,city_id,from_date,to_date,state,created_at,updated_at,error,detail_only)
         VALUES(?,?,?,?,?,?,?,?,?)`).run(run.source,run.city_id,run.from_date,run.to_date,run.state,run.created_at,run.updated_at,run.error,run.detail_only);
       const runId = Number(result.lastInsertRowid);
-      for (const task of sourceTasks.all(run.id)) target.db.prepare(`INSERT INTO sync_tasks(
-        run_id,kind,task_key,source,city_id,from_date,to_date,page,source_id,state,attempts,available_at,error)
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(runId,task.kind,task.task_key,task.source,task.city_id,task.from_date,task.to_date,task.page,task.source_id,task.state,task.attempts,task.available_at,task.error);
-      for (const item of sourceItems.all(run.id)) {
-        const itemId = idMap.get(Number(item.performance_id));
-        if (itemId) target.db.prepare('INSERT OR IGNORE INTO sync_items VALUES(?,?)').run(runId,itemId);
+      const tasks = sourceTasks.all(run.id);
+      // A fully completed run keeps only its totals and list evidence, which is what history
+      // archiving keeps after seven days anyway. Thousands of task rows would otherwise be
+      // written every day and deleted a week later.
+      if (options.summarizeCompletedRuns && run.state==='complete' && tasks.length && tasks.every(task => task.state==='done')) {
+        insertRunSummary(target, runId, summarizeRun(source, Number(run.id)));
+      } else {
+        for (const task of tasks) target.db.prepare(`INSERT INTO sync_tasks(
+          run_id,kind,task_key,source,city_id,from_date,to_date,page,source_id,state,attempts,available_at,error)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(runId,task.kind,task.task_key,task.source,task.city_id,task.from_date,task.to_date,task.page,task.source_id,task.state,task.attempts,task.available_at,task.error);
+        for (const item of sourceItems.all(run.id)) {
+          const itemId = idMap.get(Number(item.performance_id));
+          if (itemId) target.db.prepare('INSERT OR IGNORE INTO sync_items VALUES(?,?)').run(runId,itemId);
+        }
       }
       target.db.prepare('INSERT INTO collection_import_runs VALUES(?,?,?)').run(importKey,run.id,runId);
       addedRuns++;

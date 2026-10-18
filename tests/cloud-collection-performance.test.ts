@@ -4,8 +4,10 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { Store } from '../server/store.js';
 import { DEFAULT_CITIES } from '../server/providers/cities.js';
 import { runCloudCollection, createCloudCollectionProviders } from '../server/cloud/collection.js';
-import { SnapshotRepository, type SnapshotPool, type SnapshotClient } from '../server/cloud/snapshot.js';
+import { SnapshotRepository } from '../server/cloud/snapshot.js';
 import type { PerformanceInput, Provider, Source } from '../shared/types.js';
+import { PglitePool } from './helpers/pglite-pool.js';
+import { durableState } from './helpers/cloud-storage.js';
 
 const env={AUTOMATIC_REFRESH_ENABLED:'1'};
 const item=(id:string,source:Source='kopis'):PerformanceInput=>({source,sourceId:id,title:`TEST ${id}`,cityId:'andong',
@@ -156,28 +158,27 @@ test('a budget too short after claiming restores the claim and never starts prov
   }finally{store.close();}
 });
 
-class TransactionPool implements SnapshotPool {
-  bytes:Buffer|null=null;writes=0;failWrite=false;private pending=Promise.resolve();
-  async connect():Promise<SnapshotClient> {
-    let unlock:(()=>void)|undefined,staged:Buffer|undefined;const owner=this;
-    return {query:async(text,values=[])=>{
-      if(text.includes('FOR UPDATE')){const previous=owner.pending;owner.pending=new Promise<void>(resolve=>{unlock=resolve;});await previous;}
-      if(text.startsWith('SELECT data'))return {rows:[{data:owner.bytes}]};
-      if(text.startsWith('UPDATE culture_desk_snapshot')){if(owner.failWrite)throw new Error('TEST persistence failure');staged=Buffer.from(values[0]);}
-      if(text==='COMMIT'){if(staged){owner.bytes=staged;owner.writes++;}unlock?.();unlock=undefined;}
-      if(text==='ROLLBACK'){unlock?.();unlock=undefined;}return {rows:[]};
-    },release(){assert.equal(unlock,undefined);}};
-  }
-}
+// A real PostgreSQL engine: the merge write fails on the statement that stores its changed rows.
+const FAIL_PERSISTENCE=/INSERT INTO culture_desk_delta|UPDATE culture_desk_base/;
 test('a failed merge preserves the durable claimed snapshot and can recover without lost records or spent attempts',async()=>{
-  const pool=new TransactionPool(),repository=new SnapshotRepository(pool);await repository.withStore(true,async store=>{seed(store);});
-  const failed=runCloudCollection({env,repository,providers:{kopis:provider('kopis',async value=>{pool.failWrite=true;return {...value,title:'TEST uncommitted',detailState:'complete'};})}});
-  await assert.rejects(failed,/persistence failure/);assert.equal(pool.writes,2);pool.failWrite=false;
-  await repository.withStore(true,async store=>{
-    assert.equal(store.internal('kopis','TEST_kopis_0')!.detailState,'pending');assert.equal(store.db.prepare('SELECT attempts FROM sync_tasks').get()!.attempts,0);expireClaims(store);
-  });
-  await runCloudCollection({env,repository,providers:{kopis:provider('kopis',async value=>({...value,title:'TEST recovered',detailState:'complete'}))}});
-  await repository.withStore(false,async store=>{assert.equal(store.runs()[0].state,'complete');assert.equal(store.internal('kopis','TEST_kopis_0')!.title,'TEST recovered');assert.equal(store.db.prepare('SELECT attempts FROM sync_tasks').get()!.attempts,1);});
+  const pool=new PglitePool(),repository=new SnapshotRepository(pool);
+  try {
+    await repository.withStore(true,async store=>{seed(store);});
+    const writes=pool.writes;let claimed:Awaited<ReturnType<typeof durableState>>|undefined;
+    const failed=runCloudCollection({env,repository,providers:{kopis:provider('kopis',async value=>{
+      // Provider I/O runs after the claim committed and before the merge write, which is made to fail.
+      claimed=await durableState(pool);pool.failAlways=FAIL_PERSISTENCE;return {...value,title:'TEST uncommitted',detailState:'complete'};
+    })}});
+    await assert.rejects(failed,/persistence failure/);pool.failAlways=null;
+    assert.ok(claimed,'the provider ran after the claim');
+    assert.equal(pool.writes-writes,1,'only the claim was committed; the merge was not');
+    assert.deepEqual(await durableState(pool),claimed,'the failed merge changed nothing durable');
+    await repository.withStore(true,async store=>{
+      assert.equal(store.internal('kopis','TEST_kopis_0')!.detailState,'pending');assert.equal(store.db.prepare('SELECT attempts FROM sync_tasks').get()!.attempts,0);expireClaims(store);
+    });
+    await runCloudCollection({env,repository,providers:{kopis:provider('kopis',async value=>({...value,title:'TEST recovered',detailState:'complete'}))}});
+    for(const reader of [repository,new SnapshotRepository(pool)])await reader.withStore(false,async store=>{assert.equal(store.runs()[0].state,'complete');assert.equal(store.internal('kopis','TEST_kopis_0')!.title,'TEST recovered');assert.equal(store.db.prepare('SELECT attempts FROM sync_tasks').get()!.attempts,1);});
+  } finally { await pool.close(); }
 });
 
 test('the actual HTTP gate counts facility requests and reuses facility responses without losing venue coordinates',async()=>{

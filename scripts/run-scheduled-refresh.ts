@@ -84,7 +84,7 @@ async function main() {
   const rawBudget = Number(process.env.NATIONAL_RUN_BUDGET_MINUTES || 50);
   const budget = Math.max(45, Math.min(55, Number.isFinite(rawBudget) ? rawBudget : 50)) * 60000;
   const started = Date.now();
-  let lastSave = 0;
+  let lastSave = Date.now();
   let lastCheckpoint: string | undefined;
   const progressFile = path.join(directory, 'progress.json');
   // Delete a stale report so a fresh runner cannot publish another day's previous file.
@@ -94,7 +94,9 @@ async function main() {
   child = spawn(process.execPath, ['--import', 'tsx', path.join(ROOT, 'scripts', 'collect-national.ts')], { cwd: ROOT, env, stdio: ['ignore', 'ignore', 'ignore'] });
   child.once('error', () => { exited = true; exitCode = 1; });
   child.once('exit', code => { exited = true; exitCode = code; });
-  const publish = async (checkpoint: string) => {
+  // Resume points go to the job row; the production data is merged once, when the run ends.
+  // A merge writes only the performances the providers changed, so it no longer runs on every checkpoint.
+  const publish = async (checkpoint: string, merge: boolean) => {
     if (leaseLost) throw new LeaseLostError();
     const resolved = path.resolve(checkpoint);
     if (path.dirname(resolved) !== directory || !/^checkpoint-\d+\.db$/.test(path.basename(resolved))) throw new Error('Invalid collector checkpoint path');
@@ -104,26 +106,28 @@ async function main() {
       await jobs.heartbeat(job.day, owner);
       await jobs.save(job.day, owner, readFileSync(resolved), audit.counts);
       // Completion is only recorded after the production merge succeeds.
-      await getSnapshotRepository().withStore(true, async target => {
+      if (merge) await getSnapshotRepository().withStore(true, async target => {
         await jobs.heartbeat(job.day, owner);
-        const imported = importCollection(source, target, batch);
+        const imported = importCollection(source, target, batch, { summarizeCompletedRuns: true });
         if (audit.complete) archiveCompletedCollectionRuns(target);
         return imported;
       });
       lastCheckpoint = checkpoint; lastSave = Date.now();
-      log('refresh_checkpoint', { day: job.day, counts: audit.counts, complete: audit.complete });
+      log(merge ? 'refresh_merged' : 'refresh_checkpoint', { day: job.day, counts: audit.counts, complete: audit.complete });
       return audit;
     } finally { source.close(); }
   };
+  const rawInterval = Number(process.env.NATIONAL_CHECKPOINT_MINUTES || 10);
+  const checkpointInterval = Math.max(2, Math.min(30, Number.isFinite(rawInterval) ? rawInterval : 10)) * 60000;
   try {
     while (!exited) {
       if (!interrupted && Date.now() - started >= budget) stop();
       if (stoppingAt && Date.now() - stoppingAt > 60000) child.kill('SIGKILL');
       if (leaseLost) { child.kill('SIGTERM'); throw new LeaseLostError(); }
-      if (Date.now() - lastSave >= 120000 && existsSync(progressFile)) {
+      if (Date.now() - lastSave >= checkpointInterval && existsSync(progressFile)) {
         const progress = JSON.parse(readFileSync(progressFile, 'utf8'));
         if (progress.from !== job.from || progress.to !== job.to || progress.batch !== batch) throw new Error('Collector range mismatch');
-        if (progress.checkpoint && progress.checkpoint !== lastCheckpoint) await publish(progress.checkpoint);
+        if (progress.checkpoint && progress.checkpoint !== lastCheckpoint) await publish(progress.checkpoint, false);
       }
       await delay(1000);
     }
@@ -132,7 +136,7 @@ async function main() {
     if (existsSync(progressFile)) {
       const progress = JSON.parse(readFileSync(progressFile, 'utf8'));
       if (progress.from !== job.from || progress.to !== job.to || progress.batch !== batch) throw new Error('Collector range mismatch');
-      if (progress.checkpoint) complete = (await publish(progress.checkpoint)).complete;
+      if (progress.checkpoint) complete = (await publish(progress.checkpoint, true)).complete;
     }
     await jobs.finish(job.day, owner, complete);
     owned = undefined;
