@@ -110,13 +110,17 @@ test('cloud search is public without password configuration or cookies and cron 
 test('cloud tick commits completed queue work and aborts a slow provider without losing its task', async () => {
   const repo = new SnapshotRepository(new TransactionPool());
   await repo.withStore(true, async store => { store.createRun('kopis', 'andong', '2026-10-01', '2026-10-31'); });
-  let receivedAbort = false;
+  let starts = 0; let aborts = 0;
   const slow: Provider = { source: 'kopis', detail: async item => item, list: async (_input, signal) => new Promise((_resolve, reject) => {
-    signal?.addEventListener('abort', () => { receivedAbort = true; reject(new Error('aborted')); }, { once: true });
+    starts++;
+    signal?.addEventListener('abort', () => { aborts++; reject(new Error('aborted')); }, { once: true });
   }) };
-  // The batch budget includes snapshot I/O and the 350ms cross-request cooldown; the task still gets only 30ms.
-  const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: slow }, tickStepMs: 30, tickBudgetMs: 800 });
-  assert.equal(response.status, 200); assert.equal(receivedAbort, true);
+  // Leave bounded headroom for real snapshot I/O under parallel CI load; the provider deadline stays 30ms.
+  const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: slow }, tickStepMs: 30, tickBudgetMs: 5000 });
+  assert.equal(response.status, 200);
+  const tick = await response.json() as { steps: number; batches: number };
+  assert.equal(tick.steps, 1); assert.equal(tick.batches, 1);
+  assert.equal(starts, 1); assert.equal(aborts, 1);
   await repo.withStore(false, async store => {
     const row = store.db.prepare('SELECT state,attempts,available_at FROM sync_tasks').get()!;
     assert.equal(row.state, 'queued'); assert.equal(row.attempts, 1); assert.ok(Date.parse(String(row.available_at)) > Date.now());
@@ -136,15 +140,20 @@ test('three cloud deadlines mark the stalled task failed and allow later queue w
     laterId = store.createRun('kopis', 'gongju', '2026-10-01', '2026-10-31');
     store.setRunState(laterId, 'paused');
   });
+  let starts = 0; let aborts = 0; let laterStarts = 0;
   const provider: Provider = { source: 'kopis', detail: async item => item, list: async (input, signal) => {
-    if (input.city.id === 'gongju') return { items: [], hasMore: false };
-    return new Promise((_resolve, reject) => { signal?.addEventListener('abort', () => reject(new Error('deadline')), { once: true }); });
+    if (input.city.id === 'gongju') { laterStarts++; return { items: [], hasMore: false }; }
+    starts++;
+    return new Promise((_resolve, reject) => { signal?.addEventListener('abort', () => { aborts++; reject(new Error('deadline')); }, { once: true }); });
   } };
   for (let attempt = 1; attempt <= 3; attempt++) {
     await repo.withStore(true, async store => { store.db.prepare("UPDATE sync_tasks SET available_at='2000-01-01T00:00:00.000Z' WHERE run_id=?").run(slowId); });
-    // Allow the cross-request 350ms API cooldown while retaining the 30ms task deadline.
-    const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider }, tickStepMs: 30, tickBudgetMs: 800 });
+    // Include snapshot I/O and the 350ms cooldown without testing an incidental 800ms admission limit.
+    const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider }, tickStepMs: 30, tickBudgetMs: 5000 });
     assert.equal(response.status, 200);
+    const tick = await response.json() as { steps: number; batches: number };
+    assert.equal(tick.steps, 1); assert.equal(tick.batches, 1);
+    assert.equal(starts, attempt); assert.equal(aborts, attempt); assert.equal(laterStarts, 0);
     await repo.withStore(false, async store => {
       const task = store.db.prepare('SELECT attempts,state,error FROM sync_tasks WHERE run_id=?').get(slowId)!;
       assert.equal(task.attempts, attempt);
@@ -158,6 +167,7 @@ test('three cloud deadlines mark the stalled task failed and allow later queue w
   });
   const response = await handleCloudRequest(request('/api/cloud/tick', 'POST', {}), { env, repository: repo, providers: { kopis: provider } });
   assert.equal(response.status, 200);
+  assert.equal(starts, 3); assert.equal(aborts, 3); assert.equal(laterStarts, 1);
   await repo.withStore(false, async store => {
     assert.equal(store.runs().find(run => run.id === laterId)!.state, 'complete');
     assert.equal(store.runs().find(run => run.id === slowId)!.state, 'partial');

@@ -1,0 +1,29 @@
+(node:47772) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ cron secrets must match and an unconfigured secret never authenticates (3.5867ms)
+✔ cloud mutation origin protection rejects cross-site and missing request marker (34.9491ms)
+✔ cloud snapshots serialize concurrent writers and preserve both mutations (505.6072ms)
+✔ failed cloud mutation cannot replace the last durable snapshot (508.6317ms)
+✔ cloud search is public without password configuration or cookies and cron remains authenticated (2491.1733ms)
+✔ cloud tick commits completed queue work and aborts a slow provider without losing its task (1014.692ms)
+{"event":"culture_cloud_failure","type":"Error","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\cloud.test.ts:178:56)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\cloud.test.ts:179:26)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+✔ three cloud deadlines mark the stalled task failed and allow later queue work to finish (1986.073ms)
+✔ public cloud database failures return safe errors (10.2809ms)
+✔ snapshot capacity rejection preserves prior data and returns a non-retryable storage explanation (3279.1545ms)
+✔ compressed snapshots retain complete large datasets and transparently read legacy SQLite bytes (1130.2865ms)
+✔ public JSON and Excel omit prior personal data while keeping it intact in storage (418.0616ms)
+✔ public collection controls work without cookies but still require same-origin JSON requests (459.9546ms)
+✔ local search mode omits notes from Excel while explicitly permitted launcher shutdown still works (257.8216ms)
+✔ oversized UTF-8 JSON responses return a filter guidance error before the platform limit (468.6847ms)
+✔ oversized real Excel exports return JSON filter guidance instead of a platform failure (1253.3877ms)
+✔ cloud queue activity includes older runs outside the visible recent-history window (2565.2746ms)
+✔ scheduled refresh status is public, but a status outage does not hide search data (1535.2707ms)
+✔ durable scheduling disables legacy browser refresh while preserving explicit collection work (12.6288ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22320.7289
