@@ -54,6 +54,8 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
   const nationwide = filters.cities.length === 0 || filters.cities.length === boot.cities.length;
   const mapCities = useMemo(() => filters.cities.length ? filters.cities : boot.cities.map(c => c.id), [filters.cities, boot.cities]);
   const [focusedId, setFocusedId] = useState<number | null>(null);
+  const [focusRevision, setFocusRevision] = useState(0);
+  const locatePerformance = (id: number) => { setFocusedId(id); setFocusRevision(value => value + 1); };
   const [mapResult, setMapResult] = useState<MapResult | null>(null);
   const [mapFailed, setMapFailed] = useState(false);
   const q = useDebounced(filters.q, 350);
@@ -262,11 +264,11 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
 
             {result && !problem && display === 'map' && <>
               <div className="map-result-layout">
-                <DeferredPerformanceMap items={mapResult?.items ?? result.items} selectedCities={mapCities} focusedId={focusedId} onCity={id => setFilters({ ...filters, cities: [id] })} onFocus={setFocusedId}
+                <DeferredPerformanceMap items={mapResult?.items ?? result.items} selectedCities={mapCities} focusedId={focusedId} focusRevision={focusRevision} onCity={id => setFilters({ ...filters, cities: [id] })} onFocus={setFocusedId}
                   trace={mapResult && mapTrace.current?.result === mapResult ? mapTrace.current.context : searchTrace.current ? { ...searchTrace.current.context, dataSource: 'page' } : undefined} />
                 <div className="map-results-column">
                   <div className="map-list-heading"><span>공연 둘러보기</span><span>{number(start)}–{number(end)} / {number(result.total)}건</span></div>
-                  <div className="map-result-list">{result.items.map(p => <PerformanceCard key={p.id} item={p} compact active={focusedId === p.id} onLocate={() => setFocusedId(p.id)} />)}{!result.items.length && <div className="empty"><Search size={28} aria-hidden="true" /><h3>조건에 맞는 자료가 없습니다</h3><p>기간을 넓히거나 상세 조건을 조정해 보세요.</p><button type="button" className="button" onClick={() => setFilters(base)}>조건 초기화</button></div>}</div>
+                  <div className="map-result-list">{result.items.map(p => <PerformanceCard key={p.id} item={p} compact active={focusedId === p.id} onLocate={() => locatePerformance(p.id)} />)}{!result.items.length && <div className="empty"><Search size={28} aria-hidden="true" /><h3>조건에 맞는 자료가 없습니다</h3><p>기간을 넓히거나 상세 조건을 조정해 보세요.</p><button type="button" className="button" onClick={() => setFilters(base)}>조건 초기화</button></div>}</div>
                 </div>
               </div>
               <p className="map-scope-note">{mapResult ? `검색 결과 ${number(mapResult.items.length)}건 중 위치가 확인된 공연을 지도에 표시합니다.${mapResult.truncated ? ` 전체 ${number(mapResult.total)}건 중 일부를 조회했습니다. 지역·기간을 좁히면 나머지 공연도 확인할 수 있습니다.` : ''}` : mapFailed ? '전체 지도 자료를 불러오지 못해 현재 목록 페이지만 표시합니다.' : '공연장 위치를 불러오는 중입니다.'} 목록은 페이지 단위로 표시합니다.</p>
@@ -335,7 +337,7 @@ export function SearchView({ filters, setFilters, display }: { filters: FilterSt
               </footer>
             )}
           </section>
-          <div className="explore-sources"><SourceStrip /><p>자료의 최신 일정과 예매 조건은 공연 원문에서 확인하세요.</p></div>
+          {result && <div className="explore-sources"><SourceStrip /><p>자료의 최신 일정과 예매 조건은 공연 원문에서 확인하세요.</p></div>}
         </>
       )}
     </section>

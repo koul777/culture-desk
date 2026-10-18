@@ -1,0 +1,121 @@
+{"variant":"baseline","index":-2,"domReadyMs":1003.6999999955297,"visualReadyMs":1299.7999999970198,"images":4}
+{"variant":"candidate","index":-2,"domReadyMs":469.20000000298023,"visualReadyMs":771.1000000014901,"images":4}
+{"variant":"candidate","index":-1,"domReadyMs":559.7999999970198,"visualReadyMs":1061,"images":4}
+{"variant":"baseline","index":-1,"domReadyMs":470.5,"visualReadyMs":1167.5,"images":4}
+{"variant":"baseline","index":0,"domReadyMs":609.6000000014901,"visualReadyMs":1127.5,"images":4}
+{"variant":"candidate","index":0,"domReadyMs":687.5999999940395,"visualReadyMs":1188.3999999985099,"images":4}
+{"variant":"candidate","index":1,"domReadyMs":625.3999999985099,"visualReadyMs":959.5999999940395,"images":4}
+{"variant":"baseline","index":1,"domReadyMs":546,"visualReadyMs":829.3999999985099,"images":4}
+{"variant":"baseline","index":2,"domReadyMs":484.1000000014901,"visualReadyMs":715.1000000014901,"images":4}
+{"variant":"candidate","index":2,"domReadyMs":498.5,"visualReadyMs":749.1000000014901,"images":4}
+{"variant":"candidate","index":3,"domReadyMs":472.40000000596046,"visualReadyMs":706.2000000029802,"images":4}
+{"variant":"baseline","index":3,"domReadyMs":415.80000000447035,"visualReadyMs":648.7000000029802,"images":4}
+{"variant":"baseline","index":4,"domReadyMs":444.70000000298023,"visualReadyMs":660.2999999970198,"images":4}
+{"variant":"candidate","index":4,"domReadyMs":480.3999999985099,"visualReadyMs":764.8999999985099,"images":4}
+{"variant":"candidate","index":5,"domReadyMs":465.79999999701977,"visualReadyMs":732.5,"images":4}
+{"variant":"baseline","index":5,"domReadyMs":491.30000000447035,"visualReadyMs":742.5,"images":4}
+{"variant":"baseline","index":6,"domReadyMs":416.5,"visualReadyMs":648.1000000014901,"images":4}
+{"variant":"candidate","index":6,"domReadyMs":506.6000000014901,"visualReadyMs":736.7000000029802,"images":4}
+{"variant":"candidate","index":7,"domReadyMs":457.70000000298023,"visualReadyMs":674.7000000029802,"images":4}
+{"variant":"baseline","index":7,"domReadyMs":465.29999999701977,"visualReadyMs":731.7999999970198,"images":4}
+{"variant":"baseline","index":8,"domReadyMs":442,"visualReadyMs":693.4000000059605,"images":4}
+{"variant":"candidate","index":8,"domReadyMs":471.80000000447035,"visualReadyMs":689.1000000014901,"images":4}
+{"variant":"candidate","index":9,"domReadyMs":478,"visualReadyMs":779.5,"images":4}
+{"variant":"baseline","index":9,"domReadyMs":550.6000000014901,"visualReadyMs":800.7000000029802,"images":4}
+{"variant":"baseline","index":10,"domReadyMs":529,"visualReadyMs":774.5,"images":4}
+{"variant":"candidate","index":10,"domReadyMs":503.79999999701977,"visualReadyMs":771.0999999940395,"images":4}
+{"variant":"candidate","index":11,"domReadyMs":434.1000000014901,"visualReadyMs":701.2000000029802,"images":4}
+{"variant":"baseline","index":11,"domReadyMs":512.7999999970198,"visualReadyMs":738.6999999955297,"images":4}
+{"variant":"baseline","index":12,"domReadyMs":457.90000000596046,"visualReadyMs":708.4000000059605,"images":4}
+{"variant":"candidate","index":12,"domReadyMs":484.8999999985099,"visualReadyMs":718.1000000014901,"images":4}
+{"variant":"candidate","index":13,"domReadyMs":436.1000000014901,"visualReadyMs":671.1000000014901,"images":4}
+{"variant":"baseline","index":13,"domReadyMs":465.19999999552965,"visualReadyMs":696.6000000014901,"images":4}
+{"variant":"baseline","index":14,"domReadyMs":492.09999999403954,"visualReadyMs":741.7999999970198,"images":4}
+{"variant":"candidate","index":14,"domReadyMs":473.3999999985099,"visualReadyMs":707.7000000029802,"images":4}
+{"variant":"candidate","index":15,"domReadyMs":562.5,"visualReadyMs":891.5,"images":4}
+{"variant":"baseline","index":15,"domReadyMs":501.19999999552965,"visualReadyMs":713.1000000014901,"images":4}
+{"variant":"baseline","index":16,"domReadyMs":479.79999999701977,"visualReadyMs":729.5,"images":4}
+{"variant":"candidate","index":16,"domReadyMs":551,"visualReadyMs":818.3999999985099,"images":4}
+{"variant":"candidate","index":17,"domReadyMs":556.8999999985099,"visualReadyMs":906.7999999970198,"images":4}
+{"variant":"baseline","index":17,"domReadyMs":563.8999999985099,"visualReadyMs":947.2000000029802,"images":4}
+{"variant":"baseline","index":18,"domReadyMs":480.90000000596046,"visualReadyMs":778.6000000014901,"images":4}
+{"variant":"candidate","index":18,"domReadyMs":504.20000000298023,"visualReadyMs":804.5,"images":4}
+{"variant":"candidate","index":19,"domReadyMs":516.7999999970198,"visualReadyMs":795.3999999985099,"images":4}
+{"variant":"baseline","index":19,"domReadyMs":492,"visualReadyMs":893,"images":4}
+{
+  "out": "docs/verification/performance-20261019/poster-cls-paired-desktop-20-01.json",
+  "summary": [
+    {
+      "variant": "baseline",
+      "completedSamples": 20,
+      "domReady": {
+        "samples": 20,
+        "p50Ms": 484.1000000014901,
+        "p95Ms": 563.8999999985099,
+        "minMs": 415.80000000447035,
+        "maxMs": 609.6000000014901,
+        "meanMs": 492.035000000149
+      },
+      "visualReady": {
+        "samples": 20,
+        "p50Ms": 731.7999999970198,
+        "p95Ms": 947.2000000029802,
+        "minMs": 648.1000000014901,
+        "maxMs": 1127.5,
+        "meanMs": 765.9450000006706
+      },
+      "actionToVisualReady": {
+        "samples": 20,
+        "p50Ms": 731.7999999970198,
+        "p95Ms": 947.2000000029802,
+        "minMs": 648.1000000014901,
+        "maxMs": 1127.5,
+        "meanMs": 765.9450000006706
+      },
+      "postDomWait": {
+        "samples": 20,
+        "p50Ms": 249.70000000298023,
+        "p95Ms": 401,
+        "minMs": 211.90000000596046,
+        "maxMs": 517.8999999985099,
+        "meanMs": 273.91000000052156
+      }
+    },
+    {
+      "variant": "candidate",
+      "completedSamples": 20,
+      "domReady": {
+        "samples": 20,
+        "p50Ms": 484.8999999985099,
+        "p95Ms": 625.3999999985099,
+        "minMs": 434.1000000014901,
+        "maxMs": 687.5999999940395,
+        "meanMs": 508.3949999999255
+      },
+      "visualReady": {
+        "samples": 20,
+        "p50Ms": 749.1000000014901,
+        "p95Ms": 959.5999999940395,
+        "minMs": 671.1000000014901,
+        "maxMs": 1188.3999999985099,
+        "meanMs": 788.325
+      },
+      "actionToVisualReady": {
+        "samples": 20,
+        "p50Ms": 749.1000000014901,
+        "p95Ms": 959.5999999940395,
+        "minMs": 671.1000000014901,
+        "maxMs": 1188.3999999985099,
+        "meanMs": 788.325
+      },
+      "postDomWait": {
+        "samples": 20,
+        "p50Ms": 267.1000000014901,
+        "p95Ms": 349.8999999985099,
+        "minMs": 217,
+        "maxMs": 500.80000000447035,
+        "meanMs": 279.93000000007453
+      }
+    }
+  ]
+}

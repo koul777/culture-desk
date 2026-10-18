@@ -20,7 +20,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
   projects: [
-    { name: 'desktop-chromium', testMatch: ['**/published.spec.ts', '**/freshness.spec.ts', '**/export-selection.spec.ts'], use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 } } },
+    { name: 'desktop-chromium', testMatch: ['**/published.spec.ts', '**/freshness.spec.ts', '**/export-selection.spec.ts', '**/popup.spec.ts'], use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 } } },
     { name: 'mobile-chromium', testMatch: '**/mobile.spec.ts', use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 } } },
   ],
   webServer: {

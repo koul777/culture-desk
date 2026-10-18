@@ -1,0 +1,906 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\workspace\\cultureapi\\node_modules\\@playwright\\test\\cli.js",
+      "test"
+    ],
+    "configFile": "C:\\workspace\\cultureapi\\playwright.config.ts",
+    "rootDir": "C:/workspace/cultureapi/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/workspace/cultureapi/test-results/e2e",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop-chromium",
+        "name": "desktop-chromium",
+        "testDir": "C:/workspace/cultureapi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/published.spec.ts",
+          "**/freshness.spec.ts",
+          "**/export-selection.spec.ts",
+          "**/popup.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/workspace/cultureapi/test-results/e2e",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-chromium",
+        "name": "mobile-chromium",
+        "testDir": "C:/workspace/cultureapi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/mobile.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\workspace\\cultureapi\\test-results\\e2e",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "desktop-chromium",
+        "testDir": "C:\\workspace\\cultureapi\\tests\\e2e",
+        "snapshotDir": "C:\\workspace\\cultureapi\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/published.spec.ts",
+          "**/freshness.spec.ts",
+          "**/export-selection.spec.ts",
+          "**/popup.spec.ts"
+        ],
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4339",
+          "locale": "ko-KR",
+          "timezoneId": "Asia/Seoul",
+          "reducedMotion": "reduce",
+          "serviceWorkers": "block",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\workspace\\cultureapi\\test-results\\e2e",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "mobile-chromium",
+        "testDir": "C:\\workspace\\cultureapi\\tests\\e2e",
+        "snapshotDir": "C:\\workspace\\cultureapi\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/mobile.spec.ts",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4339",
+          "locale": "ko-KR",
+          "timezoneId": "Asia/Seoul",
+          "reducedMotion": "reduce",
+          "serviceWorkers": "block",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Mobile Safari/537.36",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "screen": {
+            "width": 412,
+            "height": 915
+          },
+          "deviceScaleFactor": 2.625,
+          "isMobile": true,
+          "hasTouch": true,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "mobile-chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/e2e-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node --import tsx tests/e2e/server.ts",
+      "url": "http://127.0.0.1:4339/__qa/ready",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "export-selection.spec.ts",
+      "file": "export-selection.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "export waits for the typed search and its response, then records the displayed selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6889,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:50:31.156Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "export-selection.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJyZXF1ZXN0cyI6IFsKICAgICJodHRwOi8vMTI3LjAuMC4xOjQzMzkvYXBpL2V4cG9ydC54bHN4P2Zyb209MjAyNi0xMC0wMSZ0bz0yMDI3LTAxLTE4JnE9JUVDJTk1JTg4JUVCJThGJTk5IgogIF0sCiAgInN0YXJ0ZWQiOiB0cnVlLAogICJzZXR0bGVkIjogdHJ1ZQp9"
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "45712bb901e2df6136c6-61fc982de07aba585225",
+          "file": "export-selection.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "freshness.spec.ts",
+      "file": "freshness.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "KST midnight refreshes status-filtered list and map once without changing the publication or chosen period",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2398,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:50:38.731Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "kst-midnight-refresh.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY29wZSI6ICJCcm93c2VyIGNsb2NrIGFuZCBleHBsaWNpdCByb3V0ZSBmaXh0dXJlIG9ubHk7IE5vZGUgY2xvY2sgaXMgdW5jaGFuZ2VkLiIsCiAgImJlZm9yZVRpbWUiOiAiMjAyNi0xMC0xOFQxNDo1OTo1OS4wMDBaIiwKICAiYWZ0ZXJUaW1lIjogIjIwMjYtMTAtMThUMTU6MDA6MDEuMDAwWiIsCiAgInNuYXBzaG90QXQiOiAiMjAyNi0xMC0xOFQwMDozMDowMC4wMDBaIiwKICAiZmlsdGVycyI6IHsKICAgICJjaXRpZXMiOiBbCiAgICAgICJhbmRvbmciCiAgICBdLAogICAgImZyb20iOiAiMjAyNi0xMC0wMSIsCiAgICAidG8iOiAiMjAyNi0xMS0zMCIsCiAgICAiZ2VucmUiOiAiIiwKICAgICJxIjogIiIsCiAgICAic3RhdHVzIjogIm9uZ29pbmciLAogICAgInByaWNlIjogIiIsCiAgICAiYWdlIjogIiIsCiAgICAic291cmNlIjogIiIsCiAgICAibGltaXQiOiAzMAogIH0sCiAgInJlYWRzIjogewogICAgImJvb3RzdHJhcCI6IDIsCiAgICAic2VhcmNoIjogMSwKICAgICJtYXAiOiAxCiAgfSwKICAiYm9vdElkZW50aXRpZXMiOiBbCiAgICB7CiAgICAgICJzb3VyY2VzIjogWwogICAgICAgIHsKICAgICAgICAgICJzb3VyY2UiOiAia29waXMiLAogICAgICAgICAgImxhYmVsIjogIktPUElTIiwKICAgICAgICAgICJjb25maWd1cmVkIjogdHJ1ZSwKICAgICAgICAgICJjb3VudCI6IDMsCiAgICAgICAgICAibGFzdFN5bmMiOiAiMjAyNi0xMC0xOFQwMDozMDowMC4wMDBaIiwKICAgICAgICAgICJhcHBsaWNhdGlvblVybCI6ICJodHRwczovL2tvcGlzLm9yLmtyL3Bvci9jcy9vcGVuYXBpL29wZW5BcGlJbmZvLmRvP21lbnVJZD1NTlVfMDAwNzQiCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAic291cmNlIjogImN1bHR1cmUiLAogICAgICAgICAgImxhYmVsIjogIuusuO2ZlO2PrO2EuCIsCiAgICAgICAgICAiY29uZmlndXJlZCI6IHRydWUsCiAgICAgICAgICAiY291bnQiOiAwLAogICAgICAgICAgImxhc3RTeW5jIjogIjIwMjYtMTAtMThUMDA6MzA6MDAuMDAwWiIsCiAgICAgICAgICAiYXBwbGljYXRpb25VcmwiOiAiaHR0cHM6Ly93d3cuZGF0YS5nby5rci9kYXRhLzE1MTM4OTM3L29wZW5hcGkuZG8iCiAgICAgICAgfQogICAgICBdLAogICAgICAicGVuZGluZ0RldGFpbHMiOiAwLAogICAgICAicnVucyI6IFtdLAogICAgICAicHVibGlzaGVkIjogewogICAgICAgICJtb2RlIjogInB1Ymxpc2hlZCIsCiAgICAgICAgInNuYXBzaG90QXQiOiAiMjAyNi0xMC0xOFQwMDozMDowMC4wMDBaIgogICAgICB9LAogICAgICAiZmFsbGJhY2siOiBudWxsCiAgICB9LAogICAgewogICAgICAic291cmNlcyI6IFsKICAgICAgICB7CiAgICAgICAgICAic291cmNlIjogImtvcGlzIiwKICAgICAgICAgICJsYWJlbCI6ICJLT1BJUyIsCiAgICAgICAgICAiY29uZmlndXJlZCI6IHRydWUsCiAgICAgICAgICAiY291bnQiOiAzLAogICAgICAgICAgImxhc3RTeW5jIjogIjIwMjYtMTAtMThUMDA6MzA6MDAuMDAwWiIsCiAgICAgICAgICAiYXBwbGljYXRpb25VcmwiOiAiaHR0cHM6Ly9rb3Bpcy5vci5rci9wb3IvY3Mvb3BlbmFwaS9vcGVuQXBpSW5mby5kbz9tZW51SWQ9TU5VXzAwMDc0IgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgInNvdXJjZSI6ICJjdWx0dXJlIiwKICAgICAgICAgICJsYWJlbCI6ICLrrLjtmZTtj6zthLgiLAogICAgICAgICAgImNvbmZpZ3VyZWQiOiB0cnVlLAogICAgICAgICAgImNvdW50IjogMCwKICAgICAgICAgICJsYXN0U3luYyI6ICIyMDI2LTEwLTE4VDAwOjMwOjAwLjAwMFoiLAogICAgICAgICAgImFwcGxpY2F0aW9uVXJsIjogImh0dHBzOi8vd3d3LmRhdGEuZ28ua3IvZGF0YS8xNTEzODkzNy9vcGVuYXBpLmRvIgogICAgICAgIH0KICAgICAgXSwKICAgICAgInBlbmRpbmdEZXRhaWxzIjogMCwKICAgICAgInJ1bnMiOiBbXSwKICAgICAgInB1Ymxpc2hlZCI6IHsKICAgICAgICAibW9kZSI6ICJwdWJsaXNoZWQiLAogICAgICAgICJzbmFwc2hvdEF0IjogIjIwMjYtMTAtMThUMDA6MzA6MDAuMDAwWiIKICAgICAgfSwKICAgICAgImZhbGxiYWNrIjogbnVsbAogICAgfSwKICAgIHsKICAgICAgInNvdXJjZXMiOiBbCiAgICAgICAgewogICAgICAgICAgInNvdXJjZSI6ICJrb3BpcyIsCiAgICAgICAgICAibGFiZWwiOiAiS09QSVMiLAogICAgICAgICAgImNvbmZpZ3VyZWQiOiB0cnVlLAogICAgICAgICAgImNvdW50IjogMywKICAgICAgICAgICJsYXN0U3luYyI6ICIyMDI2LTEwLTE4VDAwOjMwOjAwLjAwMFoiLAogICAgICAgICAgImFwcGxpY2F0aW9uVXJsIjogImh0dHBzOi8va29waXMub3Iua3IvcG9yL2NzL29wZW5hcGkvb3BlbkFwaUluZm8uZG8/bWVudUlkPU1OVV8wMDA3NCIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJzb3VyY2UiOiAiY3VsdHVyZSIsCiAgICAgICAgICAibGFiZWwiOiAi66y47ZmU7Y+s7YS4IiwKICAgICAgICAgICJjb25maWd1cmVkIjogdHJ1ZSwKICAgICAgICAgICJjb3VudCI6IDAsCiAgICAgICAgICAibGFzdFN5bmMiOiAiMjAyNi0xMC0xOFQwMDozMDowMC4wMDBaIiwKICAgICAgICAgICJhcHBsaWNhdGlvblVybCI6ICJodHRwczovL3d3dy5kYXRhLmdvLmtyL2RhdGEvMTUxMzg5Mzcvb3BlbmFwaS5kbyIKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJwZW5kaW5nRGV0YWlscyI6IDAsCiAgICAgICJydW5zIjogW10sCiAgICAgICJwdWJsaXNoZWQiOiB7CiAgICAgICAgIm1vZGUiOiAicHVibGlzaGVkIiwKICAgICAgICAic25hcHNob3RBdCI6ICIyMDI2LTEwLTE4VDAwOjMwOjAwLjAwMFoiCiAgICAgIH0sCiAgICAgICJmYWxsYmFjayI6IG51bGwKICAgIH0KICBdLAogICJvYnNlcnZlZCI6IFsKICAgIHsKICAgICAgInN0YWdlIjogImluaXRpYWwiLAogICAgICAiZW5kcG9pbnQiOiAiYm9vdHN0cmFwIgogICAgfSwKICAgIHsKICAgICAgInN0YWdlIjogImluaXRpYWwiLAogICAgICAiZW5kcG9pbnQiOiAicGVyZm9ybWFuY2VzIiwKICAgICAgImlkcyI6IFsKICAgICAgICA5OTAxLAogICAgICAgIDk5MDMKICAgICAgXSwKICAgICAgInF1ZXJ5IjogewogICAgICAgICJjaXRpZXMiOiAiYW5kb25nIiwKICAgICAgICAiZnJvbSI6ICIyMDI2LTEwLTAxIiwKICAgICAgICAidG8iOiAiMjAyNi0xMS0zMCIsCiAgICAgICAgInN0YXR1cyI6ICJvbmdvaW5nIiwKICAgICAgICAicGFnZSI6ICIxIiwKICAgICAgICAibGltaXQiOiAiMzAiCiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJzdGFnZSI6ICJpbml0aWFsIiwKICAgICAgImVuZHBvaW50IjogIm1hcCIsCiAgICAgICJpZHMiOiBbCiAgICAgICAgOTkwMSwKICAgICAgICA5OTAzCiAgICAgIF0sCiAgICAgICJxdWVyeSI6IHsKICAgICAgICAiY2l0aWVzIjogImFuZG9uZyIsCiAgICAgICAgImZyb20iOiAiMjAyNi0xMC0wMSIsCiAgICAgICAgInRvIjogIjIwMjYtMTEtMzAiLAogICAgICAgICJzdGF0dXMiOiAib25nb2luZyIKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInN0YWdlIjogIm1pZG5pZ2h0IiwKICAgICAgImVuZHBvaW50IjogImJvb3RzdHJhcCIKICAgIH0sCiAgICB7CiAgICAgICJzdGFnZSI6ICJtaWRuaWdodCIsCiAgICAgICJlbmRwb2ludCI6ICJwZXJmb3JtYW5jZXMiLAogICAgICAiaWRzIjogWwogICAgICAgIDk5MDIsCiAgICAgICAgOTkwMwogICAgICBdLAogICAgICAicXVlcnkiOiB7CiAgICAgICAgImNpdGllcyI6ICJhbmRvbmciLAogICAgICAgICJmcm9tIjogIjIwMjYtMTAtMDEiLAogICAgICAgICJ0byI6ICIyMDI2LTExLTMwIiwKICAgICAgICAic3RhdHVzIjogIm9uZ29pbmciLAogICAgICAgICJwYWdlIjogIjEiLAogICAgICAgICJsaW1pdCI6ICIzMCIKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInN0YWdlIjogIm1pZG5pZ2h0IiwKICAgICAgImVuZHBvaW50IjogIm1hcCIsCiAgICAgICJpZHMiOiBbCiAgICAgICAgOTkwMiwKICAgICAgICA5OTAzCiAgICAgIF0sCiAgICAgICJxdWVyeSI6IHsKICAgICAgICAiY2l0aWVzIjogImFuZG9uZyIsCiAgICAgICAgImZyb20iOiAiMjAyNi0xMC0wMSIsCiAgICAgICAgInRvIjogIjIwMjYtMTEtMzAiLAogICAgICAgICJzdGF0dXMiOiAib25nb2luZyIKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInN0YWdlIjogInNhbWUtZGF5IiwKICAgICAgImVuZHBvaW50IjogImJvb3RzdHJhcCIKICAgIH0KICBdCn0="
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b50bbcbaf45e340d2006-e9e318306970c63c897b",
+          "file": "freshness.spec.ts",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "popup.spec.ts",
+      "file": "popup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "375px dense popup keeps local navigation and reveals repeated external locate requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:50:41.173Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "popup-local-state.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJvcmRlcmVkSWRzIjogWwogICAgMzYsCiAgICAzNSwKICAgIDM0LAogICAgMzMsCiAgICAzMiwKICAgIDMxLAogICAgMzAsCiAgICAyOSwKICAgIDI4LAogICAgMjcsCiAgICAyNiwKICAgIDI1LAogICAgMjQsCiAgICAyMywKICAgIDIyLAogICAgMjEsCiAgICAyMCwKICAgIDE5LAogICAgMTgsCiAgICAxNywKICAgIDE2LAogICAgMTUsCiAgICAxNCwKICAgIDEzLAogICAgMTIsCiAgICAxMSwKICAgIDEwLAogICAgOSwKICAgIDgsCiAgICA3LAogICAgNiwKICAgIDUsCiAgICA0LAogICAgMywKICAgIDIsCiAgICAxCiAgXSwKICAidGFyZ2V0SWQiOiA3LAogICJwcmVzZXJ2ZWQiOiBbCiAgICB7CiAgICAgICJsb2NhbFN0YXRlIjogInBhZ2UyIiwKICAgICAgIm1ldGhvZCI6ICJrZXlib2FyZCIsCiAgICAgICJiZWZvcmUiOiB7CiAgICAgICAgInF1ZXJ5IjogIiIsCiAgICAgICAgInBhZ2UiOiAiMiAvIDIiLAogICAgICAgICJpZHMiOiBbCiAgICAgICAgICAxNiwKICAgICAgICAgIDE1LAogICAgICAgICAgMTQsCiAgICAgICAgICAxMywKICAgICAgICAgIDEyLAogICAgICAgICAgMTEsCiAgICAgICAgICAxMCwKICAgICAgICAgIDksCiAgICAgICAgICA4LAogICAgICAgICAgNywKICAgICAgICAgIDYsCiAgICAgICAgICA1LAogICAgICAgICAgNCwKICAgICAgICAgIDMsCiAgICAgICAgICAyLAogICAgICAgICAgMQogICAgICAgIF0KICAgICAgfSwKICAgICAgImFmdGVyIjogewogICAgICAgICJxdWVyeSI6ICIiLAogICAgICAgICJwYWdlIjogIjIgLyAyIiwKICAgICAgICAiaWRzIjogWwogICAgICAgICAgMTYsCiAgICAgICAgICAxNSwKICAgICAgICAgIDE0LAogICAgICAgICAgMTMsCiAgICAgICAgICAxMiwKICAgICAgICAgIDExLAogICAgICAgICAgMTAsCiAgICAgICAgICA5LAogICAgICAgICAgOCwKICAgICAgICAgIDcsCiAgICAgICAgICA2LAogICAgICAgICAgNSwKICAgICAgICAgIDQsCiAgICAgICAgICAzLAogICAgICAgICAgMiwKICAgICAgICAgIDEKICAgICAgICBdCiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJsb2NhbFN0YXRlIjogInBhZ2UyIiwKICAgICAgIm1ldGhvZCI6ICJwb2ludGVyIiwKICAgICAgImJlZm9yZSI6IHsKICAgICAgICAicXVlcnkiOiAiIiwKICAgICAgICAicGFnZSI6ICIyIC8gMiIsCiAgICAgICAgImlkcyI6IFsKICAgICAgICAgIDE2LAogICAgICAgICAgMTUsCiAgICAgICAgICAxNCwKICAgICAgICAgIDEzLAogICAgICAgICAgMTIsCiAgICAgICAgICAxMSwKICAgICAgICAgIDEwLAogICAgICAgICAgOSwKICAgICAgICAgIDgsCiAgICAgICAgICA3LAogICAgICAgICAgNiwKICAgICAgICAgIDUsCiAgICAgICAgICA0LAogICAgICAgICAgMywKICAgICAgICAgIDIsCiAgICAgICAgICAxCiAgICAgICAgXQogICAgICB9LAogICAgICAiYWZ0ZXIiOiB7CiAgICAgICAgInF1ZXJ5IjogIiIsCiAgICAgICAgInBhZ2UiOiAiMiAvIDIiLAogICAgICAgICJpZHMiOiBbCiAgICAgICAgICAxNiwKICAgICAgICAgIDE1LAogICAgICAgICAgMTQsCiAgICAgICAgICAxMywKICAgICAgICAgIDEyLAogICAgICAgICAgMTEsCiAgICAgICAgICAxMCwKICAgICAgICAgIDksCiAgICAgICAgICA4LAogICAgICAgICAgNywKICAgICAgICAgIDYsCiAgICAgICAgICA1LAogICAgICAgICAgNCwKICAgICAgICAgIDMsCiAgICAgICAgICAyLAogICAgICAgICAgMQogICAgICAgIF0KICAgICAgfQogICAgfSwKICAgIHsKICAgICAgImxvY2FsU3RhdGUiOiAidGl0bGUiLAogICAgICAibWV0aG9kIjogImtleWJvYXJkIiwKICAgICAgImJlZm9yZSI6IHsKICAgICAgICAicXVlcnkiOiAiVEVTVCDsl6zsiJgg7KCV6riwIOqzteyXsCAzNiIsCiAgICAgICAgInBhZ2UiOiAiMSAvIDEiLAogICAgICAgICJpZHMiOiBbCiAgICAgICAgICAzNgogICAgICAgIF0KICAgICAgfSwKICAgICAgImFmdGVyIjogewogICAgICAgICJxdWVyeSI6ICJURVNUIOyXrOyImCDsoJXquLAg6rO17JewIDM2IiwKICAgICAgICAicGFnZSI6ICIxIC8gMSIsCiAgICAgICAgImlkcyI6IFsKICAgICAgICAgIDM2CiAgICAgICAgXQogICAgICB9CiAgICB9LAogICAgewogICAgICAibG9jYWxTdGF0ZSI6ICJ0aXRsZSIsCiAgICAgICJtZXRob2QiOiAicG9pbnRlciIsCiAgICAgICJiZWZvcmUiOiB7CiAgICAgICAgInF1ZXJ5IjogIlRFU1Qg7Jes7IiYIOygleq4sCDqs7Xsl7AgMzYiLAogICAgICAgICJwYWdlIjogIjEgLyAxIiwKICAgICAgICAiaWRzIjogWwogICAgICAgICAgMzYKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJhZnRlciI6IHsKICAgICAgICAicXVlcnkiOiAiVEVTVCDsl6zsiJgg7KCV6riwIOqzteyXsCAzNiIsCiAgICAgICAgInBhZ2UiOiAiMSAvIDEiLAogICAgICAgICJpZHMiOiBbCiAgICAgICAgICAzNgogICAgICAgIF0KICAgICAgfQogICAgfSwKICAgIHsKICAgICAgImxvY2FsU3RhdGUiOiAiZW1wdHkiLAogICAgICAibWV0aG9kIjogImtleWJvYXJkIiwKICAgICAgImJlZm9yZSI6IHsKICAgICAgICAicXVlcnkiOiAi7JeG64qUIOqzteyXsOyepSBURVNUIHh5eiIsCiAgICAgICAgInBhZ2UiOiAiMSAvIDEiLAogICAgICAgICJpZHMiOiBbXQogICAgICB9LAogICAgICAiYWZ0ZXIiOiB7CiAgICAgICAgInF1ZXJ5IjogIuyXhuuKlCDqs7Xsl7DsnqUgVEVTVCB4eXoiLAogICAgICAgICJwYWdlIjogIjEgLyAxIiwKICAgICAgICAiaWRzIjogW10KICAgICAgfQogICAgfSwKICAgIHsKICAgICAgImxvY2FsU3RhdGUiOiAiZW1wdHkiLAogICAgICAibWV0aG9kIjogInBvaW50ZXIiLAogICAgICAiYmVmb3JlIjogewogICAgICAgICJxdWVyeSI6ICLsl4bripQg6rO17Jew7J6lIFRFU1QgeHl6IiwKICAgICAgICAicGFnZSI6ICIxIC8gMSIsCiAgICAgICAgImlkcyI6IFtdCiAgICAgIH0sCiAgICAgICJhZnRlciI6IHsKICAgICAgICAicXVlcnkiOiAi7JeG64qUIOqzteyXsOyepSBURVNUIHh5eiIsCiAgICAgICAgInBhZ2UiOiAiMSAvIDEiLAogICAgICAgICJpZHMiOiBbXQogICAgICB9CiAgICB9CiAgXSwKICAicmVxdWVzdHMiOiB7CiAgICAibWFwIjogMSwKICAgICJzZWFyY2giOiAxCiAgfQp9"
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-9d26feea069e5c95dfdf",
+          "file": "popup.spec.ts",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "cached popup state survives visiting another marker and zooming within venue view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6590,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:50:49.595Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-24452e15291b88d9080b",
+          "file": "popup.spec.ts",
+          "line": 99,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "published.spec.ts",
+      "file": "published.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "published search, cards, table, map, detail and export share the same regional results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5307,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:50:56.222Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-221cdca9e3d852e10fa5",
+          "file": "published.spec.ts",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "obsolete searches are aborted and cannot replace the newest result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3125,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:01.543Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "held-search-settlement.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzZXR0bGVkIjogdHJ1ZSwKICAiY2FuY2VsbGVkIjogWwogICAgIm5ldDo6RVJSX0FCT1JURUQiCiAgXSwKICAicm91dGVFcnJvcnMiOiBbXQp9"
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-5ae379e40e14ee38e25b",
+          "file": "published.spec.ts",
+          "line": 65,
+          "column": 1
+        },
+        {
+          "title": "search failure retries cleanly and restores the requested result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2502,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:04.680Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-1f6a32ad354bcd3ebd26",
+          "file": "published.spec.ts",
+          "line": 104,
+          "column": 1
+        },
+        {
+          "title": "source footer waits for the first result while initial errors keep recovery available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1799,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:07.193Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "source-footer-state.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdGFydGVkIjogdHJ1ZSwKICAic2V0dGxlZCI6IHRydWUKfQ=="
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-4da5ce41c0456c61e09f",
+          "file": "published.spec.ts",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "map exit cancels its request and reentry works when external tiles fail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:09.003Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "held-map-settlement.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzZXR0bGVkIjogdHJ1ZSwKICAiY2FuY2VsbGVkIjogWwogICAgIm5ldDo6RVJSX0FCT1JURUQiCiAgXSwKICAicm91dGVFcnJvcnMiOiBbXQp9"
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-34c7e75169583e30fc7c",
+          "file": "published.spec.ts",
+          "line": 183,
+          "column": 1
+        },
+        {
+          "title": "region dialog supports keyboard dismissal and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1921,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:12.181Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-baf8d25d7ef1f35c22b4",
+          "file": "published.spec.ts",
+          "line": 224,
+          "column": 1
+        },
+        {
+          "title": "map js chunk failure offers reload and restores a styled map with saved filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:14.114Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-588618d160f0673ea1c6",
+          "file": "published.spec.ts",
+          "line": 239,
+          "column": 3
+        },
+        {
+          "title": "map css chunk failure offers reload and restores a styled map with saved filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3570,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:17.575Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-d4f904e27e7910bddbd4",
+          "file": "published.spec.ts",
+          "line": 239,
+          "column": 3
+        },
+        {
+          "title": "low-zoom keyboard popup keeps final focus through resize and returns it on Escape",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3709,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:21.156Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-afadd8dbb9d9198057d2",
+          "file": "published.spec.ts",
+          "line": 278,
+          "column": 1
+        },
+        {
+          "title": "a newer publication with unchanged counts refreshes both list and map once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2991,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:24.878Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "publication-refresh.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJvcmlnaW5hbFNuYXBzaG90QXQiOiAiMjAyNi0xMC0xOFQwMDozMDowMC4wMDBaIiwKICAibmV4dFNuYXBzaG90QXQiOiAiMjAyNi0xMC0xOFQwMDozMTowMC4wMDBaIiwKICAib3JpZ2luYWxDb3VudHMiOiB7CiAgICAic291cmNlcyI6IFsKICAgICAgWwogICAgICAgICJrb3BpcyIsCiAgICAgICAgMzUKICAgICAgXSwKICAgICAgWwogICAgICAgICJjdWx0dXJlIiwKICAgICAgICAxCiAgICAgIF0KICAgIF0sCiAgICAicGVuZGluZ0RldGFpbHMiOiAwLAogICAgInJ1bnMiOiBbXQogIH0sCiAgIm5ld0NvdW50cyI6IHsKICAgICJzb3VyY2VzIjogWwogICAgICBbCiAgICAgICAgImtvcGlzIiwKICAgICAgICAzNQogICAgICBdLAogICAgICBbCiAgICAgICAgImN1bHR1cmUiLAogICAgICAgIDEKICAgICAgXQogICAgXSwKICAgICJwZW5kaW5nRGV0YWlscyI6IDAsCiAgICAicnVucyI6IFtdCiAgfSwKICAicmVhZHMiOiB7CiAgICAiYm9vdHN0cmFwIjogMSwKICAgICJzZWFyY2giOiAxLAogICAgIm1hcCI6IDEKICB9Cn0="
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef0251d7957f2c16f8d3-96f284d7e715ea384bd2",
+          "file": "published.spec.ts",
+          "line": 318,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "mobile cards, region selector, detail, table and map fit a 375px viewport",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10923,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:51:30.834Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "horizontal-overflow.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ3aWR0aCI6IDM3NSwKICAiaW5uZXJXaWR0aCI6IDM3NSwKICAic2Nyb2xsIjogMzc1LAogICJkaWFsb2dzIjogW10KfQ=="
+                    },
+                    {
+                      "name": "horizontal-overflow.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ3aWR0aCI6IDM3NSwKICAiaW5uZXJXaWR0aCI6IDM3NSwKICAic2Nyb2xsIjogMzc1LAogICJkaWFsb2dzIjogWwogICAgewogICAgICAiY2xpZW50IjogMzc1LAogICAgICAic2Nyb2xsIjogMzc1CiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "horizontal-overflow.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ3aWR0aCI6IDM3NSwKICAiaW5uZXJXaWR0aCI6IDM3NSwKICAic2Nyb2xsIjogMzc1LAogICJkaWFsb2dzIjogWwogICAgewogICAgICAiY2xpZW50IjogMzc1LAogICAgICAic2Nyb2xsIjogMzc1CiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "horizontal-overflow.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ3aWR0aCI6IDM3NSwKICAiaW5uZXJXaWR0aCI6IDM3NSwKICAic2Nyb2xsIjogMzc1LAogICJkaWFsb2dzIjogW10KfQ=="
+                    },
+                    {
+                      "name": "horizontal-overflow.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ3aWR0aCI6IDM3NSwKICAiaW5uZXJXaWR0aCI6IDM3NSwKICAic2Nyb2xsIjogMzc1LAogICJkaWFsb2dzIjogW10KfQ=="
+                    },
+                    {
+                      "name": "horizontal-overflow.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ3aWR0aCI6IDM3NSwKICAiaW5uZXJXaWR0aCI6IDM3NSwKICAic2Nyb2xsIjogMzc1LAogICJkaWFsb2dzIjogW10KfQ=="
+                    },
+                    {
+                      "name": "horizontal-overflow.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ3aWR0aCI6IDM3NSwKICAiaW5uZXJXaWR0aCI6IDM3NSwKICAic2Nyb2xsIjogMzc1LAogICJkaWFsb2dzIjogW10KfQ=="
+                    },
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-d54db59e85a8f6f28833",
+          "file": "mobile.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T18:50:23.754Z",
+    "duration": 81603.399,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

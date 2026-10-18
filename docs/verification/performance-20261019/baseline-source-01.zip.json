@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-18T18:33:29.211673+00:00",
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\baseline",
+  "manifest": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\baseline-files.json",
+  "manifestSha256": "e32540880284a876d34f53941e0e47ce076c6d6a9c14b26181a8a25307aea194",
+  "archive": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\baseline-source-01.zip",
+  "archiveSha256": "c67b7b8c897193a87f9d784541e05dcc6411f5dae3672312c657251abf0329e3",
+  "files": 165,
+  "uncompressedBytes": 9778354,
+  "archiveBytes": 1555863,
+  "exactBytesVerified": true,
+  "scope": "Initial enumerated source/assets only, including pre-session uncommitted changes. No dependencies/build/secrets. This is not the Git base commit alone.",
+  "archiveTimestampPolicy": "All ZIP entries use the session start UTC as a constant marker."
+}

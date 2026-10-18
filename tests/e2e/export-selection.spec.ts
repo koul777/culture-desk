@@ -25,7 +25,8 @@ test('export waits for the typed search and its response, then records the displ
   try {
     // A paused browser clock makes the 350 ms debounce boundary deterministic.
     // The Node API fixture and the test's own deadline still use real time.
-    await page.clock.pauseAt(new Date('2026-10-18T10:00:10Z'));
+    // Slow CI startup must not make an absolute pause timestamp fall in the past.
+    await page.clock.pauseAt(new Date(await page.evaluate(() => Date.now() + 5_000)));
     await page.getByRole('searchbox', { name: '공연명·공연장 검색' }).fill('안동');
     await expect(button, 'new text must not export the previous debounced selection').toBeDisabled({ timeout: 500 });
     expect(started).toBe(false);
@@ -56,7 +57,7 @@ test('export waits for the typed search and its response, then records the displ
     expect(JSON.parse(workbook.getWorksheet('조회 근거')!.getCell('B3').text).q).toBe('안동');
 
     await page.getByRole('button', { name: /^상세 조건/ }).click();
-    await page.clock.pauseAt(new Date('2026-10-18T10:00:20Z'));
+    await page.clock.pauseAt(new Date(await page.evaluate(() => Date.now() + 5_000)));
     await page.getByLabel(/^관람 연령/).fill('전체');
     await expect(button, 'the independent age debounce also guards export').toBeDisabled();
     const ageResponse = page.waitForResponse(response => {

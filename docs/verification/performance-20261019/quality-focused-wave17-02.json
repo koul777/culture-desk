@@ -1,0 +1,208 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\workspace\\cultureapi\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/popup.spec.ts",
+      "--project=desktop-chromium",
+      "--grep",
+      "cached popup",
+      "--output=test-results/wave17-focused-02"
+    ],
+    "configFile": "C:\\workspace\\cultureapi\\playwright.config.ts",
+    "rootDir": "C:/workspace/cultureapi/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/workspace/cultureapi/test-results/wave17-focused-02",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop-chromium",
+        "name": "desktop-chromium",
+        "testDir": "C:/workspace/cultureapi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/published.spec.ts",
+          "**/freshness.spec.ts",
+          "**/export-selection.spec.ts",
+          "**/popup.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/workspace/cultureapi/test-results/wave17-focused-02",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-chromium",
+        "name": "mobile-chromium",
+        "testDir": "C:/workspace/cultureapi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/mobile.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\workspace\\cultureapi\\test-results\\wave17-focused-02",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "desktop-chromium",
+        "testDir": "C:\\workspace\\cultureapi\\tests\\e2e",
+        "snapshotDir": "C:\\workspace\\cultureapi\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/published.spec.ts",
+          "**/freshness.spec.ts",
+          "**/export-selection.spec.ts",
+          "**/popup.spec.ts"
+        ],
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4339",
+          "locale": "ko-KR",
+          "timezoneId": "Asia/Seoul",
+          "reducedMotion": "reduce",
+          "serviceWorkers": "block",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop-chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/e2e-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node --import tsx tests/e2e/server.ts",
+      "url": "http://127.0.0.1:4339/__qa/ready",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "popup.spec.ts",
+      "file": "popup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "cached popup state survives visiting another marker and zooming within venue view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7881,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T18:48:24.221Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-guard.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ1bmV4cGVjdGVkIjogW10sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-24452e15291b88d9080b",
+          "file": "popup.spec.ts",
+          "line": 99,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T18:48:20.318Z",
+    "duration": 15510.675000000001,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

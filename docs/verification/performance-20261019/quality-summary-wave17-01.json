@@ -1,0 +1,27 @@
+{
+  "startedAt": "2026-10-18T18:49:42.072Z",
+  "steps": [
+    {
+      "name": "typecheck",
+      "durationMs": 3074,
+      "exitCode": 0
+    },
+    {
+      "name": "unit",
+      "durationMs": 26113,
+      "exitCode": 0
+    },
+    {
+      "name": "build",
+      "durationMs": 10565,
+      "exitCode": 0
+    },
+    {
+      "name": "browser",
+      "durationMs": 83737,
+      "exitCode": 0
+    }
+  ],
+  "passed": true,
+  "completedAt": "2026-10-18T18:51:45.574Z"
+}

@@ -1,0 +1,12 @@
+{
+  "startedAt": "2026-10-18T19:06:18.892Z",
+  "steps": [
+    {
+      "name": "typecheck",
+      "durationMs": 2773,
+      "exitCode": 1
+    }
+  ],
+  "passed": false,
+  "completedAt": "2026-10-18T19:06:21.675Z"
+}

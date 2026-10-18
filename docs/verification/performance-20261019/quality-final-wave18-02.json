@@ -1,0 +1,109 @@
+{
+  "at": "2026-10-18T19:13:02.964Z",
+  "passed": true,
+  "unit": {
+    "files": 50,
+    "tests": 309,
+    "passed": 309,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "tests": 16,
+    "stats": {
+      "startTime": "2026-10-18T19:10:28.122Z",
+      "duration": 98645.274,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "guards": 16,
+    "runtimeErrors": 0,
+    "unexpectedNetwork": 0,
+    "projects": {
+      "desktop-chromium": 15,
+      "mobile-chromium": 1
+    }
+  },
+  "steps": [
+    {
+      "name": "typecheck",
+      "durationMs": 3296,
+      "exitCode": 0
+    },
+    {
+      "name": "unit",
+      "durationMs": 40820,
+      "exitCode": 0
+    },
+    {
+      "name": "build",
+      "durationMs": 23229,
+      "exitCode": 0
+    },
+    {
+      "name": "browser",
+      "durationMs": 100900,
+      "exitCode": 0
+    }
+  ],
+  "source": "82f3e500a7df24307da75da9030db2db5bea818be75595d4dd4020bc8c776179",
+  "build": "f90479edaf65a0e81c5bb8cd9b1020f4680af6b20b13b21b1e3c21baba62a965",
+  "validation": "aef6f56b41c89afd29e7571ef6dd1bb0b132f8bcd1e5f52de0d7edec9b30fad2",
+  "workflow": "67394d9844835128ce65ce64be7406371a17608ae5b478594a8f867f2243d2cd",
+  "snapshot": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+  "images": [
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\mobile-cards.png",
+      "hash": "8338df9e86f2051e9a0e63836121169fd52ef25ed1a2009932de4050a8fcff3f"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\mobile-detail.png",
+      "hash": "2d14896d9d6debf9f5e9484fd19e265ef6c8eaa63519ba9db2ab543ee067e3a5"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\mobile-loading.png",
+      "hash": "0aba5f384282887713c53b83989df781cc106a3d8b72214ee577152cfec9166f"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\mobile-map.png",
+      "hash": "54ea1ac0b5c3c6bba2f3691dff2673acca67b3198c8542e4191fcb6a563765a7"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\mobile-overview.png",
+      "hash": "ff53d6a37585c92f38a7c25183cb649066e5911a0c4a1248e0b098a514ef871c"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\mobile-pagination.png",
+      "hash": "6542e169f46e29cf232456b29b82a50e010a04db2ca4fb416882edbe82fb3bb0"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\mobile-regions.png",
+      "hash": "8014e39ffe0a4198038d93f241cf37ea3dcc1f6c1cae3424146edaa2e34d2cdb"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\desktop-cards.png",
+      "hash": "a301778336dc427a6a403956b168f30b118aca922eb5ddff3798efb2518c2861"
+    },
+    {
+      "file": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\quality-wave18-images\\desktop-map.png",
+      "hash": "62c6f419e45c9bebfe7151548a48788b687ebb0b540153cb2eb32ae9490defc2"
+    }
+  ],
+  "priorAttempt": {
+    "log": "quality-wave18-01.txt",
+    "summary": "quality-summary-wave18-01.json",
+    "phase": "typecheck",
+    "cause": "New test metadata compared Source to uppercase KOPIS/CULTURE; unit/build/browser were not run",
+    "fix": "Test-only dynamic source counts with total41 assertion; product source/build unchanged"
+  },
+  "workflowScope": "Adds push for feat/daily-snapshot-deploy only; contents read, no credentials persistence, same quality command,15-minute timeout,no deployment",
+  "files": {
+    "log": "quality-wave18-02.txt",
+    "quality": "quality-summary-wave18-02.json",
+    "browser": "quality-e2e-wave18-02.json",
+    "before": "quality-wave18-before-02.json",
+    "after": "quality-wave18-after-02.json"
+  }
+}

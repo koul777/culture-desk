@@ -1,0 +1,890 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: popup.spec.ts >> cached popup state survives visiting another marker and zooming within venue view
+- Location: tests\e2e\popup.spec.ts:99:1
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - button "본문으로 건너뛰기" [ref=e3] [cursor=pointer]
+  - generic [ref=e4]:
+    - complementary [ref=e5]:
+      - strong [ref=e18]: Culture Desk
+      - navigation "주요 화면" [ref=e19]:
+        - list [ref=e20]:
+          - listitem [ref=e21]:
+            - link "공연 찾기" [ref=e22] [cursor=pointer]:
+              - /url: "#search"
+          - listitem [ref=e27]:
+            - link "지도 보기" [ref=e28] [cursor=pointer]:
+              - /url: "#map"
+          - listitem [ref=e32]:
+            - link "데이터 연결" [ref=e33] [cursor=pointer]:
+              - /url: "#connection"
+    - main "본문" [ref=e39]:
+      - region [ref=e40]:
+        - generic [ref=e41]:
+          - heading "전국 주요 공연 검색." [level=1] [ref=e43]
+          - link "공연 목록 보기" [ref=e45] [cursor=pointer]:
+            - /url: "#search"
+        - generic [ref=e51]:
+          - generic [ref=e53]:
+            - button "지역 선택 전국" [ref=e54] [cursor=pointer]:
+              - text: 지역 선택
+              - generic [ref=e58]: 전국
+            - generic "지역 선택 요약" [ref=e61]: 전국 모든 지역
+          - generic [ref=e63]:
+            - generic [ref=e64]:
+              - generic [ref=e68]: 공연명·공연장 검색
+              - searchbox "공연명·공연장 검색" [ref=e69]
+            - generic [ref=e70]:
+              - generic [ref=e71]:
+                - generic [ref=e72]: 빠른 조회 시작일
+                - textbox "빠른 조회 시작일" [ref=e73]: 2026-10-01
+              - generic [ref=e74]:
+                - generic [ref=e75]: 빠른 조회 종료일
+                - textbox "빠른 조회 종료일" [ref=e76]: 2027-01-18
+            - button "상세 조건" [ref=e77] [cursor=pointer]
+        - region [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - paragraph [ref=e82]: 전국 · 지도와 목록
+              - heading "공연 목록 36" [level=2] [ref=e83]
+            - generic [ref=e84]:
+              - group "공연 보기 방식" [ref=e85]:
+                - button "카드" [ref=e86] [cursor=pointer]
+                - button "표" [ref=e92] [cursor=pointer]
+                - button "지도 + 목록" [pressed] [ref=e95] [cursor=pointer]
+              - button "엑셀 내보내기" [ref=e98] [cursor=pointer]
+          - generic [ref=e102]:
+            - generic [ref=e103]:
+              - region "공연 지도. Tab으로 공연장 마커를 이동하고 Enter로 공연 목록을 확인할 수 있습니다." [ref=e104]:
+                - generic:
+                  - generic:
+                    - button "이 위치의 공연 35건 · 공연장 표기 3개 · 공연 목록 열기" [ref=e105] [cursor=pointer]:
+                      - generic [ref=e106]: "35"
+                    - button "TEST 안동 공연장 · 공연 1건 · 공연 목록 열기" [active] [ref=e107] [cursor=pointer]:
+                      - generic [ref=e108]: "1"
+                - generic:
+                  - generic:
+                    - generic [ref=e109]:
+                      - button "지도 확대" [ref=e110] [cursor=pointer]: +
+                      - button "지도 축소" [ref=e111] [cursor=pointer]: −
+                    - generic [ref=e112]:
+                      - link "Leaflet" [ref=e113] [cursor=pointer]:
+                        - /url: https://leafletjs.com
+                      - text: "| ©"
+                      - link "OpenStreetMap" [ref=e118] [cursor=pointer]:
+                        - /url: https://www.openstreetmap.org/copyright
+                      - text: contributors
+              - generic:
+                - generic:
+                  - strong: 전국 공연 지도
+              - button "검색 결과가 보이도록 지도 맞추기" [ref=e119] [cursor=pointer]: 결과 맞춤
+              - generic [ref=e129]:
+                - generic [ref=e130]: 묶음 · 누르면 확대
+                - generic [ref=e132]: 공연장 · 숫자는 공연 수
+              - status [ref=e135]:
+                - generic [ref=e139]: 공연장 위치 36건 · 위치 미확인 0건
+            - generic [ref=e140]:
+              - generic [ref=e141]:
+                - generic [ref=e142]: 공연 둘러보기
+                - generic [ref=e143]: 1–30 / 36건
+              - generic [ref=e144]:
+                - article [ref=e145]:
+                  - button "TEST 여수 정기 공연 36 상세 보기" [ref=e146] [cursor=pointer]:
+                    - generic [ref=e147]:
+                      - generic [ref=e157]: 음악
+                      - generic [ref=e158]: 포스터 정보 없음
+                  - generic [ref=e159]:
+                    - generic [ref=e160]:
+                      - generic [ref=e161]: 음악
+                      - generic [aria-hidden] [ref=e162]: ·
+                      - generic [ref=e163]: 여수
+                    - heading [level=3] [ref=e164]:
+                      - button "TEST 여수 정기 공연 36" [ref=e165] [cursor=pointer]
+                    - generic [ref=e166]:
+                      - paragraph [ref=e167]:
+                        - generic [ref=e170]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e171]:
+                        - generic "TEST 가상 공연장" [ref=e175]
+                      - paragraph [ref=e176]:
+                        - generic "30,000원" [ref=e179]
+                    - generic [ref=e180]:
+                      - generic [ref=e181]: 진행 중
+                      - generic [ref=e182]: KOPIS
+                      - button "TEST 여수 정기 공연 36 지도에서 보기" [ref=e183] [cursor=pointer]:
+                        - generic [ref=e187]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e188] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e195]:
+                  - button "TEST 여수 정기 공연 35 상세 보기" [ref=e196] [cursor=pointer]:
+                    - generic [ref=e197]:
+                      - generic [ref=e207]: 음악
+                      - generic [ref=e208]: 포스터 정보 없음
+                  - generic [ref=e209]:
+                    - generic [ref=e210]:
+                      - generic [ref=e211]: 음악
+                      - generic [aria-hidden] [ref=e212]: ·
+                      - generic [ref=e213]: 여수
+                    - heading [level=3] [ref=e214]:
+                      - button "TEST 여수 정기 공연 35" [ref=e215] [cursor=pointer]
+                    - generic [ref=e216]:
+                      - paragraph [ref=e217]:
+                        - generic [ref=e220]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e221]:
+                        - generic "TEST 가상 공연장" [ref=e225]
+                      - paragraph [ref=e226]:
+                        - generic "30,000원" [ref=e229]
+                    - generic [ref=e230]:
+                      - generic [ref=e231]: 진행 중
+                      - generic [ref=e232]: KOPIS
+                      - button "TEST 여수 정기 공연 35 지도에서 보기" [ref=e233] [cursor=pointer]:
+                        - generic [ref=e237]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e238] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e245]:
+                  - button "TEST 여수 정기 공연 34 상세 보기" [ref=e246] [cursor=pointer]:
+                    - generic [ref=e247]:
+                      - generic [ref=e257]: 음악
+                      - generic [ref=e258]: 포스터 정보 없음
+                  - generic [ref=e259]:
+                    - generic [ref=e260]:
+                      - generic [ref=e261]: 음악
+                      - generic [aria-hidden] [ref=e262]: ·
+                      - generic [ref=e263]: 여수
+                    - heading [level=3] [ref=e264]:
+                      - button "TEST 여수 정기 공연 34" [ref=e265] [cursor=pointer]
+                    - generic [ref=e266]:
+                      - paragraph [ref=e267]:
+                        - generic [ref=e270]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e271]:
+                        - generic "TEST 가상 공연장" [ref=e275]
+                      - paragraph [ref=e276]:
+                        - generic "30,000원" [ref=e279]
+                    - generic [ref=e280]:
+                      - generic [ref=e281]: 진행 중
+                      - generic [ref=e282]: KOPIS
+                      - button "TEST 여수 정기 공연 34 지도에서 보기" [ref=e283] [cursor=pointer]:
+                        - generic [ref=e287]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e288] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e295]:
+                  - button "TEST 여수 정기 공연 33 상세 보기" [ref=e296] [cursor=pointer]:
+                    - generic [ref=e297]:
+                      - generic [ref=e307]: 음악
+                      - generic [ref=e308]: 포스터 정보 없음
+                  - generic [ref=e309]:
+                    - generic [ref=e310]:
+                      - generic [ref=e311]: 음악
+                      - generic [aria-hidden] [ref=e312]: ·
+                      - generic [ref=e313]: 여수
+                    - heading [level=3] [ref=e314]:
+                      - button "TEST 여수 정기 공연 33" [ref=e315] [cursor=pointer]
+                    - generic [ref=e316]:
+                      - paragraph [ref=e317]:
+                        - generic [ref=e320]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e321]:
+                        - generic "TEST 가상 공연장" [ref=e325]
+                      - paragraph [ref=e326]:
+                        - generic "30,000원" [ref=e329]
+                    - generic [ref=e330]:
+                      - generic [ref=e331]: 진행 중
+                      - generic [ref=e332]: KOPIS
+                      - button "TEST 여수 정기 공연 33 지도에서 보기" [ref=e333] [cursor=pointer]:
+                        - generic [ref=e337]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e338] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e345]:
+                  - button "TEST 여수 정기 공연 32 상세 보기" [ref=e346] [cursor=pointer]:
+                    - generic [ref=e347]:
+                      - generic [ref=e357]: 음악
+                      - generic [ref=e358]: 포스터 정보 없음
+                  - generic [ref=e359]:
+                    - generic [ref=e360]:
+                      - generic [ref=e361]: 음악
+                      - generic [aria-hidden] [ref=e362]: ·
+                      - generic [ref=e363]: 여수
+                    - heading [level=3] [ref=e364]:
+                      - button "TEST 여수 정기 공연 32" [ref=e365] [cursor=pointer]
+                    - generic [ref=e366]:
+                      - paragraph [ref=e367]:
+                        - generic [ref=e370]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e371]:
+                        - generic "TEST 가상 공연장" [ref=e375]
+                      - paragraph [ref=e376]:
+                        - generic "30,000원" [ref=e379]
+                    - generic [ref=e380]:
+                      - generic [ref=e381]: 진행 중
+                      - generic [ref=e382]: KOPIS
+                      - button "TEST 여수 정기 공연 32 지도에서 보기" [ref=e383] [cursor=pointer]:
+                        - generic [ref=e387]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e388] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e395]:
+                  - button "TEST 여수 정기 공연 31 상세 보기" [ref=e396] [cursor=pointer]:
+                    - generic [ref=e397]:
+                      - generic [ref=e407]: 음악
+                      - generic [ref=e408]: 포스터 정보 없음
+                  - generic [ref=e409]:
+                    - generic [ref=e410]:
+                      - generic [ref=e411]: 음악
+                      - generic [aria-hidden] [ref=e412]: ·
+                      - generic [ref=e413]: 여수
+                    - heading [level=3] [ref=e414]:
+                      - button "TEST 여수 정기 공연 31" [ref=e415] [cursor=pointer]
+                    - generic [ref=e416]:
+                      - paragraph [ref=e417]:
+                        - generic [ref=e420]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e421]:
+                        - generic "TEST 가상 공연장" [ref=e425]
+                      - paragraph [ref=e426]:
+                        - generic "30,000원" [ref=e429]
+                    - generic [ref=e430]:
+                      - generic [ref=e431]: 진행 중
+                      - generic [ref=e432]: KOPIS
+                      - button "TEST 여수 정기 공연 31 지도에서 보기" [ref=e433] [cursor=pointer]:
+                        - generic [ref=e437]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e438] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e445]:
+                  - button "TEST 여수 정기 공연 30 상세 보기" [ref=e446] [cursor=pointer]:
+                    - generic [ref=e447]:
+                      - generic [ref=e457]: 음악
+                      - generic [ref=e458]: 포스터 정보 없음
+                  - generic [ref=e459]:
+                    - generic [ref=e460]:
+                      - generic [ref=e461]: 음악
+                      - generic [aria-hidden] [ref=e462]: ·
+                      - generic [ref=e463]: 여수
+                    - heading [level=3] [ref=e464]:
+                      - button "TEST 여수 정기 공연 30" [ref=e465] [cursor=pointer]
+                    - generic [ref=e466]:
+                      - paragraph [ref=e467]:
+                        - generic [ref=e470]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e471]:
+                        - generic "TEST 가상 공연장" [ref=e475]
+                      - paragraph [ref=e476]:
+                        - generic "30,000원" [ref=e479]
+                    - generic [ref=e480]:
+                      - generic [ref=e481]: 진행 중
+                      - generic [ref=e482]: KOPIS
+                      - button "TEST 여수 정기 공연 30 지도에서 보기" [ref=e483] [cursor=pointer]:
+                        - generic [ref=e487]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e488] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e495]:
+                  - button "TEST 여수 정기 공연 29 상세 보기" [ref=e496] [cursor=pointer]:
+                    - generic [ref=e497]:
+                      - generic [ref=e507]: 음악
+                      - generic [ref=e508]: 포스터 정보 없음
+                  - generic [ref=e509]:
+                    - generic [ref=e510]:
+                      - generic [ref=e511]: 음악
+                      - generic [aria-hidden] [ref=e512]: ·
+                      - generic [ref=e513]: 여수
+                    - heading [level=3] [ref=e514]:
+                      - button "TEST 여수 정기 공연 29" [ref=e515] [cursor=pointer]
+                    - generic [ref=e516]:
+                      - paragraph [ref=e517]:
+                        - generic [ref=e520]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e521]:
+                        - generic "TEST 가상 공연장" [ref=e525]
+                      - paragraph [ref=e526]:
+                        - generic "30,000원" [ref=e529]
+                    - generic [ref=e530]:
+                      - generic [ref=e531]: 진행 중
+                      - generic [ref=e532]: KOPIS
+                      - button "TEST 여수 정기 공연 29 지도에서 보기" [ref=e533] [cursor=pointer]:
+                        - generic [ref=e537]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e538] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e545]:
+                  - button "TEST 여수 정기 공연 28 상세 보기" [ref=e546] [cursor=pointer]:
+                    - generic [ref=e547]:
+                      - generic [ref=e557]: 음악
+                      - generic [ref=e558]: 포스터 정보 없음
+                  - generic [ref=e559]:
+                    - generic [ref=e560]:
+                      - generic [ref=e561]: 음악
+                      - generic [aria-hidden] [ref=e562]: ·
+                      - generic [ref=e563]: 여수
+                    - heading [level=3] [ref=e564]:
+                      - button "TEST 여수 정기 공연 28" [ref=e565] [cursor=pointer]
+                    - generic [ref=e566]:
+                      - paragraph [ref=e567]:
+                        - generic [ref=e570]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e571]:
+                        - generic "TEST 가상 공연장" [ref=e575]
+                      - paragraph [ref=e576]:
+                        - generic "30,000원" [ref=e579]
+                    - generic [ref=e580]:
+                      - generic [ref=e581]: 진행 중
+                      - generic [ref=e582]: KOPIS
+                      - button "TEST 여수 정기 공연 28 지도에서 보기" [ref=e583] [cursor=pointer]:
+                        - generic [ref=e587]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e588] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e595]:
+                  - button "TEST 여수 정기 공연 27 상세 보기" [ref=e596] [cursor=pointer]:
+                    - generic [ref=e597]:
+                      - generic [ref=e607]: 음악
+                      - generic [ref=e608]: 포스터 정보 없음
+                  - generic [ref=e609]:
+                    - generic [ref=e610]:
+                      - generic [ref=e611]: 음악
+                      - generic [aria-hidden] [ref=e612]: ·
+                      - generic [ref=e613]: 여수
+                    - heading [level=3] [ref=e614]:
+                      - button "TEST 여수 정기 공연 27" [ref=e615] [cursor=pointer]
+                    - generic [ref=e616]:
+                      - paragraph [ref=e617]:
+                        - generic [ref=e620]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e621]:
+                        - generic "TEST 가상 공연장" [ref=e625]
+                      - paragraph [ref=e626]:
+                        - generic "30,000원" [ref=e629]
+                    - generic [ref=e630]:
+                      - generic [ref=e631]: 진행 중
+                      - generic [ref=e632]: KOPIS
+                      - button "TEST 여수 정기 공연 27 지도에서 보기" [ref=e633] [cursor=pointer]:
+                        - generic [ref=e637]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e638] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e645]:
+                  - button "TEST 여수 정기 공연 26 상세 보기" [ref=e646] [cursor=pointer]:
+                    - generic [ref=e647]:
+                      - generic [ref=e657]: 음악
+                      - generic [ref=e658]: 포스터 정보 없음
+                  - generic [ref=e659]:
+                    - generic [ref=e660]:
+                      - generic [ref=e661]: 음악
+                      - generic [aria-hidden] [ref=e662]: ·
+                      - generic [ref=e663]: 여수
+                    - heading [level=3] [ref=e664]:
+                      - button "TEST 여수 정기 공연 26" [ref=e665] [cursor=pointer]
+                    - generic [ref=e666]:
+                      - paragraph [ref=e667]:
+                        - generic [ref=e670]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e671]:
+                        - generic "TEST 가상 공연장" [ref=e675]
+                      - paragraph [ref=e676]:
+                        - generic "30,000원" [ref=e679]
+                    - generic [ref=e680]:
+                      - generic [ref=e681]: 진행 중
+                      - generic [ref=e682]: KOPIS
+                      - button "TEST 여수 정기 공연 26 지도에서 보기" [ref=e683] [cursor=pointer]:
+                        - generic [ref=e687]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e688] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e695]:
+                  - button "TEST 여수 정기 공연 25 상세 보기" [ref=e696] [cursor=pointer]:
+                    - generic [ref=e697]:
+                      - generic [ref=e707]: 음악
+                      - generic [ref=e708]: 포스터 정보 없음
+                  - generic [ref=e709]:
+                    - generic [ref=e710]:
+                      - generic [ref=e711]: 음악
+                      - generic [aria-hidden] [ref=e712]: ·
+                      - generic [ref=e713]: 여수
+                    - heading [level=3] [ref=e714]:
+                      - button "TEST 여수 정기 공연 25" [ref=e715] [cursor=pointer]
+                    - generic [ref=e716]:
+                      - paragraph [ref=e717]:
+                        - generic [ref=e720]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e721]:
+                        - generic "TEST 가상 공연장" [ref=e725]
+                      - paragraph [ref=e726]:
+                        - generic "30,000원" [ref=e729]
+                    - generic [ref=e730]:
+                      - generic [ref=e731]: 진행 중
+                      - generic [ref=e732]: KOPIS
+                      - button "TEST 여수 정기 공연 25 지도에서 보기" [ref=e733] [cursor=pointer]:
+                        - generic [ref=e737]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e738] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e745]:
+                  - button "TEST 여수 정기 공연 24 상세 보기" [ref=e746] [cursor=pointer]:
+                    - generic [ref=e747]:
+                      - generic [ref=e757]: 음악
+                      - generic [ref=e758]: 포스터 정보 없음
+                  - generic [ref=e759]:
+                    - generic [ref=e760]:
+                      - generic [ref=e761]: 음악
+                      - generic [aria-hidden] [ref=e762]: ·
+                      - generic [ref=e763]: 여수
+                    - heading [level=3] [ref=e764]:
+                      - button "TEST 여수 정기 공연 24" [ref=e765] [cursor=pointer]
+                    - generic [ref=e766]:
+                      - paragraph [ref=e767]:
+                        - generic [ref=e770]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e771]:
+                        - generic "TEST 가상 공연장" [ref=e775]
+                      - paragraph [ref=e776]:
+                        - generic "30,000원" [ref=e779]
+                    - generic [ref=e780]:
+                      - generic [ref=e781]: 진행 중
+                      - generic [ref=e782]: KOPIS
+                      - button "TEST 여수 정기 공연 24 지도에서 보기" [ref=e783] [cursor=pointer]:
+                        - generic [ref=e787]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e788] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e795]:
+                  - button "TEST 여수 정기 공연 23 상세 보기" [ref=e796] [cursor=pointer]:
+                    - generic [ref=e797]:
+                      - generic [ref=e807]: 음악
+                      - generic [ref=e808]: 포스터 정보 없음
+                  - generic [ref=e809]:
+                    - generic [ref=e810]:
+                      - generic [ref=e811]: 음악
+                      - generic [aria-hidden] [ref=e812]: ·
+                      - generic [ref=e813]: 여수
+                    - heading [level=3] [ref=e814]:
+                      - button "TEST 여수 정기 공연 23" [ref=e815] [cursor=pointer]
+                    - generic [ref=e816]:
+                      - paragraph [ref=e817]:
+                        - generic [ref=e820]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e821]:
+                        - generic "TEST 가상 공연장" [ref=e825]
+                      - paragraph [ref=e826]:
+                        - generic "30,000원" [ref=e829]
+                    - generic [ref=e830]:
+                      - generic [ref=e831]: 진행 중
+                      - generic [ref=e832]: KOPIS
+                      - button "TEST 여수 정기 공연 23 지도에서 보기" [ref=e833] [cursor=pointer]:
+                        - generic [ref=e837]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e838] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e845]:
+                  - button "TEST 여수 정기 공연 22 상세 보기" [ref=e846] [cursor=pointer]:
+                    - generic [ref=e847]:
+                      - generic [ref=e857]: 음악
+                      - generic [ref=e858]: 포스터 정보 없음
+                  - generic [ref=e859]:
+                    - generic [ref=e860]:
+                      - generic [ref=e861]: 음악
+                      - generic [aria-hidden] [ref=e862]: ·
+                      - generic [ref=e863]: 여수
+                    - heading [level=3] [ref=e864]:
+                      - button "TEST 여수 정기 공연 22" [ref=e865] [cursor=pointer]
+                    - generic [ref=e866]:
+                      - paragraph [ref=e867]:
+                        - generic [ref=e870]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e871]:
+                        - generic "TEST 가상 공연장" [ref=e875]
+                      - paragraph [ref=e876]:
+                        - generic "30,000원" [ref=e879]
+                    - generic [ref=e880]:
+                      - generic [ref=e881]: 진행 중
+                      - generic [ref=e882]: KOPIS
+                      - button "TEST 여수 정기 공연 22 지도에서 보기" [ref=e883] [cursor=pointer]:
+                        - generic [ref=e887]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e888] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e895]:
+                  - button "TEST 여수 정기 공연 21 상세 보기" [ref=e896] [cursor=pointer]:
+                    - generic [ref=e897]:
+                      - generic [ref=e907]: 음악
+                      - generic [ref=e908]: 포스터 정보 없음
+                  - generic [ref=e909]:
+                    - generic [ref=e910]:
+                      - generic [ref=e911]: 음악
+                      - generic [aria-hidden] [ref=e912]: ·
+                      - generic [ref=e913]: 여수
+                    - heading [level=3] [ref=e914]:
+                      - button "TEST 여수 정기 공연 21" [ref=e915] [cursor=pointer]
+                    - generic [ref=e916]:
+                      - paragraph [ref=e917]:
+                        - generic [ref=e920]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e921]:
+                        - generic "TEST 가상 공연장" [ref=e925]
+                      - paragraph [ref=e926]:
+                        - generic "30,000원" [ref=e929]
+                    - generic [ref=e930]:
+                      - generic [ref=e931]: 진행 중
+                      - generic [ref=e932]: KOPIS
+                      - button "TEST 여수 정기 공연 21 지도에서 보기" [ref=e933] [cursor=pointer]:
+                        - generic [ref=e937]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e938] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e945]:
+                  - button "TEST 여수 정기 공연 20 상세 보기" [ref=e946] [cursor=pointer]:
+                    - generic [ref=e947]:
+                      - generic [ref=e957]: 음악
+                      - generic [ref=e958]: 포스터 정보 없음
+                  - generic [ref=e959]:
+                    - generic [ref=e960]:
+                      - generic [ref=e961]: 음악
+                      - generic [aria-hidden] [ref=e962]: ·
+                      - generic [ref=e963]: 여수
+                    - heading [level=3] [ref=e964]:
+                      - button "TEST 여수 정기 공연 20" [ref=e965] [cursor=pointer]
+                    - generic [ref=e966]:
+                      - paragraph [ref=e967]:
+                        - generic [ref=e970]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e971]:
+                        - generic "TEST 가상 공연장" [ref=e975]
+                      - paragraph [ref=e976]:
+                        - generic "30,000원" [ref=e979]
+                    - generic [ref=e980]:
+                      - generic [ref=e981]: 진행 중
+                      - generic [ref=e982]: KOPIS
+                      - button "TEST 여수 정기 공연 20 지도에서 보기" [ref=e983] [cursor=pointer]:
+                        - generic [ref=e987]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e988] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e995]:
+                  - button "TEST 여수 정기 공연 19 상세 보기" [ref=e996] [cursor=pointer]:
+                    - generic [ref=e997]:
+                      - generic [ref=e1007]: 음악
+                      - generic [ref=e1008]: 포스터 정보 없음
+                  - generic [ref=e1009]:
+                    - generic [ref=e1010]:
+                      - generic [ref=e1011]: 음악
+                      - generic [aria-hidden] [ref=e1012]: ·
+                      - generic [ref=e1013]: 여수
+                    - heading [level=3] [ref=e1014]:
+                      - button "TEST 여수 정기 공연 19" [ref=e1015] [cursor=pointer]
+                    - generic [ref=e1016]:
+                      - paragraph [ref=e1017]:
+                        - generic [ref=e1020]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1021]:
+                        - generic "TEST 가상 공연장" [ref=e1025]
+                      - paragraph [ref=e1026]:
+                        - generic "30,000원" [ref=e1029]
+                    - generic [ref=e1030]:
+                      - generic [ref=e1031]: 진행 중
+                      - generic [ref=e1032]: KOPIS
+                      - button "TEST 여수 정기 공연 19 지도에서 보기" [ref=e1033] [cursor=pointer]:
+                        - generic [ref=e1037]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1038] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1045]:
+                  - button "TEST 여수 정기 공연 18 상세 보기" [ref=e1046] [cursor=pointer]:
+                    - generic [ref=e1047]:
+                      - generic [ref=e1057]: 음악
+                      - generic [ref=e1058]: 포스터 정보 없음
+                  - generic [ref=e1059]:
+                    - generic [ref=e1060]:
+                      - generic [ref=e1061]: 음악
+                      - generic [aria-hidden] [ref=e1062]: ·
+                      - generic [ref=e1063]: 여수
+                    - heading [level=3] [ref=e1064]:
+                      - button "TEST 여수 정기 공연 18" [ref=e1065] [cursor=pointer]
+                    - generic [ref=e1066]:
+                      - paragraph [ref=e1067]:
+                        - generic [ref=e1070]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1071]:
+                        - generic "TEST 가상 공연장" [ref=e1075]
+                      - paragraph [ref=e1076]:
+                        - generic "30,000원" [ref=e1079]
+                    - generic [ref=e1080]:
+                      - generic [ref=e1081]: 진행 중
+                      - generic [ref=e1082]: KOPIS
+                      - button "TEST 여수 정기 공연 18 지도에서 보기" [ref=e1083] [cursor=pointer]:
+                        - generic [ref=e1087]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1088] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1095]:
+                  - button "TEST 여수 정기 공연 17 상세 보기" [ref=e1096] [cursor=pointer]:
+                    - generic [ref=e1097]:
+                      - generic [ref=e1107]: 음악
+                      - generic [ref=e1108]: 포스터 정보 없음
+                  - generic [ref=e1109]:
+                    - generic [ref=e1110]:
+                      - generic [ref=e1111]: 음악
+                      - generic [aria-hidden] [ref=e1112]: ·
+                      - generic [ref=e1113]: 여수
+                    - heading [level=3] [ref=e1114]:
+                      - button "TEST 여수 정기 공연 17" [ref=e1115] [cursor=pointer]
+                    - generic [ref=e1116]:
+                      - paragraph [ref=e1117]:
+                        - generic [ref=e1120]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1121]:
+                        - generic "TEST 가상 공연장" [ref=e1125]
+                      - paragraph [ref=e1126]:
+                        - generic "30,000원" [ref=e1129]
+                    - generic [ref=e1130]:
+                      - generic [ref=e1131]: 진행 중
+                      - generic [ref=e1132]: KOPIS
+                      - button "TEST 여수 정기 공연 17 지도에서 보기" [ref=e1133] [cursor=pointer]:
+                        - generic [ref=e1137]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1138] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1145]:
+                  - button "TEST 여수 정기 공연 16 상세 보기" [ref=e1146] [cursor=pointer]:
+                    - generic [ref=e1147]:
+                      - generic [ref=e1157]: 음악
+                      - generic [ref=e1158]: 포스터 정보 없음
+                  - generic [ref=e1159]:
+                    - generic [ref=e1160]:
+                      - generic [ref=e1161]: 음악
+                      - generic [aria-hidden] [ref=e1162]: ·
+                      - generic [ref=e1163]: 여수
+                    - heading [level=3] [ref=e1164]:
+                      - button "TEST 여수 정기 공연 16" [ref=e1165] [cursor=pointer]
+                    - generic [ref=e1166]:
+                      - paragraph [ref=e1167]:
+                        - generic [ref=e1170]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1171]:
+                        - generic "TEST 가상 공연장" [ref=e1175]
+                      - paragraph [ref=e1176]:
+                        - generic "30,000원" [ref=e1179]
+                    - generic [ref=e1180]:
+                      - generic [ref=e1181]: 진행 중
+                      - generic [ref=e1182]: KOPIS
+                      - button "TEST 여수 정기 공연 16 지도에서 보기" [ref=e1183] [cursor=pointer]:
+                        - generic [ref=e1187]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1188] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1195]:
+                  - button "TEST 여수 정기 공연 15 상세 보기" [ref=e1196] [cursor=pointer]:
+                    - generic [ref=e1197]:
+                      - generic [ref=e1207]: 음악
+                      - generic [ref=e1208]: 포스터 정보 없음
+                  - generic [ref=e1209]:
+                    - generic [ref=e1210]:
+                      - generic [ref=e1211]: 음악
+                      - generic [aria-hidden] [ref=e1212]: ·
+                      - generic [ref=e1213]: 여수
+                    - heading [level=3] [ref=e1214]:
+                      - button "TEST 여수 정기 공연 15" [ref=e1215] [cursor=pointer]
+                    - generic [ref=e1216]:
+                      - paragraph [ref=e1217]:
+                        - generic [ref=e1220]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1221]:
+                        - generic "TEST 가상 공연장" [ref=e1225]
+                      - paragraph [ref=e1226]:
+                        - generic "30,000원" [ref=e1229]
+                    - generic [ref=e1230]:
+                      - generic [ref=e1231]: 진행 중
+                      - generic [ref=e1232]: KOPIS
+                      - button "TEST 여수 정기 공연 15 지도에서 보기" [ref=e1233] [cursor=pointer]:
+                        - generic [ref=e1237]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1238] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1245]:
+                  - button "TEST 여수 정기 공연 14 상세 보기" [ref=e1246] [cursor=pointer]:
+                    - generic [ref=e1247]:
+                      - generic [ref=e1257]: 음악
+                      - generic [ref=e1258]: 포스터 정보 없음
+                  - generic [ref=e1259]:
+                    - generic [ref=e1260]:
+                      - generic [ref=e1261]: 음악
+                      - generic [aria-hidden] [ref=e1262]: ·
+                      - generic [ref=e1263]: 여수
+                    - heading [level=3] [ref=e1264]:
+                      - button "TEST 여수 정기 공연 14" [ref=e1265] [cursor=pointer]
+                    - generic [ref=e1266]:
+                      - paragraph [ref=e1267]:
+                        - generic [ref=e1270]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1271]:
+                        - generic "TEST 가상 공연장" [ref=e1275]
+                      - paragraph [ref=e1276]:
+                        - generic "30,000원" [ref=e1279]
+                    - generic [ref=e1280]:
+                      - generic [ref=e1281]: 진행 중
+                      - generic [ref=e1282]: KOPIS
+                      - button "TEST 여수 정기 공연 14 지도에서 보기" [ref=e1283] [cursor=pointer]:
+                        - generic [ref=e1287]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1288] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1295]:
+                  - button "TEST 여수 정기 공연 13 상세 보기" [ref=e1296] [cursor=pointer]:
+                    - generic [ref=e1297]:
+                      - generic [ref=e1307]: 음악
+                      - generic [ref=e1308]: 포스터 정보 없음
+                  - generic [ref=e1309]:
+                    - generic [ref=e1310]:
+                      - generic [ref=e1311]: 음악
+                      - generic [aria-hidden] [ref=e1312]: ·
+                      - generic [ref=e1313]: 여수
+                    - heading [level=3] [ref=e1314]:
+                      - button "TEST 여수 정기 공연 13" [ref=e1315] [cursor=pointer]
+                    - generic [ref=e1316]:
+                      - paragraph [ref=e1317]:
+                        - generic [ref=e1320]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1321]:
+                        - generic "TEST 가상 공연장" [ref=e1325]
+                      - paragraph [ref=e1326]:
+                        - generic "30,000원" [ref=e1329]
+                    - generic [ref=e1330]:
+                      - generic [ref=e1331]: 진행 중
+                      - generic [ref=e1332]: KOPIS
+                      - button "TEST 여수 정기 공연 13 지도에서 보기" [ref=e1333] [cursor=pointer]:
+                        - generic [ref=e1337]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1338] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1345]:
+                  - button "TEST 여수 정기 공연 12 상세 보기" [ref=e1346] [cursor=pointer]:
+                    - generic [ref=e1347]:
+                      - generic [ref=e1357]: 음악
+                      - generic [ref=e1358]: 포스터 정보 없음
+                  - generic [ref=e1359]:
+                    - generic [ref=e1360]:
+                      - generic [ref=e1361]: 음악
+                      - generic [aria-hidden] [ref=e1362]: ·
+                      - generic [ref=e1363]: 여수
+                    - heading [level=3] [ref=e1364]:
+                      - button "TEST 여수 정기 공연 12" [ref=e1365] [cursor=pointer]
+                    - generic [ref=e1366]:
+                      - paragraph [ref=e1367]:
+                        - generic [ref=e1370]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1371]:
+                        - generic "TEST 가상 공연장" [ref=e1375]
+                      - paragraph [ref=e1376]:
+                        - generic "30,000원" [ref=e1379]
+                    - generic [ref=e1380]:
+                      - generic [ref=e1381]: 진행 중
+                      - generic [ref=e1382]: KOPIS
+                      - button "TEST 여수 정기 공연 12 지도에서 보기" [ref=e1383] [cursor=pointer]:
+                        - generic [ref=e1387]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1388] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1395]:
+                  - button "TEST 여수 정기 공연 11 상세 보기" [ref=e1396] [cursor=pointer]:
+                    - generic [ref=e1397]:
+                      - generic [ref=e1407]: 음악
+                      - generic [ref=e1408]: 포스터 정보 없음
+                  - generic [ref=e1409]:
+                    - generic [ref=e1410]:
+                      - generic [ref=e1411]: 음악
+                      - generic [aria-hidden] [ref=e1412]: ·
+                      - generic [ref=e1413]: 여수
+                    - heading [level=3] [ref=e1414]:
+                      - button "TEST 여수 정기 공연 11" [ref=e1415] [cursor=pointer]
+                    - generic [ref=e1416]:
+                      - paragraph [ref=e1417]:
+                        - generic [ref=e1420]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1421]:
+                        - generic "TEST 가상 공연장" [ref=e1425]
+                      - paragraph [ref=e1426]:
+                        - generic "30,000원" [ref=e1429]
+                    - generic [ref=e1430]:
+                      - generic [ref=e1431]: 진행 중
+                      - generic [ref=e1432]: KOPIS
+                      - button "TEST 여수 정기 공연 11 지도에서 보기" [ref=e1433] [cursor=pointer]:
+                        - generic [ref=e1437]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1438] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1445]:
+                  - button "TEST 여수 정기 공연 10 상세 보기" [ref=e1446] [cursor=pointer]:
+                    - generic [ref=e1447]:
+                      - generic [ref=e1457]: 음악
+                      - generic [ref=e1458]: 포스터 정보 없음
+                  - generic [ref=e1459]:
+                    - generic [ref=e1460]:
+                      - generic [ref=e1461]: 음악
+                      - generic [aria-hidden] [ref=e1462]: ·
+                      - generic [ref=e1463]: 여수
+                    - heading [level=3] [ref=e1464]:
+                      - button "TEST 여수 정기 공연 10" [ref=e1465] [cursor=pointer]
+                    - generic [ref=e1466]:
+                      - paragraph [ref=e1467]:
+                        - generic [ref=e1470]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1471]:
+                        - generic "TEST 가상 공연장" [ref=e1475]
+                      - paragraph [ref=e1476]:
+                        - generic "30,000원" [ref=e1479]
+                    - generic [ref=e1480]:
+                      - generic [ref=e1481]: 진행 중
+                      - generic [ref=e1482]: KOPIS
+                      - button "TEST 여수 정기 공연 10 지도에서 보기" [ref=e1483] [cursor=pointer]:
+                        - generic [ref=e1487]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1488] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1495]:
+                  - button "TEST 여수 정기 공연 09 상세 보기" [ref=e1496] [cursor=pointer]:
+                    - generic [ref=e1497]:
+                      - generic [ref=e1507]: 음악
+                      - generic [ref=e1508]: 포스터 정보 없음
+                  - generic [ref=e1509]:
+                    - generic [ref=e1510]:
+                      - generic [ref=e1511]: 음악
+                      - generic [aria-hidden] [ref=e1512]: ·
+                      - generic [ref=e1513]: 여수
+                    - heading [level=3] [ref=e1514]:
+                      - button "TEST 여수 정기 공연 09" [ref=e1515] [cursor=pointer]
+                    - generic [ref=e1516]:
+                      - paragraph [ref=e1517]:
+                        - generic [ref=e1520]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1521]:
+                        - generic "TEST 가상 공연장" [ref=e1525]
+                      - paragraph [ref=e1526]:
+                        - generic "30,000원" [ref=e1529]
+                    - generic [ref=e1530]:
+                      - generic [ref=e1531]: 진행 중
+                      - generic [ref=e1532]: KOPIS
+                      - button "TEST 여수 정기 공연 09 지도에서 보기" [ref=e1533] [cursor=pointer]:
+                        - generic [ref=e1537]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1538] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1545]:
+                  - button "TEST 여수 정기 공연 08 상세 보기" [ref=e1546] [cursor=pointer]:
+                    - generic [ref=e1547]:
+                      - generic [ref=e1557]: 음악
+                      - generic [ref=e1558]: 포스터 정보 없음
+                  - generic [ref=e1559]:
+                    - generic [ref=e1560]:
+                      - generic [ref=e1561]: 음악
+                      - generic [aria-hidden] [ref=e1562]: ·
+                      - generic [ref=e1563]: 여수
+                    - heading [level=3] [ref=e1564]:
+                      - button "TEST 여수 정기 공연 08" [ref=e1565] [cursor=pointer]
+                    - generic [ref=e1566]:
+                      - paragraph [ref=e1567]:
+                        - generic [ref=e1570]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1571]:
+                        - generic "TEST 가상 공연장" [ref=e1575]
+                      - paragraph [ref=e1576]:
+                        - generic "30,000원" [ref=e1579]
+                    - generic [ref=e1580]:
+                      - generic [ref=e1581]: 진행 중
+                      - generic [ref=e1582]: KOPIS
+                      - button "TEST 여수 정기 공연 08 지도에서 보기" [ref=e1583] [cursor=pointer]:
+                        - generic [ref=e1587]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1588] [cursor=pointer]: 공연장 3D 보기
+                - article [ref=e1595]:
+                  - button "TEST 여수 정기 공연 07 상세 보기" [ref=e1596] [cursor=pointer]:
+                    - generic [ref=e1597]:
+                      - generic [ref=e1607]: 음악
+                      - generic [ref=e1608]: 포스터 정보 없음
+                  - generic [ref=e1609]:
+                    - generic [ref=e1610]:
+                      - generic [ref=e1611]: 음악
+                      - generic [aria-hidden] [ref=e1612]: ·
+                      - generic [ref=e1613]: 여수
+                    - heading [level=3] [ref=e1614]:
+                      - button "TEST 여수 정기 공연 07" [ref=e1615] [cursor=pointer]
+                    - generic [ref=e1616]:
+                      - paragraph [ref=e1617]:
+                        - generic [ref=e1620]: 2026.10.18 – 2026.11.18
+                      - paragraph [ref=e1621]:
+                        - generic "TEST 가상 공연장" [ref=e1625]
+                      - paragraph [ref=e1626]:
+                        - generic "30,000원" [ref=e1629]
+                    - generic [ref=e1630]:
+                      - generic [ref=e1631]: 진행 중
+                      - generic [ref=e1632]: KOPIS
+                      - button "TEST 여수 정기 공연 07 지도에서 보기" [ref=e1633] [cursor=pointer]:
+                        - generic [ref=e1637]: 지도 위치
+                    - button "TEST 가상 공연장 3D로 보기" [ref=e1638] [cursor=pointer]: 공연장 3D 보기
+          - paragraph [ref=e1645]: 검색 결과 36건 중 위치가 확인된 공연을 지도에 표시합니다. 목록은 페이지 단위로 표시합니다.
+          - generic [ref=e1646]:
+            - paragraph [ref=e1647]: 목록 행 1–30 / 36 · 조회 시각 2026. 10. 18. 09:30
+            - generic [ref=e1648]:
+              - generic [ref=e1649]: 쪽당
+              - combobox "쪽당" [ref=e1650]:
+                - option "30행" [selected]
+                - option "50행"
+                - option "100행"
+            - navigation "검색 결과 페이지" [ref=e1651]:
+              - button "첫 페이지" [disabled] [ref=e1652]
+              - button "이전 페이지" [disabled] [ref=e1656]
+              - generic [ref=e1659]: 1 / 2 페이지
+              - button "다음 페이지" [ref=e1660] [cursor=pointer]
+              - button "마지막 페이지" [ref=e1663] [cursor=pointer]
+        - generic [ref=e1667]:
+          - generic "출처별 연결과 등록 자료" [ref=e1668]:
+            - generic [ref=e1669]:
+              - term [ref=e1670]: KOPIS
+              - definition [ref=e1671]:
+                - generic [ref=e1672]: 완료
+                - generic [ref=e1673]: 등록 35건
+                - generic [ref=e1674]: 마지막 완료 2026. 10. 18. 09:30
+            - generic [ref=e1675]:
+              - term [ref=e1676]: 문화포털
+              - definition [ref=e1677]:
+                - generic [ref=e1678]: 완료
+                - generic [ref=e1679]: 등록 1건
+                - generic [ref=e1680]: 마지막 완료 2026. 10. 18. 09:30
+          - paragraph [ref=e1681]: 자료의 최신 일정과 예매 조건은 공연 원문에서 확인하세요.
+  - generic:
+    - status
+    - alert
+```

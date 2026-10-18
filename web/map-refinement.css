@@ -33,6 +33,17 @@
 .map-panel-refined .map-popup-more { display: block; margin-top: 6px; font-size: 11px; color: var(--teal-strong); }
 .map-panel-refined .leaflet-popup-content { max-height: min(300px, 48vh); max-width: calc(100vw - 100px); }
 .map-panel-refined .map-popup strong { overflow-wrap: anywhere; }
+.map-popup .map-popup-search { display: block; margin: 10px 0; }
+.map-popup .map-popup-search input { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid var(--line-strong); border-radius: 7px; background: var(--paper-raised); color: var(--ink); font: inherit; font-size: 14px; }
+.map-popup .map-popup-search input:focus-visible { outline: 3px solid var(--teal-strong); outline-offset: 2px; }
+.map-popup .map-popup-count { margin: 8px 0 !important; color: var(--ink-2); font-size: 12px; line-height: 1.5; }
+.map-popup .map-popup-venue { display: block; margin-top: 5px; color: var(--ink-2); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.map-popup .map-popup-empty { font-size: 13px; line-height: 1.6; }
+.map-popup .map-popup-pagination { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+.map-popup .map-popup-pagination[hidden] { display: none; }
+.map-popup .map-popup-pagination button { min-width: 44px; min-height: 44px; padding: 8px 10px; border: 1px solid var(--line-strong); border-radius: 7px; background: var(--paper-raised); color: var(--ink); font-size: 12px; }
+.map-popup .map-popup-pagination button:disabled { opacity: .45; cursor: default; }
+.map-popup .map-popup-page { flex: none; color: var(--ink-2); font-size: 12px; }
 .map-popup .map-popup-route { display: flex; align-items: center; justify-content: center; min-height: 44px; margin: 0 0 5px; border: 1px solid var(--line-strong); border-radius: 7px; color: var(--ink); background: var(--paper-raised); font-size: 13px; font-weight: 600; text-decoration: none; }
 .map-popup .map-popup-route:hover { border-color: var(--teal); color: var(--teal-strong); }
 .map-panel-refined .map-focus-note { display: flex; align-items: center; gap: 10px; margin-top: 4px; border-top: 1px solid var(--line); }

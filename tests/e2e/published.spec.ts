@@ -84,6 +84,9 @@ test('obsolete searches are aborted and cannot replace the newest result', async
   try {
     await page.getByRole('searchbox', { name: '공연명·공연장 검색' }).fill('안동');
     await intercepted;
+    await expect(page.locator('.results')).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('.performance-card')).toHaveCount(30);
+    await expect(page.locator('.explore-sources')).toBeVisible();
     await page.getByRole('searchbox', { name: '공연명·공연장 검색' }).fill('강릉');
     await expectTotal(page, 1);
     await expect(page.locator('.performance-card h3')).toHaveText('TEST 강릉 유료 음악');
@@ -111,14 +114,70 @@ test('search failure retries cleanly and restores the requested result', async (
   });
   await page.getByRole('searchbox', { name: '공연명·공연장 검색' }).fill('강릉');
   await expect(page.getByText('검색 결과를 불러오지 못했습니다', { exact: true })).toBeVisible();
+  await expect(page.locator('.performance-card')).toHaveCount(30);
+  await expect(page.locator('.explore-sources')).toBeVisible();
   try {
     await page.getByRole('button', { name: '다시 시도', exact: true }).click();
     await expect(page.getByText('검색 결과를 불러오지 못했습니다', { exact: true })).toHaveCount(0);
     await expect(page.locator('.results')).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('.explore-sources')).toBeVisible();
   } finally { release(); }
   await expectTotal(page, 1);
   await expect(page.locator('.performance-card h3')).toHaveText('TEST 강릉 유료 음악');
   expect(attempts).toBe(2);
+});
+
+test('source footer waits for the first result while initial errors keep recovery available', async ({ page }, testInfo) => {
+  let release!: () => void;
+  const held = new Promise<void>(resolve => { release = resolve; });
+  let started = false, settled = false;
+  await page.route('**/api/performances?**', async route => {
+    if (started) return route.fallback();
+    started = true;
+    try {
+      await held;
+      await route.fulfill({ status: 503, contentType: 'application/json', body: '{"error":"TEST initial search failure"}' });
+    } finally { settled = true; }
+  });
+  try {
+    // openPublished waits for 36 rows, so inspect this deliberately pending first search directly.
+    await page.goto('/');
+    await expect(page.getByRole('heading', { name: '전국 주요 공연 검색.' })).toBeVisible();
+    await expect.poll(() => started).toBe(true);
+    await expect(page.locator('.results')).toHaveAttribute('aria-busy', 'true');
+    await page.evaluate(() => new Promise<void>(done => requestAnimationFrame(() => requestAnimationFrame(() => done()))));
+    await expect(page.locator('.result-total')).toHaveText('—');
+    await expect(page.locator('.result-counts,.performance-card,.explore-sources')).toHaveCount(0);
+
+    release();
+    await expect.poll(() => settled).toBe(true);
+    await expect(page.getByText('검색 결과를 불러오지 못했습니다', { exact: true })).toBeVisible();
+    await expect(page.locator('.results')).toHaveAttribute('aria-busy', 'false');
+    await expect(page.locator('.result-total')).toHaveText('—');
+    await expect(page.locator('.explore-sources')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: '다시 시도', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: /^데이터 연결/ })).toBeVisible();
+
+    // A real zero-result API response is still a loaded result, not an initial/error state.
+    const query = 'TEST 없는 공연장 footer zero';
+    const emptyResponse = page.waitForResponse(response => {
+      const url = new URL(response.url());
+      return url.pathname === '/api/performances' && url.searchParams.get('q') === query;
+    });
+    await page.getByRole('searchbox', { name: '공연명·공연장 검색' }).fill(query);
+    const response = await emptyResponse;
+    expect(response.status()).toBe(200);
+    expect((await response.json()).total).toBe(0);
+    await expectTotal(page, 0);
+    await expect(page.locator('.performance-card')).toHaveCount(0);
+    await expect(page.getByText('검색 결과를 불러오지 못했습니다', { exact: true })).toHaveCount(0);
+    await expect(page.locator('.explore-sources')).toBeVisible();
+    await expect(page.locator('.explore-sources .source-strip')).toHaveAttribute('aria-label', '출처별 연결과 등록 자료');
+  } finally {
+    release();
+    if (started) await expect.poll(() => settled, { message: 'initial search interception must settle before teardown' }).toBe(true);
+    await testInfo.attach('source-footer-state.json', { body: JSON.stringify({ started, settled }, null, 2), contentType: 'application/json' });
+  }
 });
 
 test('map exit cancels its request and reentry works when external tiles fail', async ({ page }, testInfo) => {

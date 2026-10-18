@@ -1,0 +1,10 @@
+
+> culture-desk@1.0.0 quality
+> node scripts/quality.mjs
+
+
+[quality] typecheck
+tests/e2e/popup.spec.ts(153,56): error TS2367: This comparison appears to be unintentional because the types 'Source' and '"KOPIS"' have no overlap.
+tests/e2e/popup.spec.ts(153,119): error TS2367: This comparison appears to be unintentional because the types 'Source' and '"CULTURE"' have no overlap.
+
+[quality] FAIL; report: test-results/quality-summary.json

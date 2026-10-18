@@ -1,0 +1,402 @@
+{
+  "sourceReport": "docs/verification/performance-20261019/poster-cls-paired-desktop-20-01.json",
+  "comparison": "previous validated pin11 to pin14; not initial session baseline",
+  "measurement": "No-input layout-shift sum through visual readiness; not a full-session Core Web Vitals CLS score",
+  "complete": true,
+  "measured": 40,
+  "warmup": 4,
+  "shifts": {
+    "baseline": {
+      "samples": 20,
+      "noInputShiftSum": {
+        "min": 0.17203746141975307,
+        "p50": 0.17203746141975307,
+        "max": 0.17203746141975307
+      },
+      "samplesWithShiftAtLeast001": 20,
+      "largeEvents": 40,
+      "values": {
+        "0.09722222222222222": 20,
+        "0.0012721836419753085": 20,
+        "0.07354305555555556": 20
+      }
+    },
+    "candidate": {
+      "samples": 20,
+      "noInputShiftSum": {
+        "min": 0.0027944308810763886,
+        "p50": 0.0027944308810763886,
+        "max": 0.0027944308810763886
+      },
+      "samplesWithShiftAtLeast001": 0,
+      "largeEvents": 0,
+      "values": {
+        "0.0012721836419753085": 20,
+        "0.0015222472391010803": 20
+      }
+    }
+  },
+  "timings": [
+    {
+      "variant": "baseline",
+      "completedSamples": 20,
+      "domReady": {
+        "samples": 20,
+        "p50Ms": 484.1000000014901,
+        "p95Ms": 563.8999999985099,
+        "minMs": 415.80000000447035,
+        "maxMs": 609.6000000014901,
+        "meanMs": 492.035000000149
+      },
+      "visualReady": {
+        "samples": 20,
+        "p50Ms": 731.7999999970198,
+        "p95Ms": 947.2000000029802,
+        "minMs": 648.1000000014901,
+        "maxMs": 1127.5,
+        "meanMs": 765.9450000006706
+      },
+      "actionToVisualReady": {
+        "samples": 20,
+        "p50Ms": 731.7999999970198,
+        "p95Ms": 947.2000000029802,
+        "minMs": 648.1000000014901,
+        "maxMs": 1127.5,
+        "meanMs": 765.9450000006706
+      },
+      "postDomWait": {
+        "samples": 20,
+        "p50Ms": 249.70000000298023,
+        "p95Ms": 401,
+        "minMs": 211.90000000596046,
+        "maxMs": 517.8999999985099,
+        "meanMs": 273.91000000052156
+      }
+    },
+    {
+      "variant": "candidate",
+      "completedSamples": 20,
+      "domReady": {
+        "samples": 20,
+        "p50Ms": 484.8999999985099,
+        "p95Ms": 625.3999999985099,
+        "minMs": 434.1000000014901,
+        "maxMs": 687.5999999940395,
+        "meanMs": 508.3949999999255
+      },
+      "visualReady": {
+        "samples": 20,
+        "p50Ms": 749.1000000014901,
+        "p95Ms": 959.5999999940395,
+        "minMs": 671.1000000014901,
+        "maxMs": 1188.3999999985099,
+        "meanMs": 788.325
+      },
+      "actionToVisualReady": {
+        "samples": 20,
+        "p50Ms": 749.1000000014901,
+        "p95Ms": 959.5999999940395,
+        "minMs": 671.1000000014901,
+        "maxMs": 1188.3999999985099,
+        "meanMs": 788.325
+      },
+      "postDomWait": {
+        "samples": 20,
+        "p50Ms": 267.1000000014901,
+        "p95Ms": 349.8999999985099,
+        "minMs": 217,
+        "maxMs": 500.80000000447035,
+        "meanMs": 279.93000000007453
+      }
+    }
+  ],
+  "timeBlocks": [
+    {
+      "index": 0,
+      "firstPair": 0,
+      "lastPair": 5,
+      "variants": [
+        {
+          "variant": "baseline",
+          "completedSamples": 6,
+          "domReady": {
+            "samples": 6,
+            "p50Ms": 484.1000000014901,
+            "p95Ms": 609.6000000014901,
+            "minMs": 415.80000000447035,
+            "maxMs": 609.6000000014901,
+            "meanMs": 498.58333333581686
+          },
+          "visualReady": {
+            "samples": 6,
+            "p50Ms": 715.1000000014901,
+            "p95Ms": 1127.5,
+            "minMs": 648.7000000029802,
+            "maxMs": 1127.5,
+            "meanMs": 787.25
+          },
+          "actionToVisualReady": {
+            "samples": 6,
+            "p50Ms": 715.1000000014901,
+            "p95Ms": 1127.5,
+            "minMs": 648.7000000029802,
+            "maxMs": 1127.5,
+            "meanMs": 787.25
+          },
+          "postDomWait": {
+            "samples": 6,
+            "p50Ms": 232.89999999850988,
+            "p95Ms": 517.8999999985099,
+            "minMs": 215.59999999403954,
+            "maxMs": 517.8999999985099,
+            "meanMs": 288.66666666418314
+          }
+        },
+        {
+          "variant": "candidate",
+          "completedSamples": 6,
+          "domReady": {
+            "samples": 6,
+            "p50Ms": 480.3999999985099,
+            "p95Ms": 687.5999999940395,
+            "minMs": 465.79999999701977,
+            "maxMs": 687.5999999940395,
+            "meanMs": 538.3499999990066
+          },
+          "visualReady": {
+            "samples": 6,
+            "p50Ms": 749.1000000014901,
+            "p95Ms": 1188.3999999985099,
+            "minMs": 706.2000000029802,
+            "maxMs": 1188.3999999985099,
+            "meanMs": 850.1166666659216
+          },
+          "actionToVisualReady": {
+            "samples": 6,
+            "p50Ms": 749.1000000014901,
+            "p95Ms": 1188.3999999985099,
+            "minMs": 706.2000000029802,
+            "maxMs": 1188.3999999985099,
+            "meanMs": 850.1166666659216
+          },
+          "postDomWait": {
+            "samples": 6,
+            "p50Ms": 266.70000000298023,
+            "p95Ms": 500.80000000447035,
+            "minMs": 233.79999999701977,
+            "maxMs": 500.80000000447035,
+            "meanMs": 311.766666666915
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "firstPair": 6,
+      "lastPair": 12,
+      "variants": [
+        {
+          "variant": "baseline",
+          "completedSamples": 7,
+          "domReady": {
+            "samples": 7,
+            "p50Ms": 465.29999999701977,
+            "p95Ms": 550.6000000014901,
+            "minMs": 416.5,
+            "maxMs": 550.6000000014901,
+            "meanMs": 482.0142857144986
+          },
+          "visualReady": {
+            "samples": 7,
+            "p50Ms": 731.7999999970198,
+            "p95Ms": 800.7000000029802,
+            "minMs": 648.1000000014901,
+            "maxMs": 800.7000000029802,
+            "meanMs": 727.9428571441343
+          },
+          "actionToVisualReady": {
+            "samples": 7,
+            "p50Ms": 731.7999999970198,
+            "p95Ms": 800.7000000029802,
+            "minMs": 648.1000000014901,
+            "maxMs": 800.7000000029802,
+            "meanMs": 727.9428571441343
+          },
+          "postDomWait": {
+            "samples": 7,
+            "p50Ms": 250.10000000149012,
+            "p95Ms": 266.5,
+            "minMs": 225.89999999850988,
+            "maxMs": 266.5,
+            "meanMs": 245.9285714296358
+          }
+        },
+        {
+          "variant": "candidate",
+          "completedSamples": 7,
+          "domReady": {
+            "samples": 7,
+            "p50Ms": 478,
+            "p95Ms": 506.6000000014901,
+            "minMs": 434.1000000014901,
+            "maxMs": 506.6000000014901,
+            "meanMs": 476.7000000008515
+          },
+          "visualReady": {
+            "samples": 7,
+            "p50Ms": 718.1000000014901,
+            "p95Ms": 779.5,
+            "minMs": 674.7000000029802,
+            "maxMs": 779.5,
+            "meanMs": 724.3428571437087
+          },
+          "actionToVisualReady": {
+            "samples": 7,
+            "p50Ms": 718.1000000014901,
+            "p95Ms": 779.5,
+            "minMs": 674.7000000029802,
+            "maxMs": 779.5,
+            "meanMs": 724.3428571437087
+          },
+          "postDomWait": {
+            "samples": 7,
+            "p50Ms": 233.20000000298023,
+            "p95Ms": 301.5,
+            "minMs": 217,
+            "maxMs": 301.5,
+            "meanMs": 247.64285714285714
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "firstPair": 13,
+      "lastPair": 19,
+      "variants": [
+        {
+          "variant": "baseline",
+          "completedSamples": 7,
+          "domReady": {
+            "samples": 7,
+            "p50Ms": 492,
+            "p95Ms": 563.8999999985099,
+            "minMs": 465.19999999552965,
+            "maxMs": 563.8999999985099,
+            "meanMs": 496.44285714094127
+          },
+          "visualReady": {
+            "samples": 7,
+            "p50Ms": 741.7999999970198,
+            "p95Ms": 947.2000000029802,
+            "minMs": 696.6000000014901,
+            "maxMs": 947.2000000029802,
+            "meanMs": 785.6857142863529
+          },
+          "actionToVisualReady": {
+            "samples": 7,
+            "p50Ms": 741.7999999970198,
+            "p95Ms": 947.2000000029802,
+            "minMs": 696.6000000014901,
+            "maxMs": 947.2000000029802,
+            "meanMs": 785.6857142863529
+          },
+          "postDomWait": {
+            "samples": 7,
+            "p50Ms": 249.70000000298023,
+            "p95Ms": 401,
+            "minMs": 211.90000000596046,
+            "maxMs": 401,
+            "meanMs": 289.2428571454116
+          }
+        },
+        {
+          "variant": "candidate",
+          "completedSamples": 7,
+          "domReady": {
+            "samples": 7,
+            "p50Ms": 516.7999999970198,
+            "p95Ms": 562.5,
+            "minMs": 436.1000000014901,
+            "maxMs": 562.5,
+            "meanMs": 514.4142857140729
+          },
+          "visualReady": {
+            "samples": 7,
+            "p50Ms": 804.5,
+            "p95Ms": 906.7999999970198,
+            "minMs": 671.1000000014901,
+            "maxMs": 906.7999999970198,
+            "meanMs": 799.3428571426442
+          },
+          "actionToVisualReady": {
+            "samples": 7,
+            "p50Ms": 804.5,
+            "p95Ms": 906.7999999970198,
+            "minMs": 671.1000000014901,
+            "maxMs": 906.7999999970198,
+            "meanMs": 799.3428571426442
+          },
+          "postDomWait": {
+            "samples": 7,
+            "p50Ms": 278.6000000014901,
+            "p95Ms": 349.8999999985099,
+            "minMs": 234.30000000447035,
+            "maxMs": 349.8999999985099,
+            "meanMs": 284.92857142857144
+          }
+        }
+      ]
+    }
+  ],
+  "ambientEvidence": {
+    "path": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\host-poster-cls-20-01.json",
+    "hash": "20d79048433b1edbb49c85ff9d7d5c4bedcfb7ce1090d98c1e1c36ff5c5bd84d",
+    "startedAt": "2026-10-18T18:07:13.374Z",
+    "endedAt": "2026-10-18T18:07:45.782Z",
+    "summary": {
+      "meanCpuBusyFraction": 0.49820765679618645,
+      "maxCpuBusyFraction": 0.537412793438926,
+      "minFreeMemoryMiB": 2362.14453125
+    }
+  },
+  "validity": {
+    "everyMeasurementComplete": true,
+    "fourRasterImages": true,
+    "total5649": true,
+    "cards30": true,
+    "errors": [],
+    "unexpected": [],
+    "apiMeasured": 80,
+    "everyApiProduced": true,
+    "everyRouteSettled": true,
+    "sourcesStable": true,
+    "cleanup": [
+      {
+        "action": "browser.close",
+        "success": true
+      },
+      {
+        "action": "server.close",
+        "success": true
+      },
+      {
+        "action": "baseline.fixture.stop",
+        "success": true
+      },
+      {
+        "action": "candidate.fixture.stop",
+        "success": true
+      }
+    ]
+  },
+  "limitations": [
+    "Saved GIF bytes served locally; no real network-latency claim.",
+    "20 samples per variant provide descriptive p95 only.",
+    "All repeated entries contain values/times, not LayoutShift.sources; node identity established separately in poster-shift-diagnostic-01/02.",
+    "Candidate has popup changes in addition to two layout fixes, so this is integrated-build comparison.",
+    "GIF animations are not frozen; visual ready means raster decode and rectangle stability, not animation completion.",
+    "Remaining small controls movement is not zero CLS."
+  ],
+  "decision": "Large known body/footer shift signatures absent in all 20 candidate samples. No speed-improvement claim: visual p50 is 2.36% slower with mixed time blocks."
+}

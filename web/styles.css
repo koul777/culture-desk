@@ -391,7 +391,7 @@ progress::-moz-progress-bar { background: var(--teal); border-radius: 3px; }
 .spin { animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.standalone { max-width: 640px; margin: 14vh auto; padding: 0 16px; display: grid; gap: 12px; outline: none; }
+.standalone { max-width: 640px; margin: 0 auto; padding: 14vh 16px; display: grid; gap: 12px; outline: none; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1180px) {

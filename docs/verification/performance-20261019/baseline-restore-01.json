@@ -1,0 +1,19 @@
+{
+  "verifiedAt": "2026-10-18T18:37:24.860136+00:00",
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\baseline-restore-01",
+  "archiveSha256": "c67b7b8c897193a87f9d784541e05dcc6411f5dae3672312c657251abf0329e3",
+  "sourceFiles": 165,
+  "exactRestoredBytesVerified": true,
+  "clientBuildStatus": "exact_match",
+  "verifiedAfterBuildAt": "2026-10-18T18:43:44.727Z",
+  "node": "v24.14.0",
+  "originalBuildHash": "3a06b1c190b30844485f4d0556f206b889c4cc46cbe9a438579c624523fc89ff",
+  "restoredBuildHash": "3a06b1c190b30844485f4d0556f206b889c4cc46cbe9a438579c624523fc89ff",
+  "buildFiles": 349,
+  "sourceHashes": {
+    "original": "fdcf0db5254c90bf84d59c823bc9a9459953ecd54275e52f4f76fca0c465a4b4",
+    "restored": "fdcf0db5254c90bf84d59c823bc9a9459953ecd54275e52f4f76fca0c465a4b4"
+  },
+  "differences": [],
+  "dependencyMode": "Existing installed node_modules junction; no fresh dependency installation was performed."
+}

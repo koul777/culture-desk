@@ -1,6 +1,8 @@
 name: Quality
 
 on:
+  push:
+    branches: [feat/daily-snapshot-deploy]
   pull_request:
   workflow_dispatch:
 

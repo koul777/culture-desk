@@ -1,0 +1,12 @@
+{
+  "attemptedAt": "2026-10-18T18:36:43.949083+00:00",
+  "commit": "b61436ee10364b1fb9e5660cac23e1bd383fb2e4",
+  "branch": "feat/daily-snapshot-deploy",
+  "command": "gh workflow run quality.yml --repo koul777/culture-desk --ref feat/daily-snapshot-deploy",
+  "exitCode": 1,
+  "httpStatus": 404,
+  "error": "workflow quality.yml not found on the default branch",
+  "workflowStarted": false,
+  "productionDeploymentStarted": false,
+  "next": "The feature branch workflow must first become available on the default branch before manual dispatch. Do not merge or deploy merely to bypass this. Local exact staged-tree quality already passed; no remote CI pass claim."
+}

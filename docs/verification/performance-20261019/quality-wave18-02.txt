@@ -1,0 +1,460 @@
+
+> culture-desk@1.0.0 quality
+> node scripts/quality.mjs
+
+
+[quality] typecheck
+
+[quality] unit
+✔ complete status still warns when last nationwide success is older than 36 hours (4.1489ms)
+✔ recovery reservation uses Korea time, advances across midnight, and completed jobs wait for daily primary (6.5982ms)
+✔ simultaneous polls share one read and a later poll can read again (5.6159ms)
+✔ a refresh after a write waits for an older poll then reads fresh without overlapping or stale overwrite (1.1401ms)
+✔ another mutation during the fresh read requires a subsequent read, not that in-flight snapshot (1.0572ms)
+✔ an unsuccessful pending poll cannot block a fresh refresh or mark a poll as recently successful (10.4814ms)
+✔ poll freshness follows successful completion but never skips an explicit refresh (1.0641ms)
+✔ the short coalescing window preserves a normal three-second poll after a delayed response (0.378ms)
+✔ unchanged city data retains marker identity while progress and actual catalogue changes are delivered (0.9155ms)
+✔ bootstrap aborts its actual request at 30 seconds and reports a clear timeout (10.1981ms)
+✔ a successful JSON body finishing after abort is rejected rather than applied (101.2651ms)
+✔ a timed-out shared read releases a queued fresh read and later polls can continue (13.1632ms)
+✔ successful reads clear their deadline and ordinary server failures remain retryable (13.1359ms)
+✔ cloud tick and search requests do not inherit the bootstrap deadline (2.7055ms)
+(node:30184) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ eight details use two durable batches writes, preserve raw/coordinates/notes, and idle ticks do not write (1873.1243ms)
+✔ overlapping cloud ticks cannot fetch the same claim and do not hold a write transaction during I/O (56.4015ms)
+✔ pause preserves state and pending attempts; resume invalidates a pre-pause response and fetches current details (872.8261ms)
+✔ expired claims recover and the old owner cannot overwrite a newer completed response (187.8234ms)
+✔ concurrent record updates invalidate stale detail results and require another detail fetch without consuming an attempt (165.9297ms)
+✔ quota stops not-yet-started source requests without spending their attempts (341.6735ms)
+✔ auth stops not-yet-started source requests without spending their attempts (223.6916ms)
+✔ each task receives its complete timeout after the 350ms source gate, and late success cannot bypass a timeout (1703.2989ms)
+✔ request cancellation restores its unstarted/rejected claims without consuming attempts (14.8407ms)
+✔ a budget too short after claiming restores the claim and never starts provider I/O (84.0539ms)
+✔ a failed merge preserves the durable claimed snapshot and can recover without lost records or spent attempts (973.761ms)
+✔ the actual HTTP gate counts facility requests and reuses facility responses without losing venue coordinates (898.8567ms)
+(node:33188) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a provider resolving successfully after its timeout cannot complete the claimed task (351.5455ms)
+✔ pause/resume and lease reclamation prevent an older response from overwriting the successor result (28.9951ms)
+(node:40768) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ cron secrets must match and an unconfigured secret never authenticates (4.0726ms)
+✔ cloud mutation origin protection rejects cross-site and missing request marker (82.4012ms)
+✔ cloud snapshots serialize concurrent writers and preserve both mutations (594.0702ms)
+✔ failed cloud mutation cannot replace the last durable snapshot (519.308ms)
+✔ cloud search is public without password configuration or cookies and cron remains authenticated (2708.2856ms)
+✔ cloud tick commits completed queue work and aborts a slow provider without losing its task (982.32ms)
+{"event":"culture_cloud_failure","type":"Error","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\cloud.test.ts:168:56)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\cloud.test.ts:169:26)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+✔ three cloud deadlines mark the stalled task failed and allow later queue work to finish (2083.819ms)
+✔ public cloud database failures return safe errors (22.7514ms)
+✔ snapshot capacity rejection preserves prior data and returns a non-retryable storage explanation (3719.2573ms)
+✔ compressed snapshots retain complete large datasets and transparently read legacy SQLite bytes (1015.2778ms)
+✔ public JSON and Excel omit prior personal data while keeping it intact in storage (2068.246ms)
+✔ public collection controls work without cookies but still require same-origin JSON requests (1053.3509ms)
+✔ local search mode omits notes from Excel while explicitly permitted launcher shutdown still works (1130.6236ms)
+✔ oversized UTF-8 JSON responses return a filter guidance error before the platform limit (2036.0415ms)
+✔ oversized real Excel exports return JSON filter guidance instead of a platform failure (6137.2849ms)
+✔ cloud queue activity includes older runs outside the visible recent-history window (1496.5355ms)
+✔ scheduled refresh status is public, but a status outage does not hide search data (762.3932ms)
+✔ durable scheduling disables legacy browser refresh while preserving explicit collection work (13.5032ms)
+(node:21288) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ archiving keeps performances, private data, coverage, sync time, import mapping and Excel evidence unchanged (2473.4762ms)
+✔ recent, unfinished and inconsistent runs stay intact; a completed zero-result run retains its coverage proof (31.6443ms)
+✔ a deletion failure rolls back archive creation and all task/item changes (24.1365ms)
+(node:38732) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ dates: 31-day inclusive chunks cover leap/year boundaries with no gaps or overlaps (103.003ms)
+✔ dates: impossible dates, non-ISO input and reversed ranges are rejected (22.1503ms)
+✔ store: upsert identity is (source, sourceId), and source refresh preserves bookmark, note and hydrated details (363.5418ms)
+✔ store: hydrated values and user data survive a real SQLite close/reopen (69.0935ms)
+✔ store: excluded/review rows stay out of results and each source retains independent counts (76.4121ms)
+✔ store: unknown admission is not free; price/age filters signal incomplete details until hydration (96.6705ms)
+✔ store: date overlap, city, source, bookmark, literal search and pagination agree (71.0068ms)
+✔ store: interrupted claims recover on restart while completed and explicitly paused work are preserved (92.8868ms)
+✔ store: a newer failed collection cannot reuse old complete coverage; detail-only completion is not collection coverage (68.4575ms)
+✔ worker: scans every page of every 31-day chunk, hydrates unique items and counts excluded/review records (1079.5719ms)
+✔ worker: transient detail failure retries with backoff, stops after three attempts and resumes only unfinished work (112.149ms)
+✔ worker: a later page failure retains earlier rows and retries only the failed page (124.8114ms)
+✔ worker: a fresh empty collection does not delete previously stored performances or infer cancellation (70.3313ms)
+✔ worker: auth blocks all runs for the affected source without exposing errors or retrying credentials (89.8159ms)
+✔ worker: quota blocks all runs for the affected source without exposing errors or retrying credentials (89.1491ms)
+✔ worker: pause/resume keeps completed page checkpoints and prevents calls while paused (81.9798ms)
+✔ worker: stop aborts an in-flight request and restart retains its checkpoint without consuming a retry (73.5165ms)
+✔ worker: detail backfill ignores detail-dependent filters and deduplicates outstanding work (76.4725ms)
+✔ export: two sheets preserve literal formula-looking strings, Korean, URL, unknown price and snapshot evidence (503.5683ms)
+✔ HTTP: no-key bootstrap is empty, source status truthful, and configured test keys/raw are never returned (1424.9544ms)
+✔ HTTP: mutation header, Origin and Host checks reject cross-site requests before changing user data (81.0705ms)
+✔ HTTP: all mutations require application/json, including routes that do not inspect their body (72.2047ms)
+✔ HTTP: invalid search condition returns 400 (from=2026-02-30) (77.0083ms)
+✔ HTTP: invalid search condition returns 400 (from=2026-02-02&to=2026-02-01) (75.2492ms)
+✔ HTTP: invalid search condition returns 400 (source=bogus) (81.7101ms)
+✔ HTTP: invalid search condition returns 400 (price=bogus) (86.3182ms)
+✔ HTTP: invalid search condition returns 400 (page=1.5) (78.7904ms)
+✔ HTTP: invalid search condition returns 400 (limit=1.5) (77.2124ms)
+✔ HTTP: invalid search condition returns 400 (page=Infinity) (79.3534ms)
+✔ HTTP: invalid search condition returns 400 (status=bogus) (68.6366ms)
+✔ HTTP: invalid search condition returns 400 (bookmarked=bogus) (80.1032ms)
+✔ HTTP: malformed IDs, missing records, bad bookmarks and invalid sync requests fail without creating runs (90.7075ms)
+✔ HTTP: search, bookmark and selected Excel export agree on persisted records (174.3868ms)
+(node:32896) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ export captures caller filters, selected IDs and all evidence before yielding or closing the Store (1961.7718ms)
+✔ streaming export cleans all worksheet inputs after a real synchronous row serialization error (474.5162ms)
+✔ streaming export preserves asynchronous commit failure and closes uncommitted inputs (398.2193ms)
+✔ streaming export observes early archive errors and a commit continuing after abort (191.1514ms)
+✔ streaming export observes early output errors and a commit continuing after abort (87.6805ms)
+✔ streaming export observes a finalize promise rejection without an error event (179.3378ms)
+✔ normal browsing creates neither timing entries nor animation-frame work (13.6383ms)
+✔ paint readiness carries the response identity only after two frames (4.9715ms)
+✔ unmount or a superseding zoom cancels pending readiness before either frame (1.2ms)
+✔ profiling does not swallow rendering failures or alter returned values (3.5342ms)
+(node:49772) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ national collection merge preserves live IDs, notes, existing detail and uncollected past records (316.2009ms)
+✔ only completed source coverage is published and repeat publication is idempotent (35.7704ms)
+✔ invalid collection identity cannot mutate the target (7.5074ms)
+✔ an old checkpoint or failed detail never overwrites newer complete live information (16.2497ms)
+✔ publishing older complete runs cannot hide newer live or source collection gaps (31.3657ms)
+✔ finished refresh restores temporarily hidden completion history without disguising real failures (26.1559ms)
+(node:35044) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ map omits unused and private fields entirely without changing stored details or notes (3960.1818ms)
+✔ map caps rows at 10000 and keeps total/count metadata for all matches (9033.6774ms)
+✔ all 5602 nationwide performances and every region fit within the 3 MiB map budget (4230.0408ms)
+✔ map enforces the UTF-8 JSON budget without clipping Korean titles or venues (647.7917ms)
+✔ map applies city, period, source, search and bookmark filters before projection (81.4382ms)
+✔ projected clustering retains every venue and performance count exactly once (17.8564ms)
+✔ zooming separates projected neighbours and releases all individual venues at street zoom (1.5816ms)
+✔ empty data stays empty and separated coordinates never merge across distant cells (0.44ms)
+✔ neighbours across a grid boundary do not leave overlapping cluster circles (0.7028ms)
+(node:37668) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+▶ source map coordinates
+  ✔ accepts source decimal coordinates and rejects empty, non-finite, swapped or outside-Korea pairs (4.2775ms)
+  ✔ maps Culture gpsY to latitude and gpsX to longitude in both list and detail (272.7434ms)
+  ✔ does not invent Culture venue locations when the source GPS is absent or invalid (45.5002ms)
+  ✔ hydrates KOPIS venue location/address and shares one facility request across concurrent details (14.5965ms)
+  ✔ keeps KOPIS performance detail when optional facility lookup fails and briefly caches the failure (5.1714ms)
+  ✔ rejects mismatched facility identity without assigning another venue location (4.9059ms)
+  ✔ propagates KOPIS facility authentication/quota errors so the worker stops that source (4.1904ms)
+✔ source map coordinates (354.7217ms)
+▶ map data persistence
+  ✔ fills centres for old seed cities while preserving user coordinates and custom cities (7.7996ms)
+  ✔ preserves hydrated venue coordinates and user notes during a list refresh (6.3519ms)
+✔ map data persistence (14.9545ms)
+✔ venue grouping preserves every id and source order while using the existing five-decimal coordinate precision (5.1733ms)
+✔ venue grouping supports an empty map and many performances at the same venue without truncating popup membership (30.6957ms)
+✔ external locate scroll is zero for an already visible row and minimal above or below (3.8589ms)
+✔ a row taller than the available viewport reveals its start below the fixed top bar (0.5778ms)
+✔ visible bounds account for visual viewport offset and only overlapping pinned headers (3.7936ms)
+✔ pending row scroll cancels cleanly and a settled or bounded request scrolls at most once (4.303ms)
+✔ paging preserves all210 ids and original order exactly, including the short final page (5.3959ms)
+✔ venue search keeps exact original strings and input ordering, including duplicate titles (7.9965ms)
+✔ empty search has no rows and invalid or overshooting pages remain bounded (12.8062ms)
+✔ external focus reveals exact id, clearing only a query that hides it (14.389ms)
+✔ optional or malformed snapshot venue values remain searchable by title without inventing venues (1.8264ms)
+(node:56332) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ map query preserves marker/sentinel and 20001/20002/20003 optimization boundaries while paged/all search stays unchanged (15835.5536ms)
+✔ map cap preserves positive bookmarks, historical counts, coverage, sparse/null markers and early byte truncation (14403.0206ms)
+(node:38348) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ compact map query preserves legacy marker bytes, filters, ordering and result metadata (602.8676ms)
+✔ compact projection distinguishes missing fields from null and keeps exact numbers and database IDs (42.3393ms)
+✔ compact projection preserves serialized IEEE precision, exponent forms, subnormals and signed zero (72.8503ms)
+(node:56404) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 250-region CSV filters retain every region in paginated search and map results (4989.7316ms)
+✔ 250 regions enqueue 500 source-region runs with a complete receipt and zero provider calls (1469.7483ms)
+✔ unknown regions reject the entire collection request while ordinary text filters keep their 1000-character limit (897.1975ms)
+(node:14216) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ national recovery only requeues failed network tasks and preserves live, complete, schema and provider-halted work (331.7543ms)
+✔ national recovery stops after two durable extra rounds for a repeatedly failed task (2.8773ms)
+✔ national batch keeps the original defaults and supports isolated daily directories (34.0959ms)
+✔ national batch rejects impossible, reversed and malformed dates and unsafe batch paths (1.8462ms)
+(node:24264) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ backup and restore preserve the snapshot, retain previous database and refuse a running target (317.4285ms)
+✔ invalid restore input never overwrites existing data and releases its own lock (71.7664ms)
+✔ configuration file supports quoted keys, applies safe bounds and reloads without exposing keys (4716.7494ms)
+✔ scheduled refresh catches up once and preserves quota-wait and paused work (167.2634ms)
+✔ detail-only completion never proves collection completion or replaces its last sync timestamp (1043.49ms)
+✔ legacy Yeosu and Suncheon seeds upgrade once, preserve custom data and requeue stale region coverage (226.2723ms)
+✔ poster corpus rejects SVG, unknown signatures and MIME mismatches (39.9412ms)
+✔ poster deadline rejects a stalled operation independently (39.942ms)
+✔ route ledger distinguishes fulfilled bytes, explicit close cancellation and arbitrary errors (12.7052ms)
+✔ export verification preserves worksheet semantics and bounds dimension scans (1093.555ms)
+✔ export semantic hashes distinguish actual date cells from other dates and text (285.3384ms)
+✔ full numeric prices and mixed free/paid admissions (4.4096ms)
+✔ recognized circus name and province evidence never override wrong municipality (2.0265ms)
+✔ real calendar dates only (9.6219ms)
+✔ culture request uses official eight-digit dates and short province name (109.1784ms)
+✔ KOPIS rows retain official working source URL and reject missing identity (25.8411ms)
+✔ network exceptions cannot expose keys and already aborted requests do not fetch (1.6167ms)
+✔ secret echoed into a display field is rejected before persistence (21.0404ms)
+✔ merged province names do not count as a mismatched municipality (2.949ms)
+✔ both providers request current Yeosu region and retain province-only KOPIS rows (8.4844ms)
+▶ DEFAULT_CITIES
+  ✔ includes seven official KOPIS region codes (2.9713ms)
+✔ DEFAULT_CITIES (5.6518ms)
+▶ createProviders
+  ✔ omits providers without keys (1.522ms)
+  ✔ includes configured providers only (1.1556ms)
+✔ createProviders (3.3117ms)
+▶ KOPIS adapter
+  ✔ parses empty and multi list responses (120.235ms)
+  ✔ maps auth faults to kind auth without leaking key (3.4792ms)
+  ✔ rejects windows longer than 31 days (0.8144ms)
+  ✔ does not place API key in raw payload (3.5505ms)
+✔ KOPIS adapter (128.9627ms)
+▶ Culture adapter
+  ✔ paginates and normalizes list rows (14.5213ms)
+  ✔ excludes exhibitions even when serviceTp is A (6.4417ms)
+  ✔ maps auth header codes (6.0816ms)
+  ✔ avoids double-encoding pre-encoded service keys in URL (15.526ms)
+✔ Culture adapter (43.4721ms)
+▶ text helpers
+  ✔ strips external HTML (1.279ms)
+✔ text helpers (1.5661ms)
+▶ price inference
+  ✔ does not treat paid amounts as free (0.9209ms)
+✔ price inference (1.1455ms)
+(node:55676) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the web service serves the published snapshot as normal data with its refresh state, never as an outage (4428.9987ms)
+✔ audited coverage removes the false "not collected" notice only for covered regions, sources and dates (283.9122ms)
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\published-data.test.ts:74:78)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\published-data.test.ts:75:26)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+✔ the published service has no collection, cron or database path and reports a missing artifact safely (177.7144ms)
+✔ the database path is used only when explicitly configured (198.4984ms)
+✔ a scheduled run merges into the earlier public rows, publishes partial progress and resumes to completion (2962.8206ms)
+✔ a new day discards the previous day's partial collection but keeps its merged rows (953.6129ms)
+✔ export failure retains the previous public snapshot and resumes the completed collection (3049.198ms)
+✔ a completed day restores its saved snapshot or rebuilds a missing export without recollection (2527.9137ms)
+✔ a missing production database is seeded from the saved snapshot before the older checkout baseline (920.7692ms)
+✔ planner recovery rebuilds a corrupt saved export for a complete day and prepares it without recollection (4555.5424ms)
+(node:47852) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ simultaneous identical published reads share work and each reader owns its response body (58.2497ms)
+✔ query keys remain distinct and least recently used results obey entry and byte budgets (23.1635ms)
+✔ oversize and non-JSON responses are returned intact but never retained (46.6156ms)
+✔ failed reads are not cached and thrown producers release their pending slot for retry (73.092ms)
+✔ a day change invalidates date-dependent data and an older in-flight request cannot overwrite it (2.3132ms)
+✔ published caches are isolated by snapshot and preserve filters, errors, HEAD and read-only routes (5475.6969ms)
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:22:101)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:41:28)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+(node:1244) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the fallback preserves public IDs/coordinates/timestamps and enforces SQLite read-only mode without personal/raw/queue data (71.0405ms)
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:22:101)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:61:46)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+✔ quota failures serve bootstrap/search/map/detail/building and HEAD from one public snapshot with truthful metadata (1183.5648ms)
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:22:101)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:69:31)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+✔ fallback Excel contains selected public rows and explicitly records the saved snapshot date (178.3851ms)
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:82:136)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:84:30)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+✔ fallback never queues mutations, retains origin protection, and reports a 60s retry delay (46.9624ms)
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:22:101)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:94:87)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:22:101)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:94:87)","    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"]}
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:22:101)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:102:60)","    at Test.runInAsyncScope (node:async_hooks:228:14)"]}
+✔ after the circuit interval only one request probes, and successful database reads automatically end snapshot mode (101.6384ms)
+✔ a missing or invalid public artifact retains the safe 503 response and never fabricates an empty successful search (26.4969ms)
+{"event":"culture_cloud_failure","type":"Error","code":"53000","locations":["    at Object.withStore (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:22:101)","    at handleCloudRequest (C:\\workspace\\cultureapi\\server\\cloud\\handler.ts:189:29)","    at TestContext.<anonymous> (C:\\workspace\\cultureapi\\tests\\readonly-fallback.test.ts:104:29)","    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"]}
+✔ fallback JSON and Excel preserve the 4MiB response cap, including empty HEAD error bodies (2743.2333ms)
+✔ the bundled public artifact is usable and cached without inventing completed collection history (2483.9992ms)
+(node:44052) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ omitted, empty and all-region selection have identical public search and map scope (2715.8323ms)
+✔ two checked regions restrict both endpoints while retaining their exact coverage and source counts (331.0457ms)
+✔ browser query serialization sends no city constraint for an empty selection and keeps explicit subsets (20.4223ms)
+✔ fresh frontend filters have no preset seven-region selection and accept nationwide search (16.1256ms)
+✔ legacy v1 saved seven-region defaults cannot reappear in the nationwide frontend (2.6177ms)
+✔ v3 saves and restores an explicitly empty nationwide selection (1.2719ms)
+✔ v3 restores a chosen subset and keeps that subset in the outgoing search (0.9832ms)
+✔ current nationwide period starts this month and old default period migrates without changing chosen cities (1.279ms)
+✔ empty-region validation permits nationwide scope without weakening date validation (0.5193ms)
+✔ national catalog includes the 230 current KOPIS municipalities with unique stable identifiers (6.7173ms)
+✔ the original seven cities keep IDs, region codes, names and approximate centres (0.6566ms)
+✔ catalog uses live merged and renamed regions rather than obsolete PDF codes (0.7533ms)
+✔ same district names remain distinct by province, and Gyeonggi Gwangju is separate (2.0211ms)
+✔ Sejong requests the entire province and recognizes source subdivisions without accepting another province (1.1358ms)
+✔ Culture adapter omits Sejong sigungu and retains performances in its 읍 subdivisions (124.2793ms)
+✔ collection success without deployment acknowledgement retries deployment without recollecting (5.8989ms)
+✔ partial, stale, missing, or mismatched exports cannot suppress collection (0.8425ms)
+✔ code pushes deploy without collecting and manual runs can redeploy an acknowledged snapshot (0.5391ms)
+✔ restoration excludes preview/fork/expired state and accepts the newest failed-run checkpoint (2.9141ms)
+✔ a rerun selects fresh attempt state without overwriting its earlier recovery artifact (0.8956ms)
+✔ a failed deploy preserves its pending snapshot and a later acknowledgement closes recovery (142.5477ms)
+✔ a receipt cannot acknowledge changed bytes, code, or deployment environment (84.5795ms)
+✔ an invalid saved snapshot cannot overwrite the last usable deployment input (18.7194ms)
+✔ the planning helper runs with Node alone before dependency installation (1349.3632ms)
+✔ a corrupt saved export schedules recovery instead of permanently stopping at the planner (1101.6314ms)
+(node:53720) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ rolling range uses Korea date and clamps a three-month target at month end (83.1269ms)
+✔ nationwide completion requires all 460 source-region runs and each date chunk task (610.1387ms)
+✔ failed detail task cannot pass the completion audit even when run claims complete (158.6118ms)
+✔ provider or database errors never expose credentials in persisted public messages (0.856ms)
+✔ concurrent runners acquire only one lease and a completed day is skipped (5.2701ms)
+✔ expired runner cannot heartbeat or complete after another runner resumes its checkpoint (4.3591ms)
+✔ a live lease blocks another date; expired previous-day failures do not starve today (5.6151ms)
+✔ completion frees checkpoint bytes and expired failure retention preserves metadata (2.4284ms)
+(node:57072) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ search metadata counts pending detail before price and age while preserving empty, unknown and bookmarked groups (338.1265ms)
+(node:43552) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ read-only snapshot time is applied consistently to search and map envelopes (583.3917ms)
+✔ ordinary search and map keep per-read timestamps when no snapshot time is provided (47.1977ms)
+✔ opt-in phase diagnostics report timings without altering read-only API output (290.281ms)
+✔ search passes cancellation to fetch without turning it into an offline error (8.9457ms)
+✔ search skips transport when the caller already cancelled (2.8455ms)
+✔ search rejects a late transport response after cancellation (108.1437ms)
+✔ search ignores a 200 body decoded after cancellation, including snapshot state (3.133ms)
+✔ search ignores a 503 body decoded after cancellation, including snapshot state (5.2208ms)
+✔ search still observes snapshot availability for an active request (5.7769ms)
+✔ map passes cancellation to fetch without turning it into an offline error (0.7909ms)
+✔ map skips transport when the caller already cancelled (0.3759ms)
+✔ map rejects a late transport response after cancellation (3.3106ms)
+✔ map ignores a 200 body decoded after cancellation, including snapshot state (8.2374ms)
+✔ map ignores a 503 body decoded after cancellation, including snapshot state (1.6564ms)
+✔ map still observes snapshot availability for an active request (2.1496ms)
+✔ active search network, HTTP, and unreadable-response failures keep their useful errors (3.4045ms)
+✔ search fallback blocks collection transport, and a healthy bootstrap restores it (72.4803ms)
+✔ an outage response on a write activates snapshot mode without exposing provider error data (3.4765ms)
+✔ snapshot mode validates metadata and reports its timestamp without accepting unrelated response shapes (1.5537ms)
+✔ a search can enter snapshot mode; only a fresh healthy bootstrap restores writes (0.5287ms)
+✔ late responses cannot erase a newer outage or reintroduce an older snapshot after recovery (0.4254ms)
+(node:40196) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unchanged reads check the current revision without downloading the snapshot again (506.6371ms)
+✔ a write from another instance is visible on the very next cached read (711.3828ms)
+✔ cached empty databases observe seeding and read-only temporary changes never enter the cache (804.1058ms)
+✔ failed persistence cannot make uncommitted records visible through the read cache (607.1877ms)
+✔ empty queue probes skip snapshot persistence but real mutations still commit (718.0661ms)
+(node:5880) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ run totals preserve independent live/archive fallback, zero counts and unrecognized states/classifications (23.1707ms)
+✔ large run histories use a constant number of read statements and retain the default limit (106.5299ms)
+✔ coverage respects region/source, full coverage, newer overlap, details-only and later recovery (16.9065ms)
+✔ batched coverage matches historical predicates across mixed run histories and selection filters (60.4907ms)
+✔ a missing footprint never produces a model; an unknown height stays unchanged while preview varies (2.759ms)
+✔ source-recorded and floor-estimated heights retain their provenance and ignore preview changes (2.634ms)
+✔ camera fitting accounts for narrow screens and taller previews without distant fixed minimum (3.9668ms)
+✔ button zoom derives from the live camera distance and respects near/far bounds (0.8159ms)
+(node:55932) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ public building API resolves a stored performance ID and rejects arbitrary or excluded records (592.3688ms)
+✔ the selected OSM consumer starts immediately and preserves an unavailable response without manufacturing geometry (91.1056ms)
+✔ closing one opening aborts only its consumer and rapid reopening owns a fresh signal (3.1664ms)
+✔ late JSON after close cannot become visible success or timeout fallback (1.2377ms)
+✔ the request deadline starts before renderer consumption and produces a distinct timeout outcome (1.1876ms)
+✔ network, HTTP and JSON failures settle safely while the renderer is still loading (21.1467ms)
+✔ accepts an actual containing footprint with explicit name and height evidence (18.8487ms)
+✔ unnamed containing building is labeled coordinate association, without inventing height (1.3106ms)
+✔ does not substitute city centres, unrelated adjacent buildings or conflicting named buildings (1.929ms)
+✔ accepts a nearby named footprint only with matching identity within 120 metres (1.2143ms)
+✔ ambiguous overlaps, incomplete geometry, partial provider responses and malformed points are rejected (2.6863ms)
+✔ joins real relation member segments and preserves courtyard holes and multiple outer rings (12.3254ms)
+✔ height units and floor estimates are explicit; malformed and implausible heights stay unknown (0.848ms)
+✔ verified public snapshots serve real venue geometry without a network dependency (3.9998ms)
+✔ service coalesces concurrent performances at one venue and caches by venue, not performance id (64.3496ms)
+✔ service handles quota cooldown, provider fallback and short negative-cache expiry (6.4527ms)
+✔ service refuses excessive response bodies and bounds simultaneous distinct venue lookups (5.8552ms)
+(node:28860) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ KOPIS facility payloads become whitelisted hall, amenity and booking facts with the performance hall marked (9.1439ms)
+✔ stored venue facts are revalidated and unknown or unsafe values are dropped (1.1772ms)
+✔ details include venue facts from stored provider data while search and map rows keep their previous shape (67.6609ms)
+✔ a daily list refresh keeps the stored detail payload so venue facts do not disappear (7.2207ms)
+✔ the read-only fallback serves pre-derived venue facts only after revalidation (24.4486ms)
+✔ direction links use exact venue coordinates when known and a place search otherwise, never the visitor location (1.5318ms)
+✔ only the current same-origin frame and exact random channel can update viewer state (2.7939ms)
+✔ frame URL keeps coordinates, Korean labels and channels as encoded same-origin parameters (0.9582ms)
+✔ configuration requires explicit availability and otherwise selects the existing viewer (61.81ms)
+✔ configuration timeout aborts the request and close cancels it without loading a viewer (2.9922ms)
+(node:34484) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Vercel exact rewrite capture is removed only at the cloud boundary for GET and HEAD map frames (77.6097ms)
+✔ cloud routing normalization never permits mismatched, duplicate or arbitrary frame parameters (12.1991ms)
+(node:35420) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ VWorld configuration exposes availability only and reads the dedicated optional environment value (77.9222ms)
+✔ a missing VWorld key returns a static setup message without loading any SDK (7.1844ms)
+✔ VWorld coordinates, labels and message channels are strict and reject duplicate or unknown input (51.4219ms)
+✔ the VWorld frame escapes HTML/script input and embeds only its browser key in the official SDK URL (16.0192ms)
+✔ VWorld GET and HEAD work locally, reject writes, and reload a newly configured key (589.6797ms)
+✔ all cloud VWorld outcomes bypass the database and never disclose collection/database credentials (7.0799ms)
+✔ mocked official SDK displays the building layer, marks and centres the venue, then sends same-origin readiness and cleans up (5.2279ms)
+✔ older or unsupported combined building layers fall back to LoD4 without weakening missing-layer errors (11.9812ms)
+✔ missing SDK, timeout and render failures report safe errors; a late callback never reports ready after timeout (8.0685ms)
+✔ camera targets cached terrain elevation before readiness and does not sample or initialise twice (4.3567ms)
+✔ terrain sampling delays first framing and readiness until the actual elevation is available (9.5669ms)
+✔ terrain timeout opens a wider view and late success never jumps the camera after interaction is enabled (5.593ms)
+✔ missing terrain APIs, rejected requests and invalid heights preserve usable map readiness (16.4799ms)
+✔ closing or failing the frame during terrain sampling discards pending camera work (8.2582ms)
+✔ the SDK initial flight starts after its callback and is cancelled before the deferred venue framing becomes ready (4.0239ms)
+✔ closing or failing between SDK callback and deferred focus never moves the camera or reports readiness (7.3319ms)
+ℹ tests 309
+ℹ suites 8
+ℹ pass 309
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 40376.0947
+
+[quality] build
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 3583 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/index.html                              0.86 kB │ gzip:     0.53 kB
+dist/client/assets/VWorld3DDialog-Vi7lc0Xk.css      1.79 kB │ gzip:     0.67 kB
+dist/client/assets/PerformanceMap-8giEti7T.css     21.57 kB │ gzip:     7.84 kB
+dist/client/assets/Venue3DDialog-B0i6nS9C.css      28.92 kB │ gzip:     6.55 kB
+dist/client/assets/index-DbDskOCq.css              78.52 kB │ gzip:    15.36 kB
+dist/client/assets/VWorld3DDialog-C9AlrC7h.js       3.95 kB │ gzip:     1.64 kB
+dist/client/assets/PerformanceMap-BvcJeQwC.js     169.87 kB │ gzip:    51.04 kB
+dist/client/assets/index-DrErOD37.js              338.27 kB │ gzip:   103.38 kB
+dist/client/assets/Venue3DDialog-CsXu3i2s.js    4,182.58 kB │ gzip: 1,122.58 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 17.78s
+
+[quality] browser
+[WebServer] (node:4328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4328) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+
+Running 16 tests using 1 worker
+
+(node:47704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests\e2e\export-selection.spec.ts:4:1 › export waits for the typed search and its response, then records the displayed selection (9.2s)
+  ✓   2 [desktop-chromium] › tests\e2e\freshness.spec.ts:5:1 › KST midnight refreshes status-filtered list and map once without changing the publication or chosen period (4.5s)
+  ✓   3 [desktop-chromium] › tests\e2e\popup.spec.ts:8:1 › 375px dense popup keeps local navigation and reveals repeated external locate requests (12.6s)
+  ✓   4 [desktop-chromium] › tests\e2e\popup.spec.ts:99:1 › cached popup state survives visiting another marker and zooming within venue view (8.3s)
+  ✓   5 [desktop-chromium] › tests\e2e\popup.spec.ts:139:1 › new focus intent cancels queued popup row focus while layout updates preserve it (5.1s)
+  ✓   6 [desktop-chromium] › tests\e2e\published.spec.ts:15:1 › published search, cards, table, map, detail and export share the same regional results (5.1s)
+  ✓   7 [desktop-chromium] › tests\e2e\published.spec.ts:65:1 › obsolete searches are aborted and cannot replace the newest result (3.0s)
+  ✓   8 [desktop-chromium] › tests\e2e\published.spec.ts:104:1 › search failure retries cleanly and restores the requested result (2.5s)
+  ✓   9 [desktop-chromium] › tests\e2e\published.spec.ts:130:1 › source footer waits for the first result while initial errors keep recovery available (1.9s)
+  ✓  10 [desktop-chromium] › tests\e2e\published.spec.ts:183:1 › map exit cancels its request and reentry works when external tiles fail (3.3s)
+  ✓  11 [desktop-chromium] › tests\e2e\published.spec.ts:224:1 › region dialog supports keyboard dismissal and restores focus (2.0s)
+  ✓  12 [desktop-chromium] › tests\e2e\published.spec.ts:239:3 › map js chunk failure offers reload and restores a styled map with saved filters (3.3s)
+  ✓  13 [desktop-chromium] › tests\e2e\published.spec.ts:239:3 › map css chunk failure offers reload and restores a styled map with saved filters (3.3s)
+  ✓  14 [desktop-chromium] › tests\e2e\published.spec.ts:278:1 › low-zoom keyboard popup keeps final focus through resize and returns it on Escape (4.0s)
+  ✓  15 [desktop-chromium] › tests\e2e\published.spec.ts:318:1 › a newer publication with unchanged counts refreshes both list and map once (3.5s)
+(node:54884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  16 [mobile-chromium] › tests\e2e\mobile.spec.ts:3:1 › mobile cards, region selector, detail, table and map fit a 375px viewport (10.6s)
+
+  16 passed (1.6m)
+
+[quality] PASS; report: test-results/quality-summary.json
