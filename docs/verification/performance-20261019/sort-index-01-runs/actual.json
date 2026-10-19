@@ -1,0 +1,3840 @@
+{
+  "version": 1,
+  "at": "2026-10-18T17:59:03.555Z",
+  "success": true,
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave11-selection",
+  "fixture": "actual",
+  "scope": "Private in-memory post-load extra-index experiment. Five alternating warm pairs per case, one warm-up pair, natural GC. Whole-route no-trace timings and a single separate trace attribution pass. Fresh-model startup excludes artifact read/parse and module import; five actual-corpus model pairs, one pair per larger fixture. Not fresh-process startup, p95, latency acceptance, or peak-memory evidence. No response cache or cloud-envelope work; exact Fastify body/status/headers (except Date) compared.",
+  "candidate": "CREATE INDEX experiment_performances_order ON performances(classification,start_date DESC,id DESC)",
+  "source": {
+    "before": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+    "after": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb"
+  },
+  "harness": {
+    "before": {
+      "hash": "04f4c5b2d4d4fdf444f0ac7b1f3a8b4c9b5880437a151c2d61c4b0d0817e58c3",
+      "files": {
+        "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts": "89f5e9ea56d417543e7d3a4bf10e37933d5138ff8ccc21e8e3657fda12fc0c6f",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f"
+      }
+    },
+    "afterHash": "04f4c5b2d4d4fdf444f0ac7b1f3a8b4c9b5880437a151c2d61c4b0d0817e58c3"
+  },
+  "artifact": {
+    "path": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave11-selection\\server\\assets\\public-snapshot.json",
+    "beforeHash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "afterHash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "rows": 5649
+  },
+  "models": [
+    {
+      "variant": "original",
+      "before": {
+        "hash": "62a6d751771ad957ccd77807877aff14bdf600e6f5b167dfaa71587e2f7bfb95",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 5649,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "totalChanges": 6340
+      },
+      "after": {
+        "hash": "62a6d751771ad957ccd77807877aff14bdf600e6f5b167dfaa71587e2f7bfb95",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 5649,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "totalChanges": 6340
+      },
+      "indexes": [
+        {
+          "name": "performances_search",
+          "sql": "CREATE INDEX performances_search ON performances(classification,city_id,start_date,end_date)"
+        },
+        {
+          "name": "run_coverage",
+          "sql": "CREATE INDEX run_coverage ON sync_runs(city_id,source,state,from_date,to_date) WHERE detail_only=0"
+        },
+        {
+          "name": "sqlite_autoindex_cities_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_performances_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_items_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_tasks_1",
+          "sql": null
+        },
+        {
+          "name": "task_queue",
+          "sql": "CREATE INDEX task_queue ON sync_tasks(state,available_at)"
+        },
+        {
+          "name": "task_run_state",
+          "sql": "CREATE INDEX task_run_state ON sync_tasks(run_id,state)"
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "before": {
+        "hash": "62a6d751771ad957ccd77807877aff14bdf600e6f5b167dfaa71587e2f7bfb95",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 5649,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "totalChanges": 6340
+      },
+      "after": {
+        "hash": "62a6d751771ad957ccd77807877aff14bdf600e6f5b167dfaa71587e2f7bfb95",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 5649,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "totalChanges": 6340
+      },
+      "indexes": [
+        {
+          "name": "experiment_performances_order",
+          "sql": "CREATE INDEX experiment_performances_order ON performances(classification,start_date DESC,id DESC)"
+        },
+        {
+          "name": "performances_search",
+          "sql": "CREATE INDEX performances_search ON performances(classification,city_id,start_date,end_date)"
+        },
+        {
+          "name": "run_coverage",
+          "sql": "CREATE INDEX run_coverage ON sync_runs(city_id,source,state,from_date,to_date) WHERE detail_only=0"
+        },
+        {
+          "name": "sqlite_autoindex_cities_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_performances_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_items_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_tasks_1",
+          "sql": null
+        },
+        {
+          "name": "task_queue",
+          "sql": "CREATE INDEX task_queue ON sync_tasks(state,available_at)"
+        },
+        {
+          "name": "task_run_state",
+          "sql": "CREATE INDEX task_run_state ON sync_tasks(run_id,state)"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "case": "national",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": {
+            "samples": 5,
+            "medianMs": 70.69169999999986,
+            "minMs": 63.51999999999998,
+            "maxMs": 148.93229999999994,
+            "valuesMs": [
+              67.14890000000014,
+              70.69169999999986,
+              63.51999999999998,
+              135.2545,
+              148.93229999999994
+            ]
+          },
+          "rows": 5649,
+          "bytes": 1654588,
+          "wireHash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130"
+        },
+        {
+          "variant": "ordered-index",
+          "route": {
+            "samples": 5,
+            "medianMs": 70.16650000000027,
+            "minMs": 60.91620000000012,
+            "maxMs": 168.63959999999997,
+            "valuesMs": [
+              60.91620000000012,
+              62.39609999999993,
+              70.16650000000027,
+              168.63959999999997,
+              141.51090000000022
+            ]
+          },
+          "rows": 5649,
+          "bytes": 1654588,
+          "wireHash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130"
+        }
+      ],
+      "pairedSavingsMs": [
+        6.2327000000000226,
+        8.295599999999922,
+        -6.646500000000287,
+        -33.385099999999966,
+        7.421399999999721
+      ]
+    },
+    {
+      "case": "single-region",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "cities": "yeosu"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": {
+            "samples": 5,
+            "medianMs": 1.0748999999996158,
+            "minMs": 1.016700000000128,
+            "maxMs": 2.365099999999984,
+            "valuesMs": [
+              1.016700000000128,
+              1.0632999999997992,
+              1.0748999999996158,
+              1.5752000000002226,
+              2.365099999999984
+            ]
+          },
+          "rows": 31,
+          "bytes": 8868,
+          "wireHash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326"
+        },
+        {
+          "variant": "ordered-index",
+          "route": {
+            "samples": 5,
+            "medianMs": 4.860099999999875,
+            "minMs": 3.7254000000002634,
+            "maxMs": 7.354599999999664,
+            "valuesMs": [
+              3.7254000000002634,
+              4.860099999999875,
+              3.7573999999999614,
+              6.26260000000002,
+              7.354599999999664
+            ]
+          },
+          "rows": 31,
+          "bytes": 8868,
+          "wireHash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326"
+        }
+      ],
+      "pairedSavingsMs": [
+        -2.7087000000001353,
+        -3.7968000000000757,
+        -2.6825000000003456,
+        -4.687399999999798,
+        -4.98949999999968
+      ]
+    },
+    {
+      "case": "multi-region",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "cities": "yeosu,wonju"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": {
+            "samples": 5,
+            "medianMs": 1.6354999999998654,
+            "minMs": 1.1689000000001215,
+            "maxMs": 3.2393999999999323,
+            "valuesMs": [
+              1.2500999999997475,
+              1.6354999999998654,
+              1.1689000000001215,
+              3.2393999999999323,
+              2.526600000000144
+            ]
+          },
+          "rows": 51,
+          "bytes": 14697,
+          "wireHash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965"
+        },
+        {
+          "variant": "ordered-index",
+          "route": {
+            "samples": 5,
+            "medianMs": 4.326799999999821,
+            "minMs": 3.6825000000003456,
+            "maxMs": 7.639900000000125,
+            "valuesMs": [
+              3.6825000000003456,
+              4.326799999999821,
+              4.297100000000228,
+              7.356499999999869,
+              7.639900000000125
+            ]
+          },
+          "rows": 51,
+          "bytes": 14697,
+          "wireHash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965"
+        }
+      ],
+      "pairedSavingsMs": [
+        -2.432400000000598,
+        -2.6912999999999556,
+        -3.1282000000001062,
+        -4.117099999999937,
+        -5.113299999999981
+      ]
+    },
+    {
+      "case": "genre",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "genre": "음악"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": {
+            "samples": 5,
+            "medianMs": 59.56620000000021,
+            "minMs": 49.81919999999991,
+            "maxMs": 126.89149999999972,
+            "valuesMs": [
+              49.81919999999991,
+              57.621399999999994,
+              59.56620000000021,
+              106.93100000000004,
+              126.89149999999972
+            ]
+          },
+          "rows": 3046,
+          "bytes": 916135,
+          "wireHash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4"
+        },
+        {
+          "variant": "ordered-index",
+          "route": {
+            "samples": 5,
+            "medianMs": 107.93880000000036,
+            "minMs": 53.12390000000005,
+            "maxMs": 139.5688,
+            "valuesMs": [
+              53.12390000000005,
+              53.90189999999984,
+              107.93880000000036,
+              139.5688,
+              129.7521999999999
+            ]
+          },
+          "rows": 3046,
+          "bytes": 916135,
+          "wireHash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4"
+        }
+      ],
+      "pairedSavingsMs": [
+        -3.304700000000139,
+        3.719500000000153,
+        -48.37260000000015,
+        -32.63779999999997,
+        -2.860700000000179
+      ]
+    },
+    {
+      "case": "price-age",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "price": "free",
+        "age": "전체"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": {
+            "samples": 5,
+            "medianMs": 61.56759999999986,
+            "minMs": 30.283500000000004,
+            "maxMs": 77.56849999999986,
+            "valuesMs": [
+              30.283500000000004,
+              31.597600000000057,
+              77.56849999999986,
+              61.56759999999986,
+              65.25960000000032
+            ]
+          },
+          "rows": 55,
+          "bytes": 17020,
+          "wireHash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f"
+        },
+        {
+          "variant": "ordered-index",
+          "route": {
+            "samples": 5,
+            "medianMs": 67.40380000000005,
+            "minMs": 33.1237000000001,
+            "maxMs": 81.19200000000001,
+            "valuesMs": [
+              33.1237000000001,
+              34.43090000000029,
+              77.51959999999963,
+              81.19200000000001,
+              67.40380000000005
+            ]
+          },
+          "rows": 55,
+          "bytes": 17020,
+          "wireHash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f"
+        }
+      ],
+      "pairedSavingsMs": [
+        -2.8402000000000953,
+        -2.8333000000002357,
+        0.04890000000023065,
+        -19.62440000000015,
+        -2.144199999999728
+      ]
+    }
+  ],
+  "coldSummary": [
+    {
+      "variant": "original",
+      "modelThroughFirstResponse": {
+        "samples": 5,
+        "medianMs": 548.8818999999985,
+        "minMs": 433.20329999999996,
+        "maxMs": 592.6085000000003,
+        "valuesMs": [
+          433.20329999999996,
+          522.1557000000003,
+          592.6085000000003,
+          587.4584000000013,
+          548.8818999999985
+        ]
+      },
+      "indexBuild": {
+        "samples": 5,
+        "medianMs": 0.0018000000000029104,
+        "minMs": 0.0005999999999630745,
+        "maxMs": 0.002500000000509317,
+        "valuesMs": [
+          0.0005999999999630745,
+          0.0018000000000029104,
+          0.0018000000000029104,
+          0.0019000000011146767,
+          0.002500000000509317
+        ]
+      },
+      "additionalAllocatedBytes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "modelThroughFirstResponse": {
+        "samples": 5,
+        "medianMs": 546.6004999999996,
+        "minMs": 219.85500000000002,
+        "maxMs": 569.6360000000004,
+        "valuesMs": [
+          219.85500000000002,
+          533.0669000000007,
+          546.6004999999996,
+          554.1350000000002,
+          569.6360000000004
+        ]
+      },
+      "indexBuild": {
+        "samples": 5,
+        "medianMs": 6.870100000000093,
+        "minMs": 3.643599999999992,
+        "maxMs": 9.177200000000084,
+        "valuesMs": [
+          3.643599999999992,
+          5.976399999999558,
+          9.177200000000084,
+          6.870100000000093,
+          6.91359999999986
+        ]
+      },
+      "additionalAllocatedBytes": [
+        192512,
+        192512,
+        192512,
+        192512,
+        192512
+      ]
+    }
+  ],
+  "cold": [
+    {
+      "pair": 0,
+      "variant": "original",
+      "setupMs": 9.574900000000014,
+      "validatedInsertMs": 167.72680000000003,
+      "indexBuildMs": 0.0005999999999630745,
+      "routeReadyMs": 169.6015,
+      "firstResponseMs": 86.17439999999999,
+      "modelThroughFirstResponseMs": 433.20329999999996,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "additionalAllocatedBytes": 0,
+      "memoryBefore": {
+        "rss": 115601408,
+        "heapTotal": 49623040,
+        "heapUsed": 25461416,
+        "external": 26045019,
+        "arrayBuffers": 8662679
+      },
+      "memoryAfter": {
+        "rss": 175095808,
+        "heapTotal": 102019072,
+        "heapUsed": 45083856,
+        "external": 33808330,
+        "arrayBuffers": 13627190
+      }
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "setupMs": 1.5455999999999221,
+      "validatedInsertMs": 142.048,
+      "indexBuildMs": 3.643599999999992,
+      "routeReadyMs": 3.5987000000001217,
+      "firstResponseMs": 68.95839999999998,
+      "modelThroughFirstResponseMs": 219.85500000000002,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2949,
+        "pageBytes": 4096,
+        "allocatedBytes": 12079104
+      },
+      "additionalAllocatedBytes": 192512,
+      "memoryBefore": {
+        "rss": 175099904,
+        "heapTotal": 102019072,
+        "heapUsed": 47414472,
+        "external": 33808330,
+        "arrayBuffers": 13627190
+      },
+      "memoryAfter": {
+        "rss": 209010688,
+        "heapTotal": 104378368,
+        "heapUsed": 49046560,
+        "external": 17299410,
+        "arrayBuffers": 8374842
+      }
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "setupMs": 5.079999999999927,
+      "validatedInsertMs": 363.1967000000004,
+      "indexBuildMs": 5.976399999999558,
+      "routeReadyMs": 5.198100000000522,
+      "firstResponseMs": 153.54150000000027,
+      "modelThroughFirstResponseMs": 533.0669000000007,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2949,
+        "pageBytes": 4096,
+        "allocatedBytes": 12079104
+      },
+      "additionalAllocatedBytes": 192512,
+      "memoryBefore": {
+        "rss": 424939520,
+        "heapTotal": 212414464,
+        "heapUsed": 123122912,
+        "external": 146286093,
+        "arrayBuffers": 90958763
+      },
+      "memoryAfter": {
+        "rss": 453816320,
+        "heapTotal": 220770304,
+        "heapUsed": 146554104,
+        "external": 151372641,
+        "arrayBuffers": 95922762
+      }
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "setupMs": 4.142399999999725,
+      "validatedInsertMs": 352.1219000000001,
+      "indexBuildMs": 0.0018000000000029104,
+      "routeReadyMs": 5.589299999999639,
+      "firstResponseMs": 160.20850000000064,
+      "modelThroughFirstResponseMs": 522.1557000000003,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "additionalAllocatedBytes": 0,
+      "memoryBefore": {
+        "rss": 440164352,
+        "heapTotal": 220770304,
+        "heapUsed": 148884408,
+        "external": 151372641,
+        "arrayBuffers": 95922762
+      },
+      "memoryAfter": {
+        "rss": 458612736,
+        "heapTotal": 223653888,
+        "heapUsed": 100826936,
+        "external": 157416841,
+        "arrayBuffers": 99231938
+      }
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "setupMs": 6.384399999999914,
+      "validatedInsertMs": 405.1187,
+      "indexBuildMs": 0.0018000000000029104,
+      "routeReadyMs": 5.548899999999776,
+      "firstResponseMs": 175.4417000000003,
+      "modelThroughFirstResponseMs": 592.6085000000003,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "additionalAllocatedBytes": 0,
+      "memoryBefore": {
+        "rss": 446316544,
+        "heapTotal": 223653888,
+        "heapUsed": 103148272,
+        "external": 157416841,
+        "arrayBuffers": 99231938
+      },
+      "memoryAfter": {
+        "rss": 465649664,
+        "heapTotal": 224702464,
+        "heapUsed": 119975216,
+        "external": 163461041,
+        "arrayBuffers": 102541114
+      }
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "setupMs": 5.289799999999559,
+      "validatedInsertMs": 367.8265000000001,
+      "indexBuildMs": 9.177200000000084,
+      "routeReadyMs": 8.336500000000342,
+      "firstResponseMs": 155.84289999999964,
+      "modelThroughFirstResponseMs": 546.6004999999996,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2949,
+        "pageBytes": 4096,
+        "allocatedBytes": 12079104
+      },
+      "additionalAllocatedBytes": 192512,
+      "memoryBefore": {
+        "rss": 453484544,
+        "heapTotal": 224702464,
+        "heapUsed": 122302008,
+        "external": 163461041,
+        "arrayBuffers": 102541114
+      },
+      "memoryAfter": {
+        "rss": 471867392,
+        "heapTotal": 220770304,
+        "heapUsed": 78178424,
+        "external": 169505241,
+        "arrayBuffers": 105850290
+      }
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "setupMs": 3.686700000000201,
+      "validatedInsertMs": 370.71939999999995,
+      "indexBuildMs": 6.870100000000093,
+      "routeReadyMs": 7.269899999999325,
+      "firstResponseMs": 165.4976000000006,
+      "modelThroughFirstResponseMs": 554.1350000000002,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2949,
+        "pageBytes": 4096,
+        "allocatedBytes": 12079104
+      },
+      "additionalAllocatedBytes": 192512,
+      "memoryBefore": {
+        "rss": 459223040,
+        "heapTotal": 220770304,
+        "heapUsed": 80509608,
+        "external": 169505241,
+        "arrayBuffers": 105850290
+      },
+      "memoryAfter": {
+        "rss": 478724096,
+        "heapTotal": 221032448,
+        "heapUsed": 97503600,
+        "external": 175549441,
+        "arrayBuffers": 109159466
+      }
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "setupMs": 5.169300000001385,
+      "validatedInsertMs": 433.7001,
+      "indexBuildMs": 0.0019000000011146767,
+      "routeReadyMs": 4.7783999999992375,
+      "firstResponseMs": 143.71280000000115,
+      "modelThroughFirstResponseMs": 587.4584000000013,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "additionalAllocatedBytes": 0,
+      "memoryBefore": {
+        "rss": 466391040,
+        "heapTotal": 221032448,
+        "heapUsed": 99880600,
+        "external": 175549441,
+        "arrayBuffers": 109159466
+      },
+      "memoryAfter": {
+        "rss": 484102144,
+        "heapTotal": 221032448,
+        "heapUsed": 118627960,
+        "external": 181593641,
+        "arrayBuffers": 112468642
+      }
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "setupMs": 5.146499999998923,
+      "validatedInsertMs": 363.5033000000003,
+      "indexBuildMs": 0.002500000000509317,
+      "routeReadyMs": 7.062099999999191,
+      "firstResponseMs": 173.07879999999932,
+      "modelThroughFirstResponseMs": 548.8818999999985,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "additionalAllocatedBytes": 0,
+      "memoryBefore": {
+        "rss": 470949888,
+        "heapTotal": 221032448,
+        "heapUsed": 120952304,
+        "external": 181593641,
+        "arrayBuffers": 112468642
+      },
+      "memoryAfter": {
+        "rss": 489779200,
+        "heapTotal": 221032448,
+        "heapUsed": 77174040,
+        "external": 187637841,
+        "arrayBuffers": 115777818
+      }
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "setupMs": 4.703799999999319,
+      "validatedInsertMs": 395.15560000000005,
+      "indexBuildMs": 6.91359999999986,
+      "routeReadyMs": 3.997800000001007,
+      "firstResponseMs": 158.8032000000003,
+      "modelThroughFirstResponseMs": 569.6360000000004,
+      "beforePages": {
+        "pages": 2902,
+        "pageBytes": 4096,
+        "allocatedBytes": 11886592
+      },
+      "afterPages": {
+        "pages": 2949,
+        "pageBytes": 4096,
+        "allocatedBytes": 12079104
+      },
+      "additionalAllocatedBytes": 192512,
+      "memoryBefore": {
+        "rss": 477384704,
+        "heapTotal": 221032448,
+        "heapUsed": 79530584,
+        "external": 187637841,
+        "arrayBuffers": 115777818
+      },
+      "memoryAfter": {
+        "rss": 495968256,
+        "heapTotal": 221032448,
+        "heapUsed": 96217960,
+        "external": 193682041,
+        "arrayBuffers": 119086994
+      }
+    }
+  ],
+  "functional": [
+    {
+      "variant": "original",
+      "case": "national",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "variant": "original",
+      "case": "single-region",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "variant": "original",
+      "case": "genre",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "variant": "original",
+      "case": "price-age",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "variant": "original",
+      "case": "national",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "33958",
+        "connection": "keep-alive"
+      },
+      "hash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "bytes": 33958,
+      "items": 30,
+      "total": 5649,
+      "truncated": null,
+      "metadataHash": "fd23929f41dc2cc24e2e67ee0b8d7a7910c7e53041a5f2533ca51bbc8789096d"
+    },
+    {
+      "variant": "original",
+      "case": "single-region",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "31881",
+        "connection": "keep-alive"
+      },
+      "hash": "680f7d171a6606022c6deaf0ac3e09341364494e4cfb60fad22060cee859ee74",
+      "bytes": 31881,
+      "items": 30,
+      "total": 31,
+      "truncated": null,
+      "metadataHash": "7aeec836e7e4e9edbaab4dc02d95f239a3c970852858b58f2f364ee584b21d6b"
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "32637",
+        "connection": "keep-alive"
+      },
+      "hash": "c31c4077e782df9732f948b728277f422f0916f6d9f5f83809709a1b608748d7",
+      "bytes": 32637,
+      "items": 30,
+      "total": 51,
+      "truncated": null,
+      "metadataHash": "8fc1547a22a48bd814bc40ec14962c2d61ae764088b730be0ddb8ba6a9b43f71"
+    },
+    {
+      "variant": "original",
+      "case": "genre",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "34396",
+        "connection": "keep-alive"
+      },
+      "hash": "6b875687e708cff889b4745624b8e41956c0a9bc17d9844bd3431c163bcd9532",
+      "bytes": 34396,
+      "items": 30,
+      "total": 3046,
+      "truncated": null,
+      "metadataHash": "be14c1dcba0a0c4c239d8e863eac020f1cde1cdddff4588e436b50cc51e53762"
+    },
+    {
+      "variant": "original",
+      "case": "price-age",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "36350",
+        "connection": "keep-alive"
+      },
+      "hash": "64970e695ac0b1d68dc519afeee7cd940849901f16045206e4b1a22b05cb3291",
+      "bytes": 36350,
+      "items": 30,
+      "total": 55,
+      "truncated": null,
+      "metadataHash": "f6e1ffa40dfda1d4fa7f39f5f606c142559c4ecce1ccc9ea0a9163e9e0c120aa"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "single-region",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "genre",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "price-age",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "33958",
+        "connection": "keep-alive"
+      },
+      "hash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "bytes": 33958,
+      "items": 30,
+      "total": 5649,
+      "truncated": null,
+      "metadataHash": "fd23929f41dc2cc24e2e67ee0b8d7a7910c7e53041a5f2533ca51bbc8789096d"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "single-region",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "31881",
+        "connection": "keep-alive"
+      },
+      "hash": "680f7d171a6606022c6deaf0ac3e09341364494e4cfb60fad22060cee859ee74",
+      "bytes": 31881,
+      "items": 30,
+      "total": 31,
+      "truncated": null,
+      "metadataHash": "7aeec836e7e4e9edbaab4dc02d95f239a3c970852858b58f2f364ee584b21d6b"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "32637",
+        "connection": "keep-alive"
+      },
+      "hash": "c31c4077e782df9732f948b728277f422f0916f6d9f5f83809709a1b608748d7",
+      "bytes": 32637,
+      "items": 30,
+      "total": 51,
+      "truncated": null,
+      "metadataHash": "8fc1547a22a48bd814bc40ec14962c2d61ae764088b730be0ddb8ba6a9b43f71"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "genre",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "34396",
+        "connection": "keep-alive"
+      },
+      "hash": "6b875687e708cff889b4745624b8e41956c0a9bc17d9844bd3431c163bcd9532",
+      "bytes": 34396,
+      "items": 30,
+      "total": 3046,
+      "truncated": null,
+      "metadataHash": "be14c1dcba0a0c4c239d8e863eac020f1cde1cdddff4588e436b50cc51e53762"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "price-age",
+      "endpoint": "performances",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "36350",
+        "connection": "keep-alive"
+      },
+      "hash": "64970e695ac0b1d68dc519afeee7cd940849901f16045206e4b1a22b05cb3291",
+      "bytes": 36350,
+      "items": 30,
+      "total": 55,
+      "truncated": null,
+      "metadataHash": "f6e1ffa40dfda1d4fa7f39f5f606c142559c4ecce1ccc9ea0a9163e9e0c120aa"
+    }
+  ],
+  "phases": [
+    {
+      "variant": "original",
+      "case": "national",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 5.657100000000355,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 100.91929999999957,
+          "rows": 5649
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 3.6116000000001804,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 11.39220000000023,
+          "rows": 5649
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 1.8629999999957363,
+          "rows": 5649
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 19.374699999993027,
+          "bytes": 1654588
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 10.998900000000503,
+          "bytes": 1654588
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "single-region",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 0.22729999999955908,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 0.6054999999996653,
+          "rows": 31
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 0.2058999999999287,
+          "rows": 2
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 0.07620000000042637,
+          "rows": 31
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.009700000001430453,
+          "rows": 31
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 0.10469999999986612,
+          "bytes": 8868
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 0.06169999999929132,
+          "bytes": 8868
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 0.1698999999998705,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 0.7217000000000553,
+          "rows": 51
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 0.16420000000016444,
+          "rows": 4
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 0.11520000000018626,
+          "rows": 51
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.00830000000223663,
+          "rows": 51
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 0.14080000000376458,
+          "bytes": 14697
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 0.08280000000013388,
+          "bytes": 14697
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "genre",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 28.824999999999818,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 51.73520000000008,
+          "rows": 3046
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 4.401100000000042,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 6.8981000000003405,
+          "rows": 3046
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.7531999999873733,
+          "rows": 3046
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 9.841000000025815,
+          "bytes": 916135
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 5.613299999999981,
+          "bytes": 916135
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "price-age",
+      "phases": [
+        {
+          "phase": "search.pending",
+          "durationMs": 5.46140000000014,
+          "rows": 1
+        },
+        {
+          "phase": "search.sourceCounts",
+          "durationMs": 33.80630000000019,
+          "rows": 1
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 41.616399999999885,
+          "rows": 55
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 4.6983000000000175,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 0.21849999999994907,
+          "rows": 55
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.013399999996181577,
+          "rows": 55
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 0.23360000000411674,
+          "bytes": 17020
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 0.15689999999995052,
+          "bytes": 17020
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 7.787800000000061,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 96.07799999999952,
+          "rows": 5649
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 3.522700000000441,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 10.615699999999379,
+          "rows": 5649
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 1.3534000000463493,
+          "rows": 5649
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 17.1775000000016,
+          "bytes": 1654588
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 14.446600000000217,
+          "bytes": 1654588
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "single-region",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 0.2867000000005646,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 6.301400000000285,
+          "rows": 31
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 0.27000000000043656,
+          "rows": 2
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 0.09070000000065193,
+          "rows": 31
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.009500000000116415,
+          "rows": 31
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 0.15829999999914435,
+          "bytes": 8868
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 0.1000000000003638,
+          "bytes": 8868
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 0.2816000000002532,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 6.393399999999929,
+          "rows": 51
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 0.3043999999999869,
+          "rows": 4
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 0.11610000000018772,
+          "rows": 51
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.014600000005884795,
+          "rows": 51
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 0.20649999999750435,
+          "bytes": 14697
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 0.18410000000039872,
+          "bytes": 14697
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "genre",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 26.50630000000001,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 58.71810000000005,
+          "rows": 3046
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 3.563799999999901,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 4.167600000000675,
+          "rows": 3046
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.4964000000118176,
+          "rows": 3046
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 7.5572999999685635,
+          "bytes": 916135
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 6.859999999999673,
+          "bytes": 916135
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "price-age",
+      "phases": [
+        {
+          "phase": "search.pending",
+          "durationMs": 5.35149999999976,
+          "rows": 1
+        },
+        {
+          "phase": "search.sourceCounts",
+          "durationMs": 35.499299999999494,
+          "rows": 1
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 30.519500000000335,
+          "rows": 55
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 3.9668000000001484,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 0.12319999999999709,
+          "rows": 55
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.0063999999956649845,
+          "rows": 55
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 0.1478000000015527,
+          "bytes": 17020
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 0.13000000000010914,
+          "bytes": 17020
+        }
+      ]
+    }
+  ],
+  "plans": [
+    {
+      "variant": "original",
+      "case": "national",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 16,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 82,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "single-region",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 50,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 20,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 50,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 91,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR LAST TERM OF ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 34,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 102,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "genre",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 19,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 85,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "price-age",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state!='complete'",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.source,count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체"
+          ],
+          "plan": [
+            {
+              "id": 10,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 28,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 94,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "national",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 16,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 20,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 48,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "single-region",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 50,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 20,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 50,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 23,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 59,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR LAST TERM OF ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 34,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 38,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 68,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "genre",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 19,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 23,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 51,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "price-age",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state!='complete'",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.source,count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체"
+          ],
+          "plan": [
+            {
+              "id": 10,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 28,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 14,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 32,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 60,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 17,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "single-region",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 50,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 20,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 34,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "genre",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 20,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "price-age",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state!='complete'",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.source,count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체"
+          ],
+          "plan": [
+            {
+              "id": 10,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 29,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 17,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 21,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "single-region",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 50,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 20,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "yeosu",
+            "2026-10-01",
+            "2027-01-17",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 23,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 34,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 24,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "genre",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 20,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND json_extract(p.data,'$.genre')=? ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 11,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 24,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "price-age",
+      "endpoint": "performances",
+      "queries": [
+        {
+          "sql": "SELECT count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state!='complete'",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.source,count(*) AS n FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체"
+          ],
+          "plan": [
+            {
+              "id": 10,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 29,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.*,b.note,b.performance_id AS bookmarked FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 ORDER BY p.start_date DESC,p.id DESC LIMIT ? OFFSET ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체",
+            30,
+            0
+          ],
+          "plan": [
+            {
+              "id": 14,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 33,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "raw": [
+    {
+      "pair": 0,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 67.14890000000014,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 60.91620000000012,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 0,
+      "variant": "original",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 1.016700000000128,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 3.7254000000002634,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 0,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 1.2500999999997475,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 3.6825000000003456,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 0,
+      "variant": "original",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 49.81919999999991,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 53.12390000000005,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 0,
+      "variant": "original",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 30.283500000000004,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 33.1237000000001,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 62.39609999999993,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 70.69169999999986,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 4.860099999999875,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 1.0632999999997992,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 4.326799999999821,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 1.6354999999998654,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 53.90189999999984,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 57.621399999999994,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 34.43090000000029,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 31.597600000000057,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 63.51999999999998,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 70.16650000000027,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 1.0748999999996158,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 3.7573999999999614,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 1.1689000000001215,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 4.297100000000228,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 59.56620000000021,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 107.93880000000036,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 77.56849999999986,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 77.51959999999963,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 168.63959999999997,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 135.2545,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 6.26260000000002,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 1.5752000000002226,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 7.356499999999869,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 3.2393999999999323,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 139.5688,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 106.93100000000004,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 81.19200000000001,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 61.56759999999986,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 148.93229999999994,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 141.51090000000022,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "1654588",
+        "connection": "keep-alive"
+      },
+      "hash": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+      "bytes": 1654588,
+      "items": 5649,
+      "total": 5649,
+      "truncated": false,
+      "metadataHash": "cd3556d5546d2b54e65014afbfe80993dbf8f5442eb9f8e5812fed37331889bd"
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 2.365099999999984,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "case": "single-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu",
+      "elapsedMs": 7.354599999999664,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "8868",
+        "connection": "keep-alive"
+      },
+      "hash": "9d148cf90de7ce5fe18db15f8ebfd76c28799502387f265efe29b1cf9413b326",
+      "bytes": 8868,
+      "items": 31,
+      "total": 31,
+      "truncated": false,
+      "metadataHash": "830e77debd93134830fadf79d244b8def5a6a8ab0925b6857ba998a93cb8fda1"
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 2.526600000000144,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 7.639900000000125,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "14697",
+        "connection": "keep-alive"
+      },
+      "hash": "1641a154b5f6278f4d39de3db1cae704da5f3fb8724af89a983c1e9b323fe965",
+      "bytes": 14697,
+      "items": 51,
+      "total": 51,
+      "truncated": false,
+      "metadataHash": "c5901375cf0ff68bff4873af1037037fbd49a7c156c6bd0dd12031afb580cf3d"
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 126.89149999999972,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "case": "genre",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&genre=%EC%9D%8C%EC%95%85",
+      "elapsedMs": 129.7521999999999,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "916135",
+        "connection": "keep-alive"
+      },
+      "hash": "2b83b5b3160fa8a7b54c589e00fba4b0fb16c28cd9934bfab33127221a2834c4",
+      "bytes": 916135,
+      "items": 3046,
+      "total": 3046,
+      "truncated": false,
+      "metadataHash": "e2f88f08e6db99bf6be5c0ad96b13fcde550769468775180de897054dfd4149b"
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 65.25960000000032,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "case": "price-age",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&price=free&age=%EC%A0%84%EC%B2%B4",
+      "elapsedMs": 67.40380000000005,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17020",
+        "connection": "keep-alive"
+      },
+      "hash": "3878adbf274d95bdd5c2b3711996b6834e237a64319ffe07e3cecaf9f7f8a51f",
+      "bytes": 17020,
+      "items": 55,
+      "total": 55,
+      "truncated": false,
+      "metadataHash": "367aea712a083022fa1323ab92c64f173239a07781af71e0080c7651c0dae8f1"
+    }
+  ]
+}

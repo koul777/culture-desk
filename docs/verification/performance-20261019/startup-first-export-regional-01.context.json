@@ -1,0 +1,42 @@
+{
+  "observedBeforeAt": "2026-10-18T18:15:01.976544+00:00",
+  "status": "completed",
+  "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+  "samples": 50,
+  "warmupPairs": 2,
+  "scope": "Sequential fresh Node processes, AB/BA; complete response body before semantic validation. OS file caches warm. No team build/browser/test workloads; external applications uncontrolled.",
+  "ambientPath": "docs\\verification\\performance-20261019\\host-final-first-requests-01.json",
+  "harness": {
+    "startup.ts": "75407cf3493146def57342465b4282c6cd1864cfdb3b546e8433b8bd8d677dcf",
+    "startup-compare.ts": "81575a29fbb41a0313d51b0eb199f5794f52404849cc031c3739377b15e0941a",
+    "startup-child.ts": "b512bc70490b6ca717341b4e34474737f21972c2cf451af58da4cef25bea687f",
+    "common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+    "child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+    "child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f",
+    "workbook.ts": "291a23710bda897b85f9828bab19b5eb6f72d63e13f4d3e1630b77aecb19d1cf"
+  },
+  "snapshots": {
+    "baseline": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "candidate-wave11-selection": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473"
+  },
+  "ambientSha256": "1529a3e6419847c9068db532c23b24cac45a3f560de3b721776305065549d3c5",
+  "ambientSummary": {
+    "meanCpuBusyFraction": 0.5882455608031737,
+    "maxCpuBusyFraction": 0.6993737982055228,
+    "minFreeMemoryMiB": 1292.0390625
+  },
+  "launchedAt": "2026-10-18T18:21:59.239521+00:00",
+  "observedAfterAt": "2026-10-18T18:32:56.513729+00:00",
+  "harnessUnchangedAfter": true,
+  "snapshotsUnchangedAfter": true,
+  "reportSha256": "ac8faf96a81e1a3a8954da025476422667087359d50f18489d24f1d26314429e",
+  "ambientAfter": {
+    "path": "docs\\verification\\performance-20261019\\host-final-first-requests-after-01.json",
+    "sha256": "938e00c2b0faf6d20cc30a298d2c0434cf26cd98d53ddd04f3b5eddc770585b2",
+    "summary": {
+      "meanCpuBusyFraction": 0.6191166207799718,
+      "maxCpuBusyFraction": 0.6695536617134056,
+      "minFreeMemoryMiB": 1320.80078125
+    }
+  }
+}

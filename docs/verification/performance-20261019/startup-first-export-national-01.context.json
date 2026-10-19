@@ -1,0 +1,29 @@
+{
+  "observedDuringAt": "2026-10-18T17:47:09.861Z",
+  "status": "completed",
+  "scope": "Fresh process first complete workbook response; excludes validation from response-ready time. AB/BA50pairs+2warmup pairs. No competing agent browser/build/test work; external applications remain uncontrolled.",
+  "rootBaseline": "data/performance-session-20261019/baseline",
+  "rootCandidate": "data/performance-session-20261019/candidate-wave11-selection",
+  "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17",
+  "ambient": {
+    "path": "docs/verification/performance-20261019/host-first-export-01.json",
+    "sha256": "c1bd5e8bd80545666623108660968ec0bee1545c0d375dc47a1ad1c2a31d5c0b"
+  },
+  "harness": {
+    "startup.ts": "75407cf3493146def57342465b4282c6cd1864cfdb3b546e8433b8bd8d677dcf",
+    "startup-compare.ts": "81575a29fbb41a0313d51b0eb199f5794f52404849cc031c3739377b15e0941a",
+    "startup-child.ts": "b512bc70490b6ca717341b4e34474737f21972c2cf451af58da4cef25bea687f",
+    "common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+    "child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+    "child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f",
+    "workbook.ts": "291a23710bda897b85f9828bab19b5eb6f72d63e13f4d3e1630b77aecb19d1cf"
+  },
+  "snapshots": {
+    "baseline": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "candidate-wave11-selection": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473"
+  },
+  "observedAfterAt": "2026-10-18T17:53:25.648310+00:00",
+  "harnessUnchangedAfter": true,
+  "snapshotsUnchangedAfter": true,
+  "reportSha256": "4fdec6a6c46f3db73fbdccd306f6a3e6e049d21e8a946bdeb5a6e2cb98267c74"
+}

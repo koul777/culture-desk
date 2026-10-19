@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "mode": "smoke",
+  "success": false,
+  "failure": "AssertionError [ERR_ASSERTION]: At least one saved raster is actually replayed/decoded\n    at <anonymous> (C:\\workspace\\cultureapi\\scripts\\performance\\browser-lifecycle-worker.ts:341:10)",
+  "endedAt": "2026-10-18T19:12:47.065Z",
+  "cycles": 0,
+  "activeMs": 0,
+  "pausedMs": 0,
+  "finalVerificationIncludedInActiveMs": false,
+  "wallMs": 2726.8507000000004,
+  "requestedActiveMs": null,
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "browser": "156.0.8078.4"
+  },
+  "scope": "One context/page with natural GC. CDP DOM counters may include uncollected detached nodes. Bounded WeakRefs observe candidates only; no heap snapshot, forced GC or no-leak assertion. Real national API responses are unchanged. Saved matching posters are exact local bytes; all other known posters/tiles are declared local SVG substitutes. Worker CPU excludes Chromium and fixture CPU.",
+  "snapshot": {
+    "hash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "rows": 5649
+  },
+  "manifestHash": "6bb3e752e8874d106a6b3bfdaf71ba3090f1f02d6735ed775f02fa4c60b50736",
+  "limits": {
+    "requests": 256,
+    "routes": 256,
+    "responseTasks": 8,
+    "oracleKeys": 128,
+    "recent": 100,
+    "weakRefs": 256,
+    "cycles": 1200
+  },
+  "target": {
+    "id": 6241,
+    "page": 1,
+    "offset": 0,
+    "groupRows": 210
+  },
+  "counts": {
+    "requests": 29,
+    "finished": 29,
+    "failed": 0,
+    "canceledImages": 0,
+    "api": 2,
+    "search": 1,
+    "map": 0,
+    "detail": 0,
+    "bootstrap": 1,
+    "savedRaster": 4,
+    "placeholder": 20,
+    "abortedImageFulfill": 0,
+    "unexpectedExternal": 0,
+    "requestOverflow": 0
+  },
+  "maxima": {
+    "pendingRequests": 24,
+    "pendingRoutes": 24,
+    "responseTasks": 1
+  },
+  "pendingAfterCleanup": {
+    "requests": 0,
+    "routes": 0,
+    "responseTasks": 0
+  },
+  "oracleHashes": {
+    "/api/map?from=2026-10-01&to=2027-01-17": "ee00997050a764a710fb0ad23cb05b62531f576f06ba9effec3f3b280d626130",
+    "/api/performances?from=2026-10-01&limit=30&page=1&to=2027-01-17": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a"
+  },
+  "fiveMinuteBins": {},
+  "cleanup": [
+    {
+      "action": "cdp.detach",
+      "success": true
+    },
+    {
+      "action": "context.close",
+      "success": true
+    },
+    {
+      "action": "request-reference-release",
+      "contextClosedPending": 0
+    }
+  ],
+  "recent": [
+    {
+      "at": "2026-10-18T19:12:46.663Z",
+      "kind": "before-cleanup",
+      "phase": "cleanup",
+      "cycles": 0,
+      "activeMs": 0,
+      "pausedMs": 0,
+      "wallMs": 2324.6937999999996,
+      "failure": "AssertionError [ERR_ASSERTION]: At least one saved raster is actually replayed/decoded\n    at <anonymous> (C:\\workspace\\cultureapi\\scripts\\performance\\browser-lifecycle-worker.ts:341:10)",
+      "pendingRequests": 24,
+      "pendingRoutes": 24,
+      "responseTasks": 0
+    }
+  ],
+  "samples": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\browser-lifecycle-smoke-01.ndjson"
+}

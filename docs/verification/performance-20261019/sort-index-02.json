@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-18T18:00:52.637Z",
+  "success": true,
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave11-selection",
+  "source": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+  "harness": {
+    "hash": "334590fef82e3e8504e1ef0dc40eec2ace29978dcbdfcc118b51fc4b56d509bf",
+    "files": {
+      "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts": "e1aa15a9fd622130ee1c4ffe79d558a18873248fd6abd79a8f635fe724c410c2",
+      "C:\\workspace\\cultureapi\\scripts\\performance\\common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+      "C:\\workspace\\cultureapi\\scripts\\performance\\child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+      "C:\\workspace\\cultureapi\\scripts\\performance\\child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f"
+    }
+  },
+  "candidate": "CREATE INDEX experiment_performances_order ON performances(classification,start_date DESC,id DESC)",
+  "results": [
+    {
+      "processElapsedMs": 12941.4337,
+      "type": "sort-index-diagnostic",
+      "fixture": "actual",
+      "output": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-02-runs\\actual.json",
+      "warmRequests": 50,
+      "coldModels": 10,
+      "success": true
+    },
+    {
+      "processElapsedMs": 13946.863999999998,
+      "type": "sort-index-diagnostic",
+      "fixture": "repeated",
+      "output": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-02-runs\\repeated.json",
+      "warmRequests": 10,
+      "coldModels": 2,
+      "success": true
+    },
+    {
+      "processElapsedMs": 34491.55009999999,
+      "type": "sort-index-diagnostic",
+      "fixture": "minimal",
+      "output": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-02-runs\\minimal.json",
+      "warmRequests": 20,
+      "coldModels": 2,
+      "success": true
+    }
+  ]
+}

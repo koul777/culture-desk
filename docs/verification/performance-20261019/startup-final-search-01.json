@@ -1,0 +1,4985 @@
+{
+  "version": 1,
+  "measuredAt": "2026-10-18T18:19:13.987Z",
+  "variants": [
+    {
+      "name": "baseline",
+      "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\baseline"
+    },
+    {
+      "name": "candidate",
+      "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave11-selection"
+    }
+  ],
+  "samples": 50,
+  "warmup": 2,
+  "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+  "node": "v24.14.0",
+  "scope": "Each sample runs a new Node process; AB/BA paired ordering, warmup processes discarded. Primary firstBodyReady is child performance.now before payload verification. OS filesystem cache is warm and not flushed. No network. Exact semantic hash equality is mandatory.",
+  "snapshot": {
+    "hash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "performances": 5649,
+    "bytes": 8559524
+  },
+  "source": [
+    {
+      "variant": "baseline",
+      "before": {
+        "hash": "aee902a8b2cf4f1e8ef5e7ffdf70052f706c312a36fb3fcdd97f1227d1374975",
+        "directories": [
+          "server",
+          "shared"
+        ],
+        "files": {
+          "server/app.ts": "6e1e195df8ce586450aa87f8a3f65e67a34afcf8926007369c097436a317c530",
+          "server/cloud/auth.ts": "2b0a566ce5c76b418b515be271d7f96719a1be7a8359999dd8b820002e325ae3",
+          "server/cloud/collection.ts": "7ac9de893c77b08d8708917682e3bebc64c54f79b129e144bc1ad7cd96f9804d",
+          "server/cloud/handler.ts": "b8864e6a1790bfabb1f2d86a2bb6675de2307f8e62b665af85a65bd137f56756",
+          "server/cloud/published-response-cache.ts": "ea3107903dcf03afe189c5da0aedfd6243d31a98e4806ba878ff3701fb451403",
+          "server/cloud/readonly-fallback.ts": "846b4602971b3069700ba3facfad6e1aae8a1e2873576b2fc87531cc69eb629a",
+          "server/cloud/refresh-jobs.ts": "18d29b4289c26dc1f59b98cb87839baf227b646f9c56abc76a54490a6faabc54",
+          "server/cloud/snapshot.ts": "e6dbb0d8c545ea234d5fa1606396f6774dbee6525c5c4021e7e8255ebf5bfbc9",
+          "server/collection-history.ts": "d222fad9c14f41c1cb275e9dd0ff2e02aff75f988039ef49dd95b9e6ba0874e9",
+          "server/config.ts": "ab87fe7b041868d82edad518b9c8865d0652872cf88811c3d8506df46c0bc0b5",
+          "server/dates.ts": "f2e51013c31479ba6db15ca2c3ad80a635f83fe8948d816791586c85760df75d",
+          "server/export.ts": "126ed99130dcf6c62dada2cd11c6c9c159a298034ae65fe8d87761ea8b0bc061",
+          "server/import-collection.ts": "3decc3b85ba43579a87bd506b9905996afd415f3dabaf55ebac4f2e97b1b113b",
+          "server/index.ts": "e3a2113bda799ecc1132d5c0f4c0b097dec4ee84ae358b954f3655c9fbed64cd",
+          "server/lock.ts": "fe7d1cfc72b2775bd7d20c2ec65ccb18d874671c9f6b75944d73087299cce620",
+          "server/maintenance.ts": "fd522a1c228e5b0e576fdbee813f66a50756b28dba4f455613cf2bf1b5792c83",
+          "server/providers/cities.ts": "4d5c7ad7c07c95397ec32c1ebbeef979e9ff4562524e2121e337d6e78b41186c",
+          "server/providers/classify.ts": "724c71e37696e878e13ccc038f608854dfb501d0604fa14e83c514c0b2fb8a60",
+          "server/providers/coordinates.ts": "59db06e7eae45c1676b575d08bc8d4760de290acd195e15298d2836e5700d961",
+          "server/providers/culture.ts": "1cec1b3995abdbff3814eefa8d34990eb124290547d63b353b270249e95496f1",
+          "server/providers/dates.ts": "92a9bf318fa4017b25cb174f03cec3943ce0c698d588df5528885c445af1928b",
+          "server/providers/errors.ts": "1e77ab45313c14e4d363988d4c056f84a850abf6e2861cf6ac96f019f4735d50",
+          "server/providers/fetch.ts": "94b7cf280d355a60a6c4ab909ad6defdc254ed1f139388e8c2f5be7181d27842",
+          "server/providers/index.ts": "7d7d960afa97a1720e60ce33f5c79f7837696dc1613b859b971877aed781558e",
+          "server/providers/kopis.ts": "9fb1f4bce2668d93385d1879995b778915a13edb9c94258dde1489c4e9d812c4",
+          "server/providers/national-cities.ts": "7f9b37662e14f52d2084e4a45ae635eeadd2c960853c0245035acceceb2c7777",
+          "server/providers/text.ts": "b59603e712de1a95bb3d60dee517cf8ec4cce2f3185c958967f238ddfc5e0928",
+          "server/providers/validate.ts": "7b00ddb104a9a6920b3ba7e5bfd9075ebf4438c2fe1d6f97bbf42426ef78fa35",
+          "server/providers/xml.ts": "923851b88a0bb7e14d67a119ecf3f5756fdb2d90a74f289a6c3e27a4b0435dc5",
+          "server/store.ts": "661445ce14569fe57504b3bd7b7c3fb9f2a13a4a8e0dfc4234be86b135c6dbc5",
+          "server/venue-building-seed.json": "80ff2b768fb97476d51589b23191d0325282920b09fa4f23671c0d26fd690a9a",
+          "server/venue-buildings.ts": "a5da7334d366256215232f16d49f12aa713e9384f96ff2c73c508720f1ae494b",
+          "server/venue-info.ts": "72a803af68b81bd2b0aab70f218e40acb69b15434b3f856020bb4abf8827702a",
+          "server/vworld.ts": "4906a13c3e6e217711ec4c510e73211353acb9e09d956a3ce6506f5d52f8ccdb",
+          "server/worker.ts": "f46db9b49da76d7b4ca59cb2a9aa11ab6d5fb65b7fcd7638de9a1069591f373d",
+          "shared/types.ts": "b30d934981d6dbda2fd7b97e7eeaee4f120c880bdc492784cb9a29cb3d20fa58",
+          "package.json": "10787a1fada00c0c8586ab44dce4534ec8c8d3d005a1af7e4b8444bdbdccc7a8",
+          "package-lock.json": "d6fa4c0f597f365b7733460e048568f7a1e02b5c04f1a6b728ae52505bbaaf83",
+          "vite.config.ts": "7b4eb14417f429d0ebbadfea374f6810a7615fd6becd0c84fd3e53da353f8b6f"
+        }
+      },
+      "afterHash": "aee902a8b2cf4f1e8ef5e7ffdf70052f706c312a36fb3fcdd97f1227d1374975",
+      "stable": true
+    },
+    {
+      "variant": "candidate",
+      "before": {
+        "hash": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+        "directories": [
+          "server",
+          "shared"
+        ],
+        "files": {
+          "server/app.ts": "81a71810d125f582aba104a422b7146b8a07a242b6fd19a67b9d593e49cc3d93",
+          "server/cloud/auth.ts": "2b0a566ce5c76b418b515be271d7f96719a1be7a8359999dd8b820002e325ae3",
+          "server/cloud/collection.ts": "7ac9de893c77b08d8708917682e3bebc64c54f79b129e144bc1ad7cd96f9804d",
+          "server/cloud/handler.ts": "6c5786d46e979e5349e734293ca90c45a9568bfb772b9b4fb99769b22ed41f04",
+          "server/cloud/published-response-cache.ts": "ea3107903dcf03afe189c5da0aedfd6243d31a98e4806ba878ff3701fb451403",
+          "server/cloud/readonly-fallback.ts": "2481cb49cee703ba325b7e2f0f8b9722f5f7822d5ee23b7eef0c8d6f2e9be80b",
+          "server/cloud/refresh-jobs.ts": "6d0ff281fa958cb749cd9204fa8eb409286bc0499ded963d283e45220f8ae83b",
+          "server/cloud/refresh-schedule.ts": "4a558bdb19547066641d33a9a05807d0a817d3a7af1ea5656a0c34d8306e3162",
+          "server/cloud/snapshot-errors.ts": "50b8a7377ba0f9d823cbc72e0ac509ff191c37375a8a180a52d741f5316d1ff6",
+          "server/cloud/snapshot.ts": "fea259a652723b0e922bd2dbfd2cfa6b76056a5da0783a6c17dcd6c136d10cfb",
+          "server/collection-history.ts": "d222fad9c14f41c1cb275e9dd0ff2e02aff75f988039ef49dd95b9e6ba0874e9",
+          "server/config.ts": "ab87fe7b041868d82edad518b9c8865d0652872cf88811c3d8506df46c0bc0b5",
+          "server/dates.ts": "f2e51013c31479ba6db15ca2c3ad80a635f83fe8948d816791586c85760df75d",
+          "server/export-stream.ts": "4bd08de55f96fe1f4c6e50dccdf547dc280c2e72144c74a220cc7fb3ace58dd9",
+          "server/export.ts": "d554f8d84ddaa16216d60e0c7d06b05218dfe72494cd9fbb55193350e2c6499a",
+          "server/import-collection.ts": "3decc3b85ba43579a87bd506b9905996afd415f3dabaf55ebac4f2e97b1b113b",
+          "server/index.ts": "e3a2113bda799ecc1132d5c0f4c0b097dec4ee84ae358b954f3655c9fbed64cd",
+          "server/lock.ts": "fe7d1cfc72b2775bd7d20c2ec65ccb18d874671c9f6b75944d73087299cce620",
+          "server/maintenance.ts": "fd522a1c228e5b0e576fdbee813f66a50756b28dba4f455613cf2bf1b5792c83",
+          "server/map-limits.ts": "2fc79e70586faa0098eac2aa3b81256fd8c5fc9f0ccdfdca4f9844e5165fecd1",
+          "server/map-query.ts": "334cbf187df98bbf390a35f5fe89d896c11525506771a4c60a9a0175855db518",
+          "server/map-response.ts": "624e67b59294dd59f47c7257de7725f7699c0e277bd2a2675161b954f36cce4c",
+          "server/providers/cities.ts": "4d5c7ad7c07c95397ec32c1ebbeef979e9ff4562524e2121e337d6e78b41186c",
+          "server/providers/classify.ts": "724c71e37696e878e13ccc038f608854dfb501d0604fa14e83c514c0b2fb8a60",
+          "server/providers/coordinates.ts": "59db06e7eae45c1676b575d08bc8d4760de290acd195e15298d2836e5700d961",
+          "server/providers/culture.ts": "1cec1b3995abdbff3814eefa8d34990eb124290547d63b353b270249e95496f1",
+          "server/providers/dates.ts": "92a9bf318fa4017b25cb174f03cec3943ce0c698d588df5528885c445af1928b",
+          "server/providers/errors.ts": "1e77ab45313c14e4d363988d4c056f84a850abf6e2861cf6ac96f019f4735d50",
+          "server/providers/fetch.ts": "94b7cf280d355a60a6c4ab909ad6defdc254ed1f139388e8c2f5be7181d27842",
+          "server/providers/index.ts": "7d7d960afa97a1720e60ce33f5c79f7837696dc1613b859b971877aed781558e",
+          "server/providers/kopis.ts": "9fb1f4bce2668d93385d1879995b778915a13edb9c94258dde1489c4e9d812c4",
+          "server/providers/national-cities.ts": "7f9b37662e14f52d2084e4a45ae635eeadd2c960853c0245035acceceb2c7777",
+          "server/providers/text.ts": "2f949f97449556fa7b6695f9d6b281f2334650c97e7790bcd456bb07ccfef3c3",
+          "server/providers/validate.ts": "7b00ddb104a9a6920b3ba7e5bfd9075ebf4438c2fe1d6f97bbf42426ef78fa35",
+          "server/providers/xml.ts": "923851b88a0bb7e14d67a119ecf3f5756fdb2d90a74f289a6c3e27a4b0435dc5",
+          "server/search-performance.ts": "265c4bc0f45b274736f997bf53378dda4456532a03435e192ca846864af30c20",
+          "server/store.ts": "0ee6275e4c621fb0fc78154b8ad002543c56ad3b17deb89d9721276e2346e438",
+          "server/venue-building-seed.json": "80ff2b768fb97476d51589b23191d0325282920b09fa4f23671c0d26fd690a9a",
+          "server/venue-buildings.ts": "0886b405227b6bf68ca829fb420ff322950f2f91d092d7822d800d1c0399584b",
+          "server/venue-info.ts": "72a803af68b81bd2b0aab70f218e40acb69b15434b3f856020bb4abf8827702a",
+          "server/vworld.ts": "4906a13c3e6e217711ec4c510e73211353acb9e09d956a3ce6506f5d52f8ccdb",
+          "server/worker.ts": "f46db9b49da76d7b4ca59cb2a9aa11ab6d5fb65b7fcd7638de9a1069591f373d",
+          "shared/types.ts": "b30d934981d6dbda2fd7b97e7eeaee4f120c880bdc492784cb9a29cb3d20fa58",
+          "package.json": "10787a1fada00c0c8586ab44dce4534ec8c8d3d005a1af7e4b8444bdbdccc7a8",
+          "package-lock.json": "d6fa4c0f597f365b7733460e048568f7a1e02b5c04f1a6b728ae52505bbaaf83",
+          "vite.config.ts": "7b4eb14417f429d0ebbadfea374f6810a7615fd6becd0c84fd3e53da353f8b6f"
+        }
+      },
+      "afterHash": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+      "stable": true
+    }
+  ],
+  "equal": true,
+  "summary": [
+    {
+      "variant": "baseline",
+      "samples": 50,
+      "firstBodyReady": {
+        "samples": 50,
+        "p50Ms": 2445.4773,
+        "p95Ms": 2863.0934,
+        "minMs": 2240.6943,
+        "maxMs": 3258.2138,
+        "meanMs": 2511.474062
+      },
+      "import": {
+        "samples": 50,
+        "p50Ms": 1468.1544,
+        "p95Ms": 1783.9983000000002,
+        "minMs": 1279.9584,
+        "maxMs": 1920.9895000000001,
+        "meanMs": 1508.963466
+      },
+      "firstResponse": {
+        "samples": 50,
+        "p50Ms": 827.1739,
+        "p95Ms": 966.5347999999999,
+        "minMs": 727.3181,
+        "maxMs": 1235.4127,
+        "meanMs": 847.187314
+      },
+      "processElapsed": {
+        "samples": 50,
+        "p50Ms": 2626.1271000000124,
+        "p95Ms": 3187.487300000008,
+        "minMs": 2396.5293000000092,
+        "maxMs": 3620.3704,
+        "meanMs": 2689.251296000001
+      }
+    },
+    {
+      "variant": "candidate",
+      "samples": 50,
+      "firstBodyReady": {
+        "samples": 50,
+        "p50Ms": 1402.5215,
+        "p95Ms": 1612.2908,
+        "minMs": 1197.1637,
+        "maxMs": 1727.7815,
+        "meanMs": 1404.087996
+      },
+      "import": {
+        "samples": 50,
+        "p50Ms": 455.05549999999994,
+        "p95Ms": 545.8847999999999,
+        "minMs": 398.6663000000001,
+        "maxMs": 571.5693,
+        "meanMs": 467.430316
+      },
+      "firstResponse": {
+        "samples": 50,
+        "p50Ms": 780.9444,
+        "p95Ms": 916.1359000000001,
+        "minMs": 620.8026,
+        "maxMs": 987.3080000000001,
+        "meanMs": 783.48409
+      },
+      "processElapsed": {
+        "samples": 50,
+        "p50Ms": 1565.4645000000019,
+        "p95Ms": 1827.5972000000183,
+        "minMs": 1341.3515000000007,
+        "maxMs": 1946.9415000000154,
+        "meanMs": 1569.218972000001
+      }
+    }
+  ],
+  "timeBlocks": [
+    {
+      "block": 1,
+      "variants": [
+        {
+          "variant": "baseline",
+          "firstRound": 0,
+          "lastRound": 16,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 2421.6692,
+            "p95Ms": 3258.2138,
+            "minMs": 2314.808,
+            "maxMs": 3258.2138,
+            "meanMs": 2503.0137941176476
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 1440.5487,
+            "p95Ms": 1800.2369,
+            "minMs": 1370.4024,
+            "maxMs": 1800.2369,
+            "meanMs": 1496.2374411764704
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 825.5518,
+            "p95Ms": 1235.4127,
+            "minMs": 742.9725000000001,
+            "maxMs": 1235.4127,
+            "meanMs": 851.5322176470589
+          }
+        },
+        {
+          "variant": "candidate",
+          "firstRound": 0,
+          "lastRound": 16,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 1367.1635,
+            "p95Ms": 1727.7815,
+            "minMs": 1197.1637,
+            "maxMs": 1727.7815,
+            "meanMs": 1376.5535176470587
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 445.1722000000001,
+            "p95Ms": 571.5693,
+            "minMs": 398.6663000000001,
+            "maxMs": 571.5693,
+            "meanMs": 459.6369352941176
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 743.2420999999999,
+            "p95Ms": 987.3080000000001,
+            "minMs": 620.8026,
+            "maxMs": 987.3080000000001,
+            "meanMs": 763.6466294117645
+          }
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "variants": [
+        {
+          "variant": "baseline",
+          "firstRound": 17,
+          "lastRound": 33,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 2445.4773,
+            "p95Ms": 3024.1171,
+            "minMs": 2240.6943,
+            "maxMs": 3024.1171,
+            "meanMs": 2509.8653647058823
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 1473.9756,
+            "p95Ms": 1920.9895000000001,
+            "minMs": 1279.9584,
+            "maxMs": 1920.9895000000001,
+            "meanMs": 1513.858494117647
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 818.7284999999999,
+            "p95Ms": 1142.0053000000003,
+            "minMs": 733.0119,
+            "maxMs": 1142.0053000000003,
+            "meanMs": 839.7360588235293
+          }
+        },
+        {
+          "variant": "candidate",
+          "firstRound": 17,
+          "lastRound": 33,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 1425.2482,
+            "p95Ms": 1674.2069,
+            "minMs": 1284.9852,
+            "maxMs": 1674.2069,
+            "meanMs": 1446.7338647058825
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 487.50210000000004,
+            "p95Ms": 560.725,
+            "minMs": 416.8491,
+            "maxMs": 560.725,
+            "meanMs": 479.3095176470588
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 794.195,
+            "p95Ms": 924.0935,
+            "minMs": 715.6124000000001,
+            "maxMs": 924.0935,
+            "meanMs": 808.8581529411764
+          }
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "variants": [
+        {
+          "variant": "baseline",
+          "firstRound": 34,
+          "lastRound": 49,
+          "firstBodyReady": {
+            "samples": 16,
+            "p50Ms": 2560.3831,
+            "p95Ms": 2807.9745,
+            "minMs": 2270.2075,
+            "maxMs": 2807.9745,
+            "meanMs": 2522.1723374999997
+          },
+          "import": {
+            "samples": 16,
+            "p50Ms": 1505.268,
+            "p95Ms": 1722.32,
+            "minMs": 1380.7713999999999,
+            "maxMs": 1722.32,
+            "meanMs": 1517.2839000000001
+          },
+          "firstResponse": {
+            "samples": 16,
+            "p50Ms": 850.2376000000002,
+            "p95Ms": 966.5347999999999,
+            "minMs": 727.3181,
+            "maxMs": 966.5347999999999,
+            "meanMs": 850.4878125000001
+          }
+        },
+        {
+          "variant": "candidate",
+          "firstRound": 34,
+          "lastRound": 49,
+          "firstBodyReady": {
+            "samples": 16,
+            "p50Ms": 1402.5215,
+            "p95Ms": 1487.0439,
+            "minMs": 1272.105,
+            "maxMs": 1487.0439,
+            "meanMs": 1388.0321437500002
+          },
+          "import": {
+            "samples": 16,
+            "p50Ms": 455.3927,
+            "p95Ms": 511.3831,
+            "minMs": 425.453,
+            "maxMs": 511.3831,
+            "meanMs": 463.0891312499999
+          },
+          "firstResponse": {
+            "samples": 16,
+            "p50Ms": 776.9288999999999,
+            "p95Ms": 850.2524999999999,
+            "minMs": 674.6125000000001,
+            "maxMs": 850.2524999999999,
+            "meanMs": 777.60145
+          }
+        }
+      ]
+    }
+  ],
+  "discarded": [
+    {
+      "variant": "baseline",
+      "round": -2,
+      "measuredAt": "2026-10-18T18:15:34.884Z",
+      "processElapsedMs": 5013.4582,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 2678.0822000000003,
+      "firstResponseMs": 1901.1152999999995,
+      "preHandlerImportMs": 180.0694,
+      "firstBodyReadySinceProcessStartMs": 4760.0866,
+      "importAndFirstResponseMs": 4579.1975,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63897600,
+        "heapTotal": 12398592,
+        "heapUsed": 8186240,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 208896000,
+        "heapTotal": 106209280,
+        "heapUsed": 67506112,
+        "external": 29338975,
+        "arrayBuffers": 11128572
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": -2,
+      "measuredAt": "2026-10-18T18:15:36.492Z",
+      "processElapsedMs": 1604.8606,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 463.80029999999994,
+      "firstResponseMs": 836.0317,
+      "preHandlerImportMs": 145.4567,
+      "firstBodyReadySinceProcessStartMs": 1445.7326,
+      "importAndFirstResponseMs": 1299.8319999999999,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63459328,
+        "heapTotal": 12660736,
+        "heapUsed": 8183072,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163516416,
+        "heapTotal": 63516672,
+        "heapUsed": 43155856,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": -1,
+      "measuredAt": "2026-10-18T18:15:38.160Z",
+      "processElapsedMs": 1667.5035000000007,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 508.4244,
+      "firstResponseMs": 831.5463,
+      "preHandlerImportMs": 150.7491,
+      "firstBodyReadySinceProcessStartMs": 1491.1368,
+      "importAndFirstResponseMs": 1339.9706999999999,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63311872,
+        "heapTotal": 12660736,
+        "heapUsed": 8179480,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164081664,
+        "heapTotal": 63516672,
+        "heapUsed": 43478888,
+        "external": 29353825,
+        "arrayBuffers": 11158536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": -1,
+      "measuredAt": "2026-10-18T18:15:40.982Z",
+      "processElapsedMs": 2822.088899999999,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1690.0144,
+      "firstResponseMs": 793.5857000000001,
+      "preHandlerImportMs": 154.9111,
+      "firstBodyReadySinceProcessStartMs": 2639.7384,
+      "importAndFirstResponseMs": 2483.6001,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63475712,
+        "heapTotal": 12660736,
+        "heapUsed": 8239216,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 208453632,
+        "heapTotal": 105947136,
+        "heapUsed": 67512896,
+        "external": 29339375,
+        "arrayBuffers": 11128972
+      }
+    }
+  ],
+  "raw": [
+    {
+      "variant": "baseline",
+      "round": 0,
+      "measuredAt": "2026-10-18T18:15:43.472Z",
+      "processElapsedMs": 2489.3935,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1451.4847,
+      "firstResponseMs": 765.0770000000002,
+      "preHandlerImportMs": 128.767,
+      "firstBodyReadySinceProcessStartMs": 2346.5945,
+      "importAndFirstResponseMs": 2216.5617,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63893504,
+        "heapTotal": 12660736,
+        "heapUsed": 8221184,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202502144,
+        "heapTotal": 108044288,
+        "heapUsed": 50585144,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "measuredAt": "2026-10-18T18:15:45.032Z",
+      "processElapsedMs": 1560.4907000000003,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 444.7614,
+      "firstResponseMs": 844.9852,
+      "preHandlerImportMs": 130.1255,
+      "firstBodyReadySinceProcessStartMs": 1420.2601,
+      "importAndFirstResponseMs": 1289.7466,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 64000000,
+        "heapTotal": 12660736,
+        "heapUsed": 8155008,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163155968,
+        "heapTotal": 63516672,
+        "heapUsed": 43348392,
+        "external": 29354225,
+        "arrayBuffers": 11158936
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "measuredAt": "2026-10-18T18:15:46.570Z",
+      "processElapsedMs": 1537.2551999999978,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 437.78189999999995,
+      "firstResponseMs": 761.5902000000001,
+      "preHandlerImportMs": 186.2006,
+      "firstBodyReadySinceProcessStartMs": 1385.8601,
+      "importAndFirstResponseMs": 1199.3721,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63987712,
+        "heapTotal": 12660736,
+        "heapUsed": 8179776,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163590144,
+        "heapTotal": 63254528,
+        "heapUsed": 43348752,
+        "external": 29354625,
+        "arrayBuffers": 11159336
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "measuredAt": "2026-10-18T18:15:50.190Z",
+      "processElapsedMs": 3620.3704,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1800.2369,
+      "firstResponseMs": 1235.4127,
+      "preHandlerImportMs": 221.5335,
+      "firstBodyReadySinceProcessStartMs": 3258.2138,
+      "importAndFirstResponseMs": 3035.6496,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63737856,
+        "heapTotal": 12660736,
+        "heapUsed": 8234504,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202084352,
+        "heapTotal": 108044288,
+        "heapUsed": 51640272,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "measuredAt": "2026-10-18T18:15:53.054Z",
+      "processElapsedMs": 2864.141499999998,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1611.5194,
+      "firstResponseMs": 829.8543999999999,
+      "preHandlerImportMs": 190.497,
+      "firstBodyReadySinceProcessStartMs": 2632.9737,
+      "importAndFirstResponseMs": 2441.3738,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 64012288,
+        "heapTotal": 12136448,
+        "heapUsed": 8136064,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202059776,
+        "heapTotal": 108306432,
+        "heapUsed": 50362400,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "measuredAt": "2026-10-18T18:15:54.396Z",
+      "processElapsedMs": 1341.3515000000007,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 398.6663000000001,
+      "firstResponseMs": 662.3119,
+      "preHandlerImportMs": 135.8593,
+      "firstBodyReadySinceProcessStartMs": 1197.1637,
+      "importAndFirstResponseMs": 1060.9782,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63655936,
+        "heapTotal": 12660736,
+        "heapUsed": 8151544,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163979264,
+        "heapTotal": 63254528,
+        "heapUsed": 43340416,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "measuredAt": "2026-10-18T18:15:55.767Z",
+      "processElapsedMs": 1371.1382000000012,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 438.9557,
+      "firstResponseMs": 620.8026,
+      "preHandlerImportMs": 148.8442,
+      "firstBodyReadySinceProcessStartMs": 1208.8843,
+      "importAndFirstResponseMs": 1059.7583,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63610880,
+        "heapTotal": 12660736,
+        "heapUsed": 8227352,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163553280,
+        "heapTotal": 63254528,
+        "heapUsed": 43232384,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "measuredAt": "2026-10-18T18:15:58.264Z",
+      "processElapsedMs": 2496.6996,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1421.0436,
+      "firstResponseMs": 776.1022000000003,
+      "preHandlerImportMs": 136.4003,
+      "firstBodyReadySinceProcessStartMs": 2334.289,
+      "importAndFirstResponseMs": 2197.1458000000002,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63930368,
+        "heapTotal": 12398592,
+        "heapUsed": 8193248,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201961472,
+        "heapTotal": 108044288,
+        "heapUsed": 50561608,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "measuredAt": "2026-10-18T18:16:01.125Z",
+      "processElapsedMs": 2860.661100000001,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1679.4046999999998,
+      "firstResponseMs": 870.6528000000001,
+      "preHandlerImportMs": 160.4707,
+      "firstBodyReadySinceProcessStartMs": 2711.6084,
+      "importAndFirstResponseMs": 2550.0575,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 64036864,
+        "heapTotal": 13185024,
+        "heapUsed": 8218464,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187572224,
+        "heapTotal": 106995712,
+        "heapUsed": 54946248,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "measuredAt": "2026-10-18T18:16:02.757Z",
+      "processElapsedMs": 1631.8678,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 480.96399999999994,
+      "firstResponseMs": 843.5400000000001,
+      "preHandlerImportMs": 146.4473,
+      "firstBodyReadySinceProcessStartMs": 1471.3186,
+      "importAndFirstResponseMs": 1324.504,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 65024000,
+        "heapTotal": 12136448,
+        "heapUsed": 8193264,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164061184,
+        "heapTotal": 63516672,
+        "heapUsed": 43219328,
+        "external": 29354625,
+        "arrayBuffers": 11159336
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 5,
+      "measuredAt": "2026-10-18T18:16:04.464Z",
+      "processElapsedMs": 1706.6264999999985,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 488.5212,
+      "firstResponseMs": 846.1171,
+      "preHandlerImportMs": 171.5613,
+      "firstBodyReadySinceProcessStartMs": 1506.5915,
+      "importAndFirstResponseMs": 1334.6383,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63299584,
+        "heapTotal": 12660736,
+        "heapUsed": 8161976,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163725312,
+        "heapTotal": 63254528,
+        "heapUsed": 43339752,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 5,
+      "measuredAt": "2026-10-18T18:16:07.017Z",
+      "processElapsedMs": 2552.924500000001,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1428.7434,
+      "firstResponseMs": 825.5518,
+      "preHandlerImportMs": 147.4042,
+      "firstBodyReadySinceProcessStartMs": 2402.8718,
+      "importAndFirstResponseMs": 2254.2952,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63672320,
+        "heapTotal": 12660736,
+        "heapUsed": 8166904,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202313728,
+        "heapTotal": 108044288,
+        "heapUsed": 58148408,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 6,
+      "measuredAt": "2026-10-18T18:16:09.561Z",
+      "processElapsedMs": 2543.8517999999967,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1387.5882000000001,
+      "firstResponseMs": 852.0953000000002,
+      "preHandlerImportMs": 137.6534,
+      "firstBodyReadySinceProcessStartMs": 2378.4533,
+      "importAndFirstResponseMs": 2239.6835,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63438848,
+        "heapTotal": 12398592,
+        "heapUsed": 8168304,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202186752,
+        "heapTotal": 108044288,
+        "heapUsed": 50761560,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 6,
+      "measuredAt": "2026-10-18T18:16:11.476Z",
+      "processElapsedMs": 1915.3945000000022,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 571.5693,
+      "firstResponseMs": 987.3080000000001,
+      "preHandlerImportMs": 168.4931,
+      "firstBodyReadySinceProcessStartMs": 1727.7815,
+      "importAndFirstResponseMs": 1558.8773,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63848448,
+        "heapTotal": 12398592,
+        "heapUsed": 8170024,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 141164544,
+        "heapTotal": 87109632,
+        "heapUsed": 22982432,
+        "external": 6802305,
+        "arrayBuffers": 2598612
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 7,
+      "measuredAt": "2026-10-18T18:16:13.172Z",
+      "processElapsedMs": 1696.0546000000031,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 545.8847999999999,
+      "firstResponseMs": 820.8528,
+      "preHandlerImportMs": 161.3301,
+      "firstBodyReadySinceProcessStartMs": 1528.4593,
+      "importAndFirstResponseMs": 1366.7376,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63631360,
+        "heapTotal": 12922880,
+        "heapUsed": 8191576,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164077568,
+        "heapTotal": 63516672,
+        "heapUsed": 43250392,
+        "external": 29354025,
+        "arrayBuffers": 11158736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 7,
+      "measuredAt": "2026-10-18T18:16:16.160Z",
+      "processElapsedMs": 2987.919900000001,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1783.9983000000002,
+      "firstResponseMs": 856.1379,
+      "preHandlerImportMs": 155.1852,
+      "firstBodyReadySinceProcessStartMs": 2796.2949,
+      "importAndFirstResponseMs": 2640.1362,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63500288,
+        "heapTotal": 13185024,
+        "heapUsed": 8171448,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202285056,
+        "heapTotal": 108044288,
+        "heapUsed": 50516840,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 8,
+      "measuredAt": "2026-10-18T18:16:18.773Z",
+      "processElapsedMs": 2612.760500000004,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1441.6576,
+      "firstResponseMs": 827.4890999999998,
+      "preHandlerImportMs": 151.472,
+      "firstBodyReadySinceProcessStartMs": 2421.6692,
+      "importAndFirstResponseMs": 2269.1467,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63303680,
+        "heapTotal": 12660736,
+        "heapUsed": 8206200,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202166272,
+        "heapTotal": 108044288,
+        "heapUsed": 50779464,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 8,
+      "measuredAt": "2026-10-18T18:16:20.153Z",
+      "processElapsedMs": 1380.073199999999,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 409.45240000000007,
+      "firstResponseMs": 690.1846999999999,
+      "preHandlerImportMs": 123.4079,
+      "firstBodyReadySinceProcessStartMs": 1223.6352,
+      "importAndFirstResponseMs": 1099.6371,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63959040,
+        "heapTotal": 12398592,
+        "heapUsed": 8173928,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164126720,
+        "heapTotal": 63254528,
+        "heapUsed": 43362072,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 9,
+      "measuredAt": "2026-10-18T18:16:21.579Z",
+      "processElapsedMs": 1425.6685999999972,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 437.18699999999995,
+      "firstResponseMs": 708.2747999999999,
+      "preHandlerImportMs": 141.449,
+      "firstBodyReadySinceProcessStartMs": 1287.3155,
+      "importAndFirstResponseMs": 1145.4617999999998,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63750144,
+        "heapTotal": 12922880,
+        "heapUsed": 8218688,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164114432,
+        "heapTotal": 63254528,
+        "heapUsed": 43408288,
+        "external": 29354625,
+        "arrayBuffers": 11159336
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 9,
+      "measuredAt": "2026-10-18T18:16:24.065Z",
+      "processElapsedMs": 2485.6564,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1413.8987,
+      "firstResponseMs": 797.2175,
+      "preHandlerImportMs": 140.1866,
+      "firstBodyReadySinceProcessStartMs": 2352.0587,
+      "importAndFirstResponseMs": 2211.1162,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63705088,
+        "heapTotal": 12398592,
+        "heapUsed": 8156344,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 209661952,
+        "heapTotal": 106995712,
+        "heapUsed": 43798552,
+        "external": 29337719,
+        "arrayBuffers": 11127316
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 10,
+      "measuredAt": "2026-10-18T18:16:26.589Z",
+      "processElapsedMs": 2519.1549000000014,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1432.0278,
+      "firstResponseMs": 777.0754999999999,
+      "preHandlerImportMs": 151.5932,
+      "firstBodyReadySinceProcessStartMs": 2361.8152,
+      "importAndFirstResponseMs": 2209.1032999999998,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63565824,
+        "heapTotal": 12660736,
+        "heapUsed": 8230400,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202276864,
+        "heapTotal": 108044288,
+        "heapUsed": 58191976,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 10,
+      "measuredAt": "2026-10-18T18:16:28.032Z",
+      "processElapsedMs": 1443.6696999999986,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 437.13870000000003,
+      "firstResponseMs": 712.8788,
+      "preHandlerImportMs": 141.575,
+      "firstBodyReadySinceProcessStartMs": 1292.1132,
+      "importAndFirstResponseMs": 1150.0175,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63426560,
+        "heapTotal": 12922880,
+        "heapUsed": 8261760,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163205120,
+        "heapTotal": 63516672,
+        "heapUsed": 43415544,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 11,
+      "measuredAt": "2026-10-18T18:16:29.399Z",
+      "processElapsedMs": 1366.488099999995,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 406.9526,
+      "firstResponseMs": 640.2361999999999,
+      "preHandlerImportMs": 167.6538,
+      "firstBodyReadySinceProcessStartMs": 1215.1234,
+      "importAndFirstResponseMs": 1047.1888,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63664128,
+        "heapTotal": 11874304,
+        "heapUsed": 8201416,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164270080,
+        "heapTotal": 63516672,
+        "heapUsed": 43404336,
+        "external": 29354625,
+        "arrayBuffers": 11159336
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 11,
+      "measuredAt": "2026-10-18T18:16:31.855Z",
+      "processElapsedMs": 2455.4833999999973,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1440.5487,
+      "firstResponseMs": 742.9725000000001,
+      "preHandlerImportMs": 130.1004,
+      "firstBodyReadySinceProcessStartMs": 2314.808,
+      "importAndFirstResponseMs": 2183.5212,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63873024,
+        "heapTotal": 12136448,
+        "heapUsed": 8154072,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 175271936,
+        "heapTotal": 73179136,
+        "heapUsed": 43999488,
+        "external": 29337719,
+        "arrayBuffers": 11127316
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 12,
+      "measuredAt": "2026-10-18T18:16:34.433Z",
+      "processElapsedMs": 2577.202099999995,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1460.3842,
+      "firstResponseMs": 807.4160999999999,
+      "preHandlerImportMs": 154.9417,
+      "firstBodyReadySinceProcessStartMs": 2423.7702,
+      "importAndFirstResponseMs": 2267.8003,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63541248,
+        "heapTotal": 12136448,
+        "heapUsed": 8223192,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201707520,
+        "heapTotal": 108044288,
+        "heapUsed": 58108880,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 12,
+      "measuredAt": "2026-10-18T18:16:35.944Z",
+      "processElapsedMs": 1510.7795000000042,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 474.2721,
+      "firstResponseMs": 712.2040000000001,
+      "preHandlerImportMs": 180.2111,
+      "firstBodyReadySinceProcessStartMs": 1367.1635,
+      "importAndFirstResponseMs": 1186.4761,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63356928,
+        "heapTotal": 12398592,
+        "heapUsed": 8209424,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164212736,
+        "heapTotal": 62992384,
+        "heapUsed": 43473552,
+        "external": 29354625,
+        "arrayBuffers": 11159336
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 13,
+      "measuredAt": "2026-10-18T18:16:37.414Z",
+      "processElapsedMs": 1470.0649999999878,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 445.1722000000001,
+      "firstResponseMs": 743.2420999999999,
+      "preHandlerImportMs": 138.4363,
+      "firstBodyReadySinceProcessStartMs": 1327.3889,
+      "importAndFirstResponseMs": 1188.4143,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63336448,
+        "heapTotal": 12660736,
+        "heapUsed": 8164088,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163639296,
+        "heapTotal": 63254528,
+        "heapUsed": 43401992,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 13,
+      "measuredAt": "2026-10-18T18:16:39.953Z",
+      "processElapsedMs": 2538.4177999999956,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1370.4024,
+      "firstResponseMs": 821.6678000000002,
+      "preHandlerImportMs": 157.0369,
+      "firstBodyReadySinceProcessStartMs": 2350.1401,
+      "importAndFirstResponseMs": 2192.0702,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63864832,
+        "heapTotal": 12398592,
+        "heapUsed": 8121640,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187158528,
+        "heapTotal": 97558528,
+        "heapUsed": 34476120,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 14,
+      "measuredAt": "2026-10-18T18:16:42.661Z",
+      "processElapsedMs": 2707.8557,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1434.4347,
+      "firstResponseMs": 939.9667000000002,
+      "preHandlerImportMs": 154.4735,
+      "firstBodyReadySinceProcessStartMs": 2529.7307,
+      "importAndFirstResponseMs": 2374.4014,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63811584,
+        "heapTotal": 12660736,
+        "heapUsed": 8161968,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202170368,
+        "heapTotal": 108044288,
+        "heapUsed": 50780992,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 14,
+      "measuredAt": "2026-10-18T18:16:44.221Z",
+      "processElapsedMs": 1559.9712,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 460.9448,
+      "firstResponseMs": 769.237,
+      "preHandlerImportMs": 160.7393,
+      "firstBodyReadySinceProcessStartMs": 1391.2801,
+      "importAndFirstResponseMs": 1230.1817999999998,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63778816,
+        "heapTotal": 12660736,
+        "heapUsed": 8231384,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163655680,
+        "heapTotal": 63254528,
+        "heapUsed": 43482152,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 15,
+      "measuredAt": "2026-10-18T18:16:45.668Z",
+      "processElapsedMs": 1447.6100999999908,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 449.84959999999995,
+      "firstResponseMs": 702.0914,
+      "preHandlerImportMs": 152.6737,
+      "firstBodyReadySinceProcessStartMs": 1304.8838,
+      "importAndFirstResponseMs": 1151.941,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63332352,
+        "heapTotal": 12660736,
+        "heapUsed": 8223648,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164237312,
+        "heapTotal": 63254528,
+        "heapUsed": 43336576,
+        "external": 29355225,
+        "arrayBuffers": 11159936
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 15,
+      "measuredAt": "2026-10-18T18:16:48.278Z",
+      "processElapsedMs": 2609.500899999999,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1476.1897000000001,
+      "firstResponseMs": 808.8095000000003,
+      "preHandlerImportMs": 158.5482,
+      "firstBodyReadySinceProcessStartMs": 2444.6024,
+      "importAndFirstResponseMs": 2284.9992,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63791104,
+        "heapTotal": 12398592,
+        "heapUsed": 8121640,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202227712,
+        "heapTotal": 108044288,
+        "heapUsed": 50695880,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 16,
+      "measuredAt": "2026-10-18T18:16:50.923Z",
+      "processElapsedMs": 2644.9955000000045,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1402.4735,
+      "firstResponseMs": 942.5489,
+      "preHandlerImportMs": 145.2046,
+      "firstBodyReadySinceProcessStartMs": 2491.3406,
+      "importAndFirstResponseMs": 2345.0224,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63533056,
+        "heapTotal": 12922880,
+        "heapUsed": 8216992,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202231808,
+        "heapTotal": 108044288,
+        "heapUsed": 56024200,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 16,
+      "measuredAt": "2026-10-18T18:16:52.635Z",
+      "processElapsedMs": 1712.116200000004,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 485.75389999999993,
+      "firstResponseMs": 916.1359000000001,
+      "preHandlerImportMs": 143.8957,
+      "firstBodyReadySinceProcessStartMs": 1546.1871,
+      "importAndFirstResponseMs": 1401.8898,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63389696,
+        "heapTotal": 12398592,
+        "heapUsed": 8221088,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163098624,
+        "heapTotal": 63516672,
+        "heapUsed": 43202696,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 17,
+      "measuredAt": "2026-10-18T18:16:54.359Z",
+      "processElapsedMs": 1723.2090999999928,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 452.10609999999997,
+      "firstResponseMs": 896.6511,
+      "preHandlerImportMs": 175.5878,
+      "firstBodyReadySinceProcessStartMs": 1524.7725,
+      "importAndFirstResponseMs": 1348.7572,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63299584,
+        "heapTotal": 12398592,
+        "heapUsed": 8201488,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164016128,
+        "heapTotal": 63516672,
+        "heapUsed": 43419200,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 17,
+      "measuredAt": "2026-10-18T18:16:57.005Z",
+      "processElapsedMs": 2646.2563999999984,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1473.9756,
+      "firstResponseMs": 818.7284999999999,
+      "preHandlerImportMs": 159.7125,
+      "firstBodyReadySinceProcessStartMs": 2453.6879,
+      "importAndFirstResponseMs": 2292.7041,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63344640,
+        "heapTotal": 12136448,
+        "heapUsed": 8242528,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202670080,
+        "heapTotal": 108044288,
+        "heapUsed": 57927432,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 18,
+      "measuredAt": "2026-10-18T18:16:59.508Z",
+      "processElapsedMs": 2502.6658000000025,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1428.1938,
+      "firstResponseMs": 766.2203999999999,
+      "preHandlerImportMs": 138.826,
+      "firstBodyReadySinceProcessStartMs": 2334.1706,
+      "importAndFirstResponseMs": 2194.4142,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63434752,
+        "heapTotal": 12398592,
+        "heapUsed": 8225680,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201682944,
+        "heapTotal": 108044288,
+        "heapUsed": 50783232,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 18,
+      "measuredAt": "2026-10-18T18:17:00.943Z",
+      "processElapsedMs": 1435.5186000000103,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 435.34209999999996,
+      "firstResponseMs": 715.6124000000001,
+      "preHandlerImportMs": 133.5483,
+      "firstBodyReadySinceProcessStartMs": 1284.9852,
+      "importAndFirstResponseMs": 1150.9545,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63373312,
+        "heapTotal": 12660736,
+        "heapUsed": 8230640,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164044800,
+        "heapTotal": 63254528,
+        "heapUsed": 43473088,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 19,
+      "measuredAt": "2026-10-18T18:17:02.407Z",
+      "processElapsedMs": 1463.8842000000004,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 435.48170000000005,
+      "firstResponseMs": 720.4402,
+      "preHandlerImportMs": 156.117,
+      "firstBodyReadySinceProcessStartMs": 1312.3868,
+      "importAndFirstResponseMs": 1155.9219,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 64196608,
+        "heapTotal": 12660736,
+        "heapUsed": 8133904,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163958784,
+        "heapTotal": 63778816,
+        "heapUsed": 43419344,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 19,
+      "measuredAt": "2026-10-18T18:17:05.079Z",
+      "processElapsedMs": 2671.6282000000065,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1539.7738,
+      "firstResponseMs": 815.7588999999998,
+      "preHandlerImportMs": 147.8222,
+      "firstBodyReadySinceProcessStartMs": 2505.013,
+      "importAndFirstResponseMs": 2355.5326999999997,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63426560,
+        "heapTotal": 12136448,
+        "heapUsed": 8151448,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202240000,
+        "heapTotal": 108044288,
+        "heapUsed": 50518912,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 20,
+      "measuredAt": "2026-10-18T18:17:07.639Z",
+      "processElapsedMs": 2555.9342000000033,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1484.1543000000001,
+      "firstResponseMs": 776.8544000000002,
+      "preHandlerImportMs": 136.7584,
+      "firstBodyReadySinceProcessStartMs": 2398.5187,
+      "importAndFirstResponseMs": 2261.0087000000003,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63533056,
+        "heapTotal": 12136448,
+        "heapUsed": 8149008,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187547648,
+        "heapTotal": 107257856,
+        "heapUsed": 54141048,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 20,
+      "measuredAt": "2026-10-18T18:17:09.207Z",
+      "processElapsedMs": 1568.0278000000108,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 497.7291,
+      "firstResponseMs": 789.1049,
+      "preHandlerImportMs": 137.8643,
+      "firstBodyReadySinceProcessStartMs": 1425.2482,
+      "importAndFirstResponseMs": 1286.834,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63533056,
+        "heapTotal": 12660736,
+        "heapUsed": 8281176,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163708928,
+        "heapTotal": 62992384,
+        "heapUsed": 43421536,
+        "external": 29354025,
+        "arrayBuffers": 11158736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 21,
+      "measuredAt": "2026-10-18T18:17:10.697Z",
+      "processElapsedMs": 1489.9738999999972,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 416.8491,
+      "firstResponseMs": 736.202,
+      "preHandlerImportMs": 176.5746,
+      "firstBodyReadySinceProcessStartMs": 1330.0382,
+      "importAndFirstResponseMs": 1153.0511000000001,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63602688,
+        "heapTotal": 12398592,
+        "heapUsed": 8216344,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163540992,
+        "heapTotal": 63516672,
+        "heapUsed": 43358104,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 21,
+      "measuredAt": "2026-10-18T18:17:13.161Z",
+      "processElapsedMs": 2464.5935000000027,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1347.6003,
+      "firstResponseMs": 798.7919000000002,
+      "preHandlerImportMs": 136.7558,
+      "firstBodyReadySinceProcessStartMs": 2284.0927,
+      "importAndFirstResponseMs": 2146.3922000000002,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63500288,
+        "heapTotal": 12136448,
+        "heapUsed": 8152168,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 209817600,
+        "heapTotal": 106995712,
+        "heapUsed": 43798872,
+        "external": 29337719,
+        "arrayBuffers": 11127316
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 22,
+      "measuredAt": "2026-10-18T18:17:15.730Z",
+      "processElapsedMs": 2568.721500000014,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1383.3991999999998,
+      "firstResponseMs": 859.0468999999998,
+      "preHandlerImportMs": 138.4914,
+      "firstBodyReadySinceProcessStartMs": 2382.0512,
+      "importAndFirstResponseMs": 2242.4460999999997,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63369216,
+        "heapTotal": 12136448,
+        "heapUsed": 8142776,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201723904,
+        "heapTotal": 108044288,
+        "heapUsed": 58662248,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 22,
+      "measuredAt": "2026-10-18T18:17:17.367Z",
+      "processElapsedMs": 1636.7032999999938,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 496.55129999999997,
+      "firstResponseMs": 799.9614,
+      "preHandlerImportMs": 150.6105,
+      "firstBodyReadySinceProcessStartMs": 1447.5225,
+      "importAndFirstResponseMs": 1296.5127,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63811584,
+        "heapTotal": 12660736,
+        "heapUsed": 8239648,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163598336,
+        "heapTotal": 63516672,
+        "heapUsed": 43403576,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 23,
+      "measuredAt": "2026-10-18T18:17:18.978Z",
+      "processElapsedMs": 1611.1502000000037,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 494.8251,
+      "firstResponseMs": 784.2331,
+      "preHandlerImportMs": 141.9363,
+      "firstBodyReadySinceProcessStartMs": 1421.4456,
+      "importAndFirstResponseMs": 1279.0582,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63729664,
+        "heapTotal": 12660736,
+        "heapUsed": 8315424,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164007936,
+        "heapTotal": 63254528,
+        "heapUsed": 43485760,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 23,
+      "measuredAt": "2026-10-18T18:17:21.535Z",
+      "processElapsedMs": 2557.113799999992,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1468.1544,
+      "firstResponseMs": 753.4816000000001,
+      "preHandlerImportMs": 173.6571,
+      "firstBodyReadySinceProcessStartMs": 2396.4874,
+      "importAndFirstResponseMs": 2221.636,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63217664,
+        "heapTotal": 12136448,
+        "heapUsed": 8138008,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202137600,
+        "heapTotal": 108044288,
+        "heapUsed": 49917904,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 24,
+      "measuredAt": "2026-10-18T18:17:24.773Z",
+      "processElapsedMs": 3237.413799999995,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1920.9895000000001,
+      "firstResponseMs": 909.4929999999999,
+      "preHandlerImportMs": 192.583,
+      "firstBodyReadySinceProcessStartMs": 3024.1171,
+      "importAndFirstResponseMs": 2830.4825,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63696896,
+        "heapTotal": 12398592,
+        "heapUsed": 8134160,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 208683008,
+        "heapTotal": 105684992,
+        "heapUsed": 67574248,
+        "external": 29338375,
+        "arrayBuffers": 11127972
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 24,
+      "measuredAt": "2026-10-18T18:17:26.407Z",
+      "processElapsedMs": 1633.4808000000048,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 523.7105,
+      "firstResponseMs": 797.5585,
+      "preHandlerImportMs": 147.7691,
+      "firstBodyReadySinceProcessStartMs": 1469.5108,
+      "importAndFirstResponseMs": 1321.269,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 64155648,
+        "heapTotal": 12660736,
+        "heapUsed": 8313176,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163385344,
+        "heapTotal": 62992384,
+        "heapUsed": 43462080,
+        "external": 29354025,
+        "arrayBuffers": 11158736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 25,
+      "measuredAt": "2026-10-18T18:17:28.032Z",
+      "processElapsedMs": 1625.1833000000042,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 455.05549999999994,
+      "firstResponseMs": 854.6741999999999,
+      "preHandlerImportMs": 147.4931,
+      "firstBodyReadySinceProcessStartMs": 1457.7883,
+      "importAndFirstResponseMs": 1309.7296999999999,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63389696,
+        "heapTotal": 12660736,
+        "heapUsed": 8243160,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164216832,
+        "heapTotal": 63778816,
+        "heapUsed": 43959776,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 25,
+      "measuredAt": "2026-10-18T18:17:30.498Z",
+      "processElapsedMs": 2466.0541999999987,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1358.4531,
+      "firstResponseMs": 785.3248999999998,
+      "preHandlerImportMs": 151.8964,
+      "firstBodyReadySinceProcessStartMs": 2296.3817,
+      "importAndFirstResponseMs": 2143.778,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63938560,
+        "heapTotal": 12398592,
+        "heapUsed": 8174712,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187621376,
+        "heapTotal": 107257856,
+        "heapUsed": 54850776,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 26,
+      "measuredAt": "2026-10-18T18:17:32.894Z",
+      "processElapsedMs": 2396.5293000000092,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1279.9584,
+      "firstResponseMs": 827.1739,
+      "preHandlerImportMs": 132.8114,
+      "firstBodyReadySinceProcessStartMs": 2240.6943,
+      "importAndFirstResponseMs": 2107.1323,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63598592,
+        "heapTotal": 12660736,
+        "heapUsed": 8220240,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201809920,
+        "heapTotal": 108044288,
+        "heapUsed": 50780352,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 26,
+      "measuredAt": "2026-10-18T18:17:34.460Z",
+      "processElapsedMs": 1565.6117999999988,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 442.1348,
+      "firstResponseMs": 790.5741,
+      "preHandlerImportMs": 137.9712,
+      "firstBodyReadySinceProcessStartMs": 1371.1293,
+      "importAndFirstResponseMs": 1232.7089,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63582208,
+        "heapTotal": 12136448,
+        "heapUsed": 8202048,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163721216,
+        "heapTotal": 63254528,
+        "heapUsed": 43402568,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 27,
+      "measuredAt": "2026-10-18T18:17:36.042Z",
+      "processElapsedMs": 1581.6996999999974,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 487.50210000000004,
+      "firstResponseMs": 759.2521999999999,
+      "preHandlerImportMs": 160.6821,
+      "firstBodyReadySinceProcessStartMs": 1407.6978,
+      "importAndFirstResponseMs": 1246.7543,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63827968,
+        "heapTotal": 12660736,
+        "heapUsed": 8151784,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163520512,
+        "heapTotal": 63516672,
+        "heapUsed": 43473448,
+        "external": 29354425,
+        "arrayBuffers": 11159136
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 27,
+      "measuredAt": "2026-10-18T18:17:38.858Z",
+      "processElapsedMs": 2816.302100000001,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1618.1934999999999,
+      "firstResponseMs": 866.4885999999999,
+      "preHandlerImportMs": 155.3646,
+      "firstBodyReadySinceProcessStartMs": 2640.749,
+      "importAndFirstResponseMs": 2484.6821,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63447040,
+        "heapTotal": 12660736,
+        "heapUsed": 8157448,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202285056,
+        "heapTotal": 108044288,
+        "heapUsed": 58114704,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 28,
+      "measuredAt": "2026-10-18T18:17:41.315Z",
+      "processElapsedMs": 2456.472700000013,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1430.4293,
+      "firstResponseMs": 733.0119,
+      "preHandlerImportMs": 129.2094,
+      "firstBodyReadySinceProcessStartMs": 2293.669,
+      "importAndFirstResponseMs": 2163.4412,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63459328,
+        "heapTotal": 12660736,
+        "heapUsed": 8208392,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202362880,
+        "heapTotal": 108044288,
+        "heapUsed": 50695856,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 28,
+      "measuredAt": "2026-10-18T18:17:42.867Z",
+      "processElapsedMs": 1551.8989000000001,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 424.366,
+      "firstResponseMs": 839.1861,
+      "preHandlerImportMs": 138.3568,
+      "firstBodyReadySinceProcessStartMs": 1402.3125,
+      "importAndFirstResponseMs": 1263.5520999999999,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63713280,
+        "heapTotal": 12660736,
+        "heapUsed": 8167320,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164372480,
+        "heapTotal": 63254528,
+        "heapUsed": 43417000,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 29,
+      "measuredAt": "2026-10-18T18:17:44.435Z",
+      "processElapsedMs": 1568.1805999999924,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 438.59029999999996,
+      "firstResponseMs": 794.195,
+      "preHandlerImportMs": 166.4994,
+      "firstBodyReadySinceProcessStartMs": 1399.5885,
+      "importAndFirstResponseMs": 1232.7853,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63332352,
+        "heapTotal": 12136448,
+        "heapUsed": 8134376,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163057664,
+        "heapTotal": 63516672,
+        "heapUsed": 43411592,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 29,
+      "measuredAt": "2026-10-18T18:17:47.286Z",
+      "processElapsedMs": 2850.894499999995,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1579.8333,
+      "firstResponseMs": 917.1497999999997,
+      "preHandlerImportMs": 157.2512,
+      "firstBodyReadySinceProcessStartMs": 2655.8297,
+      "importAndFirstResponseMs": 2496.9830999999995,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63430656,
+        "heapTotal": 12136448,
+        "heapUsed": 8198424,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187703296,
+        "heapTotal": 107257856,
+        "heapUsed": 70829688,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 30,
+      "measuredAt": "2026-10-18T18:17:50.478Z",
+      "processElapsedMs": 3187.487300000008,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1758.0308,
+      "firstResponseMs": 908.5336000000002,
+      "preHandlerImportMs": 195.5162,
+      "firstBodyReadySinceProcessStartMs": 2863.0934,
+      "importAndFirstResponseMs": 2666.5644,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63438848,
+        "heapTotal": 12136448,
+        "heapUsed": 8197704,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 208412672,
+        "heapTotal": 105684992,
+        "heapUsed": 50863968,
+        "external": 29337775,
+        "arrayBuffers": 11127372
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 30,
+      "measuredAt": "2026-10-18T18:17:52.425Z",
+      "processElapsedMs": 1946.9415000000154,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 560.725,
+      "firstResponseMs": 914.8858999999999,
+      "preHandlerImportMs": 198.1322,
+      "firstBodyReadySinceProcessStartMs": 1674.2069,
+      "importAndFirstResponseMs": 1475.6109,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63397888,
+        "heapTotal": 13185024,
+        "heapUsed": 8213632,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 159137792,
+        "heapTotal": 63516672,
+        "heapUsed": 43342824,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 31,
+      "measuredAt": "2026-10-18T18:17:54.042Z",
+      "processElapsedMs": 1616.9350000000268,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 536.4509,
+      "firstResponseMs": 734.3555999999999,
+      "preHandlerImportMs": 182.8619,
+      "firstBodyReadySinceProcessStartMs": 1454.0774,
+      "importAndFirstResponseMs": 1270.8065,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63770624,
+        "heapTotal": 11874304,
+        "heapUsed": 8208360,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164057088,
+        "heapTotal": 63516672,
+        "heapUsed": 43336776,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 31,
+      "measuredAt": "2026-10-18T18:17:56.668Z",
+      "processElapsedMs": 2626.1271000000124,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1440.6860000000001,
+      "firstResponseMs": 824.5640000000001,
+      "preHandlerImportMs": 179.4398,
+      "firstBodyReadySinceProcessStartMs": 2445.4773,
+      "importAndFirstResponseMs": 2265.25,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63557632,
+        "heapTotal": 12398592,
+        "heapUsed": 8223800,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201961472,
+        "heapTotal": 108044288,
+        "heapUsed": 58224112,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 32,
+      "measuredAt": "2026-10-18T18:17:59.665Z",
+      "processElapsedMs": 2997.2262000000046,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1514.3806000000002,
+      "firstResponseMs": 1142.0053000000003,
+      "preHandlerImportMs": 156.542,
+      "firstBodyReadySinceProcessStartMs": 2813.9675,
+      "importAndFirstResponseMs": 2656.3859,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63463424,
+        "heapTotal": 12136448,
+        "heapUsed": 8168400,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201998336,
+        "heapTotal": 108306432,
+        "heapUsed": 57681568,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 32,
+      "measuredAt": "2026-10-18T18:18:01.469Z",
+      "processElapsedMs": 1803.7685000000056,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 545.7230000000001,
+      "firstResponseMs": 899.6084000000001,
+      "preHandlerImportMs": 153.6668,
+      "firstBodyReadySinceProcessStartMs": 1599.4744,
+      "importAndFirstResponseMs": 1445.3314,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63463424,
+        "heapTotal": 12660736,
+        "heapUsed": 8173248,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 158212096,
+        "heapTotal": 63254528,
+        "heapUsed": 43197072,
+        "external": 29354225,
+        "arrayBuffers": 11158936
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 33,
+      "measuredAt": "2026-10-18T18:18:03.297Z",
+      "processElapsedMs": 1827.5972000000183,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 505.1192,
+      "firstResponseMs": 924.0935,
+      "preHandlerImportMs": 182.6441,
+      "firstBodyReadySinceProcessStartMs": 1612.2908,
+      "importAndFirstResponseMs": 1429.2127,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63770624,
+        "heapTotal": 12660736,
+        "heapUsed": 8223888,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 158162944,
+        "heapTotal": 63254528,
+        "heapUsed": 43491672,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 33,
+      "measuredAt": "2026-10-18T18:18:06.113Z",
+      "processElapsedMs": 2815.5627000000095,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1709.3885,
+      "firstResponseMs": 772.8854000000001,
+      "preHandlerImportMs": 156.3319,
+      "firstBodyReadySinceProcessStartMs": 2639.7107,
+      "importAndFirstResponseMs": 2482.2739,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63385600,
+        "heapTotal": 12660736,
+        "heapUsed": 8175648,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 174985216,
+        "heapTotal": 72654848,
+        "heapUsed": 43939696,
+        "external": 29337719,
+        "arrayBuffers": 11127316
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 34,
+      "measuredAt": "2026-10-18T18:18:08.860Z",
+      "processElapsedMs": 2747.6485000000102,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1505.268,
+      "firstResponseMs": 901.3583000000001,
+      "preHandlerImportMs": 163.879,
+      "firstBodyReadySinceProcessStartMs": 2571.5907,
+      "importAndFirstResponseMs": 2406.6263,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63524864,
+        "heapTotal": 12660736,
+        "heapUsed": 8163656,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 197840896,
+        "heapTotal": 108044288,
+        "heapUsed": 58221720,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 34,
+      "measuredAt": "2026-10-18T18:18:10.393Z",
+      "processElapsedMs": 1532.9536999999837,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 471.10620000000006,
+      "firstResponseMs": 741.9373999999999,
+      "preHandlerImportMs": 159.4277,
+      "firstBodyReadySinceProcessStartMs": 1372.935,
+      "importAndFirstResponseMs": 1213.0436,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63393792,
+        "heapTotal": 12136448,
+        "heapUsed": 8224216,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164294656,
+        "heapTotal": 63254528,
+        "heapUsed": 43417096,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 35,
+      "measuredAt": "2026-10-18T18:18:12.000Z",
+      "processElapsedMs": 1606.9960000000137,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 471.2881,
+      "firstResponseMs": 830.7498999999999,
+      "preHandlerImportMs": 148.2564,
+      "firstBodyReadySinceProcessStartMs": 1450.742,
+      "importAndFirstResponseMs": 1302.038,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63766528,
+        "heapTotal": 12398592,
+        "heapUsed": 8281096,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163794944,
+        "heapTotal": 63254528,
+        "heapUsed": 43340656,
+        "external": 29354025,
+        "arrayBuffers": 11158736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 35,
+      "measuredAt": "2026-10-18T18:18:14.962Z",
+      "processElapsedMs": 2961.428200000024,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1666.3511,
+      "firstResponseMs": 966.5347999999999,
+      "preHandlerImportMs": 173.8826,
+      "firstBodyReadySinceProcessStartMs": 2807.9745,
+      "importAndFirstResponseMs": 2632.8859,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63406080,
+        "heapTotal": 13185024,
+        "heapUsed": 8155776,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 204742656,
+        "heapTotal": 106471424,
+        "heapUsed": 67648376,
+        "external": 29337719,
+        "arrayBuffers": 11127316
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 36,
+      "measuredAt": "2026-10-18T18:18:17.471Z",
+      "processElapsedMs": 2508.524000000005,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1487.6664999999998,
+      "firstResponseMs": 727.3181,
+      "preHandlerImportMs": 144.8737,
+      "firstBodyReadySinceProcessStartMs": 2361.2606,
+      "importAndFirstResponseMs": 2214.9846,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63520768,
+        "heapTotal": 12660736,
+        "heapUsed": 8211976,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202240000,
+        "heapTotal": 108044288,
+        "heapUsed": 58242512,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 36,
+      "measuredAt": "2026-10-18T18:18:18.945Z",
+      "processElapsedMs": 1474.5020999999833,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 429.13750000000005,
+      "firstResponseMs": 780.9444,
+      "preHandlerImportMs": 133.9354,
+      "firstBodyReadySinceProcessStartMs": 1344.4566,
+      "importAndFirstResponseMs": 1210.0819000000001,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63639552,
+        "heapTotal": 12922880,
+        "heapUsed": 8160512,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163876864,
+        "heapTotal": 63254528,
+        "heapUsed": 43341552,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 37,
+      "measuredAt": "2026-10-18T18:18:20.382Z",
+      "processElapsedMs": 1436.464800000016,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 450.6779,
+      "firstResponseMs": 717.0486,
+      "preHandlerImportMs": 128.1604,
+      "firstBodyReadySinceProcessStartMs": 1296.1933,
+      "importAndFirstResponseMs": 1167.7265,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63815680,
+        "heapTotal": 12398592,
+        "heapUsed": 8222328,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164036608,
+        "heapTotal": 63516672,
+        "heapUsed": 43465960,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 37,
+      "measuredAt": "2026-10-18T18:18:22.857Z",
+      "processElapsedMs": 2475.6420999999973,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1390.7522,
+      "firstResponseMs": 797.6256000000001,
+      "preHandlerImportMs": 138.9583,
+      "firstBodyReadySinceProcessStartMs": 2328.5711,
+      "importAndFirstResponseMs": 2188.3778,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63696896,
+        "heapTotal": 12660736,
+        "heapUsed": 8235120,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 185626624,
+        "heapTotal": 106995712,
+        "heapUsed": 58594880,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 38,
+      "measuredAt": "2026-10-18T18:18:25.592Z",
+      "processElapsedMs": 2734.3632999999973,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1567.5644000000002,
+      "firstResponseMs": 832.9325000000001,
+      "preHandlerImportMs": 158.8292,
+      "firstBodyReadySinceProcessStartMs": 2560.3831,
+      "importAndFirstResponseMs": 2400.4969,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63406080,
+        "heapTotal": 12136448,
+        "heapUsed": 8179616,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201842688,
+        "heapTotal": 108044288,
+        "heapUsed": 57827720,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 38,
+      "measuredAt": "2026-10-18T18:18:27.154Z",
+      "processElapsedMs": 1561.594299999997,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 497.1636,
+      "firstResponseMs": 755.8267000000001,
+      "preHandlerImportMs": 149.063,
+      "firstBodyReadySinceProcessStartMs": 1402.5215,
+      "importAndFirstResponseMs": 1252.9903,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63873024,
+        "heapTotal": 12660736,
+        "heapUsed": 8164576,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163831808,
+        "heapTotal": 63778816,
+        "heapUsed": 43467864,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 39,
+      "measuredAt": "2026-10-18T18:18:28.729Z",
+      "processElapsedMs": 1575.4232000000193,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 443.92260000000005,
+      "firstResponseMs": 850.2524999999999,
+      "preHandlerImportMs": 138.315,
+      "firstBodyReadySinceProcessStartMs": 1432.878,
+      "importAndFirstResponseMs": 1294.1751,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63811584,
+        "heapTotal": 12398592,
+        "heapUsed": 8160984,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164036608,
+        "heapTotal": 62992384,
+        "heapUsed": 43204016,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 39,
+      "measuredAt": "2026-10-18T18:18:31.327Z",
+      "processElapsedMs": 2598.226800000004,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1413.735,
+      "firstResponseMs": 884.6578,
+      "preHandlerImportMs": 137.1989,
+      "firstBodyReadySinceProcessStartMs": 2436.5721,
+      "importAndFirstResponseMs": 2298.3927999999996,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63782912,
+        "heapTotal": 12398592,
+        "heapUsed": 8149880,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 174977024,
+        "heapTotal": 73179136,
+        "heapUsed": 43999056,
+        "external": 29337719,
+        "arrayBuffers": 11127316
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 40,
+      "measuredAt": "2026-10-18T18:18:34.061Z",
+      "processElapsedMs": 2730.1907000000065,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1544.1035,
+      "firstResponseMs": 843.2976000000001,
+      "preHandlerImportMs": 172.3054,
+      "firstBodyReadySinceProcessStartMs": 2560.8366,
+      "importAndFirstResponseMs": 2387.4011,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63832064,
+        "heapTotal": 12660736,
+        "heapUsed": 8136328,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187375616,
+        "heapTotal": 106995712,
+        "heapUsed": 54766816,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 40,
+      "measuredAt": "2026-10-18T18:18:35.659Z",
+      "processElapsedMs": 1597.8353999999817,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 455.3927,
+      "firstResponseMs": 824.0379,
+      "preHandlerImportMs": 149.7526,
+      "firstBodyReadySinceProcessStartMs": 1429.4689,
+      "importAndFirstResponseMs": 1279.4306000000001,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63815680,
+        "heapTotal": 12398592,
+        "heapUsed": 8226328,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163966976,
+        "heapTotal": 63254528,
+        "heapUsed": 43484976,
+        "external": 29354025,
+        "arrayBuffers": 11158736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 41,
+      "measuredAt": "2026-10-18T18:18:37.264Z",
+      "processElapsedMs": 1604.3801000000094,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 477.7671,
+      "firstResponseMs": 792.1169,
+      "preHandlerImportMs": 152.3048,
+      "firstBodyReadySinceProcessStartMs": 1422.5174,
+      "importAndFirstResponseMs": 1269.884,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63574016,
+        "heapTotal": 12398592,
+        "heapUsed": 8318088,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164102144,
+        "heapTotal": 63254528,
+        "heapUsed": 43476184,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 41,
+      "measuredAt": "2026-10-18T18:18:40.234Z",
+      "processElapsedMs": 2970.386599999998,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1722.32,
+      "firstResponseMs": 910.8124,
+      "preHandlerImportMs": 160.2292,
+      "firstBodyReadySinceProcessStartMs": 2794.3811,
+      "importAndFirstResponseMs": 2633.1324,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63631360,
+        "heapTotal": 12660736,
+        "heapUsed": 8220008,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 196820992,
+        "heapTotal": 108044288,
+        "heapUsed": 58183656,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 42,
+      "measuredAt": "2026-10-18T18:18:43.082Z",
+      "processElapsedMs": 2847.410499999998,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1589.0578,
+      "firstResponseMs": 859.5893000000001,
+      "preHandlerImportMs": 187.9666,
+      "firstBodyReadySinceProcessStartMs": 2637.7251,
+      "importAndFirstResponseMs": 2448.6471,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63483904,
+        "heapTotal": 12136448,
+        "heapUsed": 8132240,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202055680,
+        "heapTotal": 108044288,
+        "heapUsed": 57284288,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 42,
+      "measuredAt": "2026-10-18T18:18:44.533Z",
+      "processElapsedMs": 1450.9081000000006,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 425.453,
+      "firstResponseMs": 728.9479999999999,
+      "preHandlerImportMs": 138.3681,
+      "firstBodyReadySinceProcessStartMs": 1293.0438,
+      "importAndFirstResponseMs": 1154.4009999999998,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63692800,
+        "heapTotal": 12398592,
+        "heapUsed": 8135632,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163807232,
+        "heapTotal": 62992384,
+        "heapUsed": 43464416,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 43,
+      "measuredAt": "2026-10-18T18:18:45.966Z",
+      "processElapsedMs": 1433.4443000000028,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 452.4936,
+      "firstResponseMs": 674.6125000000001,
+      "preHandlerImportMs": 144.5906,
+      "firstBodyReadySinceProcessStartMs": 1272.105,
+      "importAndFirstResponseMs": 1127.1061,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63848448,
+        "heapTotal": 12922880,
+        "heapUsed": 8220600,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163119104,
+        "heapTotal": 63254528,
+        "heapUsed": 43335440,
+        "external": 29355025,
+        "arrayBuffers": 11159736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 43,
+      "measuredAt": "2026-10-18T18:18:48.408Z",
+      "processElapsedMs": 2441.311799999996,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1417.9288999999999,
+      "firstResponseMs": 730.8096,
+      "preHandlerImportMs": 139.0412,
+      "firstBodyReadySinceProcessStartMs": 2288.462,
+      "importAndFirstResponseMs": 2148.7385,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63827968,
+        "heapTotal": 12136448,
+        "heapUsed": 8196560,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202186752,
+        "heapTotal": 108306432,
+        "heapUsed": 58065240,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 44,
+      "measuredAt": "2026-10-18T18:18:50.832Z",
+      "processElapsedMs": 2424.5308000000077,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1380.7713999999999,
+      "firstResponseMs": 747.5192,
+      "preHandlerImportMs": 141.18,
+      "firstBodyReadySinceProcessStartMs": 2270.2075,
+      "importAndFirstResponseMs": 2128.2906,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63418368,
+        "heapTotal": 12660736,
+        "heapUsed": 8180816,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202084352,
+        "heapTotal": 108044288,
+        "heapUsed": 58353952,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 44,
+      "measuredAt": "2026-10-18T18:18:52.383Z",
+      "processElapsedMs": 1550.6662999999826,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 441.54319999999996,
+      "firstResponseMs": 830.4351999999999,
+      "preHandlerImportMs": 132.6272,
+      "firstBodyReadySinceProcessStartMs": 1404.8934,
+      "importAndFirstResponseMs": 1271.9784,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63926272,
+        "heapTotal": 12398592,
+        "heapUsed": 8187696,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163905536,
+        "heapTotal": 63516672,
+        "heapUsed": 43359960,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 45,
+      "measuredAt": "2026-10-18T18:18:53.877Z",
+      "processElapsedMs": 1493.6696999999986,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 432.8561,
+      "firstResponseMs": 750.9458,
+      "preHandlerImportMs": 139.5269,
+      "firstBodyReadySinceProcessStartMs": 1323.7101,
+      "importAndFirstResponseMs": 1183.8019,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63512576,
+        "heapTotal": 12660736,
+        "heapUsed": 8244056,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163631104,
+        "heapTotal": 63516672,
+        "heapUsed": 43397296,
+        "external": 29354425,
+        "arrayBuffers": 11159136
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 45,
+      "measuredAt": "2026-10-18T18:18:56.516Z",
+      "processElapsedMs": 2639.4208999999973,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1502.6018,
+      "firstResponseMs": 815.6313000000002,
+      "preHandlerImportMs": 147.6133,
+      "firstBodyReadySinceProcessStartMs": 2466.9203,
+      "importAndFirstResponseMs": 2318.2331000000004,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63590400,
+        "heapTotal": 12660736,
+        "heapUsed": 8190952,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 202289152,
+        "heapTotal": 108044288,
+        "heapUsed": 58145384,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 46,
+      "measuredAt": "2026-10-18T18:18:59.156Z",
+      "processElapsedMs": 2639.9087999999756,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1411.8099,
+      "firstResponseMs": 915.9772999999998,
+      "preHandlerImportMs": 133.464,
+      "firstBodyReadySinceProcessStartMs": 2462.5395,
+      "importAndFirstResponseMs": 2327.7871999999998,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 64020480,
+        "heapTotal": 12136448,
+        "heapUsed": 8204008,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 209149952,
+        "heapTotal": 106209280,
+        "heapUsed": 67663968,
+        "external": 29338375,
+        "arrayBuffers": 11127972
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 46,
+      "measuredAt": "2026-10-18T18:19:00.722Z",
+      "processElapsedMs": 1565.4645000000019,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 460.69,
+      "firstResponseMs": 776.9288999999999,
+      "preHandlerImportMs": 164.4491,
+      "firstBodyReadySinceProcessStartMs": 1402.3527,
+      "importAndFirstResponseMs": 1237.6189,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63508480,
+        "heapTotal": 12660736,
+        "heapUsed": 8157024,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163889152,
+        "heapTotal": 63778816,
+        "heapUsed": 43466984,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 47,
+      "measuredAt": "2026-10-18T18:19:02.362Z",
+      "processElapsedMs": 1639.9770000000135,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 485.9912999999999,
+      "firstResponseMs": 823.5160999999999,
+      "preHandlerImportMs": 146.7245,
+      "firstBodyReadySinceProcessStartMs": 1456.5999,
+      "importAndFirstResponseMs": 1309.5074,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63602688,
+        "heapTotal": 12398592,
+        "heapUsed": 8142312,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163827712,
+        "heapTotal": 63254528,
+        "heapUsed": 43439992,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 47,
+      "measuredAt": "2026-10-18T18:19:05.222Z",
+      "processElapsedMs": 2859.957999999984,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1568.8128,
+      "firstResponseMs": 891.5150999999998,
+      "preHandlerImportMs": 164.9692,
+      "firstBodyReadySinceProcessStartMs": 2626.5348,
+      "importAndFirstResponseMs": 2460.3278999999998,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63479808,
+        "heapTotal": 12660736,
+        "heapUsed": 8245016,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201920512,
+        "heapTotal": 107782144,
+        "heapUsed": 58339232,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 48,
+      "measuredAt": "2026-10-18T18:19:07.950Z",
+      "processElapsedMs": 2727.5863000000245,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1568.324,
+      "firstResponseMs": 850.2376000000002,
+      "preHandlerImportMs": 141.1353,
+      "firstBodyReadySinceProcessStartMs": 2561.1179,
+      "importAndFirstResponseMs": 2418.5616,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63856640,
+        "heapTotal": 12398592,
+        "heapUsed": 8185688,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 201998336,
+        "heapTotal": 108044288,
+        "heapUsed": 50761808,
+        "external": 20777451,
+        "arrayBuffers": 2567048
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 48,
+      "measuredAt": "2026-10-18T18:19:09.526Z",
+      "processElapsedMs": 1576.316999999981,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 502.56010000000003,
+      "firstResponseMs": 743.0894999999999,
+      "preHandlerImportMs": 171.0083,
+      "firstBodyReadySinceProcessStartMs": 1417.0528,
+      "importAndFirstResponseMs": 1245.6496,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63651840,
+        "heapTotal": 12136448,
+        "heapUsed": 8214080,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164683776,
+        "heapTotal": 63254528,
+        "heapUsed": 43341296,
+        "external": 29354825,
+        "arrayBuffers": 11159536
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 49,
+      "measuredAt": "2026-10-18T18:19:11.160Z",
+      "processElapsedMs": 1633.967100000009,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 511.3831,
+      "firstResponseMs": 820.2328999999999,
+      "preHandlerImportMs": 154.9591,
+      "firstBodyReadySinceProcessStartMs": 1487.0439,
+      "importAndFirstResponseMs": 1331.616,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 260,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63483904,
+        "heapTotal": 12660736,
+        "heapUsed": 8180448,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 163713024,
+        "heapTotal": 63254528,
+        "heapUsed": 43352224,
+        "external": 29354025,
+        "arrayBuffers": 11158736
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 49,
+      "measuredAt": "2026-10-18T18:19:13.932Z",
+      "processElapsedMs": 2772.0546999999788,
+      "type": "startup-result",
+      "route": "/api/performances?from=2026-10-01&to=2027-01-17",
+      "importMs": 1539.4750999999999,
+      "firstResponseMs": 931.9884999999999,
+      "preHandlerImportMs": 146.4246,
+      "firstBodyReadySinceProcessStartMs": 2619.6805,
+      "importAndFirstResponseMs": 2471.4636,
+      "bytes": 33958,
+      "wireHash": "815c121cf1d8d378a71b73c5650500b041ecb7c5aceefd9f228d2c7cc6dc722a",
+      "semanticHash": "f22fb73b0b2842b02ea3d8c2b1d0c6283753f1c7eeb7d124d8d6abdb1978f366",
+      "metadata": {
+        "snapshotAt": "2026-10-17T02:48:36.917Z"
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63807488,
+        "heapTotal": 12136448,
+        "heapUsed": 8145344,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187498496,
+        "heapTotal": 106995712,
+        "heapUsed": 54953008,
+        "external": 6785855,
+        "arrayBuffers": 2567048
+      }
+    }
+  ]
+}

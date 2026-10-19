@@ -1,0 +1,7 @@
+{
+  "startedAt": "2026-10-18T19:20:41.206Z",
+  "failure": "Error: Lifecycle worker external wall watchdog exceeded 5520000 ms\n    at Timeout.<anonymous> (C:\\workspace\\cultureapi\\scripts\\performance\\poster-runtime.ts:8:39)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)",
+  "workerOutput": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\browser-lifecycle-wave18-60min-01-worker.json",
+  "samples": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\browser-lifecycle-wave18-60min-01.ndjson",
+  "cleanup": []
+}

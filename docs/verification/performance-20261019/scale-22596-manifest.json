@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-18T16:02:45.746Z",
+  "source": {
+    "hash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "rows": 5649
+  },
+  "derived": {
+    "path": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\scale-22596.json",
+    "hash": "a237378f0a4a428eb74df07a3e01227470a2b9153146d5b6ff93d6669e69b5c2",
+    "rows": 22596,
+    "bytes": 34506109
+  },
+  "coordinates": "preserve",
+  "contract": "Synthetic scale corpus: cycles original rows, assigns unique id/sourceId, preserves all other content/timestamps/coverage unless coordinate mode is explicit. Does not overwrite production assets. Preserved coordinates repeat real venue distribution; dense/spread/missing are stress-only and not real-world distribution claims."
+}

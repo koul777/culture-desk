@@ -1,6 +1,6 @@
 # Culture Desk 성능·품질 개선 작업 계획
 
-사용자가 승인한 10시간 작업의 시작은 **2026-10-19 00:22:38 KST**, 종료 시한은 **10:22:38 KST**다. 에이전트 작업 시간을 더해 경과 시간으로 계산하지 않는다. 실제 진행 기록은 `verification/performance-20261019/session.json`에 남긴다. 이 문서는 작업 계획과 중간 상태이며 10시간 완료 보고서가 아니다.
+사용자가 승인한 10시간 작업의 시작은 **2026-10-19 00:22:38 KST**, 종료 시한은 **10:22:38 KST**다. 실행 기록에 긴 공백이 생겼고 시한 이후 재개돼 새 작업을 종료했다. 10시간 연속 작업 완료를 뜻하지 않는다. 실제 결과와 남은 업무는 [인계 기록](PERFORMANCE_HANDOFF_2026-10-19.md), 시간별 기록은 `verification/performance-20261019/session.json`을 따른다. 아래 표는 원래 시간 배분과 시한 내 진행 상태를 보존한다.
 
 ## 담당과 실행 순서
 
@@ -34,6 +34,6 @@
 
 ## 저장·공유 상태
 
-첫 검증 커밋 `b61436ee10364b1fb9e5660cac23e1bd383fb2e4`는 `feat/daily-snapshot-deploy`에 푸시했다. 이후 지도·레이아웃 변경은 추가 검증 후 별도 커밋한다. 사용자가 기존에 만든 영상과 관련 없는 작업 파일은 보존한다. 운영 배포는 수행하지 않는다.
+첫 검증 커밋 `b61436ee`에 이어 지도·레이아웃 변경 `27090b3`, 수집 시간 초과 검사의 준비 예산과 검증 조건을 보강한 `1dfbff6`을 `feat/daily-snapshot-deploy`에 푸시했다. 제품 커밋은 [GitHub Linux 검사](verification/performance-20261019/github-quality-wave18-02.md)에서 타입 검사·빌드·단위 검사 309개·브라우저 검사 16개를 통과했다. 실제 데이터의 브라우저 60분 반복 검사는 동작 시간 16.27분에서 중단됐으며, 이후 소유 프로세스가 남지 않았음을 확인했다. 사용자 영상과 관련 없는 작업 파일은 보존했고 운영 배포는 수행하지 않았다.
 
 현재 대표 검증 기록은 [후보18 통합 검사](verification/performance-20261019/quality-final-wave18-02.md), [지도 팝업 검토](verification/performance-20261019/frontend-popup-review.md), [포커스 경합 수정](verification/performance-20261019/frontend-popup-focus-review.md), [레이아웃 비교](verification/performance-20261019/poster-cls-paired-desktop-20-01.md), [기준 소스 재현 방법](verification/performance-20261019/baseline-reproduction.md)이다. 서로 다른 후보 버전의 측정을 하나의 최종 버전 측정으로 합치지 않는다.

@@ -1,0 +1,157 @@
+{
+  "at": "2026-10-18T17:14:49.226Z",
+  "roots": [
+    "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave4-cleanup",
+    "C:\\workspace\\cultureapi"
+  ],
+  "source": [
+    {
+      "before": "d50e3dc7ef47590d52ea14d1942f8efb919daa47c250b9454a3a4cb16b33bca3",
+      "after": "d50e3dc7ef47590d52ea14d1942f8efb919daa47c250b9454a3a4cb16b33bca3"
+    },
+    {
+      "before": "511c91df80844fe1c82dd1613276ed52d059c9d0997b06e721e1eb4af4508aa7",
+      "after": "511c91df80844fe1c82dd1613276ed52d059c9d0997b06e721e1eb4af4508aa7"
+    }
+  ],
+  "snapshot": {
+    "path": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\scale-22596.json",
+    "hash": "a237378f0a4a428eb74df07a3e01227470a2b9153146d5b6ff93d6669e69b5c2",
+    "rows": 22596
+  },
+  "scope": "Functional comparison of prior pinned Store/map response and current candidate on the same actual-content derived artifact. No latency or memory claim. Positive bookmarks and historical sources are covered separately by Store unit tests.",
+  "results": [
+    {
+      "name": "national",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17"
+      },
+      "priorSelectedRows": 22596,
+      "candidateMaterializedRows": 10001,
+      "returnedRows": 10000,
+      "total": 22596,
+      "sourceCounts": {
+        "kopis": 17484,
+        "culture": 5112
+      },
+      "pendingDetails": 0,
+      "partial": false,
+      "truncated": true,
+      "bytes": 2946281,
+      "wireHash": "a6bf33c37f3627fd87124a0f57ad7bc5d63158c05dccb042b89a31f55165b8ad",
+      "semanticHash": "095629c608a3d5fb102ce90876fc6d6f711526b22770a381eb607d3c1cff9ab6"
+    },
+    {
+      "name": "regional",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "cities": "yeosu,wonju"
+      },
+      "priorSelectedRows": 204,
+      "candidateMaterializedRows": 204,
+      "returnedRows": 204,
+      "total": 204,
+      "sourceCounts": {
+        "kopis": 164,
+        "culture": 40
+      },
+      "pendingDetails": 0,
+      "partial": false,
+      "truncated": false,
+      "bytes": 58537,
+      "wireHash": "927c7ca35b6f601bfe047d4ea57e592a70cb2e37f6348b6290630e7d9850e423",
+      "semanticHash": "bf4a94090aba3e2baddeaf27d92c34d3ad96e03c881f1b520c562674bfcbec09"
+    },
+    {
+      "name": "source",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "source": "culture"
+      },
+      "priorSelectedRows": 5112,
+      "candidateMaterializedRows": 5112,
+      "returnedRows": 5112,
+      "total": 5112,
+      "sourceCounts": {
+        "kopis": 0,
+        "culture": 5112
+      },
+      "pendingDetails": 0,
+      "partial": false,
+      "truncated": false,
+      "bytes": 1496650,
+      "wireHash": "f283ba242527e68ea441f0e117c9a40f6b330954878b0993a81d89919c87fb0e",
+      "semanticHash": "f6fbaa59296f09a0e7b31ab01af0d1cf9655d01c32684c2a2f287f242a403a29"
+    },
+    {
+      "name": "text",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "q": "음악"
+      },
+      "priorSelectedRows": 1760,
+      "candidateMaterializedRows": 1760,
+      "returnedRows": 1760,
+      "total": 1760,
+      "sourceCounts": {
+        "kopis": 1252,
+        "culture": 508
+      },
+      "pendingDetails": 0,
+      "partial": false,
+      "truncated": false,
+      "bytes": 550733,
+      "wireHash": "17dcec6d94040b1cef81635b4e167a777307e3c1cef562cc48718c70b7817128",
+      "semanticHash": "653591bf149f81e9f8b310bea73123fa0269d8ff772f76891409081974531ed8"
+    },
+    {
+      "name": "admission",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "price": "free",
+        "age": "전체"
+      },
+      "priorSelectedRows": 220,
+      "candidateMaterializedRows": 220,
+      "returnedRows": 220,
+      "total": 220,
+      "sourceCounts": {
+        "kopis": 220,
+        "culture": 0
+      },
+      "pendingDetails": 0,
+      "partial": false,
+      "truncated": false,
+      "bytes": 67725,
+      "wireHash": "9eeb69510d67af54273878a951a4b1c1e85bc19ee6b409e2fa0dec40d76e2966",
+      "semanticHash": "621a0bb8c79ab8682a4e8e5f0feb789646d56bd546e16cfc08383bf4d4d38d61"
+    },
+    {
+      "name": "bookmarks-empty",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "bookmarked": "true"
+      },
+      "priorSelectedRows": 0,
+      "candidateMaterializedRows": 0,
+      "returnedRows": 0,
+      "total": 0,
+      "sourceCounts": {
+        "kopis": 0,
+        "culture": 0
+      },
+      "pendingDetails": 0,
+      "partial": false,
+      "truncated": false,
+      "bytes": 173,
+      "wireHash": "83b83735e7ca227815871f4779b9663537ab04b0ad9b439535c10e78795b067e",
+      "semanticHash": "01f68f30fc11a5459323dfe910d538e26af917853c7682f4f5e24c9854d09c58"
+    }
+  ]
+}

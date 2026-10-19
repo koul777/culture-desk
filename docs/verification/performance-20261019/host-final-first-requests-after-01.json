@@ -1,0 +1,575 @@
+{
+  "startedAt": "2026-10-18T18:32:56.848Z",
+  "endedAt": "2026-10-18T18:33:04.515Z",
+  "node": "v24.14.0",
+  "platform": "win32",
+  "cpuModel": "Intel(R) Core(TM) Ultra 7 155H",
+  "logicalCores": 22,
+  "totalMemoryMiB": 32461.57421875,
+  "intervalMs": 1000,
+  "samples": 3,
+  "summary": {
+    "meanCpuBusyFraction": 0.6191166207799718,
+    "maxCpuBusyFraction": 0.6695536617134056,
+    "minFreeMemoryMiB": 1320.80078125
+  },
+  "raw": [
+    {
+      "index": 0,
+      "at": "2026-10-18T18:33:02.459Z",
+      "cpuBusyFraction": 0.5685816006739876,
+      "freeMemoryMiB": 1417.3046875
+    },
+    {
+      "index": 1,
+      "at": "2026-10-18T18:33:03.477Z",
+      "cpuBusyFraction": 0.6192145999525223,
+      "freeMemoryMiB": 1380.9453125
+    },
+    {
+      "index": 2,
+      "at": "2026-10-18T18:33:04.514Z",
+      "cpuBusyFraction": 0.6695536617134056,
+      "freeMemoryMiB": 1320.80078125
+    }
+  ],
+  "processesBefore": [
+    {
+      "image": "msedge.exe",
+      "pid": 21760,
+      "workingSetLabel": "124,888 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 2364,
+      "workingSetLabel": "4,772 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 24476,
+      "workingSetLabel": "33,428 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 21296,
+      "workingSetLabel": "50,520 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 24092,
+      "workingSetLabel": "6,296 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 19788,
+      "workingSetLabel": "19,164 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 21228,
+      "workingSetLabel": "20,032 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 21160,
+      "workingSetLabel": "9,672 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 21108,
+      "workingSetLabel": "1,448 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 484,
+      "workingSetLabel": "1,556 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 10908,
+      "workingSetLabel": "14,020 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 6376,
+      "workingSetLabel": "17,500 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 30644,
+      "workingSetLabel": "7,100 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 30068,
+      "workingSetLabel": "7,112 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 14820,
+      "workingSetLabel": "10,712 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 29684,
+      "workingSetLabel": "119,788 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 29064,
+      "workingSetLabel": "14,280 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 536,
+      "workingSetLabel": "5,260 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 40624,
+      "workingSetLabel": "8,696 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 47384,
+      "workingSetLabel": "6,048 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 30292,
+      "workingSetLabel": "7,996 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 36808,
+      "workingSetLabel": "4,464 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 34008,
+      "workingSetLabel": "588 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 39440,
+      "workingSetLabel": "412 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 37616,
+      "workingSetLabel": "380 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 43240,
+      "workingSetLabel": "360 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 37720,
+      "workingSetLabel": "3,180 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 33804,
+      "workingSetLabel": "416 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 512,
+      "workingSetLabel": "1,124 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 40604,
+      "workingSetLabel": "272 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 20124,
+      "workingSetLabel": "384 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 48324,
+      "workingSetLabel": "448 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 50304,
+      "workingSetLabel": "1,080 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 41876,
+      "workingSetLabel": "1,692 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 46584,
+      "workingSetLabel": "656 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 24356,
+      "workingSetLabel": "636 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 51260,
+      "workingSetLabel": "1,232 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 22540,
+      "workingSetLabel": "924 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 54328,
+      "workingSetLabel": "2,800 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 45924,
+      "workingSetLabel": "2,736 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 20132,
+      "workingSetLabel": "15,696 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 54072,
+      "workingSetLabel": "9,140 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 34992,
+      "workingSetLabel": "10,103,664 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 31588,
+      "workingSetLabel": "18,012 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 44168,
+      "workingSetLabel": "9,240 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 29420,
+      "workingSetLabel": "17,208 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 51912,
+      "workingSetLabel": "9,312 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 57280,
+      "workingSetLabel": "25,644 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 41904,
+      "workingSetLabel": "41,924 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 56512,
+      "workingSetLabel": "84,704 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 9776,
+      "workingSetLabel": "81,996 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 57028,
+      "workingSetLabel": "77,360 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 52388,
+      "workingSetLabel": "48,012 K"
+    }
+  ],
+  "processesAfter": [
+    {
+      "image": "msedge.exe",
+      "pid": 21760,
+      "workingSetLabel": "124,888 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 2364,
+      "workingSetLabel": "4,772 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 24476,
+      "workingSetLabel": "33,428 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 21296,
+      "workingSetLabel": "50,520 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 24092,
+      "workingSetLabel": "6,296 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 19788,
+      "workingSetLabel": "19,164 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 21228,
+      "workingSetLabel": "20,032 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 21160,
+      "workingSetLabel": "9,708 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 21108,
+      "workingSetLabel": "1,448 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 484,
+      "workingSetLabel": "1,556 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 10908,
+      "workingSetLabel": "14,020 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 6376,
+      "workingSetLabel": "17,500 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 30644,
+      "workingSetLabel": "7,100 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 30068,
+      "workingSetLabel": "7,112 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 14820,
+      "workingSetLabel": "10,712 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 29684,
+      "workingSetLabel": "119,788 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 29064,
+      "workingSetLabel": "14,280 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 536,
+      "workingSetLabel": "5,260 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 40624,
+      "workingSetLabel": "8,696 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 47384,
+      "workingSetLabel": "6,048 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 30292,
+      "workingSetLabel": "7,996 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 36808,
+      "workingSetLabel": "4,464 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 34008,
+      "workingSetLabel": "588 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 39440,
+      "workingSetLabel": "412 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 37616,
+      "workingSetLabel": "380 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 43240,
+      "workingSetLabel": "360 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 37720,
+      "workingSetLabel": "3,180 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 33804,
+      "workingSetLabel": "416 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 512,
+      "workingSetLabel": "1,124 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 40604,
+      "workingSetLabel": "272 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 20124,
+      "workingSetLabel": "384 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 48324,
+      "workingSetLabel": "448 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 50304,
+      "workingSetLabel": "1,080 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 41876,
+      "workingSetLabel": "1,692 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 46584,
+      "workingSetLabel": "656 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 24356,
+      "workingSetLabel": "636 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 51260,
+      "workingSetLabel": "1,232 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 22540,
+      "workingSetLabel": "924 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 54328,
+      "workingSetLabel": "2,800 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 45924,
+      "workingSetLabel": "2,736 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 20132,
+      "workingSetLabel": "15,696 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 54072,
+      "workingSetLabel": "9,140 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 34992,
+      "workingSetLabel": "10,108,508 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 31588,
+      "workingSetLabel": "18,012 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 44168,
+      "workingSetLabel": "9,240 K"
+    },
+    {
+      "image": "msedge.exe",
+      "pid": 29420,
+      "workingSetLabel": "17,208 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 51912,
+      "workingSetLabel": "9,312 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 57280,
+      "workingSetLabel": "25,644 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 41904,
+      "workingSetLabel": "41,964 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 56512,
+      "workingSetLabel": "84,704 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 57028,
+      "workingSetLabel": "77,360 K"
+    },
+    {
+      "image": "node.exe",
+      "pid": 52388,
+      "workingSetLabel": "49,788 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 43816,
+      "workingSetLabel": "75,344 K"
+    },
+    {
+      "image": "powershell.exe",
+      "pid": 48608,
+      "workingSetLabel": "61,884 K"
+    }
+  ]
+}

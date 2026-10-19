@@ -1,0 +1,3987 @@
+{
+  "startedAt": "2026-10-18T17:03:24.685Z",
+  "endedAt": "2026-10-18T17:33:42.772Z",
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave4-cleanup",
+  "node": "v24.14.0",
+  "scope": "Sequential exports in one process with natural GC and scheduled gaps. Post-export/settled observations are not peak-memory measurements. First and latest output buffers are deliberately retained and accounted. Final workbook parsing/database integrity verification are outside the memory series. Diagnostic latency only.",
+  "requestedMinutes": 30,
+  "intervalMs": 20000,
+  "activeMs": 1800582.1417000003,
+  "pausedMs": 0,
+  "wallMs": 1818085.6611000001,
+  "cycles": 90,
+  "success": true,
+  "snapshot": {
+    "hash": "a237378f0a4a428eb74df07a3e01227470a2b9153146d5b6ff93d6669e69b5c2",
+    "rows": 22596
+  },
+  "source": {
+    "before": {
+      "hash": "d50e3dc7ef47590d52ea14d1942f8efb919daa47c250b9454a3a4cb16b33bca3",
+      "directories": [
+        "server",
+        "shared"
+      ],
+      "files": {
+        "server/app.ts": "81a71810d125f582aba104a422b7146b8a07a242b6fd19a67b9d593e49cc3d93",
+        "server/cloud/auth.ts": "2b0a566ce5c76b418b515be271d7f96719a1be7a8359999dd8b820002e325ae3",
+        "server/cloud/collection.ts": "7ac9de893c77b08d8708917682e3bebc64c54f79b129e144bc1ad7cd96f9804d",
+        "server/cloud/handler.ts": "6c5786d46e979e5349e734293ca90c45a9568bfb772b9b4fb99769b22ed41f04",
+        "server/cloud/published-response-cache.ts": "ea3107903dcf03afe189c5da0aedfd6243d31a98e4806ba878ff3701fb451403",
+        "server/cloud/readonly-fallback.ts": "2481cb49cee703ba325b7e2f0f8b9722f5f7822d5ee23b7eef0c8d6f2e9be80b",
+        "server/cloud/refresh-jobs.ts": "6d0ff281fa958cb749cd9204fa8eb409286bc0499ded963d283e45220f8ae83b",
+        "server/cloud/refresh-schedule.ts": "4a558bdb19547066641d33a9a05807d0a817d3a7af1ea5656a0c34d8306e3162",
+        "server/cloud/snapshot-errors.ts": "50b8a7377ba0f9d823cbc72e0ac509ff191c37375a8a180a52d741f5316d1ff6",
+        "server/cloud/snapshot.ts": "fea259a652723b0e922bd2dbfd2cfa6b76056a5da0783a6c17dcd6c136d10cfb",
+        "server/collection-history.ts": "d222fad9c14f41c1cb275e9dd0ff2e02aff75f988039ef49dd95b9e6ba0874e9",
+        "server/config.ts": "ab87fe7b041868d82edad518b9c8865d0652872cf88811c3d8506df46c0bc0b5",
+        "server/dates.ts": "f2e51013c31479ba6db15ca2c3ad80a635f83fe8948d816791586c85760df75d",
+        "server/export-stream.ts": "4bd08de55f96fe1f4c6e50dccdf547dc280c2e72144c74a220cc7fb3ace58dd9",
+        "server/export.ts": "be4efc09c4b4529c0e51f4db39e83244640780bfd3a6b6cd936f09248b09e00c",
+        "server/import-collection.ts": "3decc3b85ba43579a87bd506b9905996afd415f3dabaf55ebac4f2e97b1b113b",
+        "server/index.ts": "e3a2113bda799ecc1132d5c0f4c0b097dec4ee84ae358b954f3655c9fbed64cd",
+        "server/lock.ts": "fe7d1cfc72b2775bd7d20c2ec65ccb18d874671c9f6b75944d73087299cce620",
+        "server/maintenance.ts": "fd522a1c228e5b0e576fdbee813f66a50756b28dba4f455613cf2bf1b5792c83",
+        "server/map-query.ts": "334cbf187df98bbf390a35f5fe89d896c11525506771a4c60a9a0175855db518",
+        "server/map-response.ts": "7cf9e32b04710a5be4929f980a1bf7e376766fd72b98b95423639e70374d3331",
+        "server/providers/cities.ts": "4d5c7ad7c07c95397ec32c1ebbeef979e9ff4562524e2121e337d6e78b41186c",
+        "server/providers/classify.ts": "724c71e37696e878e13ccc038f608854dfb501d0604fa14e83c514c0b2fb8a60",
+        "server/providers/coordinates.ts": "59db06e7eae45c1676b575d08bc8d4760de290acd195e15298d2836e5700d961",
+        "server/providers/culture.ts": "1cec1b3995abdbff3814eefa8d34990eb124290547d63b353b270249e95496f1",
+        "server/providers/dates.ts": "92a9bf318fa4017b25cb174f03cec3943ce0c698d588df5528885c445af1928b",
+        "server/providers/errors.ts": "1e77ab45313c14e4d363988d4c056f84a850abf6e2861cf6ac96f019f4735d50",
+        "server/providers/fetch.ts": "94b7cf280d355a60a6c4ab909ad6defdc254ed1f139388e8c2f5be7181d27842",
+        "server/providers/index.ts": "7d7d960afa97a1720e60ce33f5c79f7837696dc1613b859b971877aed781558e",
+        "server/providers/kopis.ts": "9fb1f4bce2668d93385d1879995b778915a13edb9c94258dde1489c4e9d812c4",
+        "server/providers/national-cities.ts": "7f9b37662e14f52d2084e4a45ae635eeadd2c960853c0245035acceceb2c7777",
+        "server/providers/text.ts": "b59603e712de1a95bb3d60dee517cf8ec4cce2f3185c958967f238ddfc5e0928",
+        "server/providers/validate.ts": "7b00ddb104a9a6920b3ba7e5bfd9075ebf4438c2fe1d6f97bbf42426ef78fa35",
+        "server/providers/xml.ts": "923851b88a0bb7e14d67a119ecf3f5756fdb2d90a74f289a6c3e27a4b0435dc5",
+        "server/search-performance.ts": "265c4bc0f45b274736f997bf53378dda4456532a03435e192ca846864af30c20",
+        "server/store.ts": "294d804946770cf9d28a04cf4fbe33308f18b436e366f03778485279b22742bb",
+        "server/venue-building-seed.json": "80ff2b768fb97476d51589b23191d0325282920b09fa4f23671c0d26fd690a9a",
+        "server/venue-buildings.ts": "0886b405227b6bf68ca829fb420ff322950f2f91d092d7822d800d1c0399584b",
+        "server/venue-info.ts": "72a803af68b81bd2b0aab70f218e40acb69b15434b3f856020bb4abf8827702a",
+        "server/vworld.ts": "4906a13c3e6e217711ec4c510e73211353acb9e09d956a3ce6506f5d52f8ccdb",
+        "server/worker.ts": "f46db9b49da76d7b4ca59cb2a9aa11ab6d5fb65b7fcd7638de9a1069591f373d",
+        "shared/types.ts": "b30d934981d6dbda2fd7b97e7eeaee4f120c880bdc492784cb9a29cb3d20fa58",
+        "package.json": "10787a1fada00c0c8586ab44dce4534ec8c8d3d005a1af7e4b8444bdbdccc7a8",
+        "package-lock.json": "d6fa4c0f597f365b7733460e048568f7a1e02b5c04f1a6b728ae52505bbaaf83",
+        "vite.config.ts": "7b4eb14417f429d0ebbadfea374f6810a7615fd6becd0c84fd3e53da353f8b6f"
+      }
+    },
+    "afterHash": "d50e3dc7ef47590d52ea14d1942f8efb919daa47c250b9454a3a4cb16b33bca3"
+  },
+  "harness": {
+    "before": {
+      "files": {
+        "export-soak.ts": "51c9a01125d53f7b7fef91156f67b2191f67d4b6c134c7badd07f52694c725bd",
+        "workbook.ts": "291a23710bda897b85f9828bab19b5eb6f72d63e13f4d3e1630b77aecb19d1cf",
+        "common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+        "child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+        "child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f"
+      },
+      "hash": "4150ba8f3c03f31f3189a9c6c62b0c936613bdaf5c3881b87b0ef4721deaf2e9"
+    },
+    "afterHash": "4150ba8f3c03f31f3189a9c6c62b0c936613bdaf5c3881b87b0ef4721deaf2e9"
+  },
+  "semantics": {
+    "first": "a90ab903cc038a6c451cd52430074c3b16db26cc3be4de710a1566b78991dca9",
+    "last": "a90ab903cc038a6c451cd52430074c3b16db26cc3be4de710a1566b78991dca9",
+    "rows": 22596
+  },
+  "raw": [
+    {
+      "at": "2026-10-18T17:03:24.687Z",
+      "state": "hydrated",
+      "wallMs": 0.11360000000013315,
+      "activeMs": 0,
+      "pausedMs": 0,
+      "cycles": 0,
+      "outputBytes": 0,
+      "retainedVerificationBuffers": 0,
+      "memory": {
+        "rss": 358486016,
+        "heapTotal": 311365632,
+        "heapUsed": 204546008,
+        "external": 2679825,
+        "arrayBuffers": 27107
+      },
+      "activeResources": [
+        "CloseReq",
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:03:28.225Z",
+      "state": "export-complete",
+      "wallMs": 3538.8824999999997,
+      "activeMs": 0,
+      "pausedMs": 0,
+      "cycles": 1,
+      "exportMs": 3537.0445,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 2067449,
+      "memory": {
+        "rss": 558096384,
+        "heapTotal": 333099008,
+        "heapUsed": 116348768,
+        "external": 29664551,
+        "arrayBuffers": 26153155
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:03:44.695Z",
+      "state": "settled",
+      "wallMs": 20008.2366,
+      "activeMs": 20006.5073,
+      "pausedMs": 0,
+      "cycles": 1,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 2067449,
+      "memory": {
+        "rss": 195383296,
+        "heapTotal": 70217728,
+        "heapUsed": 67899656,
+        "external": 5650496,
+        "arrayBuffers": 2139100
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:03:49.789Z",
+      "state": "export-complete",
+      "wallMs": 25102.826200000003,
+      "activeMs": 20006.5073,
+      "pausedMs": 0,
+      "cycles": 2,
+      "exportMs": 5092.373299999999,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 504553472,
+        "heapTotal": 344727552,
+        "heapUsed": 262111168,
+        "external": 32256291,
+        "arrayBuffers": 28744895
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:04:04.704Z",
+      "state": "settled",
+      "wallMs": 40017.025499999996,
+      "activeMs": 40013.1245,
+      "pausedMs": 0,
+      "cycles": 2,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 504512512,
+        "heapTotal": 344727552,
+        "heapUsed": 262137000,
+        "external": 32256691,
+        "arrayBuffers": 28745295
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:04:09.599Z",
+      "state": "export-complete",
+      "wallMs": 44912.1218,
+      "activeMs": 40013.1245,
+      "pausedMs": 0,
+      "cycles": 3,
+      "exportMs": 4892.954600000005,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 495300608,
+        "heapTotal": 321032192,
+        "heapUsed": 99605144,
+        "external": 33679489,
+        "arrayBuffers": 30173168
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:04:24.709Z",
+      "state": "settled",
+      "wallMs": 60022.029299999995,
+      "activeMs": 60016.1176,
+      "pausedMs": 0,
+      "cycles": 3,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 495284224,
+        "heapTotal": 321032192,
+        "heapUsed": 99384536,
+        "external": 33688081,
+        "arrayBuffers": 30181760
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:04:29.485Z",
+      "state": "export-complete",
+      "wallMs": 64798.19869999999,
+      "activeMs": 60016.1176,
+      "pausedMs": 0,
+      "cycles": 4,
+      "exportMs": 4774.087999999996,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 535756800,
+        "heapTotal": 370278400,
+        "heapUsed": 245152480,
+        "external": 34087536,
+        "arrayBuffers": 30582969
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:04:44.722Z",
+      "state": "settled",
+      "wallMs": 80035.3138,
+      "activeMs": 80027.35870000001,
+      "pausedMs": 0,
+      "cycles": 4,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 535756800,
+        "heapTotal": 370278400,
+        "heapUsed": 245189944,
+        "external": 34087936,
+        "arrayBuffers": 30583369
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:04:49.188Z",
+      "state": "export-complete",
+      "wallMs": 84501.8702,
+      "activeMs": 80027.35870000001,
+      "pausedMs": 0,
+      "cycles": 5,
+      "exportMs": 4464.188299999994,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 565215232,
+        "heapTotal": 340881408,
+        "heapUsed": 189691304,
+        "external": 33677937,
+        "arrayBuffers": 30173370
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:05:04.725Z",
+      "state": "settled",
+      "wallMs": 100038.5797,
+      "activeMs": 100028.3319,
+      "pausedMs": 0,
+      "cycles": 5,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 565215232,
+        "heapTotal": 340881408,
+        "heapUsed": 189859832,
+        "external": 33686529,
+        "arrayBuffers": 30181962
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:05:09.507Z",
+      "state": "export-complete",
+      "wallMs": 104820.1967,
+      "activeMs": 100028.3319,
+      "pausedMs": 0,
+      "cycles": 6,
+      "exportMs": 4779.635899999994,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588804096,
+        "heapTotal": 344805376,
+        "heapUsed": 230275088,
+        "external": 33890926,
+        "arrayBuffers": 30386359
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:05:24.731Z",
+      "state": "settled",
+      "wallMs": 120044.8768,
+      "activeMs": 120032.7397,
+      "pausedMs": 0,
+      "cycles": 6,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588804096,
+        "heapTotal": 344805376,
+        "heapUsed": 230308672,
+        "external": 33891326,
+        "arrayBuffers": 30386759
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:05:29.165Z",
+      "state": "export-complete",
+      "wallMs": 124478.7712,
+      "activeMs": 120032.7397,
+      "pausedMs": 0,
+      "cycles": 7,
+      "exportMs": 4431.794499999989,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 589238272,
+        "heapTotal": 344543232,
+        "heapUsed": 229804176,
+        "external": 33882732,
+        "arrayBuffers": 30378165
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:05:44.742Z",
+      "state": "settled",
+      "wallMs": 140056.2729,
+      "activeMs": 140042.13559999998,
+      "pausedMs": 0,
+      "cycles": 7,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 589250560,
+        "heapTotal": 344543232,
+        "heapUsed": 229829784,
+        "external": 33891324,
+        "arrayBuffers": 30386757
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:05:49.311Z",
+      "state": "export-complete",
+      "wallMs": 144625.25579999998,
+      "activeMs": 140042.13559999998,
+      "pausedMs": 0,
+      "cycles": 8,
+      "exportMs": 4567.052599999995,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 588050432,
+        "heapTotal": 344805376,
+        "heapUsed": 229728656,
+        "external": 33882735,
+        "arrayBuffers": 30378168
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:06:04.753Z",
+      "state": "settled",
+      "wallMs": 160067.3516,
+      "activeMs": 160051.34189999997,
+      "pausedMs": 0,
+      "cycles": 8,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 588050432,
+        "heapTotal": 344805376,
+        "heapUsed": 229753440,
+        "external": 33883135,
+        "arrayBuffers": 30378568
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:06:09.223Z",
+      "state": "export-complete",
+      "wallMs": 164536.8832,
+      "activeMs": 160051.34189999997,
+      "pausedMs": 0,
+      "cycles": 9,
+      "exportMs": 4467.349800000025,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 587198464,
+        "heapTotal": 344281088,
+        "heapUsed": 229599144,
+        "external": 33874542,
+        "arrayBuffers": 30369975
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:06:24.758Z",
+      "state": "settled",
+      "wallMs": 180071.599,
+      "activeMs": 180053.4881,
+      "pausedMs": 0,
+      "cycles": 9,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 587210752,
+        "heapTotal": 344281088,
+        "heapUsed": 229644616,
+        "external": 33883134,
+        "arrayBuffers": 30378567
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:06:29.190Z",
+      "state": "export-complete",
+      "wallMs": 184504.2041,
+      "activeMs": 180053.4881,
+      "pausedMs": 0,
+      "cycles": 10,
+      "exportMs": 4431.248600000021,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 589074432,
+        "heapTotal": 345591808,
+        "heapUsed": 229612888,
+        "external": 33882732,
+        "arrayBuffers": 30378165
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:06:44.767Z",
+      "state": "settled",
+      "wallMs": 200080.51559999998,
+      "activeMs": 200061.0987,
+      "pausedMs": 0,
+      "cycles": 10,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 589074432,
+        "heapTotal": 345591808,
+        "heapUsed": 229638464,
+        "external": 33883132,
+        "arrayBuffers": 30378565
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:06:49.490Z",
+      "state": "export-complete",
+      "wallMs": 204803.8038,
+      "activeMs": 200061.0987,
+      "pausedMs": 0,
+      "cycles": 11,
+      "exportMs": 4721.595299999986,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 587911168,
+        "heapTotal": 347164672,
+        "heapUsed": 229192928,
+        "external": 33874539,
+        "arrayBuffers": 30369972
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:07:04.783Z",
+      "state": "settled",
+      "wallMs": 220096.7378,
+      "activeMs": 220075.67359999998,
+      "pausedMs": 0,
+      "cycles": 11,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588001280,
+        "heapTotal": 347164672,
+        "heapUsed": 229233112,
+        "external": 33883131,
+        "arrayBuffers": 30378564
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:07:09.481Z",
+      "state": "export-complete",
+      "wallMs": 224794.8594,
+      "activeMs": 220075.67359999998,
+      "pausedMs": 0,
+      "cycles": 12,
+      "exportMs": 4695.975999999995,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588214272,
+        "heapTotal": 347688960,
+        "heapUsed": 228796264,
+        "external": 33882732,
+        "arrayBuffers": 30378165
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:07:24.798Z",
+      "state": "settled",
+      "wallMs": 240111.2044,
+      "activeMs": 240088.0519,
+      "pausedMs": 0,
+      "cycles": 12,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588214272,
+        "heapTotal": 347688960,
+        "heapUsed": 228821096,
+        "external": 33883132,
+        "arrayBuffers": 30378565
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:07:29.509Z",
+      "state": "export-complete",
+      "wallMs": 244822.5834,
+      "activeMs": 240088.0519,
+      "pausedMs": 0,
+      "cycles": 13,
+      "exportMs": 4709.406499999983,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 586637312,
+        "heapTotal": 347951104,
+        "heapUsed": 228271720,
+        "external": 33874538,
+        "arrayBuffers": 30369971
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:07:44.800Z",
+      "state": "settled",
+      "wallMs": 260113.2184,
+      "activeMs": 260088.16809999998,
+      "pausedMs": 0,
+      "cycles": 13,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 586649600,
+        "heapTotal": 347951104,
+        "heapUsed": 228300568,
+        "external": 33883130,
+        "arrayBuffers": 30378563
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:07:49.320Z",
+      "state": "export-complete",
+      "wallMs": 264633.7293,
+      "activeMs": 260088.16809999998,
+      "pausedMs": 0,
+      "cycles": 14,
+      "exportMs": 4518.557900000014,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 587161600,
+        "heapTotal": 344805376,
+        "heapUsed": 228797296,
+        "external": 33882732,
+        "arrayBuffers": 30378165
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:08:04.808Z",
+      "state": "settled",
+      "wallMs": 280122.0139,
+      "activeMs": 280095.147,
+      "pausedMs": 0,
+      "cycles": 14,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 587161600,
+        "heapTotal": 344805376,
+        "heapUsed": 228822128,
+        "external": 33883132,
+        "arrayBuffers": 30378565
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:08:09.470Z",
+      "state": "export-complete",
+      "wallMs": 284783.5455,
+      "activeMs": 280095.147,
+      "pausedMs": 0,
+      "cycles": 15,
+      "exportMs": 4659.29230000003,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588292096,
+        "heapTotal": 352931840,
+        "heapUsed": 228818904,
+        "external": 33874541,
+        "arrayBuffers": 30369974
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:08:24.811Z",
+      "state": "settled",
+      "wallMs": 300125.2487,
+      "activeMs": 300096.20910000004,
+      "pausedMs": 0,
+      "cycles": 15,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588447744,
+        "heapTotal": 352931840,
+        "heapUsed": 228844088,
+        "external": 33883133,
+        "arrayBuffers": 30378566
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:08:29.768Z",
+      "state": "export-complete",
+      "wallMs": 305081.572,
+      "activeMs": 300096.20910000004,
+      "pausedMs": 0,
+      "cycles": 16,
+      "exportMs": 4953.721799999999,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588075008,
+        "heapTotal": 350048256,
+        "heapUsed": 228815680,
+        "external": 33882732,
+        "arrayBuffers": 30378165
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:08:44.815Z",
+      "state": "settled",
+      "wallMs": 320129.2123,
+      "activeMs": 320097.6461,
+      "pausedMs": 0,
+      "cycles": 16,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 588075008,
+        "heapTotal": 350048256,
+        "heapUsed": 228840512,
+        "external": 33883132,
+        "arrayBuffers": 30378565
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:08:49.648Z",
+      "state": "export-complete",
+      "wallMs": 324961.6608,
+      "activeMs": 320097.6461,
+      "pausedMs": 0,
+      "cycles": 17,
+      "exportMs": 4830.301399999997,
+      "outputBytes": 2067452,
+      "retainedVerificationBuffers": 4134901,
+      "memory": {
+        "rss": 630272000,
+        "heapTotal": 443121664,
+        "heapUsed": 308403816,
+        "external": 55650697,
+        "arrayBuffers": 52146130
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:09:04.820Z",
+      "state": "settled",
+      "wallMs": 340133.6866,
+      "activeMs": 340100.0274,
+      "pausedMs": 0,
+      "cycles": 17,
+      "outputBytes": 2067452,
+      "retainedVerificationBuffers": 4134901,
+      "memory": {
+        "rss": 630280192,
+        "heapTotal": 443121664,
+        "heapUsed": 308421248,
+        "external": 55659289,
+        "arrayBuffers": 52154722
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:09:09.620Z",
+      "state": "export-complete",
+      "wallMs": 344934.0224,
+      "activeMs": 340100.0274,
+      "pausedMs": 0,
+      "cycles": 18,
+      "exportMs": 4798.527300000016,
+      "outputBytes": 2067452,
+      "retainedVerificationBuffers": 4134901,
+      "memory": {
+        "rss": 599195648,
+        "heapTotal": 321294336,
+        "heapUsed": 99511488,
+        "external": 33677738,
+        "arrayBuffers": 30173171
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:09:24.829Z",
+      "state": "settled",
+      "wallMs": 360142.4212,
+      "activeMs": 360107.0308,
+      "pausedMs": 0,
+      "cycles": 18,
+      "outputBytes": 2067452,
+      "retainedVerificationBuffers": 4134901,
+      "memory": {
+        "rss": 599195648,
+        "heapTotal": 321294336,
+        "heapUsed": 99536408,
+        "external": 33678138,
+        "arrayBuffers": 30173571
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:09:29.721Z",
+      "state": "export-complete",
+      "wallMs": 365034.2102,
+      "activeMs": 360107.0308,
+      "pausedMs": 0,
+      "cycles": 19,
+      "exportMs": 4889.953900000022,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 626814976,
+        "heapTotal": 377618432,
+        "heapUsed": 243092688,
+        "external": 34054765,
+        "arrayBuffers": 30550198
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:09:44.842Z",
+      "state": "settled",
+      "wallMs": 380155.9396,
+      "activeMs": 380118.7996,
+      "pausedMs": 0,
+      "cycles": 19,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 627642368,
+        "heapTotal": 377618432,
+        "heapUsed": 243146472,
+        "external": 34063357,
+        "arrayBuffers": 30558790
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:09:49.755Z",
+      "state": "export-complete",
+      "wallMs": 385069.0924,
+      "activeMs": 380118.7996,
+      "pausedMs": 0,
+      "cycles": 20,
+      "exportMs": 4910.9151999999885,
+      "outputBytes": 2067453,
+      "retainedVerificationBuffers": 4134902,
+      "memory": {
+        "rss": 605536256,
+        "heapTotal": 345600000,
+        "heapUsed": 190105096,
+        "external": 33677935,
+        "arrayBuffers": 30173368
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:10:04.857Z",
+      "state": "settled",
+      "wallMs": 400170.8704,
+      "activeMs": 400131.55100000004,
+      "pausedMs": 0,
+      "cycles": 20,
+      "outputBytes": 2067453,
+      "retainedVerificationBuffers": 4134902,
+      "memory": {
+        "rss": 605536256,
+        "heapTotal": 345600000,
+        "heapUsed": 190130616,
+        "external": 33678335,
+        "arrayBuffers": 30173768
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:10:10.071Z",
+      "state": "export-complete",
+      "wallMs": 405385.1106,
+      "activeMs": 400131.55100000004,
+      "pausedMs": 0,
+      "cycles": 21,
+      "exportMs": 5212.463799999969,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 653971456,
+        "heapTotal": 465829888,
+        "heapUsed": 377622944,
+        "external": 56240522,
+        "arrayBuffers": 52735955
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:10:24.862Z",
+      "state": "settled",
+      "wallMs": 420176.0079,
+      "activeMs": 420134.987,
+      "pausedMs": 0,
+      "cycles": 21,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 653971456,
+        "heapTotal": 465829888,
+        "heapUsed": 377640408,
+        "external": 56249114,
+        "arrayBuffers": 52744547
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:10:30.359Z",
+      "state": "export-complete",
+      "wallMs": 425673.1792,
+      "activeMs": 420134.987,
+      "pausedMs": 0,
+      "cycles": 22,
+      "exportMs": 5494.853600000031,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 629338112,
+        "heapTotal": 343883776,
+        "heapUsed": 188536944,
+        "external": 34554476,
+        "arrayBuffers": 31049909
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:10:44.876Z",
+      "state": "settled",
+      "wallMs": 440190.2564,
+      "activeMs": 440147.05110000004,
+      "pausedMs": 0,
+      "cycles": 22,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 629338112,
+        "heapTotal": 343883776,
+        "heapUsed": 188562416,
+        "external": 34554876,
+        "arrayBuffers": 31050309
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:10:50.501Z",
+      "state": "export-complete",
+      "wallMs": 445814.3677,
+      "activeMs": 440147.05110000004,
+      "pausedMs": 0,
+      "cycles": 23,
+      "exportMs": 5621.96040000004,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 628195328,
+        "heapTotal": 346640384,
+        "heapUsed": 225845536,
+        "external": 33817198,
+        "arrayBuffers": 30312631
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:11:04.887Z",
+      "state": "settled",
+      "wallMs": 460201.1956,
+      "activeMs": 460155.90690000006,
+      "pausedMs": 0,
+      "cycles": 23,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 628195328,
+        "heapTotal": 346640384,
+        "heapUsed": 225870752,
+        "external": 33825790,
+        "arrayBuffers": 30321223
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:11:11.230Z",
+      "state": "export-complete",
+      "wallMs": 466543.9845,
+      "activeMs": 460155.90690000006,
+      "pausedMs": 0,
+      "cycles": 24,
+      "exportMs": 6340.9070000000065,
+      "outputBytes": 2067452,
+      "retainedVerificationBuffers": 4134901,
+      "memory": {
+        "rss": 633044992,
+        "heapTotal": 444956672,
+        "heapUsed": 309955992,
+        "external": 55658893,
+        "arrayBuffers": 52154326
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:11:24.903Z",
+      "state": "settled",
+      "wallMs": 480217.0986,
+      "activeMs": 480169.9847000001,
+      "pausedMs": 0,
+      "cycles": 24,
+      "outputBytes": 2067452,
+      "retainedVerificationBuffers": 4134901,
+      "memory": {
+        "rss": 633044992,
+        "heapTotal": 444956672,
+        "heapUsed": 309973072,
+        "external": 55659293,
+        "arrayBuffers": 52154726
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:11:30.089Z",
+      "state": "export-complete",
+      "wallMs": 485403.08759999997,
+      "activeMs": 480169.9847000001,
+      "pausedMs": 0,
+      "cycles": 25,
+      "exportMs": 5183.9902,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 706662400,
+        "heapTotal": 422481920,
+        "heapUsed": 99437472,
+        "external": 18227840,
+        "arrayBuffers": 14723273
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:11:44.908Z",
+      "state": "settled",
+      "wallMs": 500221.5892,
+      "activeMs": 500172.5346000001,
+      "pausedMs": 0,
+      "cycles": 25,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 706662400,
+        "heapTotal": 422481920,
+        "heapUsed": 99462808,
+        "external": 18236432,
+        "arrayBuffers": 14731865
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:11:50.272Z",
+      "state": "export-complete",
+      "wallMs": 505586.0918,
+      "activeMs": 500172.5346000001,
+      "pausedMs": 0,
+      "cycles": 26,
+      "exportMs": 5362.589500000002,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 744534016,
+        "heapTotal": 362676224,
+        "heapUsed": 242990880,
+        "external": 34062957,
+        "arrayBuffers": 30558390
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:12:04.915Z",
+      "state": "settled",
+      "wallMs": 520228.5568,
+      "activeMs": 520177.66020000004,
+      "pausedMs": 0,
+      "cycles": 26,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 744534016,
+        "heapTotal": 362676224,
+        "heapUsed": 243015712,
+        "external": 34063357,
+        "arrayBuffers": 30558790
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:12:10.201Z",
+      "state": "export-complete",
+      "wallMs": 525514.5678000001,
+      "activeMs": 520177.66020000004,
+      "pausedMs": 0,
+      "cycles": 27,
+      "exportMs": 5283.616800000018,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 723025920,
+        "heapTotal": 357134336,
+        "heapUsed": 189624936,
+        "external": 33677934,
+        "arrayBuffers": 30173367
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:12:24.928Z",
+      "state": "settled",
+      "wallMs": 540241.9047000001,
+      "activeMs": 540188.7106999999,
+      "pausedMs": 0,
+      "cycles": 27,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 723025920,
+        "heapTotal": 357134336,
+        "heapUsed": 189650184,
+        "external": 33686526,
+        "arrayBuffers": 30181959
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:12:29.980Z",
+      "state": "export-complete",
+      "wallMs": 545293.8917,
+      "activeMs": 540188.7106999999,
+      "pausedMs": 0,
+      "cycles": 28,
+      "exportMs": 5049.303599999985,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 773419008,
+        "heapTotal": 465305600,
+        "heapUsed": 376591704,
+        "external": 56248715,
+        "arrayBuffers": 52744148
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:12:44.935Z",
+      "state": "settled",
+      "wallMs": 560248.6170000001,
+      "activeMs": 560192.8157999999,
+      "pausedMs": 0,
+      "cycles": 28,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 773419008,
+        "heapTotal": 465305600,
+        "heapUsed": 376608784,
+        "external": 56249115,
+        "arrayBuffers": 52744548
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:12:50.350Z",
+      "state": "export-complete",
+      "wallMs": 565664.0382000001,
+      "activeMs": 560192.8157999999,
+      "pausedMs": 0,
+      "cycles": 29,
+      "exportMs": 5413.266299999901,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 744976384,
+        "heapTotal": 343957504,
+        "heapUsed": 161561984,
+        "external": 34202223,
+        "arrayBuffers": 30697656
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:13:04.942Z",
+      "state": "settled",
+      "wallMs": 580256.5148,
+      "activeMs": 580198.6380999999,
+      "pausedMs": 0,
+      "cycles": 29,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 744976384,
+        "heapTotal": 343957504,
+        "heapUsed": 161587232,
+        "external": 34210815,
+        "arrayBuffers": 30706248
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:13:10.120Z",
+      "state": "export-complete",
+      "wallMs": 585434.3447,
+      "activeMs": 580198.6380999999,
+      "pausedMs": 0,
+      "cycles": 30,
+      "exportMs": 5176.021799999988,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 745672704,
+        "heapTotal": 346161152,
+        "heapUsed": 253766272,
+        "external": 34218605,
+        "arrayBuffers": 30714038
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:13:24.947Z",
+      "state": "settled",
+      "wallMs": 600261.0297000001,
+      "activeMs": 600201.4088999998,
+      "pausedMs": 0,
+      "cycles": 30,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 745713664,
+        "heapTotal": 346161152,
+        "heapUsed": 253791104,
+        "external": 34219005,
+        "arrayBuffers": 30714438
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:13:30.048Z",
+      "state": "export-complete",
+      "wallMs": 605361.8817,
+      "activeMs": 600201.4088999998,
+      "pausedMs": 0,
+      "cycles": 31,
+      "exportMs": 5098.4981999999145,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 747065344,
+        "heapTotal": 345980928,
+        "heapUsed": 214526752,
+        "external": 33677934,
+        "arrayBuffers": 30173367
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:13:44.952Z",
+      "state": "settled",
+      "wallMs": 620265.9617000001,
+      "activeMs": 620204.0431999997,
+      "pausedMs": 0,
+      "cycles": 31,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 747065344,
+        "heapTotal": 345980928,
+        "heapUsed": 214551968,
+        "external": 33686526,
+        "arrayBuffers": 30181959
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:13:50.174Z",
+      "state": "export-complete",
+      "wallMs": 625487.6891000001,
+      "activeMs": 620204.0431999997,
+      "pausedMs": 0,
+      "cycles": 32,
+      "exportMs": 5218.9518999999855,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 774082560,
+        "heapTotal": 465829888,
+        "heapUsed": 380141336,
+        "external": 56297868,
+        "arrayBuffers": 52793301
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:14:04.960Z",
+      "state": "settled",
+      "wallMs": 640273.8559000001,
+      "activeMs": 640209.2222999998,
+      "pausedMs": 0,
+      "cycles": 32,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 774082560,
+        "heapTotal": 465829888,
+        "heapUsed": 380158448,
+        "external": 56298268,
+        "arrayBuffers": 52793701
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:14:10.045Z",
+      "state": "export-complete",
+      "wallMs": 645358.6983,
+      "activeMs": 640209.2222999998,
+      "pausedMs": 0,
+      "cycles": 33,
+      "exportMs": 5083.103600000031,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 746795008,
+        "heapTotal": 344145920,
+        "heapUsed": 187345736,
+        "external": 34538096,
+        "arrayBuffers": 31033529
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:14:24.969Z",
+      "state": "settled",
+      "wallMs": 660283.0839000001,
+      "activeMs": 660216.7945999998,
+      "pausedMs": 0,
+      "cycles": 33,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 746795008,
+        "heapTotal": 344145920,
+        "heapUsed": 187370952,
+        "external": 34546688,
+        "arrayBuffers": 31042121
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:14:30.141Z",
+      "state": "export-complete",
+      "wallMs": 665455.1741000001,
+      "activeMs": 660216.7945999998,
+      "pausedMs": 0,
+      "cycles": 34,
+      "exportMs": 5169.66810000001,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 746631168,
+        "heapTotal": 346243072,
+        "heapUsed": 222901296,
+        "external": 33792621,
+        "arrayBuffers": 30288054
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:14:44.978Z",
+      "state": "settled",
+      "wallMs": 680292.2754,
+      "activeMs": 680223.6547999998,
+      "pausedMs": 0,
+      "cycles": 34,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 746590208,
+        "heapTotal": 346243072,
+        "heapUsed": 222926144,
+        "external": 33793021,
+        "arrayBuffers": 30288454
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:14:50.052Z",
+      "state": "export-complete",
+      "wallMs": 685365.5379000001,
+      "activeMs": 680223.6547999998,
+      "pausedMs": 0,
+      "cycles": 35,
+      "exportMs": 5071.223099999945,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 751915008,
+        "heapTotal": 444559360,
+        "heapUsed": 309363504,
+        "external": 55650698,
+        "arrayBuffers": 52146131
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:15:04.983Z",
+      "state": "settled",
+      "wallMs": 700297.165,
+      "activeMs": 700226.5710999998,
+      "pausedMs": 0,
+      "cycles": 35,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 751915008,
+        "heapTotal": 444559360,
+        "heapUsed": 309381000,
+        "external": 55659290,
+        "arrayBuffers": 52154723
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:15:10.132Z",
+      "state": "export-complete",
+      "wallMs": 705445.7756,
+      "activeMs": 700226.5710999998,
+      "pausedMs": 0,
+      "cycles": 36,
+      "exportMs": 5146.802099999972,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 708710400,
+        "heapTotal": 415404032,
+        "heapUsed": 99373808,
+        "external": 18227838,
+        "arrayBuffers": 14723271
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:15:24.993Z",
+      "state": "settled",
+      "wallMs": 720307.202,
+      "activeMs": 720234.8794999998,
+      "pausedMs": 0,
+      "cycles": 36,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 708710400,
+        "heapTotal": 415404032,
+        "heapUsed": 99398760,
+        "external": 18228238,
+        "arrayBuffers": 14723671
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:15:30.937Z",
+      "state": "export-complete",
+      "wallMs": 726250.2781000001,
+      "activeMs": 720234.8794999998,
+      "pausedMs": 0,
+      "cycles": 37,
+      "exportMs": 5940.748000000021,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 743305216,
+        "heapTotal": 366608384,
+        "heapUsed": 241658328,
+        "external": 34030193,
+        "arrayBuffers": 30525626
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:15:44.996Z",
+      "state": "settled",
+      "wallMs": 740309.581,
+      "activeMs": 740235.0225999998,
+      "pausedMs": 0,
+      "cycles": 37,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 743305216,
+        "heapTotal": 366608384,
+        "heapUsed": 241683576,
+        "external": 34038785,
+        "arrayBuffers": 30534218
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:15:49.888Z",
+      "state": "export-complete",
+      "wallMs": 745202.0866,
+      "activeMs": 740235.0225999998,
+      "pausedMs": 0,
+      "cycles": 38,
+      "exportMs": 4889.710400000098,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 770691072,
+        "heapTotal": 465907712,
+        "heapUsed": 340155400,
+        "external": 55749007,
+        "arrayBuffers": 52244440
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:16:05.012Z",
+      "state": "settled",
+      "wallMs": 760325.5909000001,
+      "activeMs": 760248.3307999999,
+      "pausedMs": 0,
+      "cycles": 38,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 770691072,
+        "heapTotal": 465907712,
+        "heapUsed": 340172480,
+        "external": 55749407,
+        "arrayBuffers": 52244840
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:16:09.998Z",
+      "state": "export-complete",
+      "wallMs": 765311.9090000001,
+      "activeMs": 760248.3307999999,
+      "pausedMs": 0,
+      "cycles": 39,
+      "exportMs": 4983.131300000008,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 701624320,
+        "heapTotal": 436113408,
+        "heapUsed": 99282960,
+        "external": 14656127,
+        "arrayBuffers": 11151560
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:16:25.015Z",
+      "state": "settled",
+      "wallMs": 780328.8071000001,
+      "activeMs": 780248.4380999999,
+      "pausedMs": 0,
+      "cycles": 39,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 701624320,
+        "heapTotal": 436113408,
+        "heapUsed": 99308312,
+        "external": 14664719,
+        "arrayBuffers": 11160152
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:16:30.339Z",
+      "state": "export-complete",
+      "wallMs": 785653.5799,
+      "activeMs": 780248.4380999999,
+      "pausedMs": 0,
+      "cycles": 40,
+      "exportMs": 5321.743800000055,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 743948288,
+        "heapTotal": 365297664,
+        "heapUsed": 242103160,
+        "external": 34038383,
+        "arrayBuffers": 30533816
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:16:45.021Z",
+      "state": "settled",
+      "wallMs": 800335.0542,
+      "activeMs": 800252.6124999999,
+      "pausedMs": 0,
+      "cycles": 40,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 743948288,
+        "heapTotal": 365297664,
+        "heapUsed": 242127992,
+        "external": 34038783,
+        "arrayBuffers": 30534216
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:16:50.097Z",
+      "state": "export-complete",
+      "wallMs": 805411.4954,
+      "activeMs": 800252.6124999999,
+      "pausedMs": 0,
+      "cycles": 41,
+      "exportMs": 5074.714600000065,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 770600960,
+        "heapTotal": 465383424,
+        "heapUsed": 341113440,
+        "external": 55740812,
+        "arrayBuffers": 52236245
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:17:05.023Z",
+      "state": "settled",
+      "wallMs": 820337.2277,
+      "activeMs": 820253.1427,
+      "pausedMs": 0,
+      "cycles": 41,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 770600960,
+        "heapTotal": 465383424,
+        "heapUsed": 341130904,
+        "external": 55749404,
+        "arrayBuffers": 52244837
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:17:10.345Z",
+      "state": "export-complete",
+      "wallMs": 825658.8868000001,
+      "activeMs": 820253.1427,
+      "pausedMs": 0,
+      "cycles": 42,
+      "exportMs": 5319.767300000065,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 701358080,
+        "heapTotal": 433229824,
+        "heapUsed": 99558392,
+        "external": 14656123,
+        "arrayBuffers": 11151556
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:17:25.029Z",
+      "state": "settled",
+      "wallMs": 840343.0204,
+      "activeMs": 840257.1319,
+      "pausedMs": 0,
+      "cycles": 42,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 701358080,
+        "heapTotal": 433229824,
+        "heapUsed": 99583512,
+        "external": 14656523,
+        "arrayBuffers": 11151956
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:17:33.293Z",
+      "state": "export-complete",
+      "wallMs": 848606.8588,
+      "activeMs": 840257.1319,
+      "pausedMs": 0,
+      "cycles": 43,
+      "exportMs": 8256.312600000063,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 743739392,
+        "heapTotal": 364511232,
+        "heapUsed": 243116512,
+        "external": 34062957,
+        "arrayBuffers": 30558390
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:17:45.041Z",
+      "state": "settled",
+      "wallMs": 860354.6718,
+      "activeMs": 860261.3008000001,
+      "pausedMs": 0,
+      "cycles": 43,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 743669760,
+        "heapTotal": 364511232,
+        "heapUsed": 243141696,
+        "external": 34071549,
+        "arrayBuffers": 30566982
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:17:54.246Z",
+      "state": "export-complete",
+      "wallMs": 869560.2561,
+      "activeMs": 860261.3008000001,
+      "pausedMs": 0,
+      "cycles": 44,
+      "exportMs": 9200.954900000012,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 770314240,
+        "heapTotal": 465121280,
+        "heapUsed": 341820768,
+        "external": 55773578,
+        "arrayBuffers": 52269011
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:18:05.050Z",
+      "state": "settled",
+      "wallMs": 880364.1630000001,
+      "activeMs": 880266.2254000001,
+      "pausedMs": 0,
+      "cycles": 44,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 770314240,
+        "heapTotal": 465121280,
+        "heapUsed": 341837848,
+        "external": 55773978,
+        "arrayBuffers": 52269411
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:18:10.124Z",
+      "state": "export-complete",
+      "wallMs": 885437.8096,
+      "activeMs": 880266.2254000001,
+      "pausedMs": 0,
+      "cycles": 45,
+      "exportMs": 5071.7652000000235,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 701112320,
+        "heapTotal": 434016256,
+        "heapUsed": 99735744,
+        "external": 14656126,
+        "arrayBuffers": 11151559
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:18:25.058Z",
+      "state": "settled",
+      "wallMs": 900372.3094,
+      "activeMs": 900272.5771000001,
+      "pausedMs": 0,
+      "cycles": 45,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 701542400,
+        "heapTotal": 434016256,
+        "heapUsed": 99771344,
+        "external": 14664718,
+        "arrayBuffers": 11160151
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:18:31.420Z",
+      "state": "export-complete",
+      "wallMs": 906733.528,
+      "activeMs": 900272.5771000001,
+      "pausedMs": 0,
+      "cycles": 46,
+      "exportMs": 6356.074100000085,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 741670912,
+        "heapTotal": 367394816,
+        "heapUsed": 240822536,
+        "external": 34013807,
+        "arrayBuffers": 30509240
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:18:45.064Z",
+      "state": "settled",
+      "wallMs": 920377.6237000001,
+      "activeMs": 920272.7625000002,
+      "pausedMs": 0,
+      "cycles": 46,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 741670912,
+        "heapTotal": 367394816,
+        "heapUsed": 240852248,
+        "external": 34014207,
+        "arrayBuffers": 30509640
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:18:49.657Z",
+      "state": "export-complete",
+      "wallMs": 924971.0724000001,
+      "activeMs": 920272.7625000002,
+      "pausedMs": 0,
+      "cycles": 47,
+      "exportMs": 4591.54429999995,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 768950272,
+        "heapTotal": 465907712,
+        "heapUsed": 339354224,
+        "external": 55847309,
+        "arrayBuffers": 52342742
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:19:05.070Z",
+      "state": "settled",
+      "wallMs": 940383.4296,
+      "activeMs": 940276.7496000002,
+      "pausedMs": 0,
+      "cycles": 47,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 768950272,
+        "heapTotal": 465907712,
+        "heapUsed": 339371704,
+        "external": 55855901,
+        "arrayBuffers": 52351334
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:19:10.593Z",
+      "state": "export-complete",
+      "wallMs": 945906.6803,
+      "activeMs": 940276.7496000002,
+      "pausedMs": 0,
+      "cycles": 48,
+      "exportMs": 5519.587199999951,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 744415232,
+        "heapTotal": 437161984,
+        "heapUsed": 99827088,
+        "external": 16409215,
+        "arrayBuffers": 12904648
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:19:25.075Z",
+      "state": "settled",
+      "wallMs": 960389.2523,
+      "activeMs": 960278.9832000001,
+      "pausedMs": 0,
+      "cycles": 48,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 744415232,
+        "heapTotal": 437161984,
+        "heapUsed": 99852040,
+        "external": 16409615,
+        "arrayBuffers": 12905048
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:19:30.309Z",
+      "state": "export-complete",
+      "wallMs": 965623.6544,
+      "activeMs": 960278.9832000001,
+      "pausedMs": 0,
+      "cycles": 49,
+      "exportMs": 5232.161899999948,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 759074816,
+        "heapTotal": 363462656,
+        "heapUsed": 242226552,
+        "external": 34046573,
+        "arrayBuffers": 30542006
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:19:45.087Z",
+      "state": "settled",
+      "wallMs": 980401.1692,
+      "activeMs": 980288.7145000001,
+      "pausedMs": 0,
+      "cycles": 49,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 759074816,
+        "heapTotal": 363462656,
+        "heapUsed": 242251768,
+        "external": 34055165,
+        "arrayBuffers": 30550598
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:19:50.038Z",
+      "state": "export-complete",
+      "wallMs": 985352.5468,
+      "activeMs": 980288.7145000001,
+      "pausedMs": 0,
+      "cycles": 50,
+      "exportMs": 4949.304600000032,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 737382400,
+        "heapTotal": 366571520,
+        "heapUsed": 190151648,
+        "external": 33677933,
+        "arrayBuffers": 30173366
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:20:05.092Z",
+      "state": "settled",
+      "wallMs": 1000406.1028000001,
+      "activeMs": 1000291.6217000001,
+      "pausedMs": 0,
+      "cycles": 50,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 737382400,
+        "heapTotal": 366571520,
+        "heapUsed": 190176504,
+        "external": 33678333,
+        "arrayBuffers": 30173766
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:20:09.812Z",
+      "state": "export-complete",
+      "wallMs": 1005126.5090000001,
+      "activeMs": 1000291.6217000001,
+      "pausedMs": 0,
+      "cycles": 51,
+      "exportMs": 4718.2179999999935,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 770637824,
+        "heapTotal": 466092032,
+        "heapUsed": 377122152,
+        "external": 56371594,
+        "arrayBuffers": 52867027
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:20:25.097Z",
+      "state": "settled",
+      "wallMs": 1020410.42,
+      "activeMs": 1020293.8050000002,
+      "pausedMs": 0,
+      "cycles": 51,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 770637824,
+        "heapTotal": 466092032,
+        "heapUsed": 377139648,
+        "external": 56380186,
+        "arrayBuffers": 52875619
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:20:30.409Z",
+      "state": "export-complete",
+      "wallMs": 1025722.8182000001,
+      "activeMs": 1020293.8050000002,
+      "pausedMs": 0,
+      "cycles": 52,
+      "exportMs": 5310.409199999995,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 755802112,
+        "heapTotal": 343433216,
+        "heapUsed": 151788640,
+        "external": 34103919,
+        "arrayBuffers": 30599352
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:20:45.107Z",
+      "state": "settled",
+      "wallMs": 1040420.4635000001,
+      "activeMs": 1040301.9174000002,
+      "pausedMs": 0,
+      "cycles": 52,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 755802112,
+        "heapTotal": 343433216,
+        "heapUsed": 151813504,
+        "external": 34104319,
+        "arrayBuffers": 30599752
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:20:50.384Z",
+      "state": "export-complete",
+      "wallMs": 1045697.3677000001,
+      "activeMs": 1040301.9174000002,
+      "pausedMs": 0,
+      "cycles": 53,
+      "exportMs": 5274.614599999972,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 757723136,
+        "heapTotal": 346824704,
+        "heapUsed": 243433192,
+        "external": 34046573,
+        "arrayBuffers": 30542006
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:21:05.115Z",
+      "state": "settled",
+      "wallMs": 1060429.0436,
+      "activeMs": 1060308.1075000002,
+      "pausedMs": 0,
+      "cycles": 53,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 757723136,
+        "heapTotal": 346824704,
+        "heapUsed": 243458440,
+        "external": 34055165,
+        "arrayBuffers": 30550598
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:21:10.271Z",
+      "state": "export-complete",
+      "wallMs": 1065584.7817000002,
+      "activeMs": 1060308.1075000002,
+      "pausedMs": 0,
+      "cycles": 54,
+      "exportMs": 5153.8305000001565,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 721350656,
+        "heapTotal": 325152768,
+        "heapUsed": 190101616,
+        "external": 33677934,
+        "arrayBuffers": 30173367
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:21:25.123Z",
+      "state": "settled",
+      "wallMs": 1080436.6358,
+      "activeMs": 1080313.8707000003,
+      "pausedMs": 0,
+      "cycles": 54,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 721350656,
+        "heapTotal": 325152768,
+        "heapUsed": 190126480,
+        "external": 33678334,
+        "arrayBuffers": 30173767
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:21:30.189Z",
+      "state": "export-complete",
+      "wallMs": 1085502.3411,
+      "activeMs": 1080313.8707000003,
+      "pausedMs": 0,
+      "cycles": 55,
+      "exportMs": 5063.563400000101,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 771670016,
+        "heapTotal": 466092032,
+        "heapUsed": 376597328,
+        "external": 56363403,
+        "arrayBuffers": 52858836
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:21:45.137Z",
+      "state": "settled",
+      "wallMs": 1100450.6538,
+      "activeMs": 1100325.8653000004,
+      "pausedMs": 0,
+      "cycles": 55,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 771670016,
+        "heapTotal": 466092032,
+        "heapUsed": 376614792,
+        "external": 56371995,
+        "arrayBuffers": 52867428
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:21:50.330Z",
+      "state": "export-complete",
+      "wallMs": 1105643.3873,
+      "activeMs": 1100325.8653000004,
+      "pausedMs": 0,
+      "cycles": 56,
+      "exportMs": 5190.452799999854,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 756797440,
+        "heapTotal": 343621632,
+        "heapUsed": 189090568,
+        "external": 34554479,
+        "arrayBuffers": 31049912
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:05.153Z",
+      "state": "settled",
+      "wallMs": 1120466.6674000002,
+      "activeMs": 1120339.6737000004,
+      "pausedMs": 0,
+      "cycles": 56,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 756797440,
+        "heapTotal": 343621632,
+        "heapUsed": 189115400,
+        "external": 34554879,
+        "arrayBuffers": 31050312
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:10.582Z",
+      "state": "export-complete",
+      "wallMs": 1125895.7851,
+      "activeMs": 1120339.6737000004,
+      "pausedMs": 0,
+      "cycles": 57,
+      "exportMs": 5427.034999999916,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 758185984,
+        "heapTotal": 346116096,
+        "heapUsed": 226416776,
+        "external": 33825389,
+        "arrayBuffers": 30320822
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:25.161Z",
+      "state": "settled",
+      "wallMs": 1140474.7519,
+      "activeMs": 1140345.7078000004,
+      "pausedMs": 0,
+      "cycles": 57,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 758185984,
+        "heapTotal": 346116096,
+        "heapUsed": 226441992,
+        "external": 33833981,
+        "arrayBuffers": 30329414
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:30.192Z",
+      "state": "export-complete",
+      "wallMs": 1145505.4319,
+      "activeMs": 1140345.7078000004,
+      "pausedMs": 0,
+      "cycles": 58,
+      "exportMs": 5028.155899999896,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 758202368,
+        "heapTotal": 345329664,
+        "heapUsed": 228932736,
+        "external": 33882734,
+        "arrayBuffers": 30378167
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:45.165Z",
+      "state": "settled",
+      "wallMs": 1160479.0408,
+      "activeMs": 1160347.5367000003,
+      "pausedMs": 0,
+      "cycles": 58,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 758202368,
+        "heapTotal": 345329664,
+        "heapUsed": 228957568,
+        "external": 33883134,
+        "arrayBuffers": 30378567
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:50.602Z",
+      "state": "export-complete",
+      "wallMs": 1165915.3999,
+      "activeMs": 1160347.5367000003,
+      "pausedMs": 0,
+      "cycles": 59,
+      "exportMs": 5433.72210000013,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 758210560,
+        "heapTotal": 345329664,
+        "heapUsed": 228938224,
+        "external": 33874540,
+        "arrayBuffers": 30369973
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:23:05.172Z",
+      "state": "settled",
+      "wallMs": 1180485.8153000001,
+      "activeMs": 1180351.7652000003,
+      "pausedMs": 0,
+      "cycles": 59,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 758210560,
+        "heapTotal": 345329664,
+        "heapUsed": 228963440,
+        "external": 33883132,
+        "arrayBuffers": 30378565
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:23:09.982Z",
+      "state": "export-complete",
+      "wallMs": 1185296.1431,
+      "activeMs": 1180351.7652000003,
+      "pausedMs": 0,
+      "cycles": 60,
+      "exportMs": 4808.104599999962,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 757174272,
+        "heapTotal": 345329664,
+        "heapUsed": 228943504,
+        "external": 33882734,
+        "arrayBuffers": 30378167
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:23:25.179Z",
+      "state": "settled",
+      "wallMs": 1200492.2915,
+      "activeMs": 1200356.0963000003,
+      "pausedMs": 0,
+      "cycles": 60,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 757174272,
+        "heapTotal": 345329664,
+        "heapUsed": 228968336,
+        "external": 33883134,
+        "arrayBuffers": 30378567
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:23:30.302Z",
+      "state": "export-complete",
+      "wallMs": 1205615.2831000001,
+      "activeMs": 1200356.0963000003,
+      "pausedMs": 0,
+      "cycles": 61,
+      "exportMs": 5121.186699999962,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 741969920,
+        "heapTotal": 345329664,
+        "heapUsed": 228703680,
+        "external": 33874543,
+        "arrayBuffers": 30369976
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:23:45.192Z",
+      "state": "settled",
+      "wallMs": 1220505.4375,
+      "activeMs": 1220367.5041000003,
+      "pausedMs": 0,
+      "cycles": 61,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 741969920,
+        "heapTotal": 345329664,
+        "heapUsed": 228728928,
+        "external": 33883135,
+        "arrayBuffers": 30378568
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:23:50.283Z",
+      "state": "export-complete",
+      "wallMs": 1225596.5849000001,
+      "activeMs": 1220367.5041000003,
+      "pausedMs": 0,
+      "cycles": 62,
+      "exportMs": 5088.9506999999285,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 745377792,
+        "heapTotal": 345591808,
+        "heapUsed": 228966480,
+        "external": 33882736,
+        "arrayBuffers": 30378169
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:24:05.203Z",
+      "state": "settled",
+      "wallMs": 1240516.828,
+      "activeMs": 1240376.7643000002,
+      "pausedMs": 0,
+      "cycles": 62,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 745377792,
+        "heapTotal": 345591808,
+        "heapUsed": 228991344,
+        "external": 33883136,
+        "arrayBuffers": 30378569
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:24:10.567Z",
+      "state": "export-complete",
+      "wallMs": 1245880.1649,
+      "activeMs": 1240376.7643000002,
+      "pausedMs": 0,
+      "cycles": 63,
+      "exportMs": 5361.220500000054,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 745058304,
+        "heapTotal": 345591808,
+        "heapUsed": 228974584,
+        "external": 33874544,
+        "arrayBuffers": 30369977
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:24:25.217Z",
+      "state": "settled",
+      "wallMs": 1260530.3894,
+      "activeMs": 1260388.2724000004,
+      "pausedMs": 0,
+      "cycles": 63,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 745058304,
+        "heapTotal": 345591808,
+        "heapUsed": 228999800,
+        "external": 33883136,
+        "arrayBuffers": 30378569
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:24:30.193Z",
+      "state": "export-complete",
+      "wallMs": 1265507.0769,
+      "activeMs": 1260388.2724000004,
+      "pausedMs": 0,
+      "cycles": 64,
+      "exportMs": 4974.84160000016,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 745775104,
+        "heapTotal": 345853952,
+        "heapUsed": 229260192,
+        "external": 33882736,
+        "arrayBuffers": 30378169
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:24:45.230Z",
+      "state": "settled",
+      "wallMs": 1280543.7304,
+      "activeMs": 1280399.8159000005,
+      "pausedMs": 0,
+      "cycles": 64,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 745775104,
+        "heapTotal": 345853952,
+        "heapUsed": 229285024,
+        "external": 33883136,
+        "arrayBuffers": 30378569
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:24:50.088Z",
+      "state": "export-complete",
+      "wallMs": 1285401.3635,
+      "activeMs": 1280399.8159000005,
+      "pausedMs": 0,
+      "cycles": 65,
+      "exportMs": 4856.266599999974,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 744841216,
+        "heapTotal": 345853952,
+        "heapUsed": 228989440,
+        "external": 33874542,
+        "arrayBuffers": 30369975
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:25:05.238Z",
+      "state": "settled",
+      "wallMs": 1300551.8752000001,
+      "activeMs": 1300406.6200000006,
+      "pausedMs": 0,
+      "cycles": 65,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 744841216,
+        "heapTotal": 345853952,
+        "heapUsed": 229014656,
+        "external": 33883134,
+        "arrayBuffers": 30378567
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:25:10.230Z",
+      "state": "export-complete",
+      "wallMs": 1305543.1865,
+      "activeMs": 1300406.6200000006,
+      "pausedMs": 0,
+      "cycles": 66,
+      "exportMs": 4989.030499999877,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 745721856,
+        "heapTotal": 348213248,
+        "heapUsed": 228988800,
+        "external": 33882732,
+        "arrayBuffers": 30378165
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:25:25.245Z",
+      "state": "settled",
+      "wallMs": 1320558.6723,
+      "activeMs": 1320411.2649000005,
+      "pausedMs": 0,
+      "cycles": 66,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 745721856,
+        "heapTotal": 348213248,
+        "heapUsed": 229013632,
+        "external": 33883132,
+        "arrayBuffers": 30378565
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:25:30.519Z",
+      "state": "export-complete",
+      "wallMs": 1325832.9155000001,
+      "activeMs": 1320411.2649000005,
+      "pausedMs": 0,
+      "cycles": 67,
+      "exportMs": 5272.508900000015,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 742912000,
+        "heapTotal": 345591808,
+        "heapUsed": 229002976,
+        "external": 33874541,
+        "arrayBuffers": 30369974
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:25:45.259Z",
+      "state": "settled",
+      "wallMs": 1340573.1216,
+      "activeMs": 1340424.0272000006,
+      "pausedMs": 0,
+      "cycles": 67,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 742912000,
+        "heapTotal": 345591808,
+        "heapUsed": 229028224,
+        "external": 33883133,
+        "arrayBuffers": 30378566
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:25:50.776Z",
+      "state": "export-complete",
+      "wallMs": 1346089.5224000001,
+      "activeMs": 1340424.0272000006,
+      "pausedMs": 0,
+      "cycles": 68,
+      "exportMs": 5514.268199999817,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 745574400,
+        "heapTotal": 347951104,
+        "heapUsed": 229261704,
+        "external": 33882736,
+        "arrayBuffers": 30378169
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:26:05.271Z",
+      "state": "settled",
+      "wallMs": 1360585.3037,
+      "activeMs": 1360434.0614000005,
+      "pausedMs": 0,
+      "cycles": 68,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 736931840,
+        "heapTotal": 347951104,
+        "heapUsed": 229286504,
+        "external": 33883136,
+        "arrayBuffers": 30378569
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:26:10.447Z",
+      "state": "export-complete",
+      "wallMs": 1365760.8513,
+      "activeMs": 1360434.0614000005,
+      "pausedMs": 0,
+      "cycles": 69,
+      "exportMs": 5169.091700000223,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 740765696,
+        "heapTotal": 443908096,
+        "heapUsed": 308679928,
+        "external": 55781773,
+        "arrayBuffers": 52277206
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:26:25.278Z",
+      "state": "settled",
+      "wallMs": 1380592.1096,
+      "activeMs": 1380434.6307000006,
+      "pausedMs": 0,
+      "cycles": 69,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 740765696,
+        "heapTotal": 443908096,
+        "heapUsed": 308697328,
+        "external": 55790365,
+        "arrayBuffers": 52285798
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:26:30.863Z",
+      "state": "export-complete",
+      "wallMs": 1386176.7015,
+      "activeMs": 1380434.6307000006,
+      "pausedMs": 0,
+      "cycles": 70,
+      "exportMs": 5581.725199999986,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 732884992,
+        "heapTotal": 413569024,
+        "heapUsed": 99774920,
+        "external": 19866238,
+        "arrayBuffers": 16361671
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:26:45.283Z",
+      "state": "settled",
+      "wallMs": 1400597.0163,
+      "activeMs": 1400436.7455000007,
+      "pausedMs": 0,
+      "cycles": 70,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 732884992,
+        "heapTotal": 413569024,
+        "heapUsed": 99799808,
+        "external": 19866638,
+        "arrayBuffers": 16362071
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:26:51.062Z",
+      "state": "export-complete",
+      "wallMs": 1406375.3038,
+      "activeMs": 1400436.7455000007,
+      "pausedMs": 0,
+      "cycles": 71,
+      "exportMs": 5775.239400000079,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 733925376,
+        "heapTotal": 368967680,
+        "heapUsed": 242201528,
+        "external": 34038382,
+        "arrayBuffers": 30533815
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:27:05.297Z",
+      "state": "settled",
+      "wallMs": 1420610.6017,
+      "activeMs": 1420447.3249000006,
+      "pausedMs": 0,
+      "cycles": 71,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 733925376,
+        "heapTotal": 368967680,
+        "heapUsed": 242226680,
+        "external": 34046974,
+        "arrayBuffers": 30542407
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:27:10.284Z",
+      "state": "export-complete",
+      "wallMs": 1425598.0183,
+      "activeMs": 1420447.3249000006,
+      "pausedMs": 0,
+      "cycles": 72,
+      "exportMs": 4984.980200000107,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 762589184,
+        "heapTotal": 466956288,
+        "heapUsed": 340443232,
+        "external": 55880075,
+        "arrayBuffers": 52375508
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:27:25.311Z",
+      "state": "settled",
+      "wallMs": 1440624.5423,
+      "activeMs": 1440458.8648000006,
+      "pausedMs": 0,
+      "cycles": 72,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 762589184,
+        "heapTotal": 466956288,
+        "heapUsed": 340460248,
+        "external": 55880475,
+        "arrayBuffers": 52375908
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:27:30.091Z",
+      "state": "export-complete",
+      "wallMs": 1445404.6497,
+      "activeMs": 1440458.8648000006,
+      "pausedMs": 0,
+      "cycles": 73,
+      "exportMs": 4777.456099999836,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 734351360,
+        "heapTotal": 443977728,
+        "heapUsed": 99565800,
+        "external": 16491134,
+        "arrayBuffers": 12986567
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:27:45.326Z",
+      "state": "settled",
+      "wallMs": 1460640.0150000001,
+      "activeMs": 1460471.7544000004,
+      "pausedMs": 0,
+      "cycles": 73,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 734359552,
+        "heapTotal": 443977728,
+        "heapUsed": 99594408,
+        "external": 16499726,
+        "arrayBuffers": 12995159
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:27:50.286Z",
+      "state": "export-complete",
+      "wallMs": 1465600.1196,
+      "activeMs": 1460471.7544000004,
+      "pausedMs": 0,
+      "cycles": 74,
+      "exportMs": 4949.410999999847,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 755322880,
+        "heapTotal": 364773376,
+        "heapUsed": 242674560,
+        "external": 34046575,
+        "arrayBuffers": 30542008
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:28:05.345Z",
+      "state": "settled",
+      "wallMs": 1480659.12,
+      "activeMs": 1480480.6502000005,
+      "pausedMs": 0,
+      "cycles": 74,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 755322880,
+        "heapTotal": 364773376,
+        "heapUsed": 242699328,
+        "external": 34046975,
+        "arrayBuffers": 30542408
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:28:10.274Z",
+      "state": "export-complete",
+      "wallMs": 1485587.4828,
+      "activeMs": 1480480.6502000005,
+      "pausedMs": 0,
+      "cycles": 75,
+      "exportMs": 4924.937200000044,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 732450816,
+        "heapTotal": 362901504,
+        "heapUsed": 190464184,
+        "external": 33677931,
+        "arrayBuffers": 30173364
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:28:25.361Z",
+      "state": "settled",
+      "wallMs": 1500674.4008,
+      "activeMs": 1500492.5502000004,
+      "pausedMs": 0,
+      "cycles": 75,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 726040576,
+        "heapTotal": 362901504,
+        "heapUsed": 190489336,
+        "external": 33686523,
+        "arrayBuffers": 30181956
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:28:31.066Z",
+      "state": "export-complete",
+      "wallMs": 1506379.301,
+      "activeMs": 1500492.5502000004,
+      "pausedMs": 0,
+      "cycles": 76,
+      "exportMs": 5702.613200000022,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 758255616,
+        "heapTotal": 466878464,
+        "heapUsed": 377464448,
+        "external": 56379784,
+        "arrayBuffers": 52875217
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:28:45.367Z",
+      "state": "settled",
+      "wallMs": 1520680.715,
+      "activeMs": 1520496.6871000004,
+      "pausedMs": 0,
+      "cycles": 76,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 758255616,
+        "heapTotal": 466878464,
+        "heapUsed": 377481488,
+        "external": 56380184,
+        "arrayBuffers": 52875617
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:28:51.393Z",
+      "state": "export-complete",
+      "wallMs": 1526706.82,
+      "activeMs": 1520496.6871000004,
+      "pausedMs": 0,
+      "cycles": 77,
+      "exportMs": 6023.422999999952,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 745754624,
+        "heapTotal": 344932352,
+        "heapUsed": 180917640,
+        "external": 34431600,
+        "arrayBuffers": 30927033
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:29:05.369Z",
+      "state": "settled",
+      "wallMs": 1540683.1311,
+      "activeMs": 1540496.4927000005,
+      "pausedMs": 0,
+      "cycles": 77,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 745754624,
+        "heapTotal": 344932352,
+        "heapUsed": 180942792,
+        "external": 34440192,
+        "arrayBuffers": 30935625
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:29:11.214Z",
+      "state": "export-complete",
+      "wallMs": 1546527.8265,
+      "activeMs": 1540496.4927000005,
+      "pausedMs": 0,
+      "cycles": 78,
+      "exportMs": 5842.556799999904,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 743690240,
+        "heapTotal": 346767360,
+        "heapUsed": 215681056,
+        "external": 33694320,
+        "arrayBuffers": 30189753
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:29:25.375Z",
+      "state": "settled",
+      "wallMs": 1560688.3104,
+      "activeMs": 1560499.6135000004,
+      "pausedMs": 0,
+      "cycles": 78,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 743690240,
+        "heapTotal": 346767360,
+        "heapUsed": 215705904,
+        "external": 33694720,
+        "arrayBuffers": 30190153
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:29:31.084Z",
+      "state": "export-complete",
+      "wallMs": 1566397.3761,
+      "activeMs": 1560499.6135000004,
+      "pausedMs": 0,
+      "cycles": 79,
+      "exportMs": 5707.385400000028,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 758460416,
+        "heapTotal": 466354176,
+        "heapUsed": 381295704,
+        "external": 56428942,
+        "arrayBuffers": 52924375
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:29:45.382Z",
+      "state": "settled",
+      "wallMs": 1580695.6352000001,
+      "activeMs": 1580505.2998000006,
+      "pausedMs": 0,
+      "cycles": 79,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 758460416,
+        "heapTotal": 466354176,
+        "heapUsed": 381313288,
+        "external": 56437534,
+        "arrayBuffers": 52932967
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:29:51.401Z",
+      "state": "export-complete",
+      "wallMs": 1586714.3353000002,
+      "activeMs": 1580505.2998000006,
+      "pausedMs": 0,
+      "cycles": 80,
+      "exportMs": 6017.199299999978,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 705302528,
+        "heapTotal": 322871296,
+        "heapUsed": 115591336,
+        "external": 33874545,
+        "arrayBuffers": 30369978
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:30:05.387Z",
+      "state": "settled",
+      "wallMs": 1600701.0615,
+      "activeMs": 1600509.3029000007,
+      "pausedMs": 0,
+      "cycles": 80,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 705302528,
+        "heapTotal": 322871296,
+        "heapUsed": 115616136,
+        "external": 33874945,
+        "arrayBuffers": 30370378
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:30:10.977Z",
+      "state": "export-complete",
+      "wallMs": 1606290.3924,
+      "activeMs": 1600509.3029000007,
+      "pausedMs": 0,
+      "cycles": 81,
+      "exportMs": 5587.417000000132,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 755998720,
+        "heapTotal": 395915264,
+        "heapUsed": 303128328,
+        "external": 56576396,
+        "arrayBuffers": 53071829
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:30:25.394Z",
+      "state": "settled",
+      "wallMs": 1620707.2752,
+      "activeMs": 1620513.6542000007,
+      "pausedMs": 0,
+      "cycles": 81,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 755998720,
+        "heapTotal": 395915264,
+        "heapUsed": 303145864,
+        "external": 56584988,
+        "arrayBuffers": 53080421
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:30:29.833Z",
+      "state": "export-complete",
+      "wallMs": 1625146.3334000001,
+      "activeMs": 1620513.6542000007,
+      "pausedMs": 0,
+      "cycles": 82,
+      "exportMs": 4436.804699999979,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 720723968,
+        "heapTotal": 322342912,
+        "heapUsed": 99992584,
+        "external": 33677734,
+        "arrayBuffers": 30173167
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:30:45.406Z",
+      "state": "settled",
+      "wallMs": 1640720.0107,
+      "activeMs": 1640524.2020000005,
+      "pausedMs": 0,
+      "cycles": 82,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 720723968,
+        "heapTotal": 322342912,
+        "heapUsed": 100017504,
+        "external": 33678134,
+        "arrayBuffers": 30173567
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:30:50.810Z",
+      "state": "export-complete",
+      "wallMs": 1646123.6836,
+      "activeMs": 1640524.2020000005,
+      "pausedMs": 0,
+      "cycles": 83,
+      "exportMs": 5401.968299999833,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 729067520,
+        "heapTotal": 377094144,
+        "heapUsed": 242767872,
+        "external": 34038382,
+        "arrayBuffers": 30533815
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:31:05.415Z",
+      "state": "settled",
+      "wallMs": 1660728.7097,
+      "activeMs": 1660531.3330000003,
+      "pausedMs": 0,
+      "cycles": 83,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 729067520,
+        "heapTotal": 377094144,
+        "heapUsed": 242793064,
+        "external": 34046974,
+        "arrayBuffers": 30542407
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:31:10.795Z",
+      "state": "export-complete",
+      "wallMs": 1666108.6909,
+      "activeMs": 1660531.3330000003,
+      "pausedMs": 0,
+      "cycles": 84,
+      "exportMs": 5377.761799999978,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 756387840,
+        "heapTotal": 467218432,
+        "heapUsed": 341287072,
+        "external": 55888267,
+        "arrayBuffers": 52383700
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:31:25.425Z",
+      "state": "settled",
+      "wallMs": 1680739.0884,
+      "activeMs": 1680539.5780000002,
+      "pausedMs": 0,
+      "cycles": 84,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 756387840,
+        "heapTotal": 467218432,
+        "heapUsed": 341304088,
+        "external": 55888667,
+        "arrayBuffers": 52384100
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:31:31.543Z",
+      "state": "export-complete",
+      "wallMs": 1686856.4385000002,
+      "activeMs": 1680539.5780000002,
+      "pausedMs": 0,
+      "cycles": 85,
+      "exportMs": 6115.3281000000425,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 731484160,
+        "heapTotal": 441618432,
+        "heapUsed": 99490440,
+        "external": 16491134,
+        "arrayBuffers": 12986567
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:31:45.436Z",
+      "state": "settled",
+      "wallMs": 1700749.8981,
+      "activeMs": 1700548.4265000003,
+      "pausedMs": 0,
+      "cycles": 85,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 731484160,
+        "heapTotal": 441618432,
+        "heapUsed": 99515744,
+        "external": 16499726,
+        "arrayBuffers": 12995159
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:31:50.512Z",
+      "state": "export-complete",
+      "wallMs": 1705825.7247000001,
+      "activeMs": 1700548.4265000003,
+      "pausedMs": 0,
+      "cycles": 86,
+      "exportMs": 5073.477100000018,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 752762880,
+        "heapTotal": 366084096,
+        "heapUsed": 243122728,
+        "external": 34062960,
+        "arrayBuffers": 30558393
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:32:05.445Z",
+      "state": "settled",
+      "wallMs": 1720759.2196,
+      "activeMs": 1720555.4359000004,
+      "pausedMs": 0,
+      "cycles": 86,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 752762880,
+        "heapTotal": 366084096,
+        "heapUsed": 243147568,
+        "external": 34063360,
+        "arrayBuffers": 30558793
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:32:09.503Z",
+      "state": "export-complete",
+      "wallMs": 1724816.3225,
+      "activeMs": 1720555.4359000004,
+      "pausedMs": 0,
+      "cycles": 87,
+      "exportMs": 4054.80709999986,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 729038848,
+        "heapTotal": 359231488,
+        "heapUsed": 189998784,
+        "external": 33677936,
+        "arrayBuffers": 30173369
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:32:25.456Z",
+      "state": "settled",
+      "wallMs": 1740769.963,
+      "activeMs": 1740563.9356000002,
+      "pausedMs": 0,
+      "cycles": 87,
+      "outputBytes": 2067450,
+      "retainedVerificationBuffers": 4134899,
+      "memory": {
+        "rss": 729038848,
+        "heapTotal": 359231488,
+        "heapUsed": 190024104,
+        "external": 33686528,
+        "arrayBuffers": 30181961
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:32:30.474Z",
+      "state": "export-complete",
+      "wallMs": 1745788.1234000002,
+      "activeMs": 1740563.9356000002,
+      "pausedMs": 0,
+      "cycles": 88,
+      "exportMs": 5016.028600000078,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 758214656,
+        "heapTotal": 466354176,
+        "heapUsed": 377237624,
+        "external": 56387979,
+        "arrayBuffers": 52883412
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:32:45.462Z",
+      "state": "settled",
+      "wallMs": 1760775.9944,
+      "activeMs": 1760567.8915000001,
+      "pausedMs": 0,
+      "cycles": 88,
+      "outputBytes": 2067449,
+      "retainedVerificationBuffers": 4134898,
+      "memory": {
+        "rss": 758214656,
+        "heapTotal": 466354176,
+        "heapUsed": 377257560,
+        "external": 56388379,
+        "arrayBuffers": 52883812
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:32:50.513Z",
+      "state": "export-complete",
+      "wallMs": 1765826.4582,
+      "activeMs": 1760567.8915000001,
+      "pausedMs": 0,
+      "cycles": 89,
+      "exportMs": 5048.182200000156,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 734777344,
+        "heapTotal": 428249088,
+        "heapUsed": 99710368,
+        "external": 18145918,
+        "arrayBuffers": 14641351
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:33:05.467Z",
+      "state": "settled",
+      "wallMs": 1780780.7876000002,
+      "activeMs": 1780570.4719000002,
+      "pausedMs": 0,
+      "cycles": 89,
+      "outputBytes": 2067451,
+      "retainedVerificationBuffers": 4134900,
+      "memory": {
+        "rss": 734777344,
+        "heapTotal": 428249088,
+        "heapUsed": 99735640,
+        "external": 18154510,
+        "arrayBuffers": 14649943
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:33:10.550Z",
+      "state": "export-complete",
+      "wallMs": 1785863.4493,
+      "activeMs": 1780570.4719000002,
+      "pausedMs": 0,
+      "cycles": 90,
+      "exportMs": 5080.595299999928,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 752795648,
+        "heapTotal": 366346240,
+        "heapUsed": 242549208,
+        "external": 34046572,
+        "arrayBuffers": 30542005
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:33:25.481Z",
+      "state": "settled",
+      "wallMs": 1800794.4456,
+      "activeMs": 1800582.1417000003,
+      "pausedMs": 0,
+      "cycles": 90,
+      "outputBytes": 2067448,
+      "retainedVerificationBuffers": 4134897,
+      "memory": {
+        "rss": 750661632,
+        "heapTotal": 366346240,
+        "heapUsed": 242573976,
+        "external": 34046972,
+        "arrayBuffers": 30542405
+      },
+      "activeResources": [
+        "PipeWrap",
+        "PipeWrap"
+      ]
+    }
+  ]
+}

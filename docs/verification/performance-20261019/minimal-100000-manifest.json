@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-18T16:53:18.459Z",
+  "source": {
+    "hash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "rows": 5649
+  },
+  "derived": {
+    "path": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\minimal-100000.json",
+    "hash": "ba06ace9741d4899908112bbbba74d0b82d02e6a75657a677b79d041eaaf2f73",
+    "rows": 100000,
+    "bytes": 58800512,
+    "decodedCodeUnits": 58360514
+  },
+  "coordinates": "preserve",
+  "partial": false,
+  "minimal": true,
+  "wideCharacters": 0,
+  "contract": "Synthetic scale corpus: cycles original rows and assigns unique id/sourceId. Content/timestamps/coverage are preserved except explicit coordinate, partial, minimal and wide-string options. Partial removes one coverage pair and marks every 17th detail pending. Minimal retains required keys, source/city/date/genre/detail/classification/time and optional coordinates, replaces titles/venues with ASCII exemplars and empties detail strings. Wide-string explicitly replaces titles/venues with repeated Korean characters. Does not overwrite production assets. Dense/spread/missing are stress-only and not real-world distribution claims."
+}

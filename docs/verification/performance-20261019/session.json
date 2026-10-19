@@ -1,0 +1,295 @@
+{
+  "objective": "Execute the approved 10-hour Culture Desk performance improvement plan",
+  "mode": "execute",
+  "status": "timebox_ended_incomplete_after_execution_gap",
+  "startedAt": "2026-10-18T15:22:38Z",
+  "deadline": "2026-10-19T01:22:38Z",
+  "timezone": "Asia/Seoul",
+  "workspace": "C:/workspace/cultureapi",
+  "baseline": "C:/workspace/cultureapi/data/performance-session-20261019/baseline",
+  "timePolicy": "Actual elapsed 10 hours; maintain useful measured work, not accumulated agent-hours or idle padding",
+  "baselineCommit": "ece419a71bb38478c839b3ab871714d72bf424d8",
+  "team": {
+    "root": "integration, cold startup, checkpoints",
+    "qa_automation": "independent performance harness and validation",
+    "release_recovery": "uncached map and search",
+    "frontend_quality": "initial bundle and map rendering"
+  },
+  "constraints": [
+    "Preserve prior and unrelated changes",
+    "GitHub commit/push explicitly authorized by the user; no production deployment",
+    "No credentials",
+    "Fixed snapshot, exact semantics",
+    "Serialize performance measurement windows"
+  ],
+  "plannedArtifacts": [
+    "baseline-files.json",
+    "raw timing samples",
+    "before-after comparisons",
+    "browser traces and screenshots",
+    "memory time series",
+    "regression results",
+    "handoff"
+  ],
+  "checkpoints": [
+    {
+      "note": "Execution authorized. Existing uncommitted implementation preserved in isolated baseline; source changes not yet started.",
+      "stage": "start",
+      "at": "2026-10-18T15:22:38Z"
+    },
+    {
+      "at": "2026-10-18T15:36:45.6071986+00:00",
+      "stage": "first_candidates",
+      "note": "Exploratory fresh-process probes support deferring ExcelJS (loaded module count156 to0). Published response timestamp is applied before serialization. Initial frontend gzip JS150.56KB to102.96KB;23focusedtests+typecheck/build passed. Real5649-row browser smoke passes three desktop paths; latency acceptance pending.",
+      "evidence": [
+        "baseline-startup-probe.json",
+        "candidate-startup-probe-01.json",
+        "pre-projection-phases.json",
+        "candidate-cold-01.cpuprofile"
+      ]
+    },
+    {
+      "at": "2026-10-18T15:36:45.6196148+00:00",
+      "stage": "rejected_hydration_copy_loop",
+      "note": "Replaced PUBLIC_FIELDS filter/map/fromEntries with direct loop experimentally; 20alternating hydration comparisons showed candidate p50/p95 worse. FullDBrowhashes matched. Reverted loop. Strong latency drift means this is not a fresh-process acceptance measurement. Wholevenue normalization cache rejected before implementation:4371venueInfo rows only79 repeats.",
+      "evidence": [
+        "hydration-copy-loop.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T15:56:47.5151956Z",
+      "stage": "wave1_controlled_startup",
+      "note": "100 measured fresh Node processes, 50 per variant, AB/BA paired, 3 time blocks: first-body p50 1528.16 to 935.24 ms; p95 2103.57 to 1356.00 ms. Exact semantic equality and stable sources. Import p50 960.10 to 316.95 ms; first request 511.21 to 514.94 ms. OS filesystem cache warm; no network.",
+      "evidence": [
+        "startup-paired-01.json",
+        "semantic-01.json",
+        "root-cloud-tests-01.txt"
+      ]
+    },
+    {
+      "at": "2026-10-18T15:56:47.5265104Z",
+      "stage": "wave1_pin_and_soak_smoke",
+      "note": "Pinned server/shared sources in data/performance-session-20261019/candidate-wave1. 64 semantic cases equal; root focused suite 80 passed. Short 9.28 active second soak smoke:145 requests,18 expected400,32 cache entries, pending0, immutable DB and source hashes. Not a long-duration result. Controlled API and Chromium loops held for ambient host CPU/memory pressure.",
+      "evidence": [
+        "soak-smoke-01.json",
+        "host-ambient-01.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T16:03:24.3457600Z",
+      "stage": "wave1_api_comparison",
+      "note": "1600 measured prepared-worker requests:100/variant/route/mode,AB/BA,3blocks. Exact body/header/metadata equality; pinned sources stable. National map miss p50 285.98→137.42ms,p95 330.99→176.07ms; block direction consistent. Cache hit essentially unchanged. Ambient CPU54–65% so tail claim conditional; no browser/build/test overlap. Regional map p95 4.74→4.96ms (+0.22ms).",
+      "evidence": [
+        "api-paired-wave1-01.json",
+        "host-ambient-series-01.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T16:25:43.1459587+00:00",
+      "stage": "hour1",
+      "note": "Actual elapsed first hour passed. Desktop browser 40 pairs per flow completed with stable pins and zero errors; map p50 gains 25.9/26.5 percent, cards p95 regresses 20.5ms. Mobile limited profile is running in an exclusive measurement window; root soak paused at 11.14 active minutes. Streaming Excel candidate observed lower memory and exact workbook semantic hashes; one independent review finding requires early error observation and cleanup, now being fixed before acceptance.",
+      "evidence": [
+        "browser-paired-desktop-01.json",
+        "frontend-functional-verified.json",
+        "export-memory-streaming-level6-22596.json",
+        "export-memory-streaming-level6-5649.json",
+        "root-export-cloud-tests-01.txt",
+        "soak-wave1-60min.ndjson"
+      ]
+    },
+    {
+      "at": "2026-10-18T16:48:39.3044853+00:00",
+      "stage": "mobile_comparison_and_regressions",
+      "note": "Mobile/limited40pairs per flow completed: cards p50 2924→2528ms, directmap4833→4542ms, transition4173→3944ms. All240cases:source/buildstable,640reads=640produces,joins0,total5649,errors0,overflow0. Integrated typecheck passed after test-only Runtime narrowing; workbook2/2passed including Date semantics. Export existing2+newfailurecleanup5passed after correcting old readable-stream test observations. Building oversized-body cancellation regression11/11passed. Soak resumed16:46:22Z after1906.11 seconds of explicit paused time; root workload latency remains diagnostic. 3D actual synthetic geometry renders and closes, but harness tile-fetch classification still being repaired before declaring scenario pass.",
+      "evidence": [
+        "browser-paired-mobile-01.json",
+        "export-stream-cleanup-tests.txt",
+        "soak-wave1-60min.ndjson"
+      ],
+      "commands": [
+        "node --import tsx --test tests/venue-buildings.test.ts"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:01:04.021Z",
+      "stage": "export_memory_paired_and_text_attribution",
+      "note": "Five fresh-process AB/BA pairs per corpus, pinned wave1 vs wave4: observed peakRSS medians 403.49 to 316.84MiB for5649 rows and916.65 to 476.39MiB for22596 rows. All workbook semantic hashes equal and snapshot/source/harness stable. NaturalGC/instrumented attribution; no latency or p95 claim. Source-only plaintext fast path had exact realvenue outputs+2124edgecases and30paired normalization passes median51.17 to 34.47ms; added two-line plain text guard,19provider/venue tests and typecheck pass. Mainsoak paused at20.04active minutes for precisionwindow, resumed17:00UTC approximately; exact NDJSON authoritative.",
+      "evidence": [
+        "export-memory-paired-5649.json",
+        "export-memory-paired-22596.json",
+        "venue-text-diagnostic-01.json",
+        "soak-wave1-60min.ndjson"
+      ],
+      "commands": [
+        "npm run typecheck",
+        "node --import tsx --test tests/providers.test.ts tests/venue-info.test.ts"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:27.834Z",
+      "stage": "integrated_publication_3d_mobile_candidates",
+      "note": "Wave7 semantic64/64 equal toinitialbaseline including2Excel, withsource/buildstable. Fixed publishedsnapshot invalidation: before newerbootstrap=samecounts yieldedsearch0/map0; afterAppsignature includes published.snapshotAt gives1/1 andupdatedlist+popup. Strengthened2held-route tests settlehandlerbeforeassertion, bothPASS. OSMparallel5lifecycle+devStrictMode/prod3extraPASS; routinechildcleanup no longer cancelsparentownedrequest. MobileCSSwave8 movesfirstcardup106.38px at375/320 andexporttarget38 to 44px; normaloverflow0. CSS2xstressrecords preexisting9pxoverflowat320 andtitleclip, followupongoing. MapCTE candidate conservativelyonlyselected>=20002 afternearcapregression;14tests+22596sixfilterexactwirePASS. Rootclusterprototype285exactordered/identityedgecasesPASS, strongsynthetic10kspreadgain butactualcluster~1 to 2ms, productionunchanged. Saved4realGIFposterbytes functionalpairPASS; rootviewedbothscreenshots. Maincacheactive~40min andexport~18min stabilityworkloads stillrunning; nofinalstabilityclaim.",
+      "evidence": [
+        "semantic-wave7-01.json",
+        "publication-refresh-after.json",
+        "held-routes-after.json",
+        "frontend-3d-parallel-01.json",
+        "frontend-3d-strictmode-02.json",
+        "frontend-3d-extra-01.json",
+        "frontend-mobile-layout-candidate-01.json",
+        "frontend-mobile-text2x-candidate-01.json",
+        "map-row-limit-tests-final.txt",
+        "map-limit-candidate-parity-22596-02.json",
+        "cluster-spatial-edgecases-02.json",
+        "poster-replay-probe-01.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:22:56.287Z",
+      "stage": "hour2",
+      "elapsedMinutes": 120.30478333333333,
+      "note": "Actual elapsed two-hour milestone reached; session continues toward01:22:38UTC deadline. Current tasks: mobile320/textreflow repairs, finitecachebytepressureintegration, twoactive stability workloads, finalquiet performancecomparisons pending. No completionclaim. Coremetadata/ordering/workbooksemantics remainbaselineequal in64cases."
+    },
+    {
+      "at": "2026-10-18T17:33:39.506Z",
+      "stage": "wave10_full_quality",
+      "note": "Typecheck/build,300unit tests from48files,10browsercases PASS. Export caller filters/IDs are copied before first await after independent review reproduced a mixed snapshot/evidence regression. Mobile wave9 normal375/320 andCSS2x4cases pass;375firstcard106.38pxup,320date-readablelayout52.38pxup. Cache bytepressure24requests demonstrates16MiB eviction before32entries,bytesaccounting/pending0/wire/databaseimmutability. Ongoing useful followups:KSTday-only frontend freshness,high-densitycoordinategroup truthful venue labels andkeyboardnavigation. No10hourcompletionclaim.",
+      "evidence": [
+        "quality-summary-wave10-01.json",
+        "quality-wave10-01.txt",
+        "export-snapshot-regression-before.txt",
+        "export-snapshot-regression-after.txt",
+        "frontend-mobile-layout-final-01.json",
+        "frontend-mobile-text2x-final-01.json",
+        "cache-byte-pressure-01.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:42:23.785Z",
+      "stage": "stability_and_selection_guards",
+      "note": "Maincache soak complete60.000active minutes,36.484paused,96.790wall:14345requests=12552success+1793expected400,pending0,maxentries32,maxbytes3509728,immutableDB/source. Export soakcomplete30.010active minutes90exports22596rows;first/last semantic exact,intermediateZIP/sizechecks,source/harnessstable. Sampledlowerheap cache29.11 to 36.56MiB andexport94.71 to 95.15MiB;RSSincrease notattributed toallocator/leakwithoutfurtherproof. NewAppboot.todayfix reproducesmidnightbefore bootstrap1/search0/map0 thenafter1/1/1,unchangedday0/0;chosenperiodpreserved. SearchViewexportdisabledwhileq/age debounceorsearchpending/error;newbrowsercasepasseswithactual2rowExcelandconditioncheck. Testagefirstattempt usedwrongtextboxrole for datalistcombobox;correctedtolabel andretainedfailedartifact. Pin11selection source9fbdebbb43633d56f2869776ccffd7a9ed0c6d3d1f5cf8a7bd21f065f7c986a7. QA startsserializedsaved4GIF20paircomparison;frontend builds local-popupsearch/paging sourceonly.",
+      "evidence": [
+        "stability-report.md",
+        "stability-memory-01.json",
+        "soak-wave1-analysis.json",
+        "export-soak-wave4-30min.json",
+        "kst-freshness.md",
+        "export-selection-before.txt",
+        "export-selection-complete.txt"
+      ]
+    },
+    {
+      "at": "2026-10-18T17:56:46.224462+00:00",
+      "stage": "github_checkpoint_and_first_export",
+      "note": "User explicitly requested commit and GitHub push. Verified runtime source91files matches pin11; unverified popup draft preserved. Exported staged tree5133a31c6bb05fd0943f065e8a91b2e892ab75d1 to isolated checkout; TypeScript/build,300unit,12browser PASS. Added only CI artifact attempt suffix/protocol/receipt afterwards. Commitb61436ee10364b1fb9e5660cac23e1bd383fb2e4 pushed to origin/feat/daily-snapshot-deploy, remote hash confirmed; no deployment. First national Excel freshprocess50pairs exact workbook semantics: bodyready p50 2077.08 to 1853.48ms,p95 2735.79 to 2589.999ms. Import deferred770.51 to 243.60 while first request1222.43 to 1516.81 due deferredwork; total bodyendpoint is the accepted metric, validationexcluded. Seven harnessfiles and bothsnapshots unchanged through aftercompletion.10hour session continues.",
+      "evidence": [
+        "commit-checkpoint-01.json",
+        "quality-git-checkpoint-01.txt",
+        "startup-first-export-national-01.json",
+        "startup-first-export-national-01.context.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T18:21:59.243518+00:00",
+      "stage": "pre_hour3",
+      "elapsedMinutes": 179.35405863333332,
+      "note": "Approaching three actual elapsed hours. User-authorized verified checkpoint b61436ee pushed and remote hash confirmed. Popup paging/search and keyboard reopening pass 12 responsive scenarios on pin14; pending later changes fix missing venue and external locate viewport. Initial loading margin collapse and premature footer CLS signatures disappear in all20 paired runs; input-free shift sum0.172037 to0.002794, not zero or field CWV. Extra SQL sort index rejected for regional regressions. Final cold search50pairs exact semantics: body-ready p50 2445.48 to1402.52ms,p95 2863.09 to1612.29. Ambient freeRAM1.29GiB andCPU58.8percent; use within-run paired comparison only. Regional first Excel50pairs starting. No10hour completion claim.",
+      "evidence": [
+        "poster-cls-paired-desktop-20-01.json",
+        "sort-index-decision.md",
+        "startup-final-search-01.json",
+        "startup-final-search-01.context.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T18:23:11.270969+00:00",
+      "stage": "hour3",
+      "elapsedMinutes": 180.55451614999998,
+      "note": "Actual three-hour checkpoint observed. Regional first workbook comparison running; browser lifecycle protocol source reviewed; next focused validation is external mobile popup locate and missing-venue safety.10hour session remains active."
+    },
+    {
+      "at": "2026-10-18T18:44:07.642840+00:00",
+      "stage": "mobile_popup_retention_and_reproduction",
+      "elapsedMinutes": 201.49404733333333,
+      "note": "Regional first workbook50pairs complete:51rows exact,body-ready p50 5225.95 to4792.59ms,p95 8347.95 to7414.04;39candidate-faster pairs,all3blocks same direction,highhost load recorded. Popup missing-venue/model and bounded-scroll9focusedtests pass. Actual mobile locate before row viewport0percent,after375/320100/99.89percent under103px header; internal paging/search/reopen page scroll unchanged. Synthetic moving-row race reproduced real wheel followed by late scroll; input-cancellation fix yields zero correction afterwheel. Highzoom15to16 before layerrebuild/popupclose,after sameDOM/layercount3to3;A-B-A localquery/page retained in4cases. Wave17 source bfea341b03a13ae23be975a25a74fc9524ce85a709b43aa7c7ec4a8f7ed93137/build bc1dce58f4ff69ea17e92d57947c8b8cce45d4f16af5ae1257f8562953e36a0f frozen;integratedquality underway,notyetPASS. Baseline165files archivedbyteexact1.56MB,restored349builtassets hashmatchesoriginal. GitHubqualitydispatch attempt404 becauseworkflowabsentdefaultbranch; noCIrunstarted,localstagedcheckpoint remainsverified.",
+      "evidence": [
+        "startup-first-export-regional-01.json",
+        "frontend-popup-review.md",
+        "frontend-popup-scroll-after-01.json",
+        "baseline-source-01.zip.json",
+        "baseline-restore-01.json",
+        "github-quality-dispatch-01.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T18:57:02.872596+00:00",
+      "stage": "wave17_quality_and_pending_focus_race",
+      "elapsedMinutes": 214.41454326666664,
+      "note": "Frozen pin17 passed TypeScript/build,309 unit tests and15 Chromium scenarios with zero runtime/unexpected network errors. QA metadata confirms source/build stability. A finite subsequent keyboard diagnostic captured exactly one pager focus RAF, moved with actual Tab to the close button, and reproduced stale focus returning to performance3584 after frame release. Pin17 remains validated for its existing suite but second Git checkpoint is held for a scoped cancellation fix and regression; first commit b61436ee is already pushed. Baseline archive and349-asset rebuild match original byte hashes. No10hour completion claim.",
+      "evidence": [
+        "quality-final-wave17-01.json",
+        "frontend-popup-focus-race-before-01.json",
+        "baseline-restore-01.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T19:18:51.352929+00:00",
+      "stage": "wave18_verified_github_push",
+      "elapsedMinutes": 236.2225488166667,
+      "note": "Candidate18 passed TypeScript/build,309 unit tests and16 Chromium scenarios; source/build/validation/workflow hashes stayed exact. Staged216 QA-represented inputs matched213raw and3newline-normalized. Commit27090b39317e56de15cb4998146642a479865472 pushed to existing feature branch, remote hash confirmed. Read-only branch push CI started as39158058662; no remote PASS claim yet. Lifecycle smoke01 failed before cycles due early saved-image readiness; bounded wait fixed harness only, smoke02 completed3cycles with116requests finished andallownedprocessesclosed. Full60minute browser observation not yet started.",
+      "evidence": [
+        "quality-final-wave18-02.json",
+        "commit-checkpoint-02.json",
+        "github-push-checkpoint-02.json",
+        "browser-lifecycle-smoke-assessment.md"
+      ]
+    },
+    {
+      "at": "2026-10-18T19:23:20.700187+00:00",
+      "stage": "hour4",
+      "elapsedMinutes": 240.71166978333335,
+      "note": "Actual four-hour checkpoint. Commit27090b3 is pushed and remote verified. Linux quality39158058662 completed failure in one cloud deadline/retry unit test after typecheck; root and QA inspect raw logs rather than rerun blindly. Local candidate18 remains309unit/16browser PASS. Browser lifecycle60active-minute run started with same immutable pin18 and saved raster corpus. At1.03active minutes15cycles,liveDOM2040,heap24.99MiB,pending0,errors0. Full run and final prepared API/desktop/mobile comparisons remain pending. No10hour completion claim.",
+      "evidence": [
+        "github-push-checkpoint-02.json",
+        "host-browser-lifecycle-wave18-60min-01.json",
+        "browser-lifecycle-wave18-60min-01.ndjson"
+      ]
+    },
+    {
+      "at": "2026-10-18T19:33:31.359600+00:00",
+      "stage": "cloud_ci_budget_fix_pushed",
+      "elapsedMinutes": 250.88932666666668,
+      "note": "Remote39158058662 failed firstretry attempts0 expected1. Whole-tick800ms admission budget exhaustion is source-supported inference; original log cannot identify exact branch. Two real30ms provider deadline tests now use bounded5000ms admission and require steps/batches1 and exact starts/aborts. Typecheck and18cloud tests pass with product source/build unchanged. Commit1dfbff6 pushed/remoteverified; newLinuxfullquality39159195100 running. Lifecycle retained samebrowser/context through220.942s pause excluded from active; resumed errors0/pending0.",
+      "evidence": [
+        "github-quality-wave18-01.md",
+        "cloud-ci-budget-validation-01.json",
+        "github-push-checkpoint-03.json"
+      ]
+    },
+    {
+      "at": "2026-10-18T19:35:04.517125+00:00",
+      "stage": "linux_ci_pass",
+      "elapsedMinutes": 252.44195208333335,
+      "note": "GitHub Ubuntu quality39159195100 head1dfbff6685223df5db32085cd0476ad05709e1df completedSUCCESS19:33:52UTC. Fresh npmciignore-scripts + Chromiuminstall, typecheck,309unit0fail0skip,build,16Chromium PASS,artifactuploadPASS. Rawlog/metadata preserved. Full60active-min browser lifecycle and finalAPI/browserpairedcomparisons continue separately.",
+      "evidence": [
+        "github-quality-wave18-02.md",
+        "github-quality-wave18-02.txt",
+        "github-quality-wave18-02.json"
+      ]
+    },
+    {
+      "at": "2026-10-19T02:02:32.556777+00:00",
+      "stage": "timebox_interruption_handoff",
+      "note": "Last successful lifecycle sample19:40:48.240UTC; next record01:05:14.326UTC ERR_NETWORK_IO_SUSPENDED. Completed239cycles/976054.427msactive,220941.907mspaused. Supervisorwatchdog ended01:05:32; Chromium close/ownedkill errors retained, all3ownedPIDs absent01:59:10. Rootclock01:59:18 exceededdeadline01:22:38, so no further features/measurements started. Gap is not activework or successfulobservation. Local prepareddate/missing-locationdiagnostics remainunvalidated/uncommitted. Latestverifiedproduct1dfbff6 passedLinux309unit16browser. Final preparedAPI/browsercomparisons andfullbrowser60remainunfinished. Onlyevidencehandoff/authorizedcommitpush follows.",
+      "evidence": [
+        "browser-lifecycle-interruption-01.md",
+        "browser-lifecycle-wave18-60min-01.json",
+        "github-quality-wave18-02.md",
+        "../../PERFORMANCE_HANDOFF_2026-10-19.md"
+      ]
+    }
+  ],
+  "newWorkStoppedAt": "2026-10-19T01:59:18Z",
+  "handoffPreparedAt": "2026-10-19T02:02:32.556777+00:00",
+  "continuousTenHoursCompleted": false
+}

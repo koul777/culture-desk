@@ -1,0 +1,1614 @@
+{
+  "version": 1,
+  "startedAt": "2026-10-18T17:24:00.643Z",
+  "endedAt": "2026-10-18T17:24:10.252Z",
+  "success": true,
+  "scope": "Finite 24-request integration smoke on pinned production handler and unchanged minimal 100k synthetic artifact. Three 8-request bursts test actual default 16 MiB byte eviction, joining, GET/HEAD and body ownership. Original-artifact ordered selection plus ordinary paged-search metadata forms an uncached wire oracle. Natural GC; elapsed times are concurrent-host diagnostics only, not latency or peak-memory acceptance. No long soak or upstream requests.",
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave7-publication",
+  "snapshot": {
+    "path": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\minimal-100000.json",
+    "hash": "ba06ace9741d4899908112bbbba74d0b82d02e6a75657a677b79d041eaaf2f73",
+    "rows": 100000,
+    "bytes": 58800512
+  },
+  "source": {
+    "before": {
+      "hash": "1182810ff91e22bae034b181c8285451dc3635dd5418bcdc6dac17aac7c094a7",
+      "directories": [
+        "server",
+        "shared"
+      ],
+      "files": {
+        "server/app.ts": "81a71810d125f582aba104a422b7146b8a07a242b6fd19a67b9d593e49cc3d93",
+        "server/cloud/auth.ts": "2b0a566ce5c76b418b515be271d7f96719a1be7a8359999dd8b820002e325ae3",
+        "server/cloud/collection.ts": "7ac9de893c77b08d8708917682e3bebc64c54f79b129e144bc1ad7cd96f9804d",
+        "server/cloud/handler.ts": "6c5786d46e979e5349e734293ca90c45a9568bfb772b9b4fb99769b22ed41f04",
+        "server/cloud/published-response-cache.ts": "ea3107903dcf03afe189c5da0aedfd6243d31a98e4806ba878ff3701fb451403",
+        "server/cloud/readonly-fallback.ts": "2481cb49cee703ba325b7e2f0f8b9722f5f7822d5ee23b7eef0c8d6f2e9be80b",
+        "server/cloud/refresh-jobs.ts": "6d0ff281fa958cb749cd9204fa8eb409286bc0499ded963d283e45220f8ae83b",
+        "server/cloud/refresh-schedule.ts": "4a558bdb19547066641d33a9a05807d0a817d3a7af1ea5656a0c34d8306e3162",
+        "server/cloud/snapshot-errors.ts": "50b8a7377ba0f9d823cbc72e0ac509ff191c37375a8a180a52d741f5316d1ff6",
+        "server/cloud/snapshot.ts": "fea259a652723b0e922bd2dbfd2cfa6b76056a5da0783a6c17dcd6c136d10cfb",
+        "server/collection-history.ts": "d222fad9c14f41c1cb275e9dd0ff2e02aff75f988039ef49dd95b9e6ba0874e9",
+        "server/config.ts": "ab87fe7b041868d82edad518b9c8865d0652872cf88811c3d8506df46c0bc0b5",
+        "server/dates.ts": "f2e51013c31479ba6db15ca2c3ad80a635f83fe8948d816791586c85760df75d",
+        "server/export-stream.ts": "4bd08de55f96fe1f4c6e50dccdf547dc280c2e72144c74a220cc7fb3ace58dd9",
+        "server/export.ts": "be4efc09c4b4529c0e51f4db39e83244640780bfd3a6b6cd936f09248b09e00c",
+        "server/import-collection.ts": "3decc3b85ba43579a87bd506b9905996afd415f3dabaf55ebac4f2e97b1b113b",
+        "server/index.ts": "e3a2113bda799ecc1132d5c0f4c0b097dec4ee84ae358b954f3655c9fbed64cd",
+        "server/lock.ts": "fe7d1cfc72b2775bd7d20c2ec65ccb18d874671c9f6b75944d73087299cce620",
+        "server/maintenance.ts": "fd522a1c228e5b0e576fdbee813f66a50756b28dba4f455613cf2bf1b5792c83",
+        "server/map-limits.ts": "2fc79e70586faa0098eac2aa3b81256fd8c5fc9f0ccdfdca4f9844e5165fecd1",
+        "server/map-query.ts": "334cbf187df98bbf390a35f5fe89d896c11525506771a4c60a9a0175855db518",
+        "server/map-response.ts": "624e67b59294dd59f47c7257de7725f7699c0e277bd2a2675161b954f36cce4c",
+        "server/providers/cities.ts": "4d5c7ad7c07c95397ec32c1ebbeef979e9ff4562524e2121e337d6e78b41186c",
+        "server/providers/classify.ts": "724c71e37696e878e13ccc038f608854dfb501d0604fa14e83c514c0b2fb8a60",
+        "server/providers/coordinates.ts": "59db06e7eae45c1676b575d08bc8d4760de290acd195e15298d2836e5700d961",
+        "server/providers/culture.ts": "1cec1b3995abdbff3814eefa8d34990eb124290547d63b353b270249e95496f1",
+        "server/providers/dates.ts": "92a9bf318fa4017b25cb174f03cec3943ce0c698d588df5528885c445af1928b",
+        "server/providers/errors.ts": "1e77ab45313c14e4d363988d4c056f84a850abf6e2861cf6ac96f019f4735d50",
+        "server/providers/fetch.ts": "94b7cf280d355a60a6c4ab909ad6defdc254ed1f139388e8c2f5be7181d27842",
+        "server/providers/index.ts": "7d7d960afa97a1720e60ce33f5c79f7837696dc1613b859b971877aed781558e",
+        "server/providers/kopis.ts": "9fb1f4bce2668d93385d1879995b778915a13edb9c94258dde1489c4e9d812c4",
+        "server/providers/national-cities.ts": "7f9b37662e14f52d2084e4a45ae635eeadd2c960853c0245035acceceb2c7777",
+        "server/providers/text.ts": "2f949f97449556fa7b6695f9d6b281f2334650c97e7790bcd456bb07ccfef3c3",
+        "server/providers/validate.ts": "7b00ddb104a9a6920b3ba7e5bfd9075ebf4438c2fe1d6f97bbf42426ef78fa35",
+        "server/providers/xml.ts": "923851b88a0bb7e14d67a119ecf3f5756fdb2d90a74f289a6c3e27a4b0435dc5",
+        "server/search-performance.ts": "265c4bc0f45b274736f997bf53378dda4456532a03435e192ca846864af30c20",
+        "server/store.ts": "0ee6275e4c621fb0fc78154b8ad002543c56ad3b17deb89d9721276e2346e438",
+        "server/venue-building-seed.json": "80ff2b768fb97476d51589b23191d0325282920b09fa4f23671c0d26fd690a9a",
+        "server/venue-buildings.ts": "0886b405227b6bf68ca829fb420ff322950f2f91d092d7822d800d1c0399584b",
+        "server/venue-info.ts": "72a803af68b81bd2b0aab70f218e40acb69b15434b3f856020bb4abf8827702a",
+        "server/vworld.ts": "4906a13c3e6e217711ec4c510e73211353acb9e09d956a3ce6506f5d52f8ccdb",
+        "server/worker.ts": "f46db9b49da76d7b4ca59cb2a9aa11ab6d5fb65b7fcd7638de9a1069591f373d",
+        "shared/types.ts": "b30d934981d6dbda2fd7b97e7eeaee4f120c880bdc492784cb9a29cb3d20fa58",
+        "package.json": "10787a1fada00c0c8586ab44dce4534ec8c8d3d005a1af7e4b8444bdbdccc7a8",
+        "package-lock.json": "d6fa4c0f597f365b7733460e048568f7a1e02b5c04f1a6b728ae52505bbaaf83",
+        "vite.config.ts": "7b4eb14417f429d0ebbadfea374f6810a7615fd6becd0c84fd3e53da353f8b6f"
+      }
+    },
+    "afterHash": "1182810ff91e22bae034b181c8285451dc3635dd5418bcdc6dac17aac7c094a7"
+  },
+  "harness": {
+    "before": {
+      "hash": "14cc875e614ae4876cb0d1f7c735397488f10e032073ad2d08a4475dcc3459a7",
+      "files": {
+        "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\cache-byte-pressure.ts": "043aa7de460fffea726a9158a4d7dfbae71b400828c7a2d68553e3bff9cf1292",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f"
+      }
+    },
+    "afterHash": "14cc875e614ae4876cb0d1f7c735397488f10e032073ad2d08a4475dcc3459a7"
+  },
+  "firstPressure": {
+    "attemptedBytes": 18047682,
+    "cap": 16777216,
+    "retainedBytes": 15840691,
+    "retainedEntries": 7,
+    "evicted": [
+      "/api/map?from=2026-10-01&to=2027-01-17&source=kopis"
+    ]
+  },
+  "counts": {
+    "reads": 21,
+    "hits": 5,
+    "joins": 2,
+    "produces": 14,
+    "requests": 24,
+    "heads": 3,
+    "maxPending": 8,
+    "maxEntries": 7,
+    "maxBytes": 15840692
+  },
+  "dataBefore": {
+    "hash": "97a7ff78eb9653cbb6436741f7c68ec4bfcdc3a1b1b8da19ff27bff22f3eb884",
+    "tables": {
+      "bookmarks": 0,
+      "cities": 230,
+      "performance_sources": 0,
+      "performances": 100000,
+      "schema_migrations": 1,
+      "sync_items": 0,
+      "sync_run_archive": 0,
+      "sync_runs": 460,
+      "sync_tasks": 0
+    },
+    "changes": 100691
+  },
+  "dataAfter": {
+    "hash": "97a7ff78eb9653cbb6436741f7c68ec4bfcdc3a1b1b8da19ff27bff22f3eb884",
+    "tables": {
+      "bookmarks": 0,
+      "cities": 230,
+      "performance_sources": 0,
+      "performances": 100000,
+      "schema_migrations": 1,
+      "sync_items": 0,
+      "sync_run_archive": 0,
+      "sync_runs": 460,
+      "sync_tasks": 0
+    },
+    "changes": 100691
+  },
+  "oracle": {
+    "/api/map?from=2026-10-01&to=2027-01-17&source=kopis": {
+      "hash": "b5e9f8e81a2184ede1fb0b02dd429bf8e004914c7011a2da237e8e90521e6474",
+      "bytes": 2206991,
+      "items": 10000,
+      "total": 77351,
+      "partial": false
+    },
+    "/api/map?from=2026-10-01&to=2027-01-17&source=culture": {
+      "hash": "a86b72e0c171fdeb7602b2953c5b0c1e5d50db7ecc0bffdbbe9c870068c09fd9",
+      "bytes": 2304931,
+      "items": 10000,
+      "total": 22649,
+      "partial": false
+    },
+    "/api/map?from=2026-09-30&to=2027-01-17&source=kopis": {
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "bytes": 2206990,
+      "items": 10000,
+      "total": 77351,
+      "partial": true
+    },
+    "/api/map?from=2026-09-30&to=2027-01-17&source=culture": {
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "bytes": 2304930,
+      "items": 10000,
+      "total": 22649,
+      "partial": true
+    },
+    "/api/map?from=2026-09-29&to=2027-01-17&source=kopis": {
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "bytes": 2206990,
+      "items": 10000,
+      "total": 77351,
+      "partial": true
+    },
+    "/api/map?from=2026-09-29&to=2027-01-17&source=culture": {
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "bytes": 2304930,
+      "items": 10000,
+      "total": 22649,
+      "partial": true
+    },
+    "/api/map?from=2026-09-28&to=2027-01-17&source=kopis": {
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "bytes": 2206990,
+      "items": 10000,
+      "total": 77351,
+      "partial": true
+    },
+    "/api/map?from=2026-09-28&to=2027-01-17&source=culture": {
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "bytes": 2304930,
+      "items": 10000,
+      "total": 22649,
+      "partial": true
+    },
+    "/api/map?from=2026-09-27&to=2027-01-17&source=kopis": {
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "bytes": 2206990,
+      "items": 10000,
+      "total": 77351,
+      "partial": true
+    },
+    "/api/map?from=2026-09-27&to=2027-01-17&source=culture": {
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "bytes": 2304930,
+      "items": 10000,
+      "total": 22649,
+      "partial": true
+    },
+    "/api/map?from=2026-09-26&to=2027-01-17&source=kopis": {
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "bytes": 2206990,
+      "items": 10000,
+      "total": 77351,
+      "partial": true
+    },
+    "/api/map?from=2026-09-26&to=2027-01-17&source=culture": {
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "bytes": 2304930,
+      "items": 10000,
+      "total": 22649,
+      "partial": true
+    }
+  },
+  "bursts": [
+    {
+      "name": "eight-distinct-large-misses",
+      "calls": [
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-09-30&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-09-30&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-09-29&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-09-29&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-09-28&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+        }
+      ],
+      "before": {
+        "reads": 0,
+        "hits": 0,
+        "joins": 0,
+        "produces": 0,
+        "requests": 0,
+        "heads": 0,
+        "maxPending": 0,
+        "maxEntries": 0,
+        "maxBytes": 0
+      },
+      "after": {
+        "reads": 8,
+        "hits": 0,
+        "joins": 0,
+        "produces": 8,
+        "requests": 8,
+        "heads": 0,
+        "maxPending": 8,
+        "maxEntries": 7,
+        "maxBytes": 15840691
+      }
+    },
+    {
+      "name": "cold-join-head-hot-and-new-keys",
+      "calls": [
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+          "method": "HEAD"
+        },
+        {
+          "key": "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-09-27&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-09-27&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-09-26&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+        }
+      ],
+      "before": {
+        "reads": 8,
+        "hits": 0,
+        "joins": 0,
+        "produces": 8,
+        "requests": 8,
+        "heads": 0,
+        "maxPending": 8,
+        "maxEntries": 7,
+        "maxBytes": 15840691
+      },
+      "after": {
+        "reads": 15,
+        "hits": 1,
+        "joins": 1,
+        "produces": 13,
+        "requests": 16,
+        "heads": 1,
+        "maxPending": 8,
+        "maxEntries": 7,
+        "maxBytes": 15840691
+      }
+    },
+    {
+      "name": "eviction-retry-and-hit-bodies",
+      "calls": [
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+          "method": "HEAD"
+        },
+        {
+          "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+        },
+        {
+          "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+          "method": "HEAD"
+        },
+        {
+          "key": "/api/map?from=2026-09-26&to=2027-01-17&source=kopis"
+        },
+        {
+          "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+        }
+      ],
+      "before": {
+        "reads": 15,
+        "hits": 1,
+        "joins": 1,
+        "produces": 13,
+        "requests": 16,
+        "heads": 1,
+        "maxPending": 8,
+        "maxEntries": 7,
+        "maxBytes": 15840691
+      },
+      "after": {
+        "reads": 21,
+        "hits": 5,
+        "joins": 2,
+        "produces": 14,
+        "requests": 24,
+        "heads": 3,
+        "maxPending": 8,
+        "maxEntries": 7,
+        "maxBytes": 15840692
+      }
+    }
+  ],
+  "records": [
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206991,
+      "hash": "b5e9f8e81a2184ede1fb0b02dd429bf8e004914c7011a2da237e8e90521e6474",
+      "elapsedMs": 2903.1041
+    },
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304931,
+      "hash": "a86b72e0c171fdeb7602b2953c5b0c1e5d50db7ecc0bffdbbe9c870068c09fd9",
+      "elapsedMs": 2892.3972000000003
+    },
+    {
+      "key": "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206990,
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "elapsedMs": 2906.1258
+    },
+    {
+      "key": "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 2919.8602
+    },
+    {
+      "key": "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206990,
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "elapsedMs": 2934.7083000000002
+    },
+    {
+      "key": "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 2953.1161
+    },
+    {
+      "key": "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206990,
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "elapsedMs": 2966.8246999999997
+    },
+    {
+      "key": "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 2980.706
+    },
+    {
+      "key": "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 1903.1082999999999
+    },
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+      "method": "HEAD",
+      "status": 200,
+      "bytes": 0,
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsedMs": 1952.0324999999993
+    },
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206991,
+      "hash": "b5e9f8e81a2184ede1fb0b02dd429bf8e004914c7011a2da237e8e90521e6474",
+      "elapsedMs": 2077.3322
+    },
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206991,
+      "hash": "b5e9f8e81a2184ede1fb0b02dd429bf8e004914c7011a2da237e8e90521e6474",
+      "elapsedMs": 2090.2937
+    },
+    {
+      "key": "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206990,
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "elapsedMs": 2103.074300000001
+    },
+    {
+      "key": "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 2116.2968
+    },
+    {
+      "key": "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206990,
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "elapsedMs": 2130.1108999999988
+    },
+    {
+      "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 2151.1571999999996
+    },
+    {
+      "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 860.0085999999992
+    },
+    {
+      "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 881.7436999999991
+    },
+    {
+      "key": "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2206990,
+      "hash": "897018c7caf79dfcb7744391b69314c44547f25b57a576ba7e86a83ac850e460",
+      "elapsedMs": 896.6722000000009
+    },
+    {
+      "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304930,
+      "hash": "da69faa2fa97d0d78537e2b8c397d8ff9796b0f3c0259c8ad19f3154cde86210",
+      "elapsedMs": 911.2968000000001
+    },
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+      "method": "HEAD",
+      "status": 200,
+      "bytes": 0,
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsedMs": 936.6265999999996
+    },
+    {
+      "key": "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+      "method": "HEAD",
+      "status": 200,
+      "bytes": 0,
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsedMs": 956.3481000000011
+    },
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304931,
+      "hash": "a86b72e0c171fdeb7602b2953c5b0c1e5d50db7ecc0bffdbbe9c870068c09fd9",
+      "elapsedMs": 1019.6479999999992
+    },
+    {
+      "key": "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+      "method": "GET",
+      "status": 200,
+      "bytes": 2304931,
+      "hash": "a86b72e0c171fdeb7602b2953c5b0c1e5d50db7ecc0bffdbbe9c870068c09fd9",
+      "elapsedMs": 1037.6693000000014
+    }
+  ],
+  "cacheObservations": [
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 1,
+      "keys": []
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 2,
+      "keys": []
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 3,
+      "keys": []
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 4,
+      "keys": []
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 5,
+      "keys": []
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 6,
+      "keys": []
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 7,
+      "keys": []
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 0,
+      "entries": 0,
+      "pending": 8,
+      "keys": []
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "burst-eight-distinct-large-misses",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 2,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 3,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 4,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 5,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 5,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 5,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840691,
+      "entries": 7,
+      "pending": 5,
+      "keys": [
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-30&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-29&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "burst-cold-join-head-hot-and-new-keys",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis"
+      ]
+    },
+    {
+      "phase": "read-start",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15742751,
+      "entries": 7,
+      "pending": 1,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840692,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "read-complete",
+      "day": "2026-10-19",
+      "bytes": 15840692,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840692,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "body-complete",
+      "day": "2026-10-19",
+      "bytes": 15840692,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+      ]
+    },
+    {
+      "phase": "burst-eviction-retry-and-hit-bodies",
+      "day": "2026-10-19",
+      "bytes": 15840692,
+      "entries": 7,
+      "pending": 0,
+      "keys": [
+        "/api/map?from=2026-09-28&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-27&to=2027-01-17&source=culture",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=kopis",
+        "/api/map?from=2026-09-26&to=2027-01-17&source=culture",
+        "/api/map?from=2026-10-01&to=2027-01-17&source=culture"
+      ]
+    }
+  ]
+}

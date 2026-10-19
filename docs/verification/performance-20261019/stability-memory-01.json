@@ -1,0 +1,169 @@
+{
+  "scope": "Sampled natural-GC observations; no baseline improvement, leak-free, peak-memory or latency acceptance claim.",
+  "cache": {
+    "input": "docs/verification/performance-20261019/soak-wave1-60min.json",
+    "inputSha256": "c7254ca39a76e0f50afbe36eefede4318dfb7d050f8a4f68a2713e7e1358c0a9",
+    "sampleState": "running",
+    "samples": 61,
+    "burnInMinutes": 10,
+    "activeMinutes": 60.000260425000235,
+    "pausedMinutes": 36.48439429333322,
+    "wallMinutes": 96.79046294833333,
+    "cycles": 1793,
+    "windows": [
+      {
+        "startMinute": 10,
+        "endMinute": 15,
+        "samples": 6,
+        "heapLowerMiB": 33.580047607421875,
+        "rssLowerMiB": 155.68359375,
+        "externalLowerMiB": 8.045675277709961
+      },
+      {
+        "startMinute": 15,
+        "endMinute": 20,
+        "samples": 5,
+        "heapLowerMiB": 30.334999084472656,
+        "rssLowerMiB": 166.30078125,
+        "externalLowerMiB": 7.376540184020996
+      },
+      {
+        "startMinute": 20,
+        "endMinute": 25,
+        "samples": 5,
+        "heapLowerMiB": 31.850013732910156,
+        "rssLowerMiB": 163.71484375,
+        "externalLowerMiB": 6.972024917602539
+      },
+      {
+        "startMinute": 25,
+        "endMinute": 30,
+        "samples": 5,
+        "heapLowerMiB": 32.95953369140625,
+        "rssLowerMiB": 159.578125,
+        "externalLowerMiB": 8.130531311035156
+      },
+      {
+        "startMinute": 30,
+        "endMinute": 35,
+        "samples": 5,
+        "heapLowerMiB": 29.114906311035156,
+        "rssLowerMiB": 174.7109375,
+        "externalLowerMiB": 4.7991437911987305
+      },
+      {
+        "startMinute": 35,
+        "endMinute": 40,
+        "samples": 5,
+        "heapLowerMiB": 29.302978515625,
+        "rssLowerMiB": 176.25,
+        "externalLowerMiB": 5.748360633850098
+      },
+      {
+        "startMinute": 40,
+        "endMinute": 45,
+        "samples": 5,
+        "heapLowerMiB": 36.55571746826172,
+        "rssLowerMiB": 178.34765625,
+        "externalLowerMiB": 7.5938215255737305
+      },
+      {
+        "startMinute": 45,
+        "endMinute": 50,
+        "samples": 5,
+        "heapLowerMiB": 30.141189575195312,
+        "rssLowerMiB": 169.67578125,
+        "externalLowerMiB": 6.560382843017578
+      },
+      {
+        "startMinute": 50,
+        "endMinute": 55,
+        "samples": 5,
+        "heapLowerMiB": 36.28870391845703,
+        "rssLowerMiB": 186.76953125,
+        "externalLowerMiB": 8.579878807067871
+      },
+      {
+        "startMinute": 55,
+        "endMinute": 60,
+        "samples": 5,
+        "heapLowerMiB": 29.831314086914062,
+        "rssLowerMiB": 167.5234375,
+        "externalLowerMiB": 6.57568359375
+      }
+    ],
+    "heapLowerTheilSenMiBPerMinute": -0.012592124938964843,
+    "earlyLowerHeapMedianMiB": 31.850013732910156,
+    "lateLowerHeapMedianMiB": 30.141189575195312,
+    "endpointWindows": 3,
+    "endpointDeltaMiB": -1.7088241577148438,
+    "sourceHash": "22827b29bb2b33ff17a10ef283c4f1770009d5cb2080516145a9ddd4cc8e7472",
+    "snapshot": {
+      "hash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+      "performances": 5649
+    }
+  },
+  "export": {
+    "input": "docs/verification/performance-20261019/export-soak-wave4-30min.json",
+    "inputSha256": "dc1debb1654df050508745a285015de8ff97ddff66ad5200ae92d6479d5cf6db",
+    "sampleState": "settled",
+    "samples": 90,
+    "burnInMinutes": 5,
+    "activeMinutes": 30.009702361666672,
+    "pausedMinutes": 0.0,
+    "wallMinutes": 30.301427685000004,
+    "cycles": 90,
+    "windows": [
+      {
+        "startMinute": 5,
+        "endMinute": 10,
+        "samples": 15,
+        "heapLowerMiB": 94.8551254272461,
+        "rssLowerMiB": 560.83203125,
+        "externalLowerMiB": 17.391616821289062
+      },
+      {
+        "startMinute": 10,
+        "endMinute": 15,
+        "samples": 15,
+        "heapLowerMiB": 94.7077865600586,
+        "rssLowerMiB": 668.8671875,
+        "externalLowerMiB": 13.97754955291748
+      },
+      {
+        "startMinute": 15,
+        "endMinute": 20,
+        "samples": 15,
+        "heapLowerMiB": 95.14936828613281,
+        "rssLowerMiB": 669.04296875,
+        "externalLowerMiB": 13.98536491394043
+      },
+      {
+        "startMinute": 20,
+        "endMinute": 25,
+        "samples": 15,
+        "heapLowerMiB": 94.98062896728516,
+        "rssLowerMiB": 698.93359375,
+        "externalLowerMiB": 15.73536491394043
+      },
+      {
+        "startMinute": 25,
+        "endMinute": 30,
+        "samples": 15,
+        "heapLowerMiB": 94.90560913085938,
+        "rssLowerMiB": 672.62890625,
+        "externalLowerMiB": 15.73536491394043
+      }
+    ],
+    "heapLowerTheilSenMiBPerMinute": 0.005445543924967449,
+    "earlyLowerHeapMedianMiB": 94.78145599365234,
+    "lateLowerHeapMedianMiB": 94.94311904907227,
+    "endpointWindows": 2,
+    "endpointDeltaMiB": 0.16166305541992188,
+    "sourceHash": "d50e3dc7ef47590d52ea14d1942f8efb919daa47c250b9454a3a4cb16b33bca3",
+    "snapshot": {
+      "hash": "a237378f0a4a428eb74df07a3e01227470a2b9153146d5b6ff93d6669e69b5c2",
+      "rows": 22596
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "at": "2026-10-18T17:59:06.515Z",
+  "success": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Additional index must not change any table or row\n+ actual - expected\n... Skipped lines\n\n  {\n    counts: {\n      bookmarks: 0,\n      cities: 230,\n      performance_sources: 0,\n...\n    },\n+   hash: '0d7a48add3e437f244758bab88981357d1d934b3642ac0d279d03fe0ce8a31fa',\n-   hash: '5bc6bcf8177877d9ff62232e47d7121b48962bf8353a9317ca8cab3eecdb0c29',\n    totalChanges: 23287\n  }\n\n    at worker (C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts:152:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async <anonymous> (C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts:239:92)",
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave11-selection",
+  "fixture": "repeated",
+  "scope": "Private in-memory post-load extra-index experiment. Five alternating warm pairs per case, one warm-up pair, natural GC. Whole-route no-trace timings and a single separate trace attribution pass. Fresh-model startup excludes artifact read/parse and module import; five actual-corpus model pairs, one pair per larger fixture. Not fresh-process startup, p95, latency acceptance, or peak-memory evidence. No response cache or cloud-envelope work; exact Fastify body/status/headers (except Date) compared.",
+  "candidate": "CREATE INDEX experiment_performances_order ON performances(classification,start_date DESC,id DESC)",
+  "source": {
+    "before": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+    "after": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb"
+  },
+  "harness": {
+    "before": {
+      "hash": "04f4c5b2d4d4fdf444f0ac7b1f3a8b4c9b5880437a151c2d61c4b0d0817e58c3",
+      "files": {
+        "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts": "89f5e9ea56d417543e7d3a4bf10e37933d5138ff8ccc21e8e3657fda12fc0c6f",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f"
+      }
+    },
+    "afterHash": "04f4c5b2d4d4fdf444f0ac7b1f3a8b4c9b5880437a151c2d61c4b0d0817e58c3"
+  },
+  "artifact": {
+    "path": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\scale-22596.json",
+    "beforeHash": "a237378f0a4a428eb74df07a3e01227470a2b9153146d5b6ff93d6669e69b5c2",
+    "afterHash": "a237378f0a4a428eb74df07a3e01227470a2b9153146d5b6ff93d6669e69b5c2",
+    "rows": 22596
+  },
+  "models": [
+    {
+      "variant": "original"
+    },
+    {
+      "variant": "ordered-index"
+    }
+  ],
+  "results": [
+    {
+      "case": "national",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": null
+        },
+        {
+          "variant": "ordered-index",
+          "route": null
+        }
+      ],
+      "pairedSavingsMs": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "coldSummary": [
+    {
+      "variant": "original",
+      "modelThroughFirstResponse": {
+        "samples": 1,
+        "medianMs": 799.1560999999999,
+        "minMs": 799.1560999999999,
+        "maxMs": 799.1560999999999,
+        "valuesMs": [
+          799.1560999999999
+        ]
+      },
+      "indexBuild": {
+        "samples": 1,
+        "medianMs": 0.001199999999926149,
+        "minMs": 0.001199999999926149,
+        "maxMs": 0.001199999999926149,
+        "valuesMs": [
+          0.001199999999926149
+        ]
+      },
+      "additionalAllocatedBytes": [
+        0
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "modelThroughFirstResponse": {
+        "samples": 1,
+        "medianMs": 686.7746000000002,
+        "minMs": 686.7746000000002,
+        "maxMs": 686.7746000000002,
+        "valuesMs": [
+          686.7746000000002
+        ]
+      },
+      "indexBuild": {
+        "samples": 1,
+        "medianMs": 15.556900000000041,
+        "minMs": 15.556900000000041,
+        "maxMs": 15.556900000000041,
+        "valuesMs": [
+          15.556900000000041
+        ]
+      },
+      "additionalAllocatedBytes": [
+        757760
+      ]
+    }
+  ],
+  "cold": [
+    {
+      "pair": 0,
+      "variant": "original",
+      "setupMs": 2.4552999999999656,
+      "validatedInsertMs": 530.2169,
+      "indexBuildMs": 0.001199999999926149,
+      "routeReadyMs": 108.49810000000002,
+      "firstResponseMs": 157.80549999999994,
+      "modelThroughFirstResponseMs": 799.1560999999999,
+      "beforePages": {
+        "pages": 11713,
+        "pageBytes": 4096,
+        "allocatedBytes": 47976448
+      },
+      "afterPages": {
+        "pages": 11713,
+        "pageBytes": 4096,
+        "allocatedBytes": 47976448
+      },
+      "additionalAllocatedBytes": 0,
+      "memoryBefore": {
+        "rss": 239919104,
+        "heapTotal": 123207680,
+        "heapUsed": 62684240,
+        "external": 94498618,
+        "arrayBuffers": 34607264
+      },
+      "memoryAfter": {
+        "rss": 366899200,
+        "heapTotal": 143413248,
+        "heapUsed": 99069488,
+        "external": 108261462,
+        "arrayBuffers": 43446854
+      }
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "setupMs": 1.574200000000019,
+      "validatedInsertMs": 523.0820999999999,
+      "indexBuildMs": 15.556900000000041,
+      "routeReadyMs": 3.1847999999999956,
+      "firstResponseMs": 143.32240000000024,
+      "modelThroughFirstResponseMs": 686.7746000000002,
+      "beforePages": {
+        "pages": 11713,
+        "pageBytes": 4096,
+        "allocatedBytes": 47976448
+      },
+      "afterPages": {
+        "pages": 11898,
+        "pageBytes": 4096,
+        "allocatedBytes": 48734208
+      },
+      "additionalAllocatedBytes": 757760,
+      "memoryBefore": {
+        "rss": 263950336,
+        "heapTotal": 135004160,
+        "heapUsed": 70005560,
+        "external": 51759052,
+        "arrayBuffers": 5994229
+      },
+      "memoryAfter": {
+        "rss": 345620480,
+        "heapTotal": 144986112,
+        "heapUsed": 84518584,
+        "external": 28003183,
+        "arrayBuffers": 14833307
+      }
+    }
+  ],
+  "functional": [],
+  "phases": [],
+  "plans": [],
+  "raw": []
+}

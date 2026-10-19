@@ -1,0 +1,2435 @@
+{
+  "version": 1,
+  "measuredAt": "2026-10-18T17:02:23.667Z",
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave4-cleanup",
+  "source": "d50e3dc7ef47590d52ea14d1942f8efb919daa47c250b9454a3a4cb16b33bca3",
+  "scope": "Offline SQL/projection/budget/serialization attribution. Alternating variants; optional explicit GC only before each variant. Memory entries are observation points, not per-variant RSS peaks. Not an HTTP or cold-start acceptance benchmark.",
+  "artifactPath": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\scale-22596.json",
+  "artifactFileBytes": 34506109,
+  "originalRows": 22596,
+  "effectiveRows": 22596,
+  "take": null,
+  "samples": 1,
+  "warmup": 0,
+  "explicitGc": true,
+  "hydrationMs": 547.1039000000001,
+  "sentinel": 10001,
+  "results": [
+    {
+      "case": "national",
+      "variants": [
+        {
+          "name": "full",
+          "materializedRows": 22596,
+          "selectedRows": 22596,
+          "returnedRows": 10000,
+          "total": 22596,
+          "bytes": 2946281,
+          "truncated": true,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 134.89510000000007,
+            "p95Ms": 134.89510000000007,
+            "minMs": 134.89510000000007,
+            "maxMs": 134.89510000000007,
+            "meanMs": 134.89510000000007
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 14.553199999999947,
+            "p95Ms": 14.553199999999947,
+            "minMs": 14.553199999999947,
+            "maxMs": 14.553199999999947,
+            "meanMs": 14.553199999999947
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 9.83299999999997,
+            "p95Ms": 9.83299999999997,
+            "minMs": 9.83299999999997,
+            "maxMs": 9.83299999999997,
+            "meanMs": 9.83299999999997
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 9.005100000000084,
+            "p95Ms": 9.005100000000084,
+            "minMs": 9.005100000000084,
+            "maxMs": 9.005100000000084,
+            "meanMs": 9.005100000000084
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 168.36700000000008,
+            "p95Ms": 168.36700000000008,
+            "minMs": 168.36700000000008,
+            "maxMs": 168.36700000000008,
+            "meanMs": 168.36700000000008
+          },
+          "wireHash": "a6bf33c37f3627fd87124a0f57ad7bc5d63158c05dccb042b89a31f55165b8ad"
+        },
+        {
+          "name": "limit",
+          "materializedRows": 10001,
+          "selectedRows": 22596,
+          "returnedRows": 10000,
+          "total": 22596,
+          "bytes": 2946281,
+          "truncated": true,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 135.50659999999993,
+            "p95Ms": 135.50659999999993,
+            "minMs": 135.50659999999993,
+            "maxMs": 135.50659999999993,
+            "meanMs": 135.50659999999993
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 6.909799999999905,
+            "p95Ms": 6.909799999999905,
+            "minMs": 6.909799999999905,
+            "maxMs": 6.909799999999905,
+            "meanMs": 6.909799999999905
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 9.115199999999959,
+            "p95Ms": 9.115199999999959,
+            "minMs": 9.115199999999959,
+            "maxMs": 9.115199999999959,
+            "meanMs": 9.115199999999959
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 9.636599999999817,
+            "p95Ms": 9.636599999999817,
+            "minMs": 9.636599999999817,
+            "maxMs": 9.636599999999817,
+            "meanMs": 9.636599999999817
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 161.26209999999992,
+            "p95Ms": 161.26209999999992,
+            "minMs": 161.26209999999992,
+            "maxMs": 161.26209999999992,
+            "meanMs": 161.26209999999992
+          },
+          "wireHash": "a6bf33c37f3627fd87124a0f57ad7bc5d63158c05dccb042b89a31f55165b8ad"
+        },
+        {
+          "name": "cte",
+          "materializedRows": 10001,
+          "selectedRows": 22596,
+          "returnedRows": 10000,
+          "total": 22596,
+          "bytes": 2946281,
+          "truncated": true,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 79.07819999999992,
+            "p95Ms": 79.07819999999992,
+            "minMs": 79.07819999999992,
+            "maxMs": 79.07819999999992,
+            "meanMs": 79.07819999999992
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 6.644800000000032,
+            "p95Ms": 6.644800000000032,
+            "minMs": 6.644800000000032,
+            "maxMs": 6.644800000000032,
+            "meanMs": 6.644800000000032
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 10.639399999999796,
+            "p95Ms": 10.639399999999796,
+            "minMs": 10.639399999999796,
+            "maxMs": 10.639399999999796,
+            "meanMs": 10.639399999999796
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 8.663800000000037,
+            "p95Ms": 8.663800000000037,
+            "minMs": 8.663800000000037,
+            "maxMs": 8.663800000000037,
+            "meanMs": 8.663800000000037
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 105.10410000000002,
+            "p95Ms": 105.10410000000002,
+            "minMs": 105.10410000000002,
+            "maxMs": 105.10410000000002,
+            "meanMs": 105.10410000000002
+          },
+          "wireHash": "a6bf33c37f3627fd87124a0f57ad7bc5d63158c05dccb042b89a31f55165b8ad"
+        }
+      ]
+    },
+    {
+      "case": "regional",
+      "variants": [
+        {
+          "name": "full",
+          "materializedRows": 204,
+          "selectedRows": 204,
+          "returnedRows": 204,
+          "total": 204,
+          "bytes": 58537,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 1.1914999999999054,
+            "p95Ms": 1.1914999999999054,
+            "minMs": 1.1914999999999054,
+            "maxMs": 1.1914999999999054,
+            "meanMs": 1.1914999999999054
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.13789999999994507,
+            "p95Ms": 0.13789999999994507,
+            "minMs": 0.13789999999994507,
+            "maxMs": 0.13789999999994507,
+            "meanMs": 0.13789999999994507
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.20450000000005275,
+            "p95Ms": 0.20450000000005275,
+            "minMs": 0.20450000000005275,
+            "maxMs": 0.20450000000005275,
+            "meanMs": 0.20450000000005275
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.09719999999992979,
+            "p95Ms": 0.09719999999992979,
+            "minMs": 0.09719999999992979,
+            "maxMs": 0.09719999999992979,
+            "meanMs": 0.09719999999992979
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 1.6440999999999804,
+            "p95Ms": 1.6440999999999804,
+            "minMs": 1.6440999999999804,
+            "maxMs": 1.6440999999999804,
+            "meanMs": 1.6440999999999804
+          },
+          "wireHash": "927c7ca35b6f601bfe047d4ea57e592a70cb2e37f6348b6290630e7d9850e423"
+        },
+        {
+          "name": "limit",
+          "materializedRows": 204,
+          "selectedRows": 204,
+          "returnedRows": 204,
+          "total": 204,
+          "bytes": 58537,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 1.4084000000000287,
+            "p95Ms": 1.4084000000000287,
+            "minMs": 1.4084000000000287,
+            "maxMs": 1.4084000000000287,
+            "meanMs": 1.4084000000000287
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.1450999999999567,
+            "p95Ms": 0.1450999999999567,
+            "minMs": 0.1450999999999567,
+            "maxMs": 0.1450999999999567,
+            "meanMs": 0.1450999999999567
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.20049999999991996,
+            "p95Ms": 0.20049999999991996,
+            "minMs": 0.20049999999991996,
+            "maxMs": 0.20049999999991996,
+            "meanMs": 0.20049999999991996
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.10069999999996071,
+            "p95Ms": 0.10069999999996071,
+            "minMs": 0.10069999999996071,
+            "maxMs": 0.10069999999996071,
+            "meanMs": 0.10069999999996071
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 1.8676000000000386,
+            "p95Ms": 1.8676000000000386,
+            "minMs": 1.8676000000000386,
+            "maxMs": 1.8676000000000386,
+            "meanMs": 1.8676000000000386
+          },
+          "wireHash": "927c7ca35b6f601bfe047d4ea57e592a70cb2e37f6348b6290630e7d9850e423"
+        },
+        {
+          "name": "cte",
+          "materializedRows": 204,
+          "selectedRows": 204,
+          "returnedRows": 204,
+          "total": 204,
+          "bytes": 58537,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 1.3293999999998505,
+            "p95Ms": 1.3293999999998505,
+            "minMs": 1.3293999999998505,
+            "maxMs": 1.3293999999998505,
+            "meanMs": 1.3293999999998505
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.1408000000001266,
+            "p95Ms": 0.1408000000001266,
+            "minMs": 0.1408000000001266,
+            "maxMs": 0.1408000000001266,
+            "meanMs": 0.1408000000001266
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.21460000000001855,
+            "p95Ms": 0.21460000000001855,
+            "minMs": 0.21460000000001855,
+            "maxMs": 0.21460000000001855,
+            "meanMs": 0.21460000000001855
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.09789999999998145,
+            "p95Ms": 0.09789999999998145,
+            "minMs": 0.09789999999998145,
+            "maxMs": 0.09789999999998145,
+            "meanMs": 0.09789999999998145
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 1.7946999999999207,
+            "p95Ms": 1.7946999999999207,
+            "minMs": 1.7946999999999207,
+            "maxMs": 1.7946999999999207,
+            "meanMs": 1.7946999999999207
+          },
+          "wireHash": "927c7ca35b6f601bfe047d4ea57e592a70cb2e37f6348b6290630e7d9850e423"
+        }
+      ]
+    },
+    {
+      "case": "source",
+      "variants": [
+        {
+          "name": "full",
+          "materializedRows": 5112,
+          "selectedRows": 5112,
+          "returnedRows": 5112,
+          "total": 5112,
+          "bytes": 1496650,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 22.934400000000096,
+            "p95Ms": 22.934400000000096,
+            "minMs": 22.934400000000096,
+            "maxMs": 22.934400000000096,
+            "meanMs": 22.934400000000096
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 3.2575000000001637,
+            "p95Ms": 3.2575000000001637,
+            "minMs": 3.2575000000001637,
+            "maxMs": 3.2575000000001637,
+            "meanMs": 3.2575000000001637
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 4.557399999999916,
+            "p95Ms": 4.557399999999916,
+            "minMs": 4.557399999999916,
+            "maxMs": 4.557399999999916,
+            "meanMs": 4.557399999999916
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 4.866500000000087,
+            "p95Ms": 4.866500000000087,
+            "minMs": 4.866500000000087,
+            "maxMs": 4.866500000000087,
+            "meanMs": 4.866500000000087
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 35.6567,
+            "p95Ms": 35.6567,
+            "minMs": 35.6567,
+            "maxMs": 35.6567,
+            "meanMs": 35.6567
+          },
+          "wireHash": "f283ba242527e68ea441f0e117c9a40f6b330954878b0993a81d89919c87fb0e"
+        },
+        {
+          "name": "limit",
+          "materializedRows": 5112,
+          "selectedRows": 5112,
+          "returnedRows": 5112,
+          "total": 5112,
+          "bytes": 1496650,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 25.739599999999882,
+            "p95Ms": 25.739599999999882,
+            "minMs": 25.739599999999882,
+            "maxMs": 25.739599999999882,
+            "meanMs": 25.739599999999882
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 4.233099999999922,
+            "p95Ms": 4.233099999999922,
+            "minMs": 4.233099999999922,
+            "maxMs": 4.233099999999922,
+            "meanMs": 4.233099999999922
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 4.765800000000127,
+            "p95Ms": 4.765800000000127,
+            "minMs": 4.765800000000127,
+            "maxMs": 4.765800000000127,
+            "meanMs": 4.765800000000127
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 4.3909000000001015,
+            "p95Ms": 4.3909000000001015,
+            "minMs": 4.3909000000001015,
+            "maxMs": 4.3909000000001015,
+            "meanMs": 4.3909000000001015
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 39.16779999999994,
+            "p95Ms": 39.16779999999994,
+            "minMs": 39.16779999999994,
+            "maxMs": 39.16779999999994,
+            "meanMs": 39.16779999999994
+          },
+          "wireHash": "f283ba242527e68ea441f0e117c9a40f6b330954878b0993a81d89919c87fb0e"
+        },
+        {
+          "name": "cte",
+          "materializedRows": 5112,
+          "selectedRows": 5112,
+          "returnedRows": 5112,
+          "total": 5112,
+          "bytes": 1496650,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 26.86920000000009,
+            "p95Ms": 26.86920000000009,
+            "minMs": 26.86920000000009,
+            "maxMs": 26.86920000000009,
+            "meanMs": 26.86920000000009
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 3.2604999999998654,
+            "p95Ms": 3.2604999999998654,
+            "minMs": 3.2604999999998654,
+            "maxMs": 3.2604999999998654,
+            "meanMs": 3.2604999999998654
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 4.469699999999875,
+            "p95Ms": 4.469699999999875,
+            "minMs": 4.469699999999875,
+            "maxMs": 4.469699999999875,
+            "meanMs": 4.469699999999875
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 4.352200000000039,
+            "p95Ms": 4.352200000000039,
+            "minMs": 4.352200000000039,
+            "maxMs": 4.352200000000039,
+            "meanMs": 4.352200000000039
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 38.983999999999924,
+            "p95Ms": 38.983999999999924,
+            "minMs": 38.983999999999924,
+            "maxMs": 38.983999999999924,
+            "meanMs": 38.983999999999924
+          },
+          "wireHash": "f283ba242527e68ea441f0e117c9a40f6b330954878b0993a81d89919c87fb0e"
+        }
+      ]
+    },
+    {
+      "case": "text",
+      "variants": [
+        {
+          "name": "full",
+          "materializedRows": 1760,
+          "selectedRows": 1760,
+          "returnedRows": 1760,
+          "total": 1760,
+          "bytes": 550733,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 57.78020000000015,
+            "p95Ms": 57.78020000000015,
+            "minMs": 57.78020000000015,
+            "maxMs": 57.78020000000015,
+            "meanMs": 57.78020000000015
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 1.304200000000037,
+            "p95Ms": 1.304200000000037,
+            "minMs": 1.304200000000037,
+            "maxMs": 1.304200000000037,
+            "meanMs": 1.304200000000037
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 1.8110000000001492,
+            "p95Ms": 1.8110000000001492,
+            "minMs": 1.8110000000001492,
+            "maxMs": 1.8110000000001492,
+            "meanMs": 1.8110000000001492
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 1.3533000000002176,
+            "p95Ms": 1.3533000000002176,
+            "minMs": 1.3533000000002176,
+            "maxMs": 1.3533000000002176,
+            "meanMs": 1.3533000000002176
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 62.2786000000001,
+            "p95Ms": 62.2786000000001,
+            "minMs": 62.2786000000001,
+            "maxMs": 62.2786000000001,
+            "meanMs": 62.2786000000001
+          },
+          "wireHash": "17dcec6d94040b1cef81635b4e167a777307e3c1cef562cc48718c70b7817128"
+        },
+        {
+          "name": "limit",
+          "materializedRows": 1760,
+          "selectedRows": 1760,
+          "returnedRows": 1760,
+          "total": 1760,
+          "bytes": 550733,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 59.21120000000019,
+            "p95Ms": 59.21120000000019,
+            "minMs": 59.21120000000019,
+            "maxMs": 59.21120000000019,
+            "meanMs": 59.21120000000019
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 1.1309999999998581,
+            "p95Ms": 1.1309999999998581,
+            "minMs": 1.1309999999998581,
+            "maxMs": 1.1309999999998581,
+            "meanMs": 1.1309999999998581
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 1.5489000000002306,
+            "p95Ms": 1.5489000000002306,
+            "minMs": 1.5489000000002306,
+            "maxMs": 1.5489000000002306,
+            "meanMs": 1.5489000000002306
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 1.355199999999968,
+            "p95Ms": 1.355199999999968,
+            "minMs": 1.355199999999968,
+            "maxMs": 1.355199999999968,
+            "meanMs": 1.355199999999968
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 63.28240000000005,
+            "p95Ms": 63.28240000000005,
+            "minMs": 63.28240000000005,
+            "maxMs": 63.28240000000005,
+            "meanMs": 63.28240000000005
+          },
+          "wireHash": "17dcec6d94040b1cef81635b4e167a777307e3c1cef562cc48718c70b7817128"
+        },
+        {
+          "name": "cte",
+          "materializedRows": 1760,
+          "selectedRows": 1760,
+          "returnedRows": 1760,
+          "total": 1760,
+          "bytes": 550733,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 65.84839999999986,
+            "p95Ms": 65.84839999999986,
+            "minMs": 65.84839999999986,
+            "maxMs": 65.84839999999986,
+            "meanMs": 65.84839999999986
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 1.4891999999999825,
+            "p95Ms": 1.4891999999999825,
+            "minMs": 1.4891999999999825,
+            "maxMs": 1.4891999999999825,
+            "meanMs": 1.4891999999999825
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 1.734599999999773,
+            "p95Ms": 1.734599999999773,
+            "minMs": 1.734599999999773,
+            "maxMs": 1.734599999999773,
+            "meanMs": 1.734599999999773
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 1.3281999999999243,
+            "p95Ms": 1.3281999999999243,
+            "minMs": 1.3281999999999243,
+            "maxMs": 1.3281999999999243,
+            "meanMs": 1.3281999999999243
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 70.47389999999996,
+            "p95Ms": 70.47389999999996,
+            "minMs": 70.47389999999996,
+            "maxMs": 70.47389999999996,
+            "meanMs": 70.47389999999996
+          },
+          "wireHash": "17dcec6d94040b1cef81635b4e167a777307e3c1cef562cc48718c70b7817128"
+        }
+      ]
+    },
+    {
+      "case": "admission",
+      "variants": [
+        {
+          "name": "full",
+          "materializedRows": 220,
+          "selectedRows": 220,
+          "returnedRows": 220,
+          "total": 220,
+          "bytes": 67725,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 43.95880000000034,
+            "p95Ms": 43.95880000000034,
+            "minMs": 43.95880000000034,
+            "maxMs": 43.95880000000034,
+            "meanMs": 43.95880000000034
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.16689999999971405,
+            "p95Ms": 0.16689999999971405,
+            "minMs": 0.16689999999971405,
+            "maxMs": 0.16689999999971405,
+            "meanMs": 0.16689999999971405
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.21030000000018845,
+            "p95Ms": 0.21030000000018845,
+            "minMs": 0.21030000000018845,
+            "maxMs": 0.21030000000018845,
+            "meanMs": 0.21030000000018845
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.1093999999998232,
+            "p95Ms": 0.1093999999998232,
+            "minMs": 0.1093999999998232,
+            "maxMs": 0.1093999999998232,
+            "meanMs": 0.1093999999998232
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 44.47260000000006,
+            "p95Ms": 44.47260000000006,
+            "minMs": 44.47260000000006,
+            "maxMs": 44.47260000000006,
+            "meanMs": 44.47260000000006
+          },
+          "wireHash": "9eeb69510d67af54273878a951a4b1c1e85bc19ee6b409e2fa0dec40d76e2966"
+        },
+        {
+          "name": "limit",
+          "materializedRows": 220,
+          "selectedRows": 220,
+          "returnedRows": 220,
+          "total": 220,
+          "bytes": 67725,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 45.164999999999964,
+            "p95Ms": 45.164999999999964,
+            "minMs": 45.164999999999964,
+            "maxMs": 45.164999999999964,
+            "meanMs": 45.164999999999964
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.17000000000007276,
+            "p95Ms": 0.17000000000007276,
+            "minMs": 0.17000000000007276,
+            "maxMs": 0.17000000000007276,
+            "meanMs": 0.17000000000007276
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.22100000000000364,
+            "p95Ms": 0.22100000000000364,
+            "minMs": 0.22100000000000364,
+            "maxMs": 0.22100000000000364,
+            "meanMs": 0.22100000000000364
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.11560000000008586,
+            "p95Ms": 0.11560000000008586,
+            "minMs": 0.11560000000008586,
+            "maxMs": 0.11560000000008586,
+            "meanMs": 0.11560000000008586
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 45.69419999999991,
+            "p95Ms": 45.69419999999991,
+            "minMs": 45.69419999999991,
+            "maxMs": 45.69419999999991,
+            "meanMs": 45.69419999999991
+          },
+          "wireHash": "9eeb69510d67af54273878a951a4b1c1e85bc19ee6b409e2fa0dec40d76e2966"
+        },
+        {
+          "name": "cte",
+          "materializedRows": 220,
+          "selectedRows": 220,
+          "returnedRows": 220,
+          "total": 220,
+          "bytes": 67725,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 45.07829999999967,
+            "p95Ms": 45.07829999999967,
+            "minMs": 45.07829999999967,
+            "maxMs": 45.07829999999967,
+            "meanMs": 45.07829999999967
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.17309999999997672,
+            "p95Ms": 0.17309999999997672,
+            "minMs": 0.17309999999997672,
+            "maxMs": 0.17309999999997672,
+            "meanMs": 0.17309999999997672
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.21329999999989013,
+            "p95Ms": 0.21329999999989013,
+            "minMs": 0.21329999999989013,
+            "maxMs": 0.21329999999989013,
+            "meanMs": 0.21329999999989013
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.10820000000012442,
+            "p95Ms": 0.10820000000012442,
+            "minMs": 0.10820000000012442,
+            "maxMs": 0.10820000000012442,
+            "meanMs": 0.10820000000012442
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 45.59929999999986,
+            "p95Ms": 45.59929999999986,
+            "minMs": 45.59929999999986,
+            "maxMs": 45.59929999999986,
+            "meanMs": 45.59929999999986
+          },
+          "wireHash": "9eeb69510d67af54273878a951a4b1c1e85bc19ee6b409e2fa0dec40d76e2966"
+        }
+      ]
+    },
+    {
+      "case": "bookmarks",
+      "variants": [
+        {
+          "name": "full",
+          "materializedRows": 0,
+          "selectedRows": 0,
+          "returnedRows": 0,
+          "total": 0,
+          "bytes": 173,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 3.345600000000104,
+            "p95Ms": 3.345600000000104,
+            "minMs": 3.345600000000104,
+            "maxMs": 3.345600000000104,
+            "meanMs": 3.345600000000104
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.012699999999767897,
+            "p95Ms": 0.012699999999767897,
+            "minMs": 0.012699999999767897,
+            "maxMs": 0.012699999999767897,
+            "meanMs": 0.012699999999767897
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.0670999999997548,
+            "p95Ms": 0.0670999999997548,
+            "minMs": 0.0670999999997548,
+            "maxMs": 0.0670999999997548,
+            "meanMs": 0.0670999999997548
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.0030999999999039574,
+            "p95Ms": 0.0030999999999039574,
+            "minMs": 0.0030999999999039574,
+            "maxMs": 0.0030999999999039574,
+            "meanMs": 0.0030999999999039574
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 3.452299999999923,
+            "p95Ms": 3.452299999999923,
+            "minMs": 3.452299999999923,
+            "maxMs": 3.452299999999923,
+            "meanMs": 3.452299999999923
+          },
+          "wireHash": "83b83735e7ca227815871f4779b9663537ab04b0ad9b439535c10e78795b067e"
+        },
+        {
+          "name": "limit",
+          "materializedRows": 0,
+          "selectedRows": 0,
+          "returnedRows": 0,
+          "total": 0,
+          "bytes": 173,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 2.42450000000008,
+            "p95Ms": 2.42450000000008,
+            "minMs": 2.42450000000008,
+            "maxMs": 2.42450000000008,
+            "meanMs": 2.42450000000008
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.0009000000000014552,
+            "p95Ms": 0.0009000000000014552,
+            "minMs": 0.0009000000000014552,
+            "maxMs": 0.0009000000000014552,
+            "meanMs": 0.0009000000000014552
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.020599999999831198,
+            "p95Ms": 0.020599999999831198,
+            "minMs": 0.020599999999831198,
+            "maxMs": 0.020599999999831198,
+            "meanMs": 0.020599999999831198
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.0009999999997489795,
+            "p95Ms": 0.0009999999997489795,
+            "minMs": 0.0009999999997489795,
+            "maxMs": 0.0009999999997489795,
+            "meanMs": 0.0009999999997489795
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 2.4578999999998814,
+            "p95Ms": 2.4578999999998814,
+            "minMs": 2.4578999999998814,
+            "maxMs": 2.4578999999998814,
+            "meanMs": 2.4578999999998814
+          },
+          "wireHash": "83b83735e7ca227815871f4779b9663537ab04b0ad9b439535c10e78795b067e"
+        },
+        {
+          "name": "cte",
+          "materializedRows": 0,
+          "selectedRows": 0,
+          "returnedRows": 0,
+          "total": 0,
+          "bytes": 173,
+          "truncated": false,
+          "sql": {
+            "samples": 1,
+            "p50Ms": 2.3799999999996544,
+            "p95Ms": 2.3799999999996544,
+            "minMs": 2.3799999999996544,
+            "maxMs": 2.3799999999996544,
+            "meanMs": 2.3799999999996544
+          },
+          "project": {
+            "samples": 1,
+            "p50Ms": 0.0009999999997489795,
+            "p95Ms": 0.0009999999997489795,
+            "minMs": 0.0009999999997489795,
+            "maxMs": 0.0009999999997489795,
+            "meanMs": 0.0009999999997489795
+          },
+          "budget": {
+            "samples": 1,
+            "p50Ms": 0.015900000000328873,
+            "p95Ms": 0.015900000000328873,
+            "minMs": 0.015900000000328873,
+            "maxMs": 0.015900000000328873,
+            "meanMs": 0.015900000000328873
+          },
+          "serialize": {
+            "samples": 1,
+            "p50Ms": 0.0010000000002037268,
+            "p95Ms": 0.0010000000002037268,
+            "minMs": 0.0010000000002037268,
+            "maxMs": 0.0010000000002037268,
+            "meanMs": 0.0010000000002037268
+          },
+          "elapsed": {
+            "samples": 1,
+            "p50Ms": 2.4097999999999047,
+            "p95Ms": 2.4097999999999047,
+            "minMs": 2.4097999999999047,
+            "maxMs": 2.4097999999999047,
+            "meanMs": 2.4097999999999047
+          },
+          "wireHash": "83b83735e7ca227815871f4779b9663537ab04b0ad9b439535c10e78795b067e"
+        }
+      ]
+    }
+  ],
+  "plans": [
+    {
+      "case": "national",
+      "variants": [
+        {
+          "name": "full",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 82,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "limit",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 90,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "cte",
+          "sql": "WITH selected AS MATERIALIZED (SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?)\n        SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 10,
+              "parent": 3,
+              "notused": 55,
+              "detail": "SEARCH p USING COVERING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 31,
+              "parent": 3,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            },
+            {
+              "id": 42,
+              "parent": 0,
+              "notused": 47,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 44,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 116,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "regional",
+      "variants": [
+        {
+          "name": "full",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 102,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "limit",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 110,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "cte",
+          "sql": "WITH selected AS MATERIALIZED (SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?)\n        SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 10,
+              "parent": 3,
+              "notused": 55,
+              "detail": "SEARCH p USING COVERING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 51,
+              "parent": 3,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            },
+            {
+              "id": 62,
+              "parent": 0,
+              "notused": 37,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 64,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 136,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "source",
+      "variants": [
+        {
+          "name": "full",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.source=? ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "culture"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX sqlite_autoindex_performances_1 (source=?)"
+            },
+            {
+              "id": 86,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "limit",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.source=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "culture",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX sqlite_autoindex_performances_1 (source=?)"
+            },
+            {
+              "id": 94,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "cte",
+          "sql": "WITH selected AS MATERIALIZED (SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.source=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?)\n        SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "culture",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 11,
+              "parent": 3,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX sqlite_autoindex_performances_1 (source=?)"
+            },
+            {
+              "id": 37,
+              "parent": 3,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            },
+            {
+              "id": 48,
+              "parent": 0,
+              "notused": 46,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 50,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 122,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "text",
+      "variants": [
+        {
+          "name": "full",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND instr(lower(json_extract(p.data,'$.title') || ' ' || json_extract(p.data,'$.venue')),lower(?))>0 ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 94,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "limit",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND instr(lower(json_extract(p.data,'$.title') || ' ' || json_extract(p.data,'$.venue')),lower(?))>0 ORDER BY p.start_date DESC,p.id DESC LIMIT ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 102,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "cte",
+          "sql": "WITH selected AS MATERIALIZED (SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND instr(lower(json_extract(p.data,'$.title') || ' ' || json_extract(p.data,'$.venue')),lower(?))>0 ORDER BY p.start_date DESC,p.id DESC LIMIT ?)\n        SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "음악",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 11,
+              "parent": 3,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 45,
+              "parent": 3,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            },
+            {
+              "id": 56,
+              "parent": 0,
+              "notused": 46,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 58,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 130,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "admission",
+      "variants": [
+        {
+          "name": "full",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 94,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "limit",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 ORDER BY p.start_date DESC,p.id DESC LIMIT ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 10,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 102,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "cte",
+          "sql": "WITH selected AS MATERIALIZED (SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND p.detail_state='complete' AND json_extract(p.data,'$.priceType')=? AND p.detail_state='complete' AND instr(json_extract(p.data,'$.age'),?)>0 ORDER BY p.start_date DESC,p.id DESC LIMIT ?)\n        SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            "free",
+            "전체",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 14,
+              "parent": 3,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 45,
+              "parent": 3,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            },
+            {
+              "id": 56,
+              "parent": 0,
+              "notused": 44,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 58,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 130,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "bookmarks",
+      "variants": [
+        {
+          "name": "full",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND b.performance_id IS NOT NULL ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 5,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 14,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 93,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "limit",
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND b.performance_id IS NOT NULL ORDER BY p.start_date DESC,p.id DESC LIMIT ?",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 8,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 17,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 101,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        },
+        {
+          "name": "cte",
+          "sql": "WITH selected AS MATERIALIZED (SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? AND b.performance_id IS NOT NULL ORDER BY p.start_date DESC,p.id DESC LIMIT ?)\n        SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 11,
+              "parent": 3,
+              "notused": 55,
+              "detail": "SEARCH p USING COVERING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 19,
+              "parent": 3,
+              "notused": 45,
+              "detail": "SEARCH b USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN"
+            },
+            {
+              "id": 42,
+              "parent": 3,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            },
+            {
+              "id": 53,
+              "parent": 0,
+              "notused": 46,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 55,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 127,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "raw": [
+    {
+      "case": "national",
+      "variant": "full",
+      "index": 0,
+      "sqlMs": 134.89510000000007,
+      "projectMs": 14.553199999999947,
+      "budgetMs": 9.83299999999997,
+      "serializeMs": 9.005100000000084,
+      "totalMs": 168.36700000000008,
+      "materializedRows": 22596,
+      "selectedRows": 22596,
+      "returnedRows": 10000,
+      "total": 22596,
+      "bytes": 2946281,
+      "truncated": true,
+      "wireHash": "a6bf33c37f3627fd87124a0f57ad7bc5d63158c05dccb042b89a31f55165b8ad",
+      "semanticHash": "095629c608a3d5fb102ce90876fc6d6f711526b22770a381eb607d3c1cff9ab6",
+      "memory": {
+        "before": {
+          "rss": 278872064,
+          "heapTotal": 126615552,
+          "heapUsed": 58064248,
+          "external": 37179329,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 247586816,
+          "heapTotal": 127848448,
+          "heapUsed": 70453048,
+          "external": 37179369,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 247771136,
+          "heapTotal": 128032768,
+          "heapUsed": 82457120,
+          "external": 37179369,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 247775232,
+          "heapTotal": 128032768,
+          "heapUsed": 89356576,
+          "external": 37179369,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "national",
+      "variant": "limit",
+      "index": 0,
+      "sqlMs": 135.50659999999993,
+      "projectMs": 6.909799999999905,
+      "budgetMs": 9.115199999999959,
+      "serializeMs": 9.636599999999817,
+      "totalMs": 161.26209999999992,
+      "materializedRows": 10001,
+      "selectedRows": 22596,
+      "returnedRows": 10000,
+      "total": 22596,
+      "bytes": 2946281,
+      "truncated": true,
+      "wireHash": "a6bf33c37f3627fd87124a0f57ad7bc5d63158c05dccb042b89a31f55165b8ad",
+      "semanticHash": "095629c608a3d5fb102ce90876fc6d6f711526b22770a381eb607d3c1cff9ab6",
+      "memory": {
+        "before": {
+          "rss": 279003136,
+          "heapTotal": 220971008,
+          "heapUsed": 85640328,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 281387008,
+          "heapTotal": 221233152,
+          "heapUsed": 91159872,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 282370048,
+          "heapTotal": 222281728,
+          "heapUsed": 96474648,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 283361280,
+          "heapTotal": 223330304,
+          "heapUsed": 103216896,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "national",
+      "variant": "cte",
+      "index": 0,
+      "sqlMs": 79.07819999999992,
+      "projectMs": 6.644800000000032,
+      "budgetMs": 10.639399999999796,
+      "serializeMs": 8.663800000000037,
+      "totalMs": 105.10410000000002,
+      "materializedRows": 10001,
+      "selectedRows": 22596,
+      "returnedRows": 10000,
+      "total": 22596,
+      "bytes": 2946281,
+      "truncated": true,
+      "wireHash": "a6bf33c37f3627fd87124a0f57ad7bc5d63158c05dccb042b89a31f55165b8ad",
+      "semanticHash": "095629c608a3d5fb102ce90876fc6d6f711526b22770a381eb607d3c1cff9ab6",
+      "memory": {
+        "before": {
+          "rss": 300486656,
+          "heapTotal": 222437376,
+          "heapUsed": 73653824,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 300498944,
+          "heapTotal": 222437376,
+          "heapUsed": 79172976,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 300498944,
+          "heapTotal": 222437376,
+          "heapUsed": 84465576,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 300498944,
+          "heapTotal": 222437376,
+          "heapUsed": 91233032,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "regional",
+      "variant": "full",
+      "index": 0,
+      "sqlMs": 1.1914999999999054,
+      "projectMs": 0.13789999999994507,
+      "budgetMs": 0.20450000000005275,
+      "serializeMs": 0.09719999999992979,
+      "totalMs": 1.6440999999999804,
+      "materializedRows": 204,
+      "selectedRows": 204,
+      "returnedRows": 204,
+      "total": 204,
+      "bytes": 58537,
+      "truncated": false,
+      "wireHash": "927c7ca35b6f601bfe047d4ea57e592a70cb2e37f6348b6290630e7d9850e423",
+      "semanticHash": "bf4a94090aba3e2baddeaf27d92c34d3ad96e03c881f1b520c562674bfcbec09",
+      "memory": {
+        "before": {
+          "rss": 311660544,
+          "heapTotal": 212213760,
+          "heapUsed": 73652080,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 311660544,
+          "heapTotal": 212213760,
+          "heapUsed": 73762648,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 311660544,
+          "heapTotal": 212213760,
+          "heapUsed": 73867784,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 311660544,
+          "heapTotal": 212213760,
+          "heapUsed": 74002184,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "regional",
+      "variant": "limit",
+      "index": 0,
+      "sqlMs": 1.4084000000000287,
+      "projectMs": 0.1450999999999567,
+      "budgetMs": 0.20049999999991996,
+      "serializeMs": 0.10069999999996071,
+      "totalMs": 1.8676000000000386,
+      "materializedRows": 204,
+      "selectedRows": 204,
+      "returnedRows": 204,
+      "total": 204,
+      "bytes": 58537,
+      "truncated": false,
+      "wireHash": "927c7ca35b6f601bfe047d4ea57e592a70cb2e37f6348b6290630e7d9850e423",
+      "semanticHash": "bf4a94090aba3e2baddeaf27d92c34d3ad96e03c881f1b520c562674bfcbec09",
+      "memory": {
+        "before": {
+          "rss": 306802688,
+          "heapTotal": 195297280,
+          "heapUsed": 58414272,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306802688,
+          "heapTotal": 195297280,
+          "heapUsed": 58526408,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306802688,
+          "heapTotal": 195297280,
+          "heapUsed": 58631544,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306802688,
+          "heapTotal": 195297280,
+          "heapUsed": 58765944,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "regional",
+      "variant": "cte",
+      "index": 0,
+      "sqlMs": 1.3293999999998505,
+      "projectMs": 0.1408000000001266,
+      "budgetMs": 0.21460000000001855,
+      "serializeMs": 0.09789999999998145,
+      "totalMs": 1.7946999999999207,
+      "materializedRows": 204,
+      "selectedRows": 204,
+      "returnedRows": 204,
+      "total": 204,
+      "bytes": 58537,
+      "truncated": false,
+      "wireHash": "927c7ca35b6f601bfe047d4ea57e592a70cb2e37f6348b6290630e7d9850e423",
+      "semanticHash": "bf4a94090aba3e2baddeaf27d92c34d3ad96e03c881f1b520c562674bfcbec09",
+      "memory": {
+        "before": {
+          "rss": 306802688,
+          "heapTotal": 193724416,
+          "heapUsed": 58415760,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306802688,
+          "heapTotal": 193724416,
+          "heapUsed": 58526488,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306802688,
+          "heapTotal": 193724416,
+          "heapUsed": 58631624,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306802688,
+          "heapTotal": 193724416,
+          "heapUsed": 58766024,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "source",
+      "variant": "full",
+      "index": 0,
+      "sqlMs": 22.934400000000096,
+      "projectMs": 3.2575000000001637,
+      "budgetMs": 4.557399999999916,
+      "serializeMs": 4.866500000000087,
+      "totalMs": 35.6567,
+      "materializedRows": 5112,
+      "selectedRows": 5112,
+      "returnedRows": 5112,
+      "total": 5112,
+      "bytes": 1496650,
+      "truncated": false,
+      "wireHash": "f283ba242527e68ea441f0e117c9a40f6b330954878b0993a81d89919c87fb0e",
+      "semanticHash": "f6fbaa59296f09a0e7b31ab01af0d1cf9655d01c32684c2a2f287f242a403a29",
+      "memory": {
+        "before": {
+          "rss": 306814976,
+          "heapTotal": 193724416,
+          "heapUsed": 58448544,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306819072,
+          "heapTotal": 193724416,
+          "heapUsed": 61273928,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306819072,
+          "heapTotal": 194248704,
+          "heapUsed": 63913816,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306819072,
+          "heapTotal": 194772992,
+          "heapUsed": 67457176,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "source",
+      "variant": "limit",
+      "index": 0,
+      "sqlMs": 25.739599999999882,
+      "projectMs": 4.233099999999922,
+      "budgetMs": 4.765800000000127,
+      "serializeMs": 4.3909000000001015,
+      "totalMs": 39.16779999999994,
+      "materializedRows": 5112,
+      "selectedRows": 5112,
+      "returnedRows": 5112,
+      "total": 5112,
+      "bytes": 1496650,
+      "truncated": false,
+      "wireHash": "f283ba242527e68ea441f0e117c9a40f6b330954878b0993a81d89919c87fb0e",
+      "semanticHash": "f6fbaa59296f09a0e7b31ab01af0d1cf9655d01c32684c2a2f287f242a403a29",
+      "memory": {
+        "before": {
+          "rss": 309329920,
+          "heapTotal": 201740288,
+          "heapUsed": 66082800,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 309329920,
+          "heapTotal": 201740288,
+          "heapUsed": 68908560,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 309329920,
+          "heapTotal": 202002432,
+          "heapUsed": 71548448,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 309329920,
+          "heapTotal": 202526720,
+          "heapUsed": 75090200,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "source",
+      "variant": "cte",
+      "index": 0,
+      "sqlMs": 26.86920000000009,
+      "projectMs": 3.2604999999998654,
+      "budgetMs": 4.469699999999875,
+      "serializeMs": 4.352200000000039,
+      "totalMs": 38.983999999999924,
+      "materializedRows": 5112,
+      "selectedRows": 5112,
+      "returnedRows": 5112,
+      "total": 5112,
+      "bytes": 1496650,
+      "truncated": false,
+      "wireHash": "f283ba242527e68ea441f0e117c9a40f6b330954878b0993a81d89919c87fb0e",
+      "semanticHash": "f6fbaa59296f09a0e7b31ab01af0d1cf9655d01c32684c2a2f287f242a403a29",
+      "memory": {
+        "before": {
+          "rss": 309329920,
+          "heapTotal": 204886016,
+          "heapUsed": 66084344,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 309338112,
+          "heapTotal": 204886016,
+          "heapUsed": 68909888,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 309338112,
+          "heapTotal": 204886016,
+          "heapUsed": 71549776,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 309342208,
+          "heapTotal": 204886016,
+          "heapUsed": 75085664,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "text",
+      "variant": "full",
+      "index": 0,
+      "sqlMs": 57.78020000000015,
+      "projectMs": 1.304200000000037,
+      "budgetMs": 1.8110000000001492,
+      "serializeMs": 1.3533000000002176,
+      "totalMs": 62.2786000000001,
+      "materializedRows": 1760,
+      "selectedRows": 1760,
+      "returnedRows": 1760,
+      "total": 1760,
+      "bytes": 550733,
+      "truncated": false,
+      "wireHash": "17dcec6d94040b1cef81635b4e167a777307e3c1cef562cc48718c70b7817128",
+      "semanticHash": "653591bf149f81e9f8b310bea73123fa0269d8ff772f76891409081974531ed8",
+      "memory": {
+        "before": {
+          "rss": 309350400,
+          "heapTotal": 202788864,
+          "heapUsed": 66103080,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 309358592,
+          "heapTotal": 202788864,
+          "heapUsed": 67096200,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 309358592,
+          "heapTotal": 202788864,
+          "heapUsed": 68046944,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 309358592,
+          "heapTotal": 202788864,
+          "heapUsed": 69270080,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "text",
+      "variant": "limit",
+      "index": 0,
+      "sqlMs": 59.21120000000019,
+      "projectMs": 1.1309999999998581,
+      "budgetMs": 1.5489000000002306,
+      "serializeMs": 1.355199999999968,
+      "totalMs": 63.28240000000005,
+      "materializedRows": 1760,
+      "selectedRows": 1760,
+      "returnedRows": 1760,
+      "total": 1760,
+      "bytes": 550733,
+      "truncated": false,
+      "wireHash": "17dcec6d94040b1cef81635b4e167a777307e3c1cef562cc48718c70b7817128",
+      "semanticHash": "653591bf149f81e9f8b310bea73123fa0269d8ff772f76891409081974531ed8",
+      "memory": {
+        "before": {
+          "rss": 307732480,
+          "heapTotal": 198541312,
+          "heapUsed": 60987144,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 307732480,
+          "heapTotal": 198541312,
+          "heapUsed": 61980272,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 307732480,
+          "heapTotal": 198541312,
+          "heapUsed": 62931384,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 307732480,
+          "heapTotal": 198541312,
+          "heapUsed": 64142008,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "text",
+      "variant": "cte",
+      "index": 0,
+      "sqlMs": 65.84839999999986,
+      "projectMs": 1.4891999999999825,
+      "budgetMs": 1.734599999999773,
+      "serializeMs": 1.3281999999999243,
+      "totalMs": 70.47389999999996,
+      "materializedRows": 1760,
+      "selectedRows": 1760,
+      "returnedRows": 1760,
+      "total": 1760,
+      "bytes": 550733,
+      "truncated": false,
+      "wireHash": "17dcec6d94040b1cef81635b4e167a777307e3c1cef562cc48718c70b7817128",
+      "semanticHash": "653591bf149f81e9f8b310bea73123fa0269d8ff772f76891409081974531ed8",
+      "memory": {
+        "before": {
+          "rss": 307740672,
+          "heapTotal": 197230592,
+          "heapUsed": 60988200,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 307740672,
+          "heapTotal": 197230592,
+          "heapUsed": 61981488,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 307740672,
+          "heapTotal": 197230592,
+          "heapUsed": 62932600,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 307740672,
+          "heapTotal": 197230592,
+          "heapUsed": 64143224,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "admission",
+      "variant": "full",
+      "index": 0,
+      "sqlMs": 43.95880000000034,
+      "projectMs": 0.16689999999971405,
+      "budgetMs": 0.21030000000018845,
+      "serializeMs": 0.1093999999998232,
+      "totalMs": 44.47260000000006,
+      "materializedRows": 220,
+      "selectedRows": 220,
+      "returnedRows": 220,
+      "total": 220,
+      "bytes": 67725,
+      "truncated": false,
+      "wireHash": "9eeb69510d67af54273878a951a4b1c1e85bc19ee6b409e2fa0dec40d76e2966",
+      "semanticHash": "621a0bb8c79ab8682a4e8e5f0feb789646d56bd546e16cfc08383bf4d4d38d61",
+      "memory": {
+        "before": {
+          "rss": 307740672,
+          "heapTotal": 197492736,
+          "heapUsed": 60998512,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 307740672,
+          "heapTotal": 197492736,
+          "heapUsed": 61122096,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 307740672,
+          "heapTotal": 197492736,
+          "heapUsed": 61240480,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 307740672,
+          "heapTotal": 197492736,
+          "heapUsed": 61389560,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "admission",
+      "variant": "limit",
+      "index": 0,
+      "sqlMs": 45.164999999999964,
+      "projectMs": 0.17000000000007276,
+      "budgetMs": 0.22100000000000364,
+      "serializeMs": 0.11560000000008586,
+      "totalMs": 45.69419999999991,
+      "materializedRows": 220,
+      "selectedRows": 220,
+      "returnedRows": 220,
+      "total": 220,
+      "bytes": 67725,
+      "truncated": false,
+      "wireHash": "9eeb69510d67af54273878a951a4b1c1e85bc19ee6b409e2fa0dec40d76e2966",
+      "semanticHash": "621a0bb8c79ab8682a4e8e5f0feb789646d56bd546e16cfc08383bf4d4d38d61",
+      "memory": {
+        "before": {
+          "rss": 306855936,
+          "heapTotal": 194510848,
+          "heapUsed": 58536448,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306855936,
+          "heapTotal": 194510848,
+          "heapUsed": 58669168,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306855936,
+          "heapTotal": 194510848,
+          "heapUsed": 58787552,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306855936,
+          "heapTotal": 194510848,
+          "heapUsed": 58936632,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "admission",
+      "variant": "cte",
+      "index": 0,
+      "sqlMs": 45.07829999999967,
+      "projectMs": 0.17309999999997672,
+      "budgetMs": 0.21329999999989013,
+      "serializeMs": 0.10820000000012442,
+      "totalMs": 45.59929999999986,
+      "materializedRows": 220,
+      "selectedRows": 220,
+      "returnedRows": 220,
+      "total": 220,
+      "bytes": 67725,
+      "truncated": false,
+      "wireHash": "9eeb69510d67af54273878a951a4b1c1e85bc19ee6b409e2fa0dec40d76e2966",
+      "semanticHash": "621a0bb8c79ab8682a4e8e5f0feb789646d56bd546e16cfc08383bf4d4d38d61",
+      "memory": {
+        "before": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58538448,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58662192,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58780576,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58929656,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "bookmarks",
+      "variant": "full",
+      "index": 0,
+      "sqlMs": 3.345600000000104,
+      "projectMs": 0.012699999999767897,
+      "budgetMs": 0.0670999999997548,
+      "serializeMs": 0.0030999999999039574,
+      "totalMs": 3.452299999999923,
+      "materializedRows": 0,
+      "selectedRows": 0,
+      "returnedRows": 0,
+      "total": 0,
+      "bytes": 173,
+      "truncated": false,
+      "wireHash": "83b83735e7ca227815871f4779b9663537ab04b0ad9b439535c10e78795b067e",
+      "semanticHash": "01f68f30fc11a5459323dfe910d538e26af917853c7682f4f5e24c9854d09c58",
+      "memory": {
+        "before": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58528288,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58531456,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58531936,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306860032,
+          "heapTotal": 193986560,
+          "heapUsed": 58533112,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "bookmarks",
+      "variant": "limit",
+      "index": 0,
+      "sqlMs": 2.42450000000008,
+      "projectMs": 0.0009000000000014552,
+      "budgetMs": 0.020599999999831198,
+      "serializeMs": 0.0009999999997489795,
+      "totalMs": 2.4578999999998814,
+      "materializedRows": 0,
+      "selectedRows": 0,
+      "returnedRows": 0,
+      "total": 0,
+      "bytes": 173,
+      "truncated": false,
+      "wireHash": "83b83735e7ca227815871f4779b9663537ab04b0ad9b439535c10e78795b067e",
+      "semanticHash": "01f68f30fc11a5459323dfe910d538e26af917853c7682f4f5e24c9854d09c58",
+      "memory": {
+        "before": {
+          "rss": 306864128,
+          "heapTotal": 193986560,
+          "heapUsed": 58163736,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306864128,
+          "heapTotal": 193986560,
+          "heapUsed": 58165288,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306864128,
+          "heapTotal": 193986560,
+          "heapUsed": 58165736,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306864128,
+          "heapTotal": 193986560,
+          "heapUsed": 58166800,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    },
+    {
+      "case": "bookmarks",
+      "variant": "cte",
+      "index": 0,
+      "sqlMs": 2.3799999999996544,
+      "projectMs": 0.0009999999997489795,
+      "budgetMs": 0.015900000000328873,
+      "serializeMs": 0.0010000000002037268,
+      "totalMs": 2.4097999999999047,
+      "materializedRows": 0,
+      "selectedRows": 0,
+      "returnedRows": 0,
+      "total": 0,
+      "bytes": 173,
+      "truncated": false,
+      "wireHash": "83b83735e7ca227815871f4779b9663537ab04b0ad9b439535c10e78795b067e",
+      "semanticHash": "01f68f30fc11a5459323dfe910d538e26af917853c7682f4f5e24c9854d09c58",
+      "memory": {
+        "before": {
+          "rss": 306864128,
+          "heapTotal": 193462272,
+          "heapUsed": 58165808,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterQuery": {
+          "rss": 306864128,
+          "heapTotal": 193462272,
+          "heapUsed": 58169072,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterProjection": {
+          "rss": 306864128,
+          "heapTotal": 193462272,
+          "heapUsed": 58169520,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        },
+        "afterBudget": {
+          "rss": 306864128,
+          "heapTotal": 193462272,
+          "heapUsed": 58170584,
+          "external": 2673260,
+          "arrayBuffers": 27107
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-18T17:59:06.557Z",
+  "results": [
+    {
+      "processElapsedMs": 10851.2964,
+      "type": "sort-index-diagnostic",
+      "fixture": "actual",
+      "output": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-01-runs\\actual.json",
+      "warmRequests": 50,
+      "coldModels": 10,
+      "success": true
+    }
+  ],
+  "error": "Error: Child failed (1): (node:42148) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\nC:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts:235\r\n  if (failure) throw new Error(failure);\r\n                     ^\r\n\r\nError: AssertionError [ERR_ASSERTION]: Additional index must not change any table or row\r\n+ actual - expected\r\n... Skipped lines\r\n\r\n  {\r\n    counts: {\r\n      bookmarks: 0,\r\n      cities: 230,\r\n      performance_sources: 0,\r\n...\r\n    },\r\n+   hash: '0d7a48add3e437f244758bab88981357d1d934b3642ac0d279d03fe0ce8a31fa',\r\n-   hash: '5bc6bcf8177877d9ff62232e47d7121b48962bf8353a9317ca8cab3eecdb0c29',\r\n    totalChanges: 23287\r\n  }\r\n\r\n    at worker (C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts:152:12)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\r\n    at async <anonymous> (C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts:239:92)\r\n    at worker (C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts:235:22)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\r\n    at async <anonymous> (C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts:239:92)\r\n\r\nNode.js v24.14.0\r\n",
+  "timeoutPerWorkerMs": 180000
+}

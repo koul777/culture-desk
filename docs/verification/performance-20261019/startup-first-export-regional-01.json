@@ -1,0 +1,4985 @@
+{
+  "version": 1,
+  "measuredAt": "2026-10-18T18:32:41.135Z",
+  "variants": [
+    {
+      "name": "baseline",
+      "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\baseline"
+    },
+    {
+      "name": "candidate",
+      "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave11-selection"
+    }
+  ],
+  "samples": 50,
+  "warmup": 2,
+  "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+  "node": "v24.14.0",
+  "scope": "Each sample runs a new Node process; AB/BA paired ordering, warmup processes discarded. Primary firstBodyReady is child performance.now before payload verification. OS filesystem cache is warm and not flushed. No network. Exact semantic hash equality is mandatory.",
+  "snapshot": {
+    "hash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "performances": 5649,
+    "bytes": 8559524
+  },
+  "source": [
+    {
+      "variant": "baseline",
+      "before": {
+        "hash": "aee902a8b2cf4f1e8ef5e7ffdf70052f706c312a36fb3fcdd97f1227d1374975",
+        "directories": [
+          "server",
+          "shared"
+        ],
+        "files": {
+          "server/app.ts": "6e1e195df8ce586450aa87f8a3f65e67a34afcf8926007369c097436a317c530",
+          "server/cloud/auth.ts": "2b0a566ce5c76b418b515be271d7f96719a1be7a8359999dd8b820002e325ae3",
+          "server/cloud/collection.ts": "7ac9de893c77b08d8708917682e3bebc64c54f79b129e144bc1ad7cd96f9804d",
+          "server/cloud/handler.ts": "b8864e6a1790bfabb1f2d86a2bb6675de2307f8e62b665af85a65bd137f56756",
+          "server/cloud/published-response-cache.ts": "ea3107903dcf03afe189c5da0aedfd6243d31a98e4806ba878ff3701fb451403",
+          "server/cloud/readonly-fallback.ts": "846b4602971b3069700ba3facfad6e1aae8a1e2873576b2fc87531cc69eb629a",
+          "server/cloud/refresh-jobs.ts": "18d29b4289c26dc1f59b98cb87839baf227b646f9c56abc76a54490a6faabc54",
+          "server/cloud/snapshot.ts": "e6dbb0d8c545ea234d5fa1606396f6774dbee6525c5c4021e7e8255ebf5bfbc9",
+          "server/collection-history.ts": "d222fad9c14f41c1cb275e9dd0ff2e02aff75f988039ef49dd95b9e6ba0874e9",
+          "server/config.ts": "ab87fe7b041868d82edad518b9c8865d0652872cf88811c3d8506df46c0bc0b5",
+          "server/dates.ts": "f2e51013c31479ba6db15ca2c3ad80a635f83fe8948d816791586c85760df75d",
+          "server/export.ts": "126ed99130dcf6c62dada2cd11c6c9c159a298034ae65fe8d87761ea8b0bc061",
+          "server/import-collection.ts": "3decc3b85ba43579a87bd506b9905996afd415f3dabaf55ebac4f2e97b1b113b",
+          "server/index.ts": "e3a2113bda799ecc1132d5c0f4c0b097dec4ee84ae358b954f3655c9fbed64cd",
+          "server/lock.ts": "fe7d1cfc72b2775bd7d20c2ec65ccb18d874671c9f6b75944d73087299cce620",
+          "server/maintenance.ts": "fd522a1c228e5b0e576fdbee813f66a50756b28dba4f455613cf2bf1b5792c83",
+          "server/providers/cities.ts": "4d5c7ad7c07c95397ec32c1ebbeef979e9ff4562524e2121e337d6e78b41186c",
+          "server/providers/classify.ts": "724c71e37696e878e13ccc038f608854dfb501d0604fa14e83c514c0b2fb8a60",
+          "server/providers/coordinates.ts": "59db06e7eae45c1676b575d08bc8d4760de290acd195e15298d2836e5700d961",
+          "server/providers/culture.ts": "1cec1b3995abdbff3814eefa8d34990eb124290547d63b353b270249e95496f1",
+          "server/providers/dates.ts": "92a9bf318fa4017b25cb174f03cec3943ce0c698d588df5528885c445af1928b",
+          "server/providers/errors.ts": "1e77ab45313c14e4d363988d4c056f84a850abf6e2861cf6ac96f019f4735d50",
+          "server/providers/fetch.ts": "94b7cf280d355a60a6c4ab909ad6defdc254ed1f139388e8c2f5be7181d27842",
+          "server/providers/index.ts": "7d7d960afa97a1720e60ce33f5c79f7837696dc1613b859b971877aed781558e",
+          "server/providers/kopis.ts": "9fb1f4bce2668d93385d1879995b778915a13edb9c94258dde1489c4e9d812c4",
+          "server/providers/national-cities.ts": "7f9b37662e14f52d2084e4a45ae635eeadd2c960853c0245035acceceb2c7777",
+          "server/providers/text.ts": "b59603e712de1a95bb3d60dee517cf8ec4cce2f3185c958967f238ddfc5e0928",
+          "server/providers/validate.ts": "7b00ddb104a9a6920b3ba7e5bfd9075ebf4438c2fe1d6f97bbf42426ef78fa35",
+          "server/providers/xml.ts": "923851b88a0bb7e14d67a119ecf3f5756fdb2d90a74f289a6c3e27a4b0435dc5",
+          "server/store.ts": "661445ce14569fe57504b3bd7b7c3fb9f2a13a4a8e0dfc4234be86b135c6dbc5",
+          "server/venue-building-seed.json": "80ff2b768fb97476d51589b23191d0325282920b09fa4f23671c0d26fd690a9a",
+          "server/venue-buildings.ts": "a5da7334d366256215232f16d49f12aa713e9384f96ff2c73c508720f1ae494b",
+          "server/venue-info.ts": "72a803af68b81bd2b0aab70f218e40acb69b15434b3f856020bb4abf8827702a",
+          "server/vworld.ts": "4906a13c3e6e217711ec4c510e73211353acb9e09d956a3ce6506f5d52f8ccdb",
+          "server/worker.ts": "f46db9b49da76d7b4ca59cb2a9aa11ab6d5fb65b7fcd7638de9a1069591f373d",
+          "shared/types.ts": "b30d934981d6dbda2fd7b97e7eeaee4f120c880bdc492784cb9a29cb3d20fa58",
+          "package.json": "10787a1fada00c0c8586ab44dce4534ec8c8d3d005a1af7e4b8444bdbdccc7a8",
+          "package-lock.json": "d6fa4c0f597f365b7733460e048568f7a1e02b5c04f1a6b728ae52505bbaaf83",
+          "vite.config.ts": "7b4eb14417f429d0ebbadfea374f6810a7615fd6becd0c84fd3e53da353f8b6f"
+        }
+      },
+      "afterHash": "aee902a8b2cf4f1e8ef5e7ffdf70052f706c312a36fb3fcdd97f1227d1374975",
+      "stable": true
+    },
+    {
+      "variant": "candidate",
+      "before": {
+        "hash": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+        "directories": [
+          "server",
+          "shared"
+        ],
+        "files": {
+          "server/app.ts": "81a71810d125f582aba104a422b7146b8a07a242b6fd19a67b9d593e49cc3d93",
+          "server/cloud/auth.ts": "2b0a566ce5c76b418b515be271d7f96719a1be7a8359999dd8b820002e325ae3",
+          "server/cloud/collection.ts": "7ac9de893c77b08d8708917682e3bebc64c54f79b129e144bc1ad7cd96f9804d",
+          "server/cloud/handler.ts": "6c5786d46e979e5349e734293ca90c45a9568bfb772b9b4fb99769b22ed41f04",
+          "server/cloud/published-response-cache.ts": "ea3107903dcf03afe189c5da0aedfd6243d31a98e4806ba878ff3701fb451403",
+          "server/cloud/readonly-fallback.ts": "2481cb49cee703ba325b7e2f0f8b9722f5f7822d5ee23b7eef0c8d6f2e9be80b",
+          "server/cloud/refresh-jobs.ts": "6d0ff281fa958cb749cd9204fa8eb409286bc0499ded963d283e45220f8ae83b",
+          "server/cloud/refresh-schedule.ts": "4a558bdb19547066641d33a9a05807d0a817d3a7af1ea5656a0c34d8306e3162",
+          "server/cloud/snapshot-errors.ts": "50b8a7377ba0f9d823cbc72e0ac509ff191c37375a8a180a52d741f5316d1ff6",
+          "server/cloud/snapshot.ts": "fea259a652723b0e922bd2dbfd2cfa6b76056a5da0783a6c17dcd6c136d10cfb",
+          "server/collection-history.ts": "d222fad9c14f41c1cb275e9dd0ff2e02aff75f988039ef49dd95b9e6ba0874e9",
+          "server/config.ts": "ab87fe7b041868d82edad518b9c8865d0652872cf88811c3d8506df46c0bc0b5",
+          "server/dates.ts": "f2e51013c31479ba6db15ca2c3ad80a635f83fe8948d816791586c85760df75d",
+          "server/export-stream.ts": "4bd08de55f96fe1f4c6e50dccdf547dc280c2e72144c74a220cc7fb3ace58dd9",
+          "server/export.ts": "d554f8d84ddaa16216d60e0c7d06b05218dfe72494cd9fbb55193350e2c6499a",
+          "server/import-collection.ts": "3decc3b85ba43579a87bd506b9905996afd415f3dabaf55ebac4f2e97b1b113b",
+          "server/index.ts": "e3a2113bda799ecc1132d5c0f4c0b097dec4ee84ae358b954f3655c9fbed64cd",
+          "server/lock.ts": "fe7d1cfc72b2775bd7d20c2ec65ccb18d874671c9f6b75944d73087299cce620",
+          "server/maintenance.ts": "fd522a1c228e5b0e576fdbee813f66a50756b28dba4f455613cf2bf1b5792c83",
+          "server/map-limits.ts": "2fc79e70586faa0098eac2aa3b81256fd8c5fc9f0ccdfdca4f9844e5165fecd1",
+          "server/map-query.ts": "334cbf187df98bbf390a35f5fe89d896c11525506771a4c60a9a0175855db518",
+          "server/map-response.ts": "624e67b59294dd59f47c7257de7725f7699c0e277bd2a2675161b954f36cce4c",
+          "server/providers/cities.ts": "4d5c7ad7c07c95397ec32c1ebbeef979e9ff4562524e2121e337d6e78b41186c",
+          "server/providers/classify.ts": "724c71e37696e878e13ccc038f608854dfb501d0604fa14e83c514c0b2fb8a60",
+          "server/providers/coordinates.ts": "59db06e7eae45c1676b575d08bc8d4760de290acd195e15298d2836e5700d961",
+          "server/providers/culture.ts": "1cec1b3995abdbff3814eefa8d34990eb124290547d63b353b270249e95496f1",
+          "server/providers/dates.ts": "92a9bf318fa4017b25cb174f03cec3943ce0c698d588df5528885c445af1928b",
+          "server/providers/errors.ts": "1e77ab45313c14e4d363988d4c056f84a850abf6e2861cf6ac96f019f4735d50",
+          "server/providers/fetch.ts": "94b7cf280d355a60a6c4ab909ad6defdc254ed1f139388e8c2f5be7181d27842",
+          "server/providers/index.ts": "7d7d960afa97a1720e60ce33f5c79f7837696dc1613b859b971877aed781558e",
+          "server/providers/kopis.ts": "9fb1f4bce2668d93385d1879995b778915a13edb9c94258dde1489c4e9d812c4",
+          "server/providers/national-cities.ts": "7f9b37662e14f52d2084e4a45ae635eeadd2c960853c0245035acceceb2c7777",
+          "server/providers/text.ts": "2f949f97449556fa7b6695f9d6b281f2334650c97e7790bcd456bb07ccfef3c3",
+          "server/providers/validate.ts": "7b00ddb104a9a6920b3ba7e5bfd9075ebf4438c2fe1d6f97bbf42426ef78fa35",
+          "server/providers/xml.ts": "923851b88a0bb7e14d67a119ecf3f5756fdb2d90a74f289a6c3e27a4b0435dc5",
+          "server/search-performance.ts": "265c4bc0f45b274736f997bf53378dda4456532a03435e192ca846864af30c20",
+          "server/store.ts": "0ee6275e4c621fb0fc78154b8ad002543c56ad3b17deb89d9721276e2346e438",
+          "server/venue-building-seed.json": "80ff2b768fb97476d51589b23191d0325282920b09fa4f23671c0d26fd690a9a",
+          "server/venue-buildings.ts": "0886b405227b6bf68ca829fb420ff322950f2f91d092d7822d800d1c0399584b",
+          "server/venue-info.ts": "72a803af68b81bd2b0aab70f218e40acb69b15434b3f856020bb4abf8827702a",
+          "server/vworld.ts": "4906a13c3e6e217711ec4c510e73211353acb9e09d956a3ce6506f5d52f8ccdb",
+          "server/worker.ts": "f46db9b49da76d7b4ca59cb2a9aa11ab6d5fb65b7fcd7638de9a1069591f373d",
+          "shared/types.ts": "b30d934981d6dbda2fd7b97e7eeaee4f120c880bdc492784cb9a29cb3d20fa58",
+          "package.json": "10787a1fada00c0c8586ab44dce4534ec8c8d3d005a1af7e4b8444bdbdccc7a8",
+          "package-lock.json": "d6fa4c0f597f365b7733460e048568f7a1e02b5c04f1a6b728ae52505bbaaf83",
+          "vite.config.ts": "7b4eb14417f429d0ebbadfea374f6810a7615fd6becd0c84fd3e53da353f8b6f"
+        }
+      },
+      "afterHash": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+      "stable": true
+    }
+  ],
+  "equal": true,
+  "summary": [
+    {
+      "variant": "baseline",
+      "samples": 50,
+      "firstBodyReady": {
+        "samples": 50,
+        "p50Ms": 5225.954,
+        "p95Ms": 8347.9455,
+        "minMs": 4457.628,
+        "maxMs": 9508.7086,
+        "meanMs": 5759.000886
+      },
+      "import": {
+        "samples": 50,
+        "p50Ms": 2932.2339,
+        "p95Ms": 4270.5085,
+        "minMs": 2611.2633,
+        "maxMs": 4777.266600000001,
+        "meanMs": 3048.0318899999997
+      },
+      "firstResponse": {
+        "samples": 50,
+        "p50Ms": 2013.0403999999999,
+        "p95Ms": 3974.2334999999994,
+        "minMs": 1588.9735999999998,
+        "maxMs": 4871.1944,
+        "meanMs": 2408.808518
+      },
+      "processElapsed": {
+        "samples": 50,
+        "p50Ms": 5803.983100000012,
+        "p95Ms": 9060.473599999968,
+        "minMs": 4897.625700000033,
+        "maxMs": 10295.7892,
+        "meanMs": 6304.564614
+      }
+    },
+    {
+      "variant": "candidate",
+      "samples": 50,
+      "firstBodyReady": {
+        "samples": 50,
+        "p50Ms": 4792.5908,
+        "p95Ms": 7414.0372,
+        "minMs": 4034.6953,
+        "maxMs": 7941.7215,
+        "meanMs": 5194.732068
+      },
+      "import": {
+        "samples": 50,
+        "p50Ms": 871.1948,
+        "p95Ms": 1069.7049,
+        "minMs": 797.0420000000001,
+        "maxMs": 1352.244,
+        "meanMs": 899.9553159999997
+      },
+      "firstResponse": {
+        "samples": 50,
+        "p50Ms": 3621.6631,
+        "p95Ms": 6139.1763,
+        "minMs": 2874.7316,
+        "maxMs": 6231.3162999999995,
+        "meanMs": 4002.2627999999995
+      },
+      "processElapsed": {
+        "samples": 50,
+        "p50Ms": 5263.925400000007,
+        "p95Ms": 8080.328699999998,
+        "minMs": 4763.7089999999735,
+        "maxMs": 8834.623399999997,
+        "meanMs": 5745.865280000001
+      }
+    }
+  ],
+  "timeBlocks": [
+    {
+      "block": 1,
+      "variants": [
+        {
+          "variant": "baseline",
+          "firstRound": 0,
+          "lastRound": 16,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 6089.6078,
+            "p95Ms": 8863.934,
+            "minMs": 4929.4383,
+            "maxMs": 8863.934,
+            "meanMs": 6298.481082352941
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 3038.1003,
+            "p95Ms": 4501.4439999999995,
+            "minMs": 2726.846,
+            "maxMs": 4501.4439999999995,
+            "meanMs": 3138.2365647058823
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 2877.1205999999997,
+            "p95Ms": 3974.2334999999994,
+            "minMs": 1869.7770999999998,
+            "maxMs": 3974.2334999999994,
+            "meanMs": 2848.1623117647055
+          }
+        },
+        {
+          "variant": "candidate",
+          "firstRound": 0,
+          "lastRound": 16,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 5389.3912,
+            "p95Ms": 7941.7215,
+            "minMs": 4529.1658,
+            "maxMs": 7941.7215,
+            "meanMs": 5764.932464705883
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 884.8505,
+            "p95Ms": 1352.244,
+            "minMs": 803.9558000000001,
+            "maxMs": 1352.244,
+            "meanMs": 936.2701235294116
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 4137.698399999999,
+            "p95Ms": 6231.3162999999995,
+            "minMs": 3394.3718,
+            "maxMs": 6231.3162999999995,
+            "meanMs": 4521.661611764706
+          }
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "variants": [
+        {
+          "variant": "baseline",
+          "firstRound": 17,
+          "lastRound": 33,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 4874.9578,
+            "p95Ms": 5779.1558,
+            "minMs": 4457.628,
+            "maxMs": 5779.1558,
+            "meanMs": 4941.3252
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 2781.3227,
+            "p95Ms": 3151.1823999999997,
+            "minMs": 2611.2633,
+            "maxMs": 3151.1823999999997,
+            "meanMs": 2837.7290235294117
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 1784.7021999999997,
+            "p95Ms": 2349.0059000000006,
+            "minMs": 1588.9735999999998,
+            "maxMs": 2349.0059000000006,
+            "meanMs": 1827.1592705882358
+          }
+        },
+        {
+          "variant": "candidate",
+          "firstRound": 17,
+          "lastRound": 33,
+          "firstBodyReady": {
+            "samples": 17,
+            "p50Ms": 4556.7408,
+            "p95Ms": 5975.0854,
+            "minMs": 4034.6953,
+            "maxMs": 5975.0854,
+            "meanMs": 4639.050652941176
+          },
+          "import": {
+            "samples": 17,
+            "p50Ms": 859.6037,
+            "p95Ms": 1082.5505,
+            "minMs": 814.9204,
+            "maxMs": 1082.5505,
+            "meanMs": 884.459105882353
+          },
+          "firstResponse": {
+            "samples": 17,
+            "p50Ms": 3425.6197999999995,
+            "p95Ms": 4537.9095,
+            "minMs": 2874.7316,
+            "maxMs": 4537.9095,
+            "meanMs": 3470.7845588235296
+          }
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "variants": [
+        {
+          "variant": "baseline",
+          "firstRound": 34,
+          "lastRound": 49,
+          "firstBodyReady": {
+            "samples": 16,
+            "p50Ms": 5168.7003,
+            "p95Ms": 9508.7086,
+            "minMs": 4700.657,
+            "maxMs": 9508.7086,
+            "meanMs": 6054.58359375
+          },
+          "import": {
+            "samples": 16,
+            "p50Ms": 2912.2521,
+            "p95Ms": 4777.266600000001,
+            "minMs": 2690.6226,
+            "maxMs": 4777.266600000001,
+            "meanMs": 3175.63621875
+          },
+          "firstResponse": {
+            "samples": 16,
+            "p50Ms": 1934.4156000000003,
+            "p95Ms": 4871.1944,
+            "minMs": 1736.2437,
+            "maxMs": 4871.1944,
+            "meanMs": 2559.9974375
+          }
+        },
+        {
+          "variant": "candidate",
+          "firstRound": 34,
+          "lastRound": 49,
+          "firstBodyReady": {
+            "samples": 16,
+            "p50Ms": 4897.382,
+            "p95Ms": 6716.3567,
+            "minMs": 4554.0376,
+            "maxMs": 6716.3567,
+            "meanMs": 5179.305649999999
+          },
+          "import": {
+            "samples": 16,
+            "p50Ms": 865.4169999999999,
+            "p95Ms": 1069.7049,
+            "minMs": 797.0420000000001,
+            "maxMs": 1069.7049,
+            "meanMs": 877.83555625
+          },
+          "firstResponse": {
+            "samples": 16,
+            "p50Ms": 3698.8594999999996,
+            "p95Ms": 5338.2376,
+            "minMs": 3411.812,
+            "maxMs": 5338.2376,
+            "meanMs": 4015.09719375
+          }
+        }
+      ]
+    }
+  ],
+  "discarded": [
+    {
+      "variant": "baseline",
+      "round": -2,
+      "measuredAt": "2026-10-18T18:22:09.958Z",
+      "processElapsedMs": 9355.3628,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 5259.7209,
+      "firstResponseMs": 3251.4724000000006,
+      "preHandlerImportMs": 281.3552,
+      "firstBodyReadySinceProcessStartMs": 8796.4181,
+      "importAndFirstResponseMs": 8511.1933,
+      "bytes": 16806,
+      "wireHash": "18bf01ddcef0d8341d933a643279405432c319c9cc46d00c6024c600a3038de3",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60125184,
+        "heapTotal": 12660736,
+        "heapUsed": 8209424,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 214142976,
+        "heapTotal": 108490752,
+        "heapUsed": 51289792,
+        "external": 33525539,
+        "arrayBuffers": 15315136
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": -2,
+      "measuredAt": "2026-10-18T18:22:19.706Z",
+      "processElapsedMs": 9742.828200000002,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 886.1850999999999,
+      "firstResponseMs": 7794.0461,
+      "preHandlerImportMs": 269.757,
+      "firstBodyReadySinceProcessStartMs": 8950.731,
+      "importAndFirstResponseMs": 8680.2312,
+      "bytes": 16415,
+      "wireHash": "7b16b3ef5de381b2cb1474758a90b387e8a30ba5fac373f8f432d41c5a69dd4c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60104704,
+        "heapTotal": 12136448,
+        "heapUsed": 8221016,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 169570304,
+        "heapTotal": 100966400,
+        "heapUsed": 28844360,
+        "external": 7509829,
+        "arrayBuffers": 2644106
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": -1,
+      "measuredAt": "2026-10-18T18:22:29.936Z",
+      "processElapsedMs": 10229.800599999999,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 940.4069000000002,
+      "firstResponseMs": 8037.6773,
+      "preHandlerImportMs": 300.9215,
+      "firstBodyReadySinceProcessStartMs": 9280.137,
+      "importAndFirstResponseMs": 8978.084200000001,
+      "bytes": 16415,
+      "wireHash": "7922bec8c84f863d454328230f79d2c80afeaf0be69c70a37f6dc65b789d1ad0",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60190720,
+        "heapTotal": 12398592,
+        "heapUsed": 8171616,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164020224,
+        "heapTotal": 100966400,
+        "heapUsed": 28701968,
+        "external": 7509829,
+        "arrayBuffers": 2644106
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": -1,
+      "measuredAt": "2026-10-18T18:22:38.015Z",
+      "processElapsedMs": 8078.882999999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3615.5378,
+      "firstResponseMs": 3410.7329,
+      "preHandlerImportMs": 396.8518,
+      "firstBodyReadySinceProcessStartMs": 7424.8427,
+      "importAndFirstResponseMs": 7026.2707,
+      "bytes": 16807,
+      "wireHash": "3e30e0fc84a8d50aac7668dd9e1e1f52d115ee0997c460bccf405c9ffc4d8f5f",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60293120,
+        "heapTotal": 12398592,
+        "heapUsed": 8239208,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191569920,
+        "heapTotal": 99393536,
+        "heapUsed": 29309504,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    }
+  ],
+  "raw": [
+    {
+      "variant": "baseline",
+      "round": 0,
+      "measuredAt": "2026-10-18T18:22:45.736Z",
+      "processElapsedMs": 7720.908000000003,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3192.7354,
+      "firstResponseMs": 3332.2566000000006,
+      "preHandlerImportMs": 307.9548,
+      "firstBodyReadySinceProcessStartMs": 6838.3896,
+      "importAndFirstResponseMs": 6524.992,
+      "bytes": 16807,
+      "wireHash": "d8dcb6f19cefcd8b87e10063993a1d57ba812e033c3a4242079b9c4899d14106",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60227584,
+        "heapTotal": 12660736,
+        "heapUsed": 8153064,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191410176,
+        "heapTotal": 99393536,
+        "heapUsed": 29112632,
+        "external": 10973686,
+        "arrayBuffers": 6754879
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "measuredAt": "2026-10-18T18:22:53.981Z",
+      "processElapsedMs": 8244.5331,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 1022.5147,
+      "firstResponseMs": 6139.1763,
+      "preHandlerImportMs": 321.3603,
+      "firstBodyReadySinceProcessStartMs": 7483.8472,
+      "importAndFirstResponseMs": 7161.691,
+      "bytes": 16417,
+      "wireHash": "a6e3c4a2636a5a61bac8af84bc30e567892a5cc55b16ba8c45f926c9cc130225",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59748352,
+        "heapTotal": 12398592,
+        "heapUsed": 8217368,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167960576,
+        "heapTotal": 100704256,
+        "heapUsed": 28807824,
+        "external": 7509845,
+        "arrayBuffers": 2644122
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "measuredAt": "2026-10-18T18:23:02.061Z",
+      "processElapsedMs": 8080.328699999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 884.8505,
+      "firstResponseMs": 6157.1379,
+      "preHandlerImportMs": 371.4541,
+      "firstBodyReadySinceProcessStartMs": 7414.0372,
+      "importAndFirstResponseMs": 7041.9884,
+      "bytes": 16418,
+      "wireHash": "31dc0a55605783b3dd338abe756b65d1af30ddb160a96d83c6ccc42a2ce80bf2",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60035072,
+        "heapTotal": 12922880,
+        "heapUsed": 8215560,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168706048,
+        "heapTotal": 100442112,
+        "heapUsed": 28784784,
+        "external": 7509853,
+        "arrayBuffers": 2644130
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "measuredAt": "2026-10-18T18:23:09.973Z",
+      "processElapsedMs": 7911.688600000001,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3251.5867000000003,
+      "firstResponseMs": 3454.2279999999996,
+      "preHandlerImportMs": 346.5966,
+      "firstBodyReadySinceProcessStartMs": 7054.7022,
+      "importAndFirstResponseMs": 6705.8147,
+      "bytes": 16808,
+      "wireHash": "37c919c81809ccb08f0c24a8e37a5d9b5d2abb6cf277be1d7571683348684198",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60215296,
+        "heapTotal": 12398592,
+        "heapUsed": 8218928,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 213815296,
+        "heapTotal": 108490752,
+        "heapUsed": 51283576,
+        "external": 33525563,
+        "arrayBuffers": 15315160
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "measuredAt": "2026-10-18T18:23:19.492Z",
+      "processElapsedMs": 9518.455300000001,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 4501.4439999999995,
+      "firstResponseMs": 3974.2334999999994,
+      "preHandlerImportMs": 383.5414,
+      "firstBodyReadySinceProcessStartMs": 8863.934,
+      "importAndFirstResponseMs": 8475.677499999998,
+      "bytes": 16807,
+      "wireHash": "ffa6fcc61b8c84a43543462fb88c0e6532882e739f458e388947132c33044d69",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60243968,
+        "heapTotal": 12398592,
+        "heapUsed": 8126240,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191725568,
+        "heapTotal": 100179968,
+        "heapUsed": 29123360,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "measuredAt": "2026-10-18T18:23:26.301Z",
+      "processElapsedMs": 6808.988299999997,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 977.1175999999999,
+      "firstResponseMs": 4963.754,
+      "preHandlerImportMs": 307.9497,
+      "firstBodyReadySinceProcessStartMs": 6249.5697,
+      "importAndFirstResponseMs": 5940.8715999999995,
+      "bytes": 16417,
+      "wireHash": "a70975dda31ac0ce0e70e7f165927c2100aeb77c9ce31a49f4dfa76cde856bda",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60116992,
+        "heapTotal": 12922880,
+        "heapUsed": 8174760,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168026112,
+        "heapTotal": 100442112,
+        "heapUsed": 28798280,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "measuredAt": "2026-10-18T18:23:32.121Z",
+      "processElapsedMs": 5819.415099999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 867.8909999999998,
+      "firstResponseMs": 4072.2747999999997,
+      "preHandlerImportMs": 292.2118,
+      "firstBodyReadySinceProcessStartMs": 5232.7719,
+      "importAndFirstResponseMs": 4940.1658,
+      "bytes": 16418,
+      "wireHash": "243bc453fb70afdfecb93c91cf1852ae25a87f915b16f3bbf7a452c126182fce",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60137472,
+        "heapTotal": 12398592,
+        "heapUsed": 8148720,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 169574400,
+        "heapTotal": 99917824,
+        "heapUsed": 28827624,
+        "external": 7509855,
+        "arrayBuffers": 2644132
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "measuredAt": "2026-10-18T18:23:38.756Z",
+      "processElapsedMs": 6634.911800000002,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2932.2339,
+      "firstResponseMs": 2877.1205999999997,
+      "preHandlerImportMs": 278.318,
+      "firstBodyReadySinceProcessStartMs": 6089.6078,
+      "importAndFirstResponseMs": 5809.3544999999995,
+      "bytes": 16807,
+      "wireHash": "0331f22e81b05e49b5cf6fe182c5a7dc4f209732dcf9629f3f0e83a1625ee385",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60137472,
+        "heapTotal": 12660736,
+        "heapUsed": 8230712,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191979520,
+        "heapTotal": 108752896,
+        "heapUsed": 62549776,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "measuredAt": "2026-10-18T18:23:45.889Z",
+      "processElapsedMs": 7132.9908,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2870.7845,
+      "firstResponseMs": 3189.7834000000003,
+      "preHandlerImportMs": 260.5287,
+      "firstBodyReadySinceProcessStartMs": 6322.9299,
+      "importAndFirstResponseMs": 6060.5679,
+      "bytes": 16806,
+      "wireHash": "629aa0493855292b7e46d29a31ca0900efb56b8c5e48ce3eef51b56911ee3381",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60289024,
+        "heapTotal": 12660736,
+        "heapUsed": 8217432,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 179478528,
+        "heapTotal": 74412032,
+        "heapUsed": 51370008,
+        "external": 33525539,
+        "arrayBuffers": 15315136
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "measuredAt": "2026-10-18T18:23:53.143Z",
+      "processElapsedMs": 7254.241399999999,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 896.9465,
+      "firstResponseMs": 4963.2383,
+      "preHandlerImportMs": 269.6081,
+      "firstBodyReadySinceProcessStartMs": 6130.4767,
+      "importAndFirstResponseMs": 5860.1848,
+      "bytes": 16416,
+      "wireHash": "b2496e83287ddb02c59f2624dd2464894059bb1dae62a1e7000ed143d1a697e8",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60432384,
+        "heapTotal": 12922880,
+        "heapUsed": 8141072,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 169455616,
+        "heapTotal": 100704256,
+        "heapUsed": 28852656,
+        "external": 7509836,
+        "arrayBuffers": 2644113
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 5,
+      "measuredAt": "2026-10-18T18:24:01.978Z",
+      "processElapsedMs": 8834.623399999997,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 1352.244,
+      "firstResponseMs": 6231.3162999999995,
+      "preHandlerImportMs": 357.4409,
+      "firstBodyReadySinceProcessStartMs": 7941.7215,
+      "importAndFirstResponseMs": 7583.560299999999,
+      "bytes": 16421,
+      "wireHash": "aecd36031aacc06618039f7c47e48686c88339a10886a6df5a38023b049287b1",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59744256,
+        "heapTotal": 12398592,
+        "heapUsed": 8151344,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167809024,
+        "heapTotal": 100704256,
+        "heapUsed": 28818808,
+        "external": 7509879,
+        "arrayBuffers": 2644156
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 5,
+      "measuredAt": "2026-10-18T18:24:10.311Z",
+      "processElapsedMs": 8331.7797,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3623.6718,
+      "firstResponseMs": 3767.3882000000003,
+      "preHandlerImportMs": 332.6748,
+      "firstBodyReadySinceProcessStartMs": 7725.31,
+      "importAndFirstResponseMs": 7391.06,
+      "bytes": 16808,
+      "wireHash": "aaac3f81900de4ea49faabbd004d2fc2bf1a91402ff02e0da402b94e29181046",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59936768,
+        "heapTotal": 12660736,
+        "heapUsed": 8151888,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192217088,
+        "heapTotal": 100179968,
+        "heapUsed": 29139240,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 6,
+      "measuredAt": "2026-10-18T18:24:18.650Z",
+      "processElapsedMs": 8338.832400000014,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3565.319,
+      "firstResponseMs": 3416.5953,
+      "preHandlerImportMs": 497.3217,
+      "firstBodyReadySinceProcessStartMs": 7482.9891,
+      "importAndFirstResponseMs": 6981.9143,
+      "bytes": 16808,
+      "wireHash": "040c0f32b41524aaa261946a2cb37982c0c3d0a19d76e46f74b89ef625358326",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59990016,
+        "heapTotal": 12136448,
+        "heapUsed": 8191128,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191586304,
+        "heapTotal": 101752832,
+        "heapUsed": 29152048,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 6,
+      "measuredAt": "2026-10-18T18:24:24.447Z",
+      "processElapsedMs": 5796.900300000008,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 823.6410999999999,
+      "firstResponseMs": 4125.1677,
+      "preHandlerImportMs": 301.7831,
+      "firstBodyReadySinceProcessStartMs": 5251.3896,
+      "importAndFirstResponseMs": 4948.8088,
+      "bytes": 16417,
+      "wireHash": "be922c8126b6085a909b18d6a6b8440f3ac23e0525a8f6804de88410cc6921e8",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59846656,
+        "heapTotal": 12398592,
+        "heapUsed": 8224984,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167309312,
+        "heapTotal": 98869248,
+        "heapUsed": 28782760,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 7,
+      "measuredAt": "2026-10-18T18:24:30.309Z",
+      "processElapsedMs": 5861.3586999999825,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 941.8441,
+      "firstResponseMs": 4112.474,
+      "preHandlerImportMs": 306.2665,
+      "firstBodyReadySinceProcessStartMs": 5361.2371,
+      "importAndFirstResponseMs": 5054.3181,
+      "bytes": 16418,
+      "wireHash": "f59ca70988f5e9fe68806e93221dc0b1d91ae41713a0817926442791a2659a1c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59731968,
+        "heapTotal": 12922880,
+        "heapUsed": 8249432,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168685568,
+        "heapTotal": 99917824,
+        "heapUsed": 28802096,
+        "external": 7509854,
+        "arrayBuffers": 2644131
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 7,
+      "measuredAt": "2026-10-18T18:24:36.329Z",
+      "processElapsedMs": 6019.506200000003,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2983.7099,
+      "firstResponseMs": 2278.4934999999996,
+      "preHandlerImportMs": 275.3723,
+      "firstBodyReadySinceProcessStartMs": 5539.8474,
+      "importAndFirstResponseMs": 5262.203399999999,
+      "bytes": 16808,
+      "wireHash": "420faf56b5c128f1047d541e0ad252cd57c74eaceecb90507b55ede49f434fcf",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59867136,
+        "heapTotal": 12660736,
+        "heapUsed": 8142512,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191942656,
+        "heapTotal": 100179968,
+        "heapUsed": 29126280,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 8,
+      "measuredAt": "2026-10-18T18:24:43.433Z",
+      "processElapsedMs": 7104.7723000000115,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3049.2608999999998,
+      "firstResponseMs": 3209.5343000000003,
+      "preHandlerImportMs": 287.4297,
+      "firstBodyReadySinceProcessStartMs": 6548.3117,
+      "importAndFirstResponseMs": 6258.7952000000005,
+      "bytes": 16808,
+      "wireHash": "04548f8d0f75735e199762df39740e0803ad1dd0b9e39ed2ff24dfdc19bdc87d",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60076032,
+        "heapTotal": 12660736,
+        "heapUsed": 8143176,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 179240960,
+        "heapTotal": 74674176,
+        "heapUsed": 51578040,
+        "external": 33525562,
+        "arrayBuffers": 15315159
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 8,
+      "measuredAt": "2026-10-18T18:24:49.796Z",
+      "processElapsedMs": 6362.661700000026,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 1010.3214999999999,
+      "firstResponseMs": 4551.2773,
+      "preHandlerImportMs": 276.6933,
+      "firstBodyReadySinceProcessStartMs": 5839.2712,
+      "importAndFirstResponseMs": 5561.5988,
+      "bytes": 16415,
+      "wireHash": "eb5bf1fff6fd5cf3f4c0f980a8046459e29ec27c087dbb534300c8f55a3d7186",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60108800,
+        "heapTotal": 12136448,
+        "heapUsed": 8180832,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168824832,
+        "heapTotal": 101228544,
+        "heapUsed": 28804536,
+        "external": 7509828,
+        "arrayBuffers": 2644105
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 9,
+      "measuredAt": "2026-10-18T18:24:55.036Z",
+      "processElapsedMs": 5239.936099999992,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 1027.9445,
+      "firstResponseMs": 3476.0236999999997,
+      "preHandlerImportMs": 287.7897,
+      "firstBodyReadySinceProcessStartMs": 4792.5908,
+      "importAndFirstResponseMs": 4503.968199999999,
+      "bytes": 16417,
+      "wireHash": "1d21f086dee2d9b2f4d7ddec4cf4808fb193c40c7e5d9787d598b7b7637c8944",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60469248,
+        "heapTotal": 12136448,
+        "heapUsed": 8167864,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168783872,
+        "heapTotal": 99655680,
+        "heapUsed": 28800016,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 9,
+      "measuredAt": "2026-10-18T18:25:00.843Z",
+      "processElapsedMs": 5806.580500000011,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2823.1177000000002,
+      "firstResponseMs": 2181.0712999999996,
+      "preHandlerImportMs": 284.9485,
+      "firstBodyReadySinceProcessStartMs": 5290.9616,
+      "importAndFirstResponseMs": 5004.189,
+      "bytes": 16807,
+      "wireHash": "07509ab7ea9a4cb1a9b0faaa12763110b9b0aa026220bd17658bd4be5d14863f",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59793408,
+        "heapTotal": 12398592,
+        "heapUsed": 8232880,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191709184,
+        "heapTotal": 99917824,
+        "heapUsed": 29142112,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 10,
+      "measuredAt": "2026-10-18T18:25:06.862Z",
+      "processElapsedMs": 6012.5350000000035,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3049.3822,
+      "firstResponseMs": 2218.8506,
+      "preHandlerImportMs": 264.7953,
+      "firstBodyReadySinceProcessStartMs": 5534.9515,
+      "importAndFirstResponseMs": 5268.2328,
+      "bytes": 16808,
+      "wireHash": "68f4ec54b8fa120099b78913bab23bbb60a599224cd6ca227507ebb4dc216f9a",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60092416,
+        "heapTotal": 12136448,
+        "heapUsed": 8201120,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191934464,
+        "heapTotal": 98869248,
+        "heapUsed": 29120936,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 10,
+      "measuredAt": "2026-10-18T18:25:12.852Z",
+      "processElapsedMs": 5990.8413,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 803.9558000000001,
+      "firstResponseMs": 4137.698399999999,
+      "preHandlerImportMs": 284.6636,
+      "firstBodyReadySinceProcessStartMs": 5226.9455,
+      "importAndFirstResponseMs": 4941.654199999999,
+      "bytes": 16418,
+      "wireHash": "ea57b3bfa317d9720ae5d2adfc1462df52d21c90228233da5ad79432b0406607",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60264448,
+        "heapTotal": 12660736,
+        "heapUsed": 8228896,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168755200,
+        "heapTotal": 100966400,
+        "heapUsed": 28789496,
+        "external": 7509855,
+        "arrayBuffers": 2644132
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 11,
+      "measuredAt": "2026-10-18T18:25:19.758Z",
+      "processElapsedMs": 6905.740699999995,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 844.8669,
+      "firstResponseMs": 5080.0052000000005,
+      "preHandlerImportMs": 342.5699,
+      "firstBodyReadySinceProcessStartMs": 6268.211,
+      "importAndFirstResponseMs": 5924.8721000000005,
+      "bytes": 16417,
+      "wireHash": "83f4781725f82771ca53dffb3fb9474205ada6d5085ef0199e7bb92c826a5ef6",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 64008192,
+        "heapTotal": 12398592,
+        "heapUsed": 8293976,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 170303488,
+        "heapTotal": 101490688,
+        "heapUsed": 28742952,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 11,
+      "measuredAt": "2026-10-18T18:25:25.382Z",
+      "processElapsedMs": 5623.886599999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3038.1003,
+      "firstResponseMs": 1880.4768000000004,
+      "preHandlerImportMs": 250.3049,
+      "firstBodyReadySinceProcessStartMs": 5170.3949,
+      "importAndFirstResponseMs": 4918.5771,
+      "bytes": 16810,
+      "wireHash": "5efe27d2d77073334774ac07d5bac029c65e328146538e256b25b3ce621d3ef6",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 64315392,
+        "heapTotal": 12922880,
+        "heapUsed": 8164512,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 193347584,
+        "heapTotal": 99917824,
+        "heapUsed": 29179224,
+        "external": 10973722,
+        "arrayBuffers": 6754915
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 12,
+      "measuredAt": "2026-10-18T18:25:31.568Z",
+      "processElapsedMs": 6185.861799999984,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2964.0379,
+      "firstResponseMs": 2325.1884,
+      "preHandlerImportMs": 272.1071,
+      "firstBodyReadySinceProcessStartMs": 5563.0252,
+      "importAndFirstResponseMs": 5289.2263,
+      "bytes": 16808,
+      "wireHash": "fe37ebab61e38d8f089899f39b47ab3f9a6e3c9b7047ed09989706782ea09351",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 64159744,
+        "heapTotal": 12660736,
+        "heapUsed": 8158056,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 214581248,
+        "heapTotal": 108752896,
+        "heapUsed": 51288136,
+        "external": 33525563,
+        "arrayBuffers": 15315160
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 12,
+      "measuredAt": "2026-10-18T18:25:36.809Z",
+      "processElapsedMs": 5240.6393999999855,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 848.5755999999999,
+      "firstResponseMs": 3569.8731000000002,
+      "preHandlerImportMs": 358.2808,
+      "firstBodyReadySinceProcessStartMs": 4777.555,
+      "importAndFirstResponseMs": 4418.4487,
+      "bytes": 16417,
+      "wireHash": "e6c3d690d96df105abd737534b426e9de067d50bcc8ba488cecfdf7174457156",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63901696,
+        "heapTotal": 12398592,
+        "heapUsed": 8143720,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 170545152,
+        "heapTotal": 101752832,
+        "heapUsed": 28855448,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 13,
+      "measuredAt": "2026-10-18T18:25:42.984Z",
+      "processElapsedMs": 6175.412300000025,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 884.1134000000001,
+      "firstResponseMs": 4232.903899999999,
+      "preHandlerImportMs": 274.3936,
+      "firstBodyReadySinceProcessStartMs": 5392.2188,
+      "importAndFirstResponseMs": 5117.0172999999995,
+      "bytes": 16417,
+      "wireHash": "0b31b04db93c3b06a64b3a19bd3841dc7a869153c30075eae0b8dd9670aa91de",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 64065536,
+        "heapTotal": 12136448,
+        "heapUsed": 8208312,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168689664,
+        "heapTotal": 100179968,
+        "heapUsed": 28733632,
+        "external": 7509845,
+        "arrayBuffers": 2644122
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 13,
+      "measuredAt": "2026-10-18T18:25:49.537Z",
+      "processElapsedMs": 6552.551700000011,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2949.5943,
+      "firstResponseMs": 2671.8154,
+      "preHandlerImportMs": 291.0789,
+      "firstBodyReadySinceProcessStartMs": 5914.0867,
+      "importAndFirstResponseMs": 5621.4097,
+      "bytes": 16808,
+      "wireHash": "7973ab4ab7ca61efca3911bcec233f768693db1f7722e40aa580682d8e85a269",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 64241664,
+        "heapTotal": 12660736,
+        "heapUsed": 8187288,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 193916928,
+        "heapTotal": 109277184,
+        "heapUsed": 49356856,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 14,
+      "measuredAt": "2026-10-18T18:25:57.365Z",
+      "processElapsedMs": 7827.872899999988,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3047.181,
+      "firstResponseMs": 3862.2947000000004,
+      "preHandlerImportMs": 296.2676,
+      "firstBodyReadySinceProcessStartMs": 7207.4053,
+      "importAndFirstResponseMs": 6909.475700000001,
+      "bytes": 16809,
+      "wireHash": "cfbd1713b04e73a6cee3a5527804220bc8843bbd84aea88ab5de79e6ba63e44a",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 64040960,
+        "heapTotal": 12136448,
+        "heapUsed": 8240088,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 193040384,
+        "heapTotal": 100179968,
+        "heapUsed": 29161472,
+        "external": 10973711,
+        "arrayBuffers": 6754904
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 14,
+      "measuredAt": "2026-10-18T18:26:03.270Z",
+      "processElapsedMs": 5904.325200000021,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 996.5553,
+      "firstResponseMs": 4069.8313,
+      "preHandlerImportMs": 322.6415,
+      "firstBodyReadySinceProcessStartMs": 5389.3912,
+      "importAndFirstResponseMs": 5066.3866,
+      "bytes": 16415,
+      "wireHash": "b185e54cfc400d3d1354d5be3d7704f9e7644613a56c661c635a544600483965",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 65445888,
+        "heapTotal": 12136448,
+        "heapUsed": 8134672,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168308736,
+        "heapTotal": 100966400,
+        "heapUsed": 28973632,
+        "external": 7509829,
+        "arrayBuffers": 2644106
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 15,
+      "measuredAt": "2026-10-18T18:26:08.228Z",
+      "processElapsedMs": 4957.811799999996,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 859.6231,
+      "firstResponseMs": 3394.3718,
+      "preHandlerImportMs": 274.7039,
+      "firstBodyReadySinceProcessStartMs": 4529.1658,
+      "importAndFirstResponseMs": 4253.9949,
+      "bytes": 16417,
+      "wireHash": "1da0dd9d62423e30bfa0dbc5f8026d0d3ee01f5ec5657df5632f9f4aeec1c4cb",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60149760,
+        "heapTotal": 12398592,
+        "heapUsed": 8250968,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168763392,
+        "heapTotal": 100704256,
+        "heapUsed": 28801472,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 15,
+      "measuredAt": "2026-10-18T18:26:13.701Z",
+      "processElapsedMs": 5473.165200000018,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2726.846,
+      "firstResponseMs": 1909.6516000000006,
+      "preHandlerImportMs": 358.6925,
+      "firstBodyReadySinceProcessStartMs": 4997.8932,
+      "importAndFirstResponseMs": 4636.497600000001,
+      "bytes": 16808,
+      "wireHash": "530db1faf9b1036a76d33ef4d8e581c73ada8737f44c5157c8c11cb1f009f45c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60035072,
+        "heapTotal": 12398592,
+        "heapUsed": 8148080,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191442944,
+        "heapTotal": 98869248,
+        "heapUsed": 29117160,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 16,
+      "measuredAt": "2026-10-18T18:26:19.067Z",
+      "processElapsedMs": 5365.8752000000095,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2781.0161,
+      "firstResponseMs": 1869.7770999999998,
+      "preHandlerImportMs": 276.9488,
+      "firstBodyReadySinceProcessStartMs": 4929.4383,
+      "importAndFirstResponseMs": 4650.7932,
+      "bytes": 16808,
+      "wireHash": "a5b4c850db05c25fbe0e3996545d264de3775be6f9217c68199618539209908d",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60133376,
+        "heapTotal": 12660736,
+        "heapUsed": 8142640,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191664128,
+        "heapTotal": 109277184,
+        "heapUsed": 62220232,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 16,
+      "measuredAt": "2026-10-18T18:26:24.198Z",
+      "processElapsedMs": 5130.904100000014,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 873.5864999999999,
+      "firstResponseMs": 3591.7234,
+      "preHandlerImportMs": 257.5308,
+      "firstBodyReadySinceProcessStartMs": 4723.4517,
+      "importAndFirstResponseMs": 4465.3099,
+      "bytes": 16416,
+      "wireHash": "cc4ff64c0a9a4e924ec7e9cc631e60006c74bf8d94cd78feb026f8c211ed7d3c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60559360,
+        "heapTotal": 12660736,
+        "heapUsed": 8177832,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 166637568,
+        "heapTotal": 100966400,
+        "heapUsed": 28751496,
+        "external": 7509838,
+        "arrayBuffers": 2644115
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 17,
+      "measuredAt": "2026-10-18T18:26:29.287Z",
+      "processElapsedMs": 5088.258299999987,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 870.2260000000001,
+      "firstResponseMs": 3530.7574999999997,
+      "preHandlerImportMs": 264.3433,
+      "firstBodyReadySinceProcessStartMs": 4666.4059,
+      "importAndFirstResponseMs": 4400.9835,
+      "bytes": 16413,
+      "wireHash": "9430002bb33bb3dd75399cd694400740653b76a279abf25d6a64932b033ee49f",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60223488,
+        "heapTotal": 12398592,
+        "heapUsed": 8159480,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168480768,
+        "heapTotal": 101490688,
+        "heapUsed": 28794976,
+        "external": 7509811,
+        "arrayBuffers": 2644088
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 17,
+      "measuredAt": "2026-10-18T18:26:34.555Z",
+      "processElapsedMs": 5268.3732999999775,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2800.3736000000004,
+      "firstResponseMs": 1784.7021999999997,
+      "preHandlerImportMs": 264.959,
+      "firstBodyReadySinceProcessStartMs": 4851.5696,
+      "importAndFirstResponseMs": 4585.0758000000005,
+      "bytes": 16807,
+      "wireHash": "c3d294baf9ae37069460d0340d2c646fbee1e7105ceba81cfd0b73432f35e6c7",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60112896,
+        "heapTotal": 12398592,
+        "heapUsed": 8230536,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192565248,
+        "heapTotal": 99655680,
+        "heapUsed": 29125792,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 18,
+      "measuredAt": "2026-10-18T18:26:39.754Z",
+      "processElapsedMs": 5198.752399999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2781.3227,
+      "firstResponseMs": 1694.0443,
+      "preHandlerImportMs": 265.6517,
+      "firstBodyReadySinceProcessStartMs": 4742.7001,
+      "importAndFirstResponseMs": 4475.367,
+      "bytes": 16807,
+      "wireHash": "f2c9d6b93f8c8fc914b0bd3a7ca63fa9e15f4aef161e45ad674e3b88e8bc7b15",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59973632,
+        "heapTotal": 12398592,
+        "heapUsed": 8216216,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 213704704,
+        "heapTotal": 108752896,
+        "heapUsed": 51290256,
+        "external": 33525551,
+        "arrayBuffers": 15315148
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 18,
+      "measuredAt": "2026-10-18T18:26:44.633Z",
+      "processElapsedMs": 4878.462299999956,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 883.3103,
+      "firstResponseMs": 3296.0962000000004,
+      "preHandlerImportMs": 277.515,
+      "firstBodyReadySinceProcessStartMs": 4457.6373,
+      "importAndFirstResponseMs": 4179.4065,
+      "bytes": 16415,
+      "wireHash": "0b221435edaeb242d12e69dd2db637380264df490bcf46f35f37f02741a07164",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60284928,
+        "heapTotal": 13185024,
+        "heapUsed": 8154464,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168398848,
+        "heapTotal": 99917824,
+        "heapUsed": 28799304,
+        "external": 7509828,
+        "arrayBuffers": 2644105
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 19,
+      "measuredAt": "2026-10-18T18:26:49.716Z",
+      "processElapsedMs": 5083.706799999985,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 840.9743000000001,
+      "firstResponseMs": 3499.0897999999997,
+      "preHandlerImportMs": 292.8563,
+      "firstBodyReadySinceProcessStartMs": 4633.6619,
+      "importAndFirstResponseMs": 4340.0641,
+      "bytes": 16417,
+      "wireHash": "89db6ade861db4be03dbb118cf16412955eaaa8e5c917d92edc77beb043d1e7c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60325888,
+        "heapTotal": 12398592,
+        "heapUsed": 8160544,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168808448,
+        "heapTotal": 101752832,
+        "heapUsed": 28839992,
+        "external": 7509845,
+        "arrayBuffers": 2644122
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 19,
+      "measuredAt": "2026-10-18T18:26:54.883Z",
+      "processElapsedMs": 5166.8445000000065,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2766.4829,
+      "firstResponseMs": 1701.2313000000004,
+      "preHandlerImportMs": 283.8087,
+      "firstBodyReadySinceProcessStartMs": 4753.506,
+      "importAndFirstResponseMs": 4467.7142,
+      "bytes": 16808,
+      "wireHash": "06e287e203c34f07ed57d866c318218a51adb82556bc0aff72871f7861bc7b4b",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60383232,
+        "heapTotal": 12398592,
+        "heapUsed": 8221304,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191668224,
+        "heapTotal": 98607104,
+        "heapUsed": 29127344,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 20,
+      "measuredAt": "2026-10-18T18:26:59.785Z",
+      "processElapsedMs": 4897.625700000033,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2611.2633,
+      "firstResponseMs": 1588.9735999999998,
+      "preHandlerImportMs": 254.6756,
+      "firstBodyReadySinceProcessStartMs": 4457.628,
+      "importAndFirstResponseMs": 4200.2369,
+      "bytes": 16806,
+      "wireHash": "760a45b78bd4216f89a1f470e62768c6bc249f7221179bfcacc112787e6f0037",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60235776,
+        "heapTotal": 12660736,
+        "heapUsed": 8222328,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192536576,
+        "heapTotal": 109277184,
+        "heapUsed": 49400800,
+        "external": 10973675,
+        "arrayBuffers": 6754868
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 20,
+      "measuredAt": "2026-10-18T18:27:04.767Z",
+      "processElapsedMs": 4982.220400000049,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 845.7486000000001,
+      "firstResponseMs": 3401.466,
+      "preHandlerImportMs": 273.704,
+      "firstBodyReadySinceProcessStartMs": 4521.8943,
+      "importAndFirstResponseMs": 4247.2146,
+      "bytes": 16414,
+      "wireHash": "d28ac0efcc98450d3145b29b4814b1baf71320d8c14e9b2bcf0fcae4eb946765",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60186624,
+        "heapTotal": 12922880,
+        "heapUsed": 8156480,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168505344,
+        "heapTotal": 100704256,
+        "heapUsed": 28835368,
+        "external": 7509819,
+        "arrayBuffers": 2644096
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 21,
+      "measuredAt": "2026-10-18T18:27:09.735Z",
+      "processElapsedMs": 4968.214800000016,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 855.2588999999999,
+      "firstResponseMs": 3417.1298000000006,
+      "preHandlerImportMs": 277.8927,
+      "firstBodyReadySinceProcessStartMs": 4551.0838,
+      "importAndFirstResponseMs": 4272.3887,
+      "bytes": 16418,
+      "wireHash": "b1b191ceda5d5533fbb99d3752b6f9b3e33a685b69bcc417ebbad30b6cabaf90",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59961344,
+        "heapTotal": 12136448,
+        "heapUsed": 8216208,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168665088,
+        "heapTotal": 100442112,
+        "heapUsed": 28824248,
+        "external": 7509855,
+        "arrayBuffers": 2644132
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 21,
+      "measuredAt": "2026-10-18T18:27:15.317Z",
+      "processElapsedMs": 5582.084499999997,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2778.8233,
+      "firstResponseMs": 1932.5484000000001,
+      "preHandlerImportMs": 275.1286,
+      "firstBodyReadySinceProcessStartMs": 4994.2581,
+      "importAndFirstResponseMs": 4711.3717,
+      "bytes": 16809,
+      "wireHash": "943545558103e9e84cba0892bb90388ff470f058bcb6fa47f67f4f3e16c18169",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60080128,
+        "heapTotal": 12398592,
+        "heapUsed": 8181600,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191647744,
+        "heapTotal": 101490688,
+        "heapUsed": 29145616,
+        "external": 10973711,
+        "arrayBuffers": 6754904
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 22,
+      "measuredAt": "2026-10-18T18:27:20.692Z",
+      "processElapsedMs": 5374.4065999999875,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2705.9419,
+      "firstResponseMs": 1892.2821000000004,
+      "preHandlerImportMs": 281.1338,
+      "firstBodyReadySinceProcessStartMs": 4881.5864,
+      "importAndFirstResponseMs": 4598.224,
+      "bytes": 16807,
+      "wireHash": "256975afd1025f49f4fc23f6bd5125b585187e1c4f7c0ac4aea324d3d90a437a",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60030976,
+        "heapTotal": 12922880,
+        "heapUsed": 8211672,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192057344,
+        "heapTotal": 99917824,
+        "heapUsed": 29296120,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 22,
+      "measuredAt": "2026-10-18T18:27:25.616Z",
+      "processElapsedMs": 4924.07209999999,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 847.7548999999999,
+      "firstResponseMs": 3315.151,
+      "preHandlerImportMs": 285.6274,
+      "firstBodyReadySinceProcessStartMs": 4449.4274,
+      "importAndFirstResponseMs": 4162.9059,
+      "bytes": 16417,
+      "wireHash": "802605a8cdc389e382ecb0fa3286cb6a9e41a813f6b8236b3d4055f1431f2d19",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60407808,
+        "heapTotal": 12398592,
+        "heapUsed": 8218944,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167411712,
+        "heapTotal": 99655680,
+        "heapUsed": 28843072,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 23,
+      "measuredAt": "2026-10-18T18:27:30.643Z",
+      "processElapsedMs": 5026.497499999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 913.3369,
+      "firstResponseMs": 3351.6843,
+      "preHandlerImportMs": 270.5782,
+      "firstBodyReadySinceProcessStartMs": 4536.0115,
+      "importAndFirstResponseMs": 4265.0212,
+      "bytes": 16416,
+      "wireHash": "a9f4d3d0a7204cce749b31d0353c0ab7993a4342bcf8b328af54df9538ed4660",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60190720,
+        "heapTotal": 12398592,
+        "heapUsed": 8162792,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168681472,
+        "heapTotal": 100704256,
+        "heapUsed": 28820840,
+        "external": 7509837,
+        "arrayBuffers": 2644114
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 23,
+      "measuredAt": "2026-10-18T18:27:35.766Z",
+      "processElapsedMs": 5123.3990999999805,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2646.5960999999998,
+      "firstResponseMs": 1692.0475000000006,
+      "preHandlerImportMs": 276.6995,
+      "firstBodyReadySinceProcessStartMs": 4617.1949,
+      "importAndFirstResponseMs": 4338.6436,
+      "bytes": 16808,
+      "wireHash": "27e1805a33adf7d9d184a8988fed5ea4ecaaf5f12701a44625df7018de444b06",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60342272,
+        "heapTotal": 12660736,
+        "heapUsed": 8238096,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191913984,
+        "heapTotal": 100966400,
+        "heapUsed": 29150200,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 24,
+      "measuredAt": "2026-10-18T18:27:40.879Z",
+      "processElapsedMs": 5112.719999999972,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2674.8691,
+      "firstResponseMs": 1697.2078999999999,
+      "preHandlerImportMs": 260.5556,
+      "firstBodyReadySinceProcessStartMs": 4634.4577,
+      "importAndFirstResponseMs": 4372.076999999999,
+      "bytes": 16807,
+      "wireHash": "6a294eb295300629e83330100739660abcba00cdc9ca4723e7a0f303b147d2b1",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60248064,
+        "heapTotal": 12660736,
+        "heapUsed": 8217568,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191574016,
+        "heapTotal": 100179968,
+        "heapUsed": 29124952,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 24,
+      "measuredAt": "2026-10-18T18:27:46.199Z",
+      "processElapsedMs": 5319.74920000002,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 999.2865999999999,
+      "firstResponseMs": 3621.6631,
+      "preHandlerImportMs": 255.8877,
+      "firstBodyReadySinceProcessStartMs": 4877.6049,
+      "importAndFirstResponseMs": 4620.9497,
+      "bytes": 16418,
+      "wireHash": "0a1d5a2186dc8d600d3f83e831a2e508f2b84e03518f2d12a2ba81b1fdf51cb4",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60289024,
+        "heapTotal": 12136448,
+        "heapUsed": 8155104,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 169381888,
+        "heapTotal": 100442112,
+        "heapUsed": 28819936,
+        "external": 7509854,
+        "arrayBuffers": 2644131
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 25,
+      "measuredAt": "2026-10-18T18:27:51.351Z",
+      "processElapsedMs": 5152.489300000016,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 908.4896999999999,
+      "firstResponseMs": 3450.6009000000004,
+      "preHandlerImportMs": 299.2707,
+      "firstBodyReadySinceProcessStartMs": 4658.9925,
+      "importAndFirstResponseMs": 4359.0906,
+      "bytes": 16418,
+      "wireHash": "f7f86a81ba7c665e4d91517a5d627370ead14887590adb3fd6c86031ecf3859d",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60035072,
+        "heapTotal": 12398592,
+        "heapUsed": 8143648,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168742912,
+        "heapTotal": 102801408,
+        "heapUsed": 28758440,
+        "external": 7509853,
+        "arrayBuffers": 2644130
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 25,
+      "measuredAt": "2026-10-18T18:27:57.197Z",
+      "processElapsedMs": 5845.591200000024,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3029.9392,
+      "firstResponseMs": 2115.7221999999997,
+      "preHandlerImportMs": 266.8067,
+      "firstBodyReadySinceProcessStartMs": 5416.588,
+      "importAndFirstResponseMs": 5145.661399999999,
+      "bytes": 16809,
+      "wireHash": "57053062a8f135cca8d66d35161a713de6f788a4fedd44b973a4fa73179eb7b6",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60076032,
+        "heapTotal": 12660736,
+        "heapUsed": 8232496,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191500288,
+        "heapTotal": 100442112,
+        "heapUsed": 29132616,
+        "external": 10973711,
+        "arrayBuffers": 6754904
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 26,
+      "measuredAt": "2026-10-18T18:28:02.195Z",
+      "processElapsedMs": 4997.523999999976,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2725.3611,
+      "firstResponseMs": 1599.3170999999998,
+      "preHandlerImportMs": 276.1251,
+      "firstBodyReadySinceProcessStartMs": 4602.9388,
+      "importAndFirstResponseMs": 4324.6782,
+      "bytes": 16807,
+      "wireHash": "29d16f60a2b5d04bc276511934cbbd14e4db1bdb9f466576851cac81b2ec1b8b",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60280832,
+        "heapTotal": 12660736,
+        "heapUsed": 8154208,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191844352,
+        "heapTotal": 98869248,
+        "heapUsed": 29133016,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 26,
+      "measuredAt": "2026-10-18T18:28:07.071Z",
+      "processElapsedMs": 4876.222300000023,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 826.5060000000001,
+      "firstResponseMs": 3352.2659,
+      "preHandlerImportMs": 284.6071,
+      "firstBodyReadySinceProcessStartMs": 4464.1776,
+      "importAndFirstResponseMs": 4178.7719,
+      "bytes": 16416,
+      "wireHash": "d754511affd9235237ba805648c34bc10becf026d422ac0cdee2d34499929216",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60129280,
+        "heapTotal": 13185024,
+        "heapUsed": 8210176,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168513536,
+        "heapTotal": 100704256,
+        "heapUsed": 28786800,
+        "external": 7509837,
+        "arrayBuffers": 2644114
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 27,
+      "measuredAt": "2026-10-18T18:28:12.153Z",
+      "processElapsedMs": 5081.939199999964,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 814.9204,
+      "firstResponseMs": 3558.8935,
+      "preHandlerImportMs": 260.6369,
+      "firstBodyReadySinceProcessStartMs": 4634.9461,
+      "importAndFirstResponseMs": 4373.8139,
+      "bytes": 16417,
+      "wireHash": "b85ccb97537c430354b5e053e3e0196a9f5cbe675e2310939cba4c73774b8a0b",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60194816,
+        "heapTotal": 12398592,
+        "heapUsed": 8230824,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 185528320,
+        "heapTotal": 107782144,
+        "heapUsed": 50978488,
+        "external": 7690070,
+        "arrayBuffers": 2824347
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 27,
+      "measuredAt": "2026-10-18T18:28:18.360Z",
+      "processElapsedMs": 6207.610099999991,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3151.1823999999997,
+      "firstResponseMs": 2349.0059000000006,
+      "preHandlerImportMs": 277.2809,
+      "firstBodyReadySinceProcessStartMs": 5779.1558,
+      "importAndFirstResponseMs": 5500.1883,
+      "bytes": 16808,
+      "wireHash": "3e70f05986c16050504c8e25b4a938f6b0dd4ebc7076f9bfff2759cf0c090dfb",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60813312,
+        "heapTotal": 12136448,
+        "heapUsed": 8171592,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192385024,
+        "heapTotal": 99393536,
+        "heapUsed": 29131536,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 28,
+      "measuredAt": "2026-10-18T18:28:23.764Z",
+      "processElapsedMs": 5403.55190000002,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2995.5726,
+      "firstResponseMs": 1679.3984,
+      "preHandlerImportMs": 299.2079,
+      "firstBodyReadySinceProcessStartMs": 4979.6438,
+      "importAndFirstResponseMs": 4674.971,
+      "bytes": 16807,
+      "wireHash": "aade9464f7f9e09daff56211c465f64c93b92cd37f9ba3e9f0edbbee74c1264f",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60583936,
+        "heapTotal": 12398592,
+        "heapUsed": 8218976,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191713280,
+        "heapTotal": 101412864,
+        "heapUsed": 30911520,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 28,
+      "measuredAt": "2026-10-18T18:28:28.837Z",
+      "processElapsedMs": 5072.644199999981,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 898.8516,
+      "firstResponseMs": 3466.8178000000003,
+      "preHandlerImportMs": 270.9403,
+      "firstBodyReadySinceProcessStartMs": 4637.8688,
+      "importAndFirstResponseMs": 4365.669400000001,
+      "bytes": 16417,
+      "wireHash": "f26a10e3bfacc6fc50e36250ae3b17e44637e3b94578c0a0f9ce78da63dec83c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60239872,
+        "heapTotal": 12398592,
+        "heapUsed": 8208376,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168898560,
+        "heapTotal": 101490688,
+        "heapUsed": 28823256,
+        "external": 7509847,
+        "arrayBuffers": 2644124
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 29,
+      "measuredAt": "2026-10-18T18:28:33.887Z",
+      "processElapsedMs": 5050.016100000008,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 831.3301999999999,
+      "firstResponseMs": 3425.6197999999995,
+      "preHandlerImportMs": 299.065,
+      "firstBodyReadySinceProcessStartMs": 4556.7408,
+      "importAndFirstResponseMs": 4256.949999999999,
+      "bytes": 16416,
+      "wireHash": "430f249bd84e0d36b2bf3ec75c6baa36de6e3e5ff9e5947fa5c22a115b554356",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60059648,
+        "heapTotal": 12660736,
+        "heapUsed": 8237656,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 166887424,
+        "heapTotal": 100442112,
+        "heapUsed": 28754160,
+        "external": 7509838,
+        "arrayBuffers": 2644115
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 29,
+      "measuredAt": "2026-10-18T18:28:38.932Z",
+      "processElapsedMs": 5045.016299999959,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2710.775,
+      "firstResponseMs": 1598.8591000000006,
+      "preHandlerImportMs": 269.2228,
+      "firstBodyReadySinceProcessStartMs": 4580.9647,
+      "importAndFirstResponseMs": 4309.634100000001,
+      "bytes": 16807,
+      "wireHash": "b48dbc4d91061d482cb735424d07562c4a58f2d60f688ba90445d6344ae6a16d",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60489728,
+        "heapTotal": 12660736,
+        "heapUsed": 8178512,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 180109312,
+        "heapTotal": 74936320,
+        "heapUsed": 51393456,
+        "external": 33525551,
+        "arrayBuffers": 15315148
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 30,
+      "measuredAt": "2026-10-18T18:28:44.266Z",
+      "processElapsedMs": 5330.107799999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2793.8541,
+      "firstResponseMs": 1809.7816000000003,
+      "preHandlerImportMs": 269.6345,
+      "firstBodyReadySinceProcessStartMs": 4874.9578,
+      "importAndFirstResponseMs": 4603.635700000001,
+      "bytes": 16808,
+      "wireHash": "6fa0e93c4e9db14d538cef04abf7e64a944ffd5c850728d7899446a509c3991b",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59891712,
+        "heapTotal": 12398592,
+        "heapUsed": 8224472,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191991808,
+        "heapTotal": 100179968,
+        "heapUsed": 29129792,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 30,
+      "measuredAt": "2026-10-18T18:28:49.258Z",
+      "processElapsedMs": 4991.608399999968,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 849.4176000000001,
+      "firstResponseMs": 3398.3239000000003,
+      "preHandlerImportMs": 282.256,
+      "firstBodyReadySinceProcessStartMs": 4530.6859,
+      "importAndFirstResponseMs": 4247.7415,
+      "bytes": 16417,
+      "wireHash": "2b5111a24734f208aad5649cfb8db55acd8e2a19985f8d003802640412874d1d",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60084224,
+        "heapTotal": 12398592,
+        "heapUsed": 8217824,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168665088,
+        "heapTotal": 100966400,
+        "heapUsed": 29109568,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 31,
+      "measuredAt": "2026-10-18T18:28:54.022Z",
+      "processElapsedMs": 4763.7089999999735,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 859.6037,
+      "firstResponseMs": 2874.7316,
+      "preHandlerImportMs": 299.6282,
+      "firstBodyReadySinceProcessStartMs": 4034.6953,
+      "importAndFirstResponseMs": 3734.3353,
+      "bytes": 16416,
+      "wireHash": "d48cf870fb844f95c79d1ef49e735220335b92a641076d16268025170e2d4f5f",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60022784,
+        "heapTotal": 12922880,
+        "heapUsed": 8215528,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168665088,
+        "heapTotal": 100704256,
+        "heapUsed": 28836272,
+        "external": 7509838,
+        "arrayBuffers": 2644115
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 31,
+      "measuredAt": "2026-10-18T18:28:59.826Z",
+      "processElapsedMs": 5803.983100000012,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3037.3891000000003,
+      "firstResponseMs": 1893.8848999999996,
+      "preHandlerImportMs": 293.0698,
+      "firstBodyReadySinceProcessStartMs": 5225.954,
+      "importAndFirstResponseMs": 4931.273999999999,
+      "bytes": 16807,
+      "wireHash": "592f463e55b46630b573db9287b477258353b9cc22ab9345180d05f023bb4a39",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60624896,
+        "heapTotal": 12136448,
+        "heapUsed": 8186872,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191467520,
+        "heapTotal": 98344960,
+        "heapUsed": 29135472,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 32,
+      "measuredAt": "2026-10-18T18:29:05.470Z",
+      "processElapsedMs": 5643.743600000045,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2886.1427000000003,
+      "firstResponseMs": 2019.6607,
+      "preHandlerImportMs": 278.084,
+      "firstBodyReadySinceProcessStartMs": 5186.1015,
+      "importAndFirstResponseMs": 4905.803400000001,
+      "bytes": 16808,
+      "wireHash": "74cf28fd809c947ad39d475b8d46e4de42420cf86180af7abf27cce212b3dfbf",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60329984,
+        "heapTotal": 12398592,
+        "heapUsed": 8242176,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191995904,
+        "heapTotal": 100704256,
+        "heapUsed": 29132312,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 32,
+      "measuredAt": "2026-10-18T18:29:10.575Z",
+      "processElapsedMs": 5105.3661999999895,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 908.2386,
+      "firstResponseMs": 3505.1369000000004,
+      "preHandlerImportMs": 262.8501,
+      "firstBodyReadySinceProcessStartMs": 4676.9417,
+      "importAndFirstResponseMs": 4413.3755,
+      "bytes": 16417,
+      "wireHash": "2f8bfdcc8d6868e65c96c777ded8bfed43f8de730f25a3c8fe16f41d750e3983",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60272640,
+        "heapTotal": 12136448,
+        "heapUsed": 8178312,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167399424,
+        "heapTotal": 99917824,
+        "heapUsed": 28777872,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 33,
+      "measuredAt": "2026-10-18T18:29:17.044Z",
+      "processElapsedMs": 6469.048200000019,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 1082.5505,
+      "firstResponseMs": 4537.9095,
+      "preHandlerImportMs": 354.1594,
+      "firstBodyReadySinceProcessStartMs": 5975.0854,
+      "importAndFirstResponseMs": 5620.46,
+      "bytes": 16418,
+      "wireHash": "605c592f27b69ab8436f4e54e43357bd71bb6bc091ec303b959b2785756be0d8",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60502016,
+        "heapTotal": 12398592,
+        "heapUsed": 8145120,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168079360,
+        "heapTotal": 99917824,
+        "heapUsed": 28809296,
+        "external": 7509855,
+        "arrayBuffers": 2644132
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 33,
+      "measuredAt": "2026-10-18T18:29:23.022Z",
+      "processElapsedMs": 5977.086600000039,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3145.5043,
+      "firstResponseMs": 2013.0403999999999,
+      "preHandlerImportMs": 263.0493,
+      "firstBodyReadySinceProcessStartMs": 5423.3232,
+      "importAndFirstResponseMs": 5158.5447,
+      "bytes": 16808,
+      "wireHash": "7297400e744f65d56a53d5577ea5b246fc7998cbc8d5da04e9e94ba549123713",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60805120,
+        "heapTotal": 12398592,
+        "heapUsed": 8193552,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192139264,
+        "heapTotal": 100704256,
+        "heapUsed": 29132576,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 34,
+      "measuredAt": "2026-10-18T18:29:28.523Z",
+      "processElapsedMs": 5501.147699999972,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2982.5315,
+      "firstResponseMs": 1796.3210000000004,
+      "preHandlerImportMs": 273.2525,
+      "firstBodyReadySinceProcessStartMs": 5054.4749,
+      "importAndFirstResponseMs": 4778.852500000001,
+      "bytes": 16814,
+      "wireHash": "f978328e0eb4788565a99d2d2d71194d6192fcfc938578821d722ed7bfd817c4",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60342272,
+        "heapTotal": 12922880,
+        "heapUsed": 8164968,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191471616,
+        "heapTotal": 98869248,
+        "heapUsed": 29133400,
+        "external": 10973766,
+        "arrayBuffers": 6754959
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 34,
+      "measuredAt": "2026-10-18T18:29:33.752Z",
+      "processElapsedMs": 5229.038499999966,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 887.1659000000001,
+      "firstResponseMs": 3643.1992,
+      "preHandlerImportMs": 285.552,
+      "firstBodyReadySinceProcessStartMs": 4816.6343,
+      "importAndFirstResponseMs": 4530.3651,
+      "bytes": 16418,
+      "wireHash": "0d947c4bbe897922c0603750f40d606fd41b01608002ce798a74f616a27097bb",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60215296,
+        "heapTotal": 12398592,
+        "heapUsed": 8226416,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168640512,
+        "heapTotal": 100704256,
+        "heapUsed": 28802392,
+        "external": 7509855,
+        "arrayBuffers": 2644132
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 35,
+      "measuredAt": "2026-10-18T18:29:39.184Z",
+      "processElapsedMs": 5431.4841000000015,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 929.7929,
+      "firstResponseMs": 3784.7833,
+      "preHandlerImportMs": 267.2858,
+      "firstBodyReadySinceProcessStartMs": 4982.3394,
+      "importAndFirstResponseMs": 4714.5762,
+      "bytes": 16416,
+      "wireHash": "97d4491d9709da26a51e7c4c79c136b18d6d05f37d1d83ccd7515aa893c585c8",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59985920,
+        "heapTotal": 12660736,
+        "heapUsed": 8191208,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168665088,
+        "heapTotal": 100704256,
+        "heapUsed": 28782528,
+        "external": 7509837,
+        "arrayBuffers": 2644114
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 35,
+      "measuredAt": "2026-10-18T18:29:44.845Z",
+      "processElapsedMs": 5661.174699999974,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2716.2755,
+      "firstResponseMs": 2166.8504000000003,
+      "preHandlerImportMs": 284.0386,
+      "firstBodyReadySinceProcessStartMs": 5168.7003,
+      "importAndFirstResponseMs": 4883.125900000001,
+      "bytes": 16807,
+      "wireHash": "47edd24dc99fb3b96fe561bba596ff1d7393b002e633535f1ec152ad7b58371c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60162048,
+        "heapTotal": 12660736,
+        "heapUsed": 8163232,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191709184,
+        "heapTotal": 99393536,
+        "heapUsed": 29278672,
+        "external": 10973686,
+        "arrayBuffers": 6754879
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 36,
+      "measuredAt": "2026-10-18T18:29:50.667Z",
+      "processElapsedMs": 5821.718099999998,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3078.1372,
+      "firstResponseMs": 1934.4156000000003,
+      "preHandlerImportMs": 345.1774,
+      "firstBodyReadySinceProcessStartMs": 5359.6646,
+      "importAndFirstResponseMs": 5012.5528,
+      "bytes": 16808,
+      "wireHash": "9667a665b1ce0d93c55006c0b06c500619472a5f41fc804aac07cc0483eacfdb",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60313600,
+        "heapTotal": 12398592,
+        "heapUsed": 8246288,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191303680,
+        "heapTotal": 99655680,
+        "heapUsed": 29127264,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 36,
+      "measuredAt": "2026-10-18T18:29:55.931Z",
+      "processElapsedMs": 5263.925400000007,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 880.1812,
+      "firstResponseMs": 3586.1524,
+      "preHandlerImportMs": 320.3961,
+      "firstBodyReadySinceProcessStartMs": 4787.4096,
+      "importAndFirstResponseMs": 4466.3336,
+      "bytes": 16417,
+      "wireHash": "247ad7145690c359accbf1398801eba95396445992d8efd7cb6cca1fb3445cbf",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59887616,
+        "heapTotal": 12136448,
+        "heapUsed": 8229000,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168583168,
+        "heapTotal": 101228544,
+        "heapUsed": 28771744,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 37,
+      "measuredAt": "2026-10-18T18:30:01.891Z",
+      "processElapsedMs": 5959.97000000003,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 840.2349000000002,
+      "firstResponseMs": 3905.9013000000004,
+      "preHandlerImportMs": 331.4632,
+      "firstBodyReadySinceProcessStartMs": 5078.354,
+      "importAndFirstResponseMs": 4746.136200000001,
+      "bytes": 16421,
+      "wireHash": "0526a25b89bd87842bb75eafff74b173a69a1aeae0d7177773c0a5898413f7a8",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59994112,
+        "heapTotal": 12398592,
+        "heapUsed": 8139224,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168833024,
+        "heapTotal": 99655680,
+        "heapUsed": 28849328,
+        "external": 7509879,
+        "arrayBuffers": 2644156
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 37,
+      "measuredAt": "2026-10-18T18:30:10.301Z",
+      "processElapsedMs": 8409.786299999978,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3161.2576,
+      "firstResponseMs": 4322.1388,
+      "preHandlerImportMs": 306.2507,
+      "firstBodyReadySinceProcessStartMs": 7791.5358,
+      "importAndFirstResponseMs": 7483.3964,
+      "bytes": 16807,
+      "wireHash": "849421268695ee015ba7547ae960a55fa724d99bc15824ff809179be4005ed83",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60403712,
+        "heapTotal": 12398592,
+        "heapUsed": 8149776,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 187904000,
+        "heapTotal": 100966400,
+        "heapUsed": 29132752,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 38,
+      "measuredAt": "2026-10-18T18:30:19.361Z",
+      "processElapsedMs": 9060.473599999968,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 4777.266600000001,
+      "firstResponseMs": 2888.0035,
+      "preHandlerImportMs": 681.5133,
+      "firstBodyReadySinceProcessStartMs": 8347.9455,
+      "importAndFirstResponseMs": 7665.270100000001,
+      "bytes": 16808,
+      "wireHash": "644b1e4a82b5bbab31ed7b7b642a98ff5718d2d09dd396e5de3c7b88aa055f92",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60256256,
+        "heapTotal": 12398592,
+        "heapUsed": 8200520,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 193056768,
+        "heapTotal": 100442112,
+        "heapUsed": 29143184,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 38,
+      "measuredAt": "2026-10-18T18:30:24.728Z",
+      "processElapsedMs": 5366.595900000015,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 917.5811999999999,
+      "firstResponseMs": 3698.8594999999996,
+      "preHandlerImportMs": 279.7417,
+      "firstBodyReadySinceProcessStartMs": 4897.382,
+      "importAndFirstResponseMs": 4616.440699999999,
+      "bytes": 16417,
+      "wireHash": "a4d7a937db16d208762e21322dec00c34745172671e6cca1f105b13ae075e360",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 62480384,
+        "heapTotal": 12922880,
+        "heapUsed": 8170560,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168898560,
+        "heapTotal": 101228544,
+        "heapUsed": 28775680,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 39,
+      "measuredAt": "2026-10-18T18:30:29.763Z",
+      "processElapsedMs": 5035.094800000021,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 894.1052,
+      "firstResponseMs": 3411.812,
+      "preHandlerImportMs": 298.5798,
+      "firstBodyReadySinceProcessStartMs": 4605.2101,
+      "importAndFirstResponseMs": 4305.9172,
+      "bytes": 16418,
+      "wireHash": "d342cd73a03f145f7e2acac6838839e5b6601d3d595672a0296a4d481a2bc94e",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 63119360,
+        "heapTotal": 12398592,
+        "heapUsed": 8152384,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 169205760,
+        "heapTotal": 100704256,
+        "heapUsed": 28760112,
+        "external": 7509855,
+        "arrayBuffers": 2644132
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 39,
+      "measuredAt": "2026-10-18T18:30:35.131Z",
+      "processElapsedMs": 5368.398600000015,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2912.2521,
+      "firstResponseMs": 1751.1726999999996,
+      "preHandlerImportMs": 276.3143,
+      "firstBodyReadySinceProcessStartMs": 4941.9225,
+      "importAndFirstResponseMs": 4663.4248,
+      "bytes": 16807,
+      "wireHash": "9caacd51ce99265a24680713235b163c95638f99584b9a3fb03122885bdff958",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 62558208,
+        "heapTotal": 11874304,
+        "heapUsed": 8117768,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191553536,
+        "heapTotal": 99393536,
+        "heapUsed": 29113224,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 40,
+      "measuredAt": "2026-10-18T18:30:40.406Z",
+      "processElapsedMs": 5270.990600000019,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2789.0636999999997,
+      "firstResponseMs": 1800.0358999999999,
+      "preHandlerImportMs": 262.8584,
+      "firstBodyReadySinceProcessStartMs": 4853.5619,
+      "importAndFirstResponseMs": 4589.0996,
+      "bytes": 16806,
+      "wireHash": "e728e9313e76d6ef17d0477a3f4a5ad5c57c04f53884cba485cb349cfa319e76",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 62631936,
+        "heapTotal": 12660736,
+        "heapUsed": 8228520,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191524864,
+        "heapTotal": 100966400,
+        "heapUsed": 29137552,
+        "external": 10973675,
+        "arrayBuffers": 6754868
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 40,
+      "measuredAt": "2026-10-18T18:30:46.866Z",
+      "processElapsedMs": 6459.165999999968,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 853.9958,
+      "firstResponseMs": 4686.5758,
+      "preHandlerImportMs": 252.2977,
+      "firstBodyReadySinceProcessStartMs": 5793.6392,
+      "importAndFirstResponseMs": 5540.571599999999,
+      "bytes": 16417,
+      "wireHash": "ee6417e8ec558577e20357d09e0b1f92ed55374a2c8b8896ee576ff8c2e9bd05",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 62705664,
+        "heapTotal": 12136448,
+        "heapUsed": 8146856,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 164478976,
+        "heapTotal": 100704256,
+        "heapUsed": 28780264,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 41,
+      "measuredAt": "2026-10-18T18:30:52.652Z",
+      "processElapsedMs": 5786.581299999962,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 831.4743,
+      "firstResponseMs": 4149.9226,
+      "preHandlerImportMs": 284.4326,
+      "firstBodyReadySinceProcessStartMs": 5266.676,
+      "importAndFirstResponseMs": 4981.3969,
+      "bytes": 16418,
+      "wireHash": "c70919dc6d64d015bb45ceb5381f157ca542d4dc6b80abecbd5303297073a614",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 62693376,
+        "heapTotal": 12398592,
+        "heapUsed": 8165544,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 162357248,
+        "heapTotal": 100179968,
+        "heapUsed": 28781104,
+        "external": 7509854,
+        "arrayBuffers": 2644131
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 41,
+      "measuredAt": "2026-10-18T18:30:57.995Z",
+      "processElapsedMs": 5342.493699999992,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2735.0099,
+      "firstResponseMs": 1849.5538000000006,
+      "preHandlerImportMs": 300.5587,
+      "firstBodyReadySinceProcessStartMs": 4886.8842,
+      "importAndFirstResponseMs": 4584.563700000001,
+      "bytes": 16808,
+      "wireHash": "5cb8a5a8037fda3a66589454e50108af450d221c73722d047f921cf29805436b",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63287296,
+        "heapTotal": 12922880,
+        "heapUsed": 8175936,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192053248,
+        "heapTotal": 108752896,
+        "heapUsed": 49453704,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 42,
+      "measuredAt": "2026-10-18T18:31:03.288Z",
+      "processElapsedMs": 5293.404100000043,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2713.5781,
+      "firstResponseMs": 1736.2437,
+      "preHandlerImportMs": 249.026,
+      "firstBodyReadySinceProcessStartMs": 4700.657,
+      "importAndFirstResponseMs": 4449.8218,
+      "bytes": 16807,
+      "wireHash": "bfb9486961d64aba03e55be506cb79930c67abc24e0eadbe0dc078675b1bdfe5",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 63041536,
+        "heapTotal": 12398592,
+        "heapUsed": 8208296,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191746048,
+        "heapTotal": 99393536,
+        "heapUsed": 29136464,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 42,
+      "measuredAt": "2026-10-18T18:31:08.395Z",
+      "processElapsedMs": 5106.859200000064,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 826.4133999999999,
+      "firstResponseMs": 3432.3534,
+      "preHandlerImportMs": 294.5342,
+      "firstBodyReadySinceProcessStartMs": 4554.0376,
+      "importAndFirstResponseMs": 4258.766799999999,
+      "bytes": 16416,
+      "wireHash": "6a89d03ec85ac6f523b280bc699dd4db2fb4c5da2474aef9ee596c50c808e80c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60489728,
+        "heapTotal": 12398592,
+        "heapUsed": 8163176,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168312832,
+        "heapTotal": 100442112,
+        "heapUsed": 28786248,
+        "external": 7509837,
+        "arrayBuffers": 2644114
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 43,
+      "measuredAt": "2026-10-18T18:31:13.511Z",
+      "processElapsedMs": 5115.145299999975,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 828.0591,
+      "firstResponseMs": 3563.6111,
+      "preHandlerImportMs": 271.6539,
+      "firstBodyReadySinceProcessStartMs": 4664.0428,
+      "importAndFirstResponseMs": 4391.6702000000005,
+      "bytes": 16416,
+      "wireHash": "257082d7c3014700575fbe47815ceb690c6465e0de397f81d5204aaa17651e6e",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60084224,
+        "heapTotal": 12398592,
+        "heapUsed": 8137976,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 166572032,
+        "heapTotal": 100704256,
+        "heapUsed": 28689584,
+        "external": 7509838,
+        "arrayBuffers": 2644115
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 43,
+      "measuredAt": "2026-10-18T18:31:18.709Z",
+      "processElapsedMs": 5198.5470000000205,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2690.6226,
+      "firstResponseMs": 1807.9938000000002,
+      "preHandlerImportMs": 255.1231,
+      "firstBodyReadySinceProcessStartMs": 4755.6162,
+      "importAndFirstResponseMs": 4498.616400000001,
+      "bytes": 16808,
+      "wireHash": "0610e4262295d8fe4762a090c8b7d3370f30a881c087a1a96584cfdaa9a178f6",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59920384,
+        "heapTotal": 12922880,
+        "heapUsed": 8204080,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 192012288,
+        "heapTotal": 100179968,
+        "heapUsed": 29122320,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 44,
+      "measuredAt": "2026-10-18T18:31:24.221Z",
+      "processElapsedMs": 5511.446999999927,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2807.5603,
+      "firstResponseMs": 1906.9643999999998,
+      "preHandlerImportMs": 260.9004,
+      "firstBodyReadySinceProcessStartMs": 4978.3776,
+      "importAndFirstResponseMs": 4714.5247,
+      "bytes": 16806,
+      "wireHash": "06a401c80ff35d0e6b49c9d52f939dab82a981623e1ad3c18eb872b0773d0fa3",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59838464,
+        "heapTotal": 12398592,
+        "heapUsed": 8151536,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191909888,
+        "heapTotal": 98869248,
+        "heapUsed": 29109232,
+        "external": 10973675,
+        "arrayBuffers": 6754868
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 44,
+      "measuredAt": "2026-10-18T18:31:31.083Z",
+      "processElapsedMs": 6860.879199999967,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 912.5572999999999,
+      "firstResponseMs": 5038.8566,
+      "preHandlerImportMs": 267.8723,
+      "firstBodyReadySinceProcessStartMs": 6220.0743,
+      "importAndFirstResponseMs": 5951.4139,
+      "bytes": 16418,
+      "wireHash": "9718b15be2a45db7d842786017a723d6cb37069fbe333809a1e2e3bb91980c99",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60198912,
+        "heapTotal": 12136448,
+        "heapUsed": 8207856,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167022592,
+        "heapTotal": 100704256,
+        "heapUsed": 28788320,
+        "external": 7509855,
+        "arrayBuffers": 2644132
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 45,
+      "measuredAt": "2026-10-18T18:31:38.427Z",
+      "processElapsedMs": 7343.815900000045,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 1069.7049,
+      "firstResponseMs": 5338.2376,
+      "preHandlerImportMs": 307.7499,
+      "firstBodyReadySinceProcessStartMs": 6716.3567,
+      "importAndFirstResponseMs": 6407.9425,
+      "bytes": 16417,
+      "wireHash": "bf2ec888f6a9ad0550315bf744968415d81c64b8f532e432c15d17be283e244c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 59990016,
+        "heapTotal": 12398592,
+        "heapUsed": 8206240,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168734720,
+        "heapTotal": 100442112,
+        "heapUsed": 28904624,
+        "external": 7509846,
+        "arrayBuffers": 2644123
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 45,
+      "measuredAt": "2026-10-18T18:31:45.653Z",
+      "processElapsedMs": 7226.211299999966,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 2748.3079,
+      "firstResponseMs": 3523.0165999999995,
+      "preHandlerImportMs": 280.3575,
+      "firstBodyReadySinceProcessStartMs": 6553.4117,
+      "importAndFirstResponseMs": 6271.324499999999,
+      "bytes": 16806,
+      "wireHash": "ac87c9ce6534b06efc890336fb84422ca3b43f3b7b1c37ae496a6d86b0b76633",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60141568,
+        "heapTotal": 12660736,
+        "heapUsed": 8145856,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191586304,
+        "heapTotal": 101752832,
+        "heapUsed": 29295056,
+        "external": 10973675,
+        "arrayBuffers": 6754868
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 46,
+      "measuredAt": "2026-10-18T18:31:52.275Z",
+      "processElapsedMs": 6621.754500000039,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3380.8371,
+      "firstResponseMs": 2504.9862,
+      "preHandlerImportMs": 294.3864,
+      "firstBodyReadySinceProcessStartMs": 6185.0826,
+      "importAndFirstResponseMs": 5885.8233,
+      "bytes": 16808,
+      "wireHash": "aa47c34741151319de7290bdfc505643c18de3c6245a7ad1be1cdc991164067c",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60186624,
+        "heapTotal": 12398592,
+        "heapUsed": 8239096,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191004672,
+        "heapTotal": 100966400,
+        "heapUsed": 29127216,
+        "external": 10973699,
+        "arrayBuffers": 6754892
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 46,
+      "measuredAt": "2026-10-18T18:31:57.470Z",
+      "processElapsedMs": 5195.301199999987,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 871.1948,
+      "firstResponseMs": 3632.9846000000002,
+      "preHandlerImportMs": 272.0084,
+      "firstBodyReadySinceProcessStartMs": 4776.9525,
+      "importAndFirstResponseMs": 4504.1794,
+      "bytes": 16416,
+      "wireHash": "5794ab4e32a08353b75a0db585636f79af307d2c07d2a659095fee9066f29f9a",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60456960,
+        "heapTotal": 12660736,
+        "heapUsed": 8233328,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168845312,
+        "heapTotal": 100704256,
+        "heapUsed": 28747792,
+        "external": 7509837,
+        "arrayBuffers": 2644114
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 47,
+      "measuredAt": "2026-10-18T18:32:03.925Z",
+      "processElapsedMs": 6455.027099999948,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 797.0420000000001,
+      "firstResponseMs": 4505.3634,
+      "preHandlerImportMs": 292.7711,
+      "firstBodyReadySinceProcessStartMs": 5595.5219,
+      "importAndFirstResponseMs": 5302.405400000001,
+      "bytes": 16415,
+      "wireHash": "a6dfde0f4996ad512a3c72aee32e473f7a173d5256acf3e389f09107ca6966c9",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60821504,
+        "heapTotal": 12398592,
+        "heapUsed": 8193288,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167956480,
+        "heapTotal": 100179968,
+        "heapUsed": 28650360,
+        "external": 7509829,
+        "arrayBuffers": 2644106
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 47,
+      "measuredAt": "2026-10-18T18:32:11.942Z",
+      "processElapsedMs": 8016.833800000022,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3466.1059999999998,
+      "firstResponseMs": 3438.2405000000003,
+      "preHandlerImportMs": 331.0144,
+      "firstBodyReadySinceProcessStartMs": 7239.5451,
+      "importAndFirstResponseMs": 6904.3465,
+      "bytes": 16807,
+      "wireHash": "42de67a638e8a2f4bca1c73c94060edf8b58e4a80f6afb53fc06bcdd450fa3e7",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60264448,
+        "heapTotal": 12398592,
+        "heapUsed": 8227664,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 191979520,
+        "heapTotal": 100442112,
+        "heapUsed": 29293080,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 48,
+      "measuredAt": "2026-10-18T18:32:19.030Z",
+      "processElapsedMs": 7087.465800000005,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 3580.8648999999996,
+      "firstResponseMs": 2662.8277,
+      "preHandlerImportMs": 301.3079,
+      "firstBodyReadySinceProcessStartMs": 6547.249,
+      "importAndFirstResponseMs": 6243.692599999999,
+      "bytes": 16807,
+      "wireHash": "c96cc56d853c8a8e492250f25a7d90d921c000ed93bf66a41aefcc7930595328",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 60092416,
+        "heapTotal": 12136448,
+        "heapUsed": 8196664,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 193376256,
+        "heapTotal": 100966400,
+        "heapUsed": 29090584,
+        "external": 10973687,
+        "arrayBuffers": 6754880
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 48,
+      "measuredAt": "2026-10-18T18:32:24.857Z",
+      "processElapsedMs": 5826.428000000073,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 840.4490000000001,
+      "firstResponseMs": 4256.8002,
+      "preHandlerImportMs": 269.3617,
+      "firstBodyReadySinceProcessStartMs": 5367.3148,
+      "importAndFirstResponseMs": 5097.2492,
+      "bytes": 16415,
+      "wireHash": "1554b95c44bb6dbc4f1a5a4793cf643cbcceb8f0338be83833511cfecc4c828f",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60125184,
+        "heapTotal": 12922880,
+        "heapUsed": 8157136,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 167378944,
+        "heapTotal": 100179968,
+        "heapUsed": 28806176,
+        "external": 7509828,
+        "arrayBuffers": 2644105
+      }
+    },
+    {
+      "variant": "candidate",
+      "round": 49,
+      "measuredAt": "2026-10-18T18:32:30.272Z",
+      "processElapsedMs": 5415.066200000001,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 865.4169999999999,
+      "firstResponseMs": 3606.1421,
+      "preHandlerImportMs": 274.8784,
+      "firstBodyReadySinceProcessStartMs": 4746.9452,
+      "importAndFirstResponseMs": 4471.5591,
+      "bytes": 16416,
+      "wireHash": "dd2a0ada84d3251e7418eb3ae41d6653ef78ee32d22511286549c76a9318b93e",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 138,
+        "exceljs": 0,
+        "pg": 0
+      },
+      "modulesAfterResponse": {
+        "total": 929,
+        "exceljs": 156,
+        "pg": 0
+      },
+      "memoryBefore": {
+        "rss": 60121088,
+        "heapTotal": 12136448,
+        "heapUsed": 8201368,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 168562688,
+        "heapTotal": 100966400,
+        "heapUsed": 29130048,
+        "external": 7509837,
+        "arrayBuffers": 2644114
+      }
+    },
+    {
+      "variant": "baseline",
+      "round": 49,
+      "measuredAt": "2026-10-18T18:32:40.567Z",
+      "processElapsedMs": 10295.7892,
+      "type": "startup-result",
+      "route": "/api/export.xlsx?from=2026-10-01&to=2027-01-17&cities=yeosu,wonju",
+      "importMs": 4270.5085,
+      "firstResponseMs": 4871.1944,
+      "preHandlerImportMs": 362.6327,
+      "firstBodyReadySinceProcessStartMs": 9508.7086,
+      "importAndFirstResponseMs": 9141.7029,
+      "bytes": 16805,
+      "wireHash": "3aa37071c4ba5a332d50e274bc610aaddd87162a90048d61745e342655074016",
+      "semanticHash": "19a7eaa407b25616c75e087b3562e15e383b00bf76a1f54f52c23237051db832",
+      "metadata": {
+        "exportedRows": 51
+      },
+      "status": 200,
+      "modulesAfterImport": {
+        "total": 839,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "modulesAfterResponse": {
+        "total": 961,
+        "exceljs": 156,
+        "pg": 13
+      },
+      "memoryBefore": {
+        "rss": 59867136,
+        "heapTotal": 12398592,
+        "heapUsed": 8135688,
+        "external": 2478160,
+        "arrayBuffers": 50564
+      },
+      "memoryAfterResponse": {
+        "rss": 185495552,
+        "heapTotal": 100966400,
+        "heapUsed": 29144208,
+        "external": 10973663,
+        "arrayBuffers": 6754856
+      }
+    }
+  ]
+}

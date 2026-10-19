@@ -1,0 +1,7 @@
+{
+  "startedAt": "2026-10-18T19:12:38.132Z",
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at <anonymous> (C:\\workspace\\cultureapi\\scripts\\performance\\browser-lifecycle.ts:52:10)",
+  "workerOutput": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\browser-lifecycle-smoke-01-worker.json",
+  "samples": "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\browser-lifecycle-smoke-01.ndjson",
+  "cleanup": []
+}

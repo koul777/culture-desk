@@ -1,0 +1,210 @@
+{
+  "analyzedAt": "2026-10-18T17:40:55.869Z",
+  "input": "docs/verification/performance-20261019/soak-wave1-60min.json",
+  "inputSha256": "c7254ca39a76e0f50afbe36eefede4318dfb7d050f8a4f68a2713e7e1358c0a9",
+  "scope": "Natural-GC memory observations from one bounded stability workload, not proof that every application path is leak-free. Explicit paused time and final integrity-hash allocations are excluded. No forced GC, request latency acceptance or baseline memory improvement claim.",
+  "startedAt": "2026-10-18T16:03:14.898Z",
+  "endedAt": "2026-10-18T17:40:03.164Z",
+  "requestedMinutes": 60,
+  "activeMinutes": 60.000260425000235,
+  "pausedMinutes": 36.48439429333322,
+  "wallMinutes": 96.79046294833333,
+  "requests": 14345,
+  "successful": 12552,
+  "expectedErrors": 1793,
+  "counts": {
+    "requests": 14345,
+    "successful": 12552,
+    "expectedErrors": 1793,
+    "reads": 12552,
+    "hits": 1869,
+    "joins": 3550,
+    "produces": 7133,
+    "evictionObservations": 26460,
+    "maxEntriesObserved": 32,
+    "maxBytesObserved": 3509728,
+    "hashHistoryEvictions": 0
+  },
+  "snapshot": {
+    "hash": "09577634afcd8ebdd244053a92d68e1ff944abe9bcebe8cf5ab364e68d86e473",
+    "performances": 5649
+  },
+  "sourceHash": "22827b29bb2b33ff17a10ef283c4f1770009d5cb2080516145a9ddd4cc8e7472",
+  "last": {
+    "at": "2026-10-18T17:40:03.093Z",
+    "state": "complete",
+    "wallMs": 5807356.5698,
+    "activeMs": 3600015.625500014,
+    "pausedMs": 2189063.657599993,
+    "cycles": 1793,
+    "counts": {
+      "requests": 14345,
+      "successful": 12552,
+      "expectedErrors": 1793,
+      "reads": 12552,
+      "hits": 1869,
+      "joins": 3550,
+      "produces": 7133,
+      "evictionObservations": 26460,
+      "maxEntriesObserved": 32,
+      "maxBytesObserved": 3509728,
+      "hashHistoryEvictions": 0
+    },
+    "hashHistory": {
+      "retainedQueries": 3233,
+      "keyAndHashUtf8Bytes": 387566,
+      "excludesObjectOverhead": true
+    },
+    "memory": {
+      "rss": 216535040,
+      "heapTotal": 113319936,
+      "heapUsed": 72203008,
+      "external": 15806670,
+      "arrayBuffers": 7705916
+    },
+    "caches": [
+      {
+        "entries": 32,
+        "retainedBytes": 1514361,
+        "pending": 0
+      }
+    ],
+    "eventLoop": {
+      "p50Ms": 30.539775,
+      "p95Ms": 31.408127,
+      "maxMs": 322.699263
+    },
+    "recentLatency": {
+      "samples": 192,
+      "p50Ms": 10.095199999399483,
+      "p95Ms": 231.72839999943972,
+      "minMs": 5.479199999943376,
+      "maxMs": 305.51870000083,
+      "meanMs": 40.15159218749128
+    }
+  },
+  "memory": {
+    "burnInMinutes": 10,
+    "windowMinutes": 5,
+    "windows": [
+      {
+        "index": 0,
+        "activeStartMinute": 10,
+        "samples": 6,
+        "firstSampleActiveMinute": 10.038532343333337,
+        "lastSampleActiveMinute": 14.153749886666688,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 33.580047607421875,
+        "rssLowerMiB": 155.68359375,
+        "externalLowerMiB": 8.045675277709961
+      },
+      {
+        "index": 1,
+        "activeStartMinute": 15,
+        "samples": 5,
+        "firstSampleActiveMinute": 15.156543281666679,
+        "lastSampleActiveMinute": 19.17387661833331,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 30.334999084472656,
+        "rssLowerMiB": 166.30078125,
+        "externalLowerMiB": 7.376540184020996
+      },
+      {
+        "index": 2,
+        "activeStartMinute": 20,
+        "samples": 5,
+        "firstSampleActiveMinute": 20.04322527833331,
+        "lastSampleActiveMinute": 24.060537774999943,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 31.850013732910156,
+        "rssLowerMiB": 163.71484375,
+        "externalLowerMiB": 6.972024917602539
+      },
+      {
+        "index": 3,
+        "activeStartMinute": 25,
+        "samples": 5,
+        "firstSampleActiveMinute": 25.064685863333256,
+        "lastSampleActiveMinute": 29.082459648333256,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 32.95953369140625,
+        "rssLowerMiB": 159.578125,
+        "externalLowerMiB": 8.130531311035156
+      },
+      {
+        "index": 4,
+        "activeStartMinute": 30,
+        "samples": 5,
+        "firstSampleActiveMinute": 30.086900818333262,
+        "lastSampleActiveMinute": 34.10342193666658,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 29.114906311035156,
+        "rssLowerMiB": 174.7109375,
+        "externalLowerMiB": 4.7991437911987305
+      },
+      {
+        "index": 5,
+        "activeStartMinute": 35,
+        "samples": 5,
+        "firstSampleActiveMinute": 35.10778140999996,
+        "lastSampleActiveMinute": 39.12358193833324,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 29.302978515625,
+        "rssLowerMiB": 176.25,
+        "externalLowerMiB": 5.748360633850098
+      },
+      {
+        "index": 6,
+        "activeStartMinute": 40,
+        "samples": 5,
+        "firstSampleActiveMinute": 40.128226058333276,
+        "lastSampleActiveMinute": 44.143562638333314,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 36.55571746826172,
+        "rssLowerMiB": 178.34765625,
+        "externalLowerMiB": 7.5938215255737305
+      },
+      {
+        "index": 7,
+        "activeStartMinute": 45,
+        "samples": 5,
+        "firstSampleActiveMinute": 45.147960985000026,
+        "lastSampleActiveMinute": 49.16237870000014,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 30.141189575195312,
+        "rssLowerMiB": 169.67578125,
+        "externalLowerMiB": 6.560382843017578
+      },
+      {
+        "index": 8,
+        "activeStartMinute": 50,
+        "samples": 5,
+        "firstSampleActiveMinute": 50.16499511000014,
+        "lastSampleActiveMinute": 54.17961404000021,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 36.28870391845703,
+        "rssLowerMiB": 186.76953125,
+        "externalLowerMiB": 8.579878807067871
+      },
+      {
+        "index": 9,
+        "activeStartMinute": 55,
+        "samples": 5,
+        "firstSampleActiveMinute": 55.1839674350002,
+        "lastSampleActiveMinute": 59.197373556666854,
+        "fullDurationElapsed": true,
+        "heapLowerMiB": 29.831314086914062,
+        "rssLowerMiB": 167.5234375,
+        "externalLowerMiB": 6.57568359375
+      }
+    ],
+    "endpoints": {
+      "windowsPerEndpoint": 3,
+      "earlyLowerHeapMedianMiB": 31.850013732910156,
+      "lateLowerHeapMedianMiB": 30.141189575195312
+    },
+    "theilSenHeapLowerSlopeMiBPerActiveMinute": -0.012592124938964843,
+    "endpointDeltaMiB": -1.7088241577148438,
+    "interpretation": "Inspect lower envelopes together with retained cache bytes, hash-history bounds and pauses. Positive slope alone is not a leak verdict; investigate sustained growth using a separate heap profile."
+  }
+}

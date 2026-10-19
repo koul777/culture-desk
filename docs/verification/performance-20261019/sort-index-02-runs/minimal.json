@@ -1,0 +1,1343 @@
+{
+  "version": 1,
+  "at": "2026-10-18T18:00:52.436Z",
+  "success": true,
+  "root": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\candidate-wave11-selection",
+  "fixture": "minimal",
+  "scope": "Private in-memory post-load extra-index experiment. Five alternating warm pairs per case, one warm-up pair, natural GC. Whole-route no-trace timings and a single separate trace attribution pass. Fresh-model startup excludes artifact read/parse and module import; five actual-corpus model pairs, one pair per larger fixture. Not fresh-process startup, p95, latency acceptance, or peak-memory evidence. No response cache or cloud-envelope work; exact Fastify body/status/headers (except Date) compared.",
+  "candidate": "CREATE INDEX experiment_performances_order ON performances(classification,start_date DESC,id DESC)",
+  "dataComparison": "Cross-model comparison normalizes only schema_migrations.applied_at (constructor wall clock); each model before/after hash includes every original field without normalization.",
+  "source": {
+    "before": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb",
+    "after": "7dbf937c06e6b6ddbd6d3ebad70c7b72cbc722b182fc40ccc23923a040b1b3bb"
+  },
+  "harness": {
+    "before": {
+      "hash": "334590fef82e3e8504e1ef0dc40eec2ace29978dcbdfcc118b51fc4b56d509bf",
+      "files": {
+        "C:\\workspace\\cultureapi\\docs\\verification\\performance-20261019\\sort-index-diagnostic.ts": "e1aa15a9fd622130ee1c4ffe79d558a18873248fd6abd79a8f635fe724c410c2",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\common.ts": "1faa99676b2041e501ed255ffe4f3507363288cf5281e91e31b1ea1a6b1ecf3f",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-process.ts": "721f2e1e5390b7a28e921dd0d4f1d451bca57f5401227afbbc60135936636112",
+        "C:\\workspace\\cultureapi\\scripts\\performance\\child-lifecycle.ts": "b8ab8c6ae340dd50b6c8614c035673b6c0e560db9b6df5009377d4b59621a80f"
+      }
+    },
+    "afterHash": "334590fef82e3e8504e1ef0dc40eec2ace29978dcbdfcc118b51fc4b56d509bf"
+  },
+  "artifact": {
+    "path": "C:\\workspace\\cultureapi\\data\\performance-session-20261019\\minimal-100000.json",
+    "beforeHash": "ba06ace9741d4899908112bbbba74d0b82d02e6a75657a677b79d041eaaf2f73",
+    "afterHash": "ba06ace9741d4899908112bbbba74d0b82d02e6a75657a677b79d041eaaf2f73",
+    "rows": 100000
+  },
+  "models": [
+    {
+      "variant": "original",
+      "before": {
+        "hash": "8b9d1e7a239bea9327744a354b080ace9408470180d71c0cb180230634c76aea",
+        "comparisonHash": "180890f9d25aa508c6e8a53690d4f16a08acdc8faceb1673b744cd55e461ebee",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 100000,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "migrations": [
+          {
+            "version": 1,
+            "applied_at": "2026-10-18 18:00:19"
+          }
+        ],
+        "totalChanges": 100691
+      },
+      "after": {
+        "hash": "8b9d1e7a239bea9327744a354b080ace9408470180d71c0cb180230634c76aea",
+        "comparisonHash": "180890f9d25aa508c6e8a53690d4f16a08acdc8faceb1673b744cd55e461ebee",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 100000,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "migrations": [
+          {
+            "version": 1,
+            "applied_at": "2026-10-18 18:00:19"
+          }
+        ],
+        "totalChanges": 100691
+      },
+      "indexes": [
+        {
+          "name": "performances_search",
+          "sql": "CREATE INDEX performances_search ON performances(classification,city_id,start_date,end_date)"
+        },
+        {
+          "name": "run_coverage",
+          "sql": "CREATE INDEX run_coverage ON sync_runs(city_id,source,state,from_date,to_date) WHERE detail_only=0"
+        },
+        {
+          "name": "sqlite_autoindex_cities_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_performances_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_items_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_tasks_1",
+          "sql": null
+        },
+        {
+          "name": "task_queue",
+          "sql": "CREATE INDEX task_queue ON sync_tasks(state,available_at)"
+        },
+        {
+          "name": "task_run_state",
+          "sql": "CREATE INDEX task_run_state ON sync_tasks(run_id,state)"
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "before": {
+        "hash": "d5ffb3468e0280366d65af5e91505e1f0c2fd94952184aaf21907198e2d191a8",
+        "comparisonHash": "180890f9d25aa508c6e8a53690d4f16a08acdc8faceb1673b744cd55e461ebee",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 100000,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "migrations": [
+          {
+            "version": 1,
+            "applied_at": "2026-10-18 18:00:20"
+          }
+        ],
+        "totalChanges": 100691
+      },
+      "after": {
+        "hash": "d5ffb3468e0280366d65af5e91505e1f0c2fd94952184aaf21907198e2d191a8",
+        "comparisonHash": "180890f9d25aa508c6e8a53690d4f16a08acdc8faceb1673b744cd55e461ebee",
+        "counts": {
+          "bookmarks": 0,
+          "cities": 230,
+          "performance_sources": 0,
+          "performances": 100000,
+          "schema_migrations": 1,
+          "sync_items": 0,
+          "sync_run_archive": 0,
+          "sync_runs": 460,
+          "sync_tasks": 0
+        },
+        "migrations": [
+          {
+            "version": 1,
+            "applied_at": "2026-10-18 18:00:20"
+          }
+        ],
+        "totalChanges": 100691
+      },
+      "indexes": [
+        {
+          "name": "experiment_performances_order",
+          "sql": "CREATE INDEX experiment_performances_order ON performances(classification,start_date DESC,id DESC)"
+        },
+        {
+          "name": "performances_search",
+          "sql": "CREATE INDEX performances_search ON performances(classification,city_id,start_date,end_date)"
+        },
+        {
+          "name": "run_coverage",
+          "sql": "CREATE INDEX run_coverage ON sync_runs(city_id,source,state,from_date,to_date) WHERE detail_only=0"
+        },
+        {
+          "name": "sqlite_autoindex_cities_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_performances_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_items_1",
+          "sql": null
+        },
+        {
+          "name": "sqlite_autoindex_sync_tasks_1",
+          "sql": null
+        },
+        {
+          "name": "task_queue",
+          "sql": "CREATE INDEX task_queue ON sync_tasks(state,available_at)"
+        },
+        {
+          "name": "task_run_state",
+          "sql": "CREATE INDEX task_run_state ON sync_tasks(run_id,state)"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "case": "national",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": {
+            "samples": 5,
+            "medianMs": 590.2488999999987,
+            "minMs": 533.7851999999984,
+            "maxMs": 650.6890000000021,
+            "valuesMs": [
+              650.6890000000021,
+              573.9077999999972,
+              590.2488999999987,
+              642.8355999999985,
+              533.7851999999984
+            ]
+          },
+          "rows": 10000,
+          "bytes": 2214704,
+          "wireHash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec"
+        },
+        {
+          "variant": "ordered-index",
+          "route": {
+            "samples": 5,
+            "medianMs": 556.1002999999982,
+            "minMs": 474.95690000000104,
+            "maxMs": 638.9134000000013,
+            "valuesMs": [
+              556.1002999999982,
+              515.6393000000025,
+              638.9134000000013,
+              568.6702000000005,
+              474.95690000000104
+            ]
+          },
+          "rows": 10000,
+          "bytes": 2214704,
+          "wireHash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec"
+        }
+      ],
+      "pairedSavingsMs": [
+        94.58870000000388,
+        58.268499999994674,
+        -48.66450000000259,
+        74.16539999999804,
+        58.8282999999974
+      ]
+    },
+    {
+      "case": "multi-region",
+      "filters": {
+        "from": "2026-10-01",
+        "to": "2027-01-17",
+        "cities": "yeosu,wonju"
+      },
+      "variants": [
+        {
+          "variant": "original",
+          "route": {
+            "samples": 5,
+            "medianMs": 26.266100000000733,
+            "minMs": 19.59700000000157,
+            "maxMs": 35.35190000000148,
+            "valuesMs": [
+              35.35190000000148,
+              19.59700000000157,
+              26.266100000000733,
+              29.68970000000263,
+              19.606599999999162
+            ]
+          },
+          "rows": 902,
+          "bytes": 197550,
+          "wireHash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67"
+        },
+        {
+          "variant": "ordered-index",
+          "route": {
+            "samples": 5,
+            "medianMs": 232.82340000000113,
+            "minMs": 202.53119999999763,
+            "maxMs": 280.7304000000004,
+            "valuesMs": [
+              280.7304000000004,
+              232.82340000000113,
+              204.0731999999989,
+              266.39640000000145,
+              202.53119999999763
+            ]
+          },
+          "rows": 902,
+          "bytes": 197550,
+          "wireHash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67"
+        }
+      ],
+      "pairedSavingsMs": [
+        -245.3784999999989,
+        -213.22639999999956,
+        -177.80709999999817,
+        -236.70669999999882,
+        -182.92459999999846
+      ]
+    }
+  ],
+  "coldSummary": [
+    {
+      "variant": "original",
+      "modelThroughFirstResponse": {
+        "samples": 1,
+        "medianMs": 1638.3976999999998,
+        "minMs": 1638.3976999999998,
+        "maxMs": 1638.3976999999998,
+        "valuesMs": [
+          1638.3976999999998
+        ]
+      },
+      "indexBuild": {
+        "samples": 1,
+        "medianMs": 0.001299999999901047,
+        "minMs": 0.001299999999901047,
+        "maxMs": 0.001299999999901047,
+        "valuesMs": [
+          0.001299999999901047
+        ]
+      },
+      "additionalAllocatedBytes": [
+        0
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "modelThroughFirstResponse": {
+        "samples": 1,
+        "medianMs": 2881.6022,
+        "minMs": 2881.6022,
+        "maxMs": 2881.6022,
+        "valuesMs": [
+          2881.6022
+        ]
+      },
+      "indexBuild": {
+        "samples": 1,
+        "medianMs": 235.90769999999975,
+        "minMs": 235.90769999999975,
+        "maxMs": 235.90769999999975,
+        "valuesMs": [
+          235.90769999999975
+        ]
+      },
+      "additionalAllocatedBytes": [
+        3473408
+      ]
+    }
+  ],
+  "cold": [
+    {
+      "pair": 0,
+      "variant": "original",
+      "setupMs": 4.413199999999961,
+      "validatedInsertMs": 1167.9652,
+      "indexBuildMs": 0.001299999999901047,
+      "routeReadyMs": 213.1798000000001,
+      "firstResponseMs": 252.63229999999976,
+      "modelThroughFirstResponseMs": 1638.3976999999998,
+      "beforePages": {
+        "pages": 19018,
+        "pageBytes": 4096,
+        "allocatedBytes": 77897728
+      },
+      "afterPages": {
+        "pages": 19018,
+        "pageBytes": 4096,
+        "allocatedBytes": 77897728
+      },
+      "additionalAllocatedBytes": 0,
+      "memoryBefore": {
+        "rss": 261517312,
+        "heapTotal": 217935872,
+        "heapUsed": 82606144,
+        "external": 62290611,
+        "arrayBuffers": 58901667
+      },
+      "memoryAfter": {
+        "rss": 447631360,
+        "heapTotal": 224727040,
+        "heapUsed": 130539688,
+        "external": 71215750,
+        "arrayBuffers": 65546526
+      }
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "setupMs": 2.6520000000000437,
+      "validatedInsertMs": 2241.0506,
+      "indexBuildMs": 235.90769999999975,
+      "routeReadyMs": 11.201900000000023,
+      "firstResponseMs": 390.66539999999986,
+      "modelThroughFirstResponseMs": 2881.6022,
+      "beforePages": {
+        "pages": 19018,
+        "pageBytes": 4096,
+        "allocatedBytes": 77897728
+      },
+      "afterPages": {
+        "pages": 19866,
+        "pageBytes": 4096,
+        "allocatedBytes": 81371136
+      },
+      "additionalAllocatedBytes": 3473408,
+      "memoryBefore": {
+        "rss": 447696896,
+        "heapTotal": 224727040,
+        "heapUsed": 133571352,
+        "external": 71215750,
+        "arrayBuffers": 65546526
+      },
+      "memoryAfter": {
+        "rss": 550473728,
+        "heapTotal": 227348480,
+        "heapUsed": 104914432,
+        "external": 77859862,
+        "arrayBuffers": 69975934
+      }
+    }
+  ],
+  "functional": [
+    {
+      "variant": "original",
+      "case": "national",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "endpoint": "map",
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    }
+  ],
+  "phases": [
+    {
+      "variant": "original",
+      "case": "national",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 225.2853000000032,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 261.4406000000017,
+          "rows": 10001
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 6.842100000001665,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 20.281499999997322,
+          "rows": 10001
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 3.4334999997918203,
+          "rows": 10000
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 23.032800000066345,
+          "bytes": 2214705
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 17.852500000000873,
+          "bytes": 2214704
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 1.9013000000013562,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 11.397600000000239,
+          "rows": 902
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 0.3953000000001339,
+          "rows": 4
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 2.279999999998836,
+          "rows": 902
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.3196999999709078,
+          "rows": 902
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 3.6617999999580206,
+          "bytes": 197550
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 1.3060000000004948,
+          "bytes": 197550
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 258.02170000000115,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 145.1072000000022,
+          "rows": 10001
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 6.9386000000013155,
+          "rows": 460
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 18.540099999998347,
+          "rows": 10001
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 11.753000000138854,
+          "rows": 10000
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 25.003400000045076,
+          "bytes": 2214705
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 19.01600000000326,
+          "bytes": 2214704
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "phases": [
+        {
+          "phase": "search.counts",
+          "durationMs": 2.2629000000015367,
+          "rows": 2
+        },
+        {
+          "phase": "search.rows",
+          "durationMs": 186.21549999999843,
+          "rows": 902
+        },
+        {
+          "phase": "search.coverage",
+          "durationMs": 0.5709000000024389,
+          "rows": 4
+        },
+        {
+          "phase": "search.decode",
+          "durationMs": 2.175599999998667,
+          "rows": 902
+        },
+        {
+          "phase": "map.project",
+          "durationMs": 0.2060999999375781,
+          "rows": 902
+        },
+        {
+          "phase": "map.budget",
+          "durationMs": 1.8981999999959953,
+          "bytes": 197550
+        },
+        {
+          "phase": "fastify.serialize",
+          "durationMs": 1.6765999999988708,
+          "bytes": 197550
+        }
+      ]
+    }
+  ],
+  "plans": [
+    {
+      "variant": "original",
+      "case": "national",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 62,
+              "detail": "SEARCH p USING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 16,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "WITH selected AS MATERIALIZED (\n          SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?\n        ) SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 10,
+              "parent": 3,
+              "notused": 55,
+              "detail": "SEARCH p USING COVERING INDEX performances_search (classification=?)"
+            },
+            {
+              "id": 31,
+              "parent": 3,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            },
+            {
+              "id": 42,
+              "parent": 0,
+              "notused": 47,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 44,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 116,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "case": "multi-region",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 34,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 60,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 102,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "national",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 17,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "WITH selected AS MATERIALIZED (\n          SELECT p.id,p.start_date FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC LIMIT ?\n        ) SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM selected JOIN performances p ON p.id=selected.id ORDER BY p.start_date DESC,p.id DESC",
+          "params": [
+            "2026-10-01",
+            "2027-01-17",
+            10001
+          ],
+          "plan": [
+            {
+              "id": 3,
+              "parent": 0,
+              "notused": 0,
+              "detail": "MATERIALIZE selected"
+            },
+            {
+              "id": 11,
+              "parent": 3,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            },
+            {
+              "id": 33,
+              "parent": 0,
+              "notused": 28,
+              "detail": "SCAN selected"
+            },
+            {
+              "id": 35,
+              "parent": 0,
+              "notused": 45,
+              "detail": "SEARCH p USING INTEGER PRIMARY KEY (rowid=?)"
+            },
+            {
+              "id": 107,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR ORDER BY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "endpoint": "map",
+      "queries": [
+        {
+          "sql": "SELECT p.source,count(*) AS n,\n        SUM(CASE WHEN p.detail_state!='complete' THEN 1 ELSE 0 END) AS pending FROM performances p  WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? GROUP BY p.source",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 7,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX performances_search (classification=? AND city_id=? AND start_date<?)"
+            },
+            {
+              "id": 34,
+              "parent": 0,
+              "notused": 0,
+              "detail": "USE TEMP B-TREE FOR GROUP BY"
+            }
+          ]
+        },
+        {
+          "sql": "SELECT p.id,json_extract(p.data,'$.title','$.venue','$.cityId','$.startDate','$.endDate','$.latitude','$.longitude','$.locationPrecision','$.source') AS marker_values,\n  ((CASE WHEN json_type(p.data,'$.title') IS NULL THEN 0 ELSE 1 END)+(CASE WHEN json_type(p.data,'$.venue') IS NULL THEN 0 ELSE 2 END)+(CASE WHEN json_type(p.data,'$.cityId') IS NULL THEN 0 ELSE 4 END)+(CASE WHEN json_type(p.data,'$.startDate') IS NULL THEN 0 ELSE 8 END)+(CASE WHEN json_type(p.data,'$.endDate') IS NULL THEN 0 ELSE 16 END)+(CASE WHEN json_type(p.data,'$.latitude') IS NULL THEN 0 ELSE 32 END)+(CASE WHEN json_type(p.data,'$.longitude') IS NULL THEN 0 ELSE 64 END)+(CASE WHEN json_type(p.data,'$.locationPrecision') IS NULL THEN 0 ELSE 128 END)+(CASE WHEN json_type(p.data,'$.source') IS NULL THEN 0 ELSE 256 END)) AS marker_fields FROM performances p LEFT JOIN bookmarks b ON b.performance_id=p.id WHERE p.classification='performance' AND p.city_id IN (?,?) AND p.end_date>=? AND p.start_date<=? ORDER BY p.start_date DESC,p.id DESC ",
+          "params": [
+            "yeosu",
+            "wonju",
+            "2026-10-01",
+            "2027-01-17"
+          ],
+          "plan": [
+            {
+              "id": 4,
+              "parent": 0,
+              "notused": 51,
+              "detail": "SEARCH p USING INDEX experiment_performances_order (classification=? AND start_date<?)"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "raw": [
+    {
+      "pair": 0,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 650.6890000000021,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 556.1002999999982,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 0,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 35.35190000000148,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 0,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 280.7304000000004,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 515.6393000000025,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 573.9077999999972,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 1,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 232.82340000000113,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 1,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 19.59700000000157,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 590.2488999999987,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 638.9134000000013,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 2,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 26.266100000000733,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 2,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 204.0731999999989,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 568.6702000000005,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 642.8355999999985,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 3,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 266.39640000000145,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 3,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 29.68970000000263,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 533.7851999999984,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "case": "national",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17",
+      "elapsedMs": 474.95690000000104,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "2214704",
+        "connection": "keep-alive"
+      },
+      "hash": "22ea80777fe4e7e50606a597fcf2fbe14cbff9531ff6470167caf829163eb7ec",
+      "bytes": 2214704,
+      "items": 10000,
+      "total": 100000,
+      "truncated": true,
+      "metadataHash": "e4f347f96a86687f6d78d69fa6b0ed45ac15dc7e0a424481403c6fcfe7cd168f"
+    },
+    {
+      "pair": 4,
+      "variant": "original",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 19.606599999999162,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    },
+    {
+      "pair": 4,
+      "variant": "ordered-index",
+      "case": "multi-region",
+      "url": "/api/map?from=2026-10-01&to=2027-01-17&cities=yeosu%2Cwonju",
+      "elapsedMs": 202.53119999999763,
+      "status": 200,
+      "headers": {
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "197550",
+        "connection": "keep-alive"
+      },
+      "hash": "38d1728b750d1dce0d47891675a4323ee1f38cdc06492e7128a1306e6d673f67",
+      "bytes": 197550,
+      "items": 902,
+      "total": 902,
+      "truncated": false,
+      "metadataHash": "617280ac99e89fc7eb73f243d1e5ebff4e03cda8f51e59a6e5fb5e4feef209bd"
+    }
+  ]
+}
